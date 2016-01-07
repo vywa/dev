@@ -41,6 +41,8 @@ public class LoginInfoController {
 	}
 	
 	
+	
+	
 	/*
 	 *  用户退出登陆
 	 * */

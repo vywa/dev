@@ -7,12 +7,18 @@ package com.hengyun.domain.loginInfo;
  * */
 public class RegisterCache {
 
+	private String sign;					//用户手机号或邮箱
+
+	
 	private int		tryCount;								//用户注册尝试次数(<=5)
 	private String confirmCode;					//验证码
 	private String status;									//是否注册
-	
-	
-	
+	public String getSign() {
+		return sign;
+	}
+	public void setSign(String sign) {
+		this.sign = sign;
+	}
 	public int getTryCount() {
 		return tryCount;
 	}
@@ -33,4 +39,5 @@ public class RegisterCache {
 	}
 	
 	
+
 }

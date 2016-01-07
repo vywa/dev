@@ -6,5 +6,5 @@ package com.hengyun.domain.loginInfo.constant;
  * */
 public enum AccountStatus {
 
-	LOGIN,FROZEN,CANCELL,REGISTERED
+	LOGIN,FROZEN,CANCELL,REGISTERED,UNREGISTERED
 }

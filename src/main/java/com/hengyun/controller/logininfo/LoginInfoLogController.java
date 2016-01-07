@@ -26,7 +26,7 @@ public class LoginInfoLogController {
 
 
 	/*
-	 *  用户登陆日志
+	 *  用户登陆日志查询
 	 *  
 	 *  
 	 * */

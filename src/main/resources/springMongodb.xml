@@ -123,7 +123,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
   
   <bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
     <constructor-arg ref="mongo"/>
-    <constructor-arg name="databaseName" value="bob"/>
+    <constructor-arg name="databaseName" value="${mongo.db.dbname}"/>
   </bean>
 	
 

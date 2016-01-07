@@ -4,7 +4,7 @@ import com.hengyun.dao.BaseMongodbDao;
 import com.hengyun.domain.loginInfo.LoginInfo;
 
 /*
- *  管理员数据访问层
+ *  用户登陆信息
  * */
 public interface LoginInfoDao extends BaseMongodbDao<LoginInfo,Integer>{
 

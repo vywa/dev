@@ -6,5 +6,5 @@ package com.hengyun.domain.loginInfo.constant;
  * */
 public enum LoginStatus {
 
-	LOGIN,UNLOGIN,UNREGISTERED
+	LOGIN,UNLOGIN
 }

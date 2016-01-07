@@ -18,19 +18,11 @@ public class UserAccountDaoImpl extends BaseMongodbDaoImpl<UserAccount,Integer> 
 		return UserAccount.class;
 	}
 
-	
-	  
-	
-	public boolean existUserByMobilephone(String mobilephone) {
+	//添加用户，返回用户的id
+	public int addUserAccount(UserAccount userAccount) {
 		// TODO Auto-generated method stub
-		
-		 	Query query = new Query();
-	      Criteria criteria = Criteria.where("loginInfo.mobilephone").is(mobilephone);
-	      query.addCriteria(criteria);
-	     if( this.queryOne(query).equals(null)){
-	    	 return false;
-	     }
-		return true;
+		return 0;
 	}
+
 
 }
