@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/hengyun/util/sms/ChangePasswordResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/GetKeFuResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/GetNumResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/GetReplyResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/QueryResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/Sms.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/SmsLocator.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/SmsSoap.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/SmsSoapStub.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/SubmitResult.java=UTF-8
+encoding//src/main/java/com/hengyun/util/sms/VersionInfoResult.java=UTF-8

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+xmlns:tx="http://www.springframework.org/schema/tx"  xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd        
+	http://www.springframework.org/schema/context        
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+   http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+	<!-- 注解支持 -->
+	<!-- <context:component-scan base-package="com.hengyun.service.impl" /> -->
+	
+	<import resource="classpath:springMongodb.xml"/> 
+	<import resource="classpath:redis.xml"/>
+	<import resource="classpath:javamail.xml"/>
+ 	<!-- <import resource="classpath:springMybatis.xml"/> --> 
+ 	 <!-- <import resource="classpath:com/healthcloudserver/resources/springShiro.xml"/> --> 
+
+
+	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  
+   <bean id="BaseServiceImpl" class="com.hengyun.service.impl.BaseServiceImpl" abstract="true" />
+
+<bean id="loginInfoDao" class="com.hengyun.dao.impl.logininfo.LoginInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="loginInfoService" class="com.hengyun.service.impl.logininfo.LoginInfoServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="userAccountDao" class="com.hengyun.dao.impl.logininfo.UserAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="userAccountService" class="com.hengyun.service.impl.logininfo.UserAccountServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="loginInfoLogDao" class="com.hengyun.dao.impl.logininfo.LoginInfoLogDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="loginInfoLogService" class="com.hengyun.service.impl.logininfo.LoginInfoLogServiceImpl" parent="BaseServiceImpl"/>
+
+<!-- 
+<bean id="administratorDao" class="com.hengyun.dao.impl.mongodb.AdministratorDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="administratorService" class="com.hengyun.service.impl.mongodb.AdministratorServiceImpl" parent="BaseServiceImpl"/>
+
+
+<bean id="patientDao" class="com.hengyun.dao.impl.mongodb.PatientDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="patientService" class="com.hengyun.service.impl.mongodb.PatientServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="docterDao" class="com.hengyun.dao.impl.mongodb.DocterDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="docterService" class="com.hengyun.service.impl.mongodb.DocterServiceImpl" parent="BaseServiceImpl"/>
+ -->
+
+<!-- redis配置 -->
+<bean id="redisDataSourceImpl" class="com.hengyun.dao.impl.RedisDataSourceImpl">
+<property name="shardedJedisPool" ref="shardedJedisPool"/>
+</bean>
+<bean id="redisClientTemplate" class="com.hengyun.dao.impl.RedisClientTemplate">
+<property name="redisDataSource" ref="redisDataSourceImpl"></property>
+</bean>
+
+
+
+</beans>

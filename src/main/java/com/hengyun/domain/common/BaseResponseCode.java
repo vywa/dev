@@ -1,0 +1,21 @@
+package com.hengyun.domain.common;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
+
+/*
+ *  返回码基类，由标志码和描述信息组成
+ * */
+public  class BaseResponseCode implements Serializable{
+
+
+	private static final long serialVersionUID = 547757876953708351L;
+
+	private String code;					//返回的标志码
+	
+	private String message;					//返回信息描述			
+
+	
+	
+}
