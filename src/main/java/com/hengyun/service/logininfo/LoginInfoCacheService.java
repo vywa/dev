@@ -1,5 +1,6 @@
 package com.hengyun.service.logininfo;
 
+import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginInfoCache;
 import com.hengyun.domain.loginInfo.constant.UserCatagory;
 
@@ -12,14 +13,17 @@ public interface LoginInfoCacheService {
 	public void loadCache(LoginInfoCache loginInfoCache);
 	
 	//销毁缓存
-	public void destroyCache(LoginInfoCache loginInfoCache);
+	public void destroyCache(String tocken);
 	
 	//是否存在会话
-	public boolean valideSession(LoginInfoCache loginInfoCache);
+	public boolean valideSession(String tocken);
 	
 	//查询用户id
-	public int getUserId(LoginInfoCache loginInfoCache);
+	public int getUserId(String tocken);
 	
 	//查询用户权限
-	public UserCatagory getUserCatagory(LoginInfoCache loginInfoCache);
+	public UserCatagory getUserCatagory(String tocken);
+	
+	//查询是否在缓存
+	public boolean loginByTocken(String tocken) ;
 }

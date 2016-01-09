@@ -16,6 +16,8 @@ import com.hengyun.domain.shopping.Shopping;
 
 public  class GeneralPerson {
 	
+	private int ID;																//用户id
+	
 	private GeneralInfo	generalInfo;							//个人基本信息
 	
 	private UserAccount	userAccount;							//个人账号信息

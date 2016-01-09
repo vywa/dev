@@ -14,8 +14,8 @@ public class UserAccount implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1932947300151540560L;
-	private int ID;																			//用户ID
+
+	private int id;																			//用户ID
 	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生，病人，游客）
 	private String 							username;							//用户名
 	private String 							mobilephone;					//用户手机号
@@ -24,13 +24,16 @@ public class UserAccount implements Serializable{
 	private AccountStatus			accountStatus;					//用户账号状态
 	
 	
-		public int getID() {
-		return ID;
+	
+
+
+	public int getId() {
+		return id;
 	}
 
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

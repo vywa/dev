@@ -18,7 +18,11 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     protected MongoTemplate mongoTemplate;
 
     
-    /**
+    public MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
+	}
+
+	/**
      * 保存一个对象
      *
      * @author bob
@@ -28,6 +32,8 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
      */
     public void save(T t){
         this.mongoTemplate.save(t);
+     
+       
     }    
     
     //根据Id从库中查询数据
@@ -82,7 +88,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
             Query query = new Query(criteria);
           
             if(null!=query && this.queryOne(query)!=null){
-            	//this.delete(query);
+            	
               this.mongoTemplate.remove(query, this.getEntityClass());
             }
         }
@@ -114,13 +120,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     
     //钩子方法，由子类实现返回反射对象的类型
     protected abstract Class<T> getEntityClass();
-    /**
-     * 为属性自动注入bean服务
-     *
-     * @author bob
-     *                
-     * @param mongoTemplate
-     */
+   
     public void setMongoTemplate(MongoTemplate mongoTemplate) {
         this.mongoTemplate = mongoTemplate;
     }

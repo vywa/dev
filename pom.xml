@@ -168,6 +168,11 @@
 			<version>2.7.0-rc2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
 
 
 
@@ -208,6 +213,25 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
+	
+
+		<dependency>
+			<groupId>commons-discovery</groupId>
+			<artifactId>commons-discovery</artifactId>
+			<version>0.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+			<version>1.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
+		</dependency>
 
 
 		<dependency>
@@ -242,6 +266,11 @@
 			<version>2.8.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.2</version>
+		</dependency>
 
 
 		<dependency>
@@ -270,6 +299,7 @@
 		</dependency>
 
 
+
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
@@ -296,11 +326,11 @@
 
 
 		<!-- mongodb驱动 -->
-	<dependency>
-	<groupId>org.mongodb</groupId>
-	<artifactId>mongo-java-driver</artifactId>
-	<version>3.2.0</version>
-</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.2.0</version>
+		</dependency>
 
 
 		<dependency>
@@ -314,7 +344,16 @@
 			<artifactId>axis</artifactId>
 			<version>1.4</version>
 		</dependency>
+
+		<dependency>
+			<groupId>axis</groupId>
+			<artifactId>axis-wsdl4j</artifactId>
+			<version>1.5.1</version>
+		</dependency>
 	</dependencies>
+
+
+
 	<build>
 		<finalName>healthcloudserver</finalName>
 		<defaultGoal>compile</defaultGoal>

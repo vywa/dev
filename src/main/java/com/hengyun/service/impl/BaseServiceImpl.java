@@ -3,6 +3,7 @@ package com.hengyun.service.impl;
 import java.io.Serializable;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
@@ -12,16 +13,17 @@ import com.hengyun.service.BaseService;
 
 public class BaseServiceImpl<T extends Serializable, PK extends Serializable> implements BaseService<T, PK> {
 
-	protected BaseMongodbDao<T, PK> baseMongodbDao;
+	@Autowired
+	protected BaseMongodbDao<T, PK> baseMongodbDaoImpl;
 	
 	
 	public BaseMongodbDao<T, PK> getBaseMongodbDao() {
-		return baseMongodbDao;
+		return baseMongodbDaoImpl;
 	}
 
 	//需要依赖注入
-	public void setBaseMongodbDao(BaseMongodbDao<T, PK> baseMongodbDao) {
-		this.baseMongodbDao = baseMongodbDao;
+	public void setBaseMongodbDao(BaseMongodbDao<T, PK> baseMongodbDaoImpl) {
+		this.baseMongodbDaoImpl = baseMongodbDaoImpl;
 	}
 
 

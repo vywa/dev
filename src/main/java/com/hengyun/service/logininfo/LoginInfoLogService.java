@@ -8,7 +8,10 @@ import com.hengyun.service.BaseService;
 public interface LoginInfoLogService  extends BaseService<LoginInfoLog,Integer> {
 
 
-	public LoginInfoLog getLoginInfoById(int id);
+	public List<LoginInfoLog> getLoginInfoById(int userId) ;
+	
+	public LoginInfoLog  getLastLogin(int userId);
+	
 	public List<LoginInfoLog> getLoginInfoAll();
 	
 	public void insertLog(LoginInfoLog loginInfoLog);

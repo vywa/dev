@@ -12,7 +12,7 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<!-- 注解支持 -->
-	<!-- <context:component-scan base-package="com.hengyun.service.impl" /> -->
+	<context:component-scan base-package="com.hengyun.service.impl,com.hengyun.dao" /> 
 	
 	<import resource="classpath:springMongodb.xml"/> 
 	<import resource="classpath:redis.xml"/>
@@ -24,6 +24,8 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  
    <bean id="BaseServiceImpl" class="com.hengyun.service.impl.BaseServiceImpl" abstract="true" />
 
+<bean id="indexCollectionDao" class="com.hengyun.dao.impl.logininfo.IndexCollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
+
 <bean id="loginInfoDao" class="com.hengyun.dao.impl.logininfo.LoginInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="loginInfoService" class="com.hengyun.service.impl.logininfo.LoginInfoServiceImpl" parent="BaseServiceImpl"/>
 
@@ -32,6 +34,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 <bean id="loginInfoLogDao" class="com.hengyun.dao.impl.logininfo.LoginInfoLogDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="loginInfoLogService" class="com.hengyun.service.impl.logininfo.LoginInfoLogServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="bloodPressureInfoDao" class="com.hengyun.dao.impl.patient.BloodPressureInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="bloodPressureInfoService" class="com.hengyun.service.impl.patient.BloodPressureInfoServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="bloodSuggerInfoDao" class="com.hengyun.dao.impl.patient.BloodSuggerInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="bloodSuggerInfoService" class="com.hengyun.service.impl.patient.BloodSuggerInfoServiceImpl" parent="BaseServiceImpl"/>
+
+
 
 <!-- 
 <bean id="administratorDao" class="com.hengyun.dao.impl.mongodb.AdministratorDaoImpl" parent="BaseMongodbDaoImpl"/>  

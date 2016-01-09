@@ -3,10 +3,8 @@ package com.hengyun.controller.logininfo;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +16,7 @@ import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.domain.loginInfo.constant.UserCatagory;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.mail.SimpleMail;
 import com.hengyun.util.sms.SubmitResult;
 import com.hengyun.util.sms.sender.SmsSender;
 
@@ -36,7 +35,8 @@ public class UserAccountController {
 	@Resource
 	private RegisterCacheService registerCacheService;
 	
-
+	@Resource
+	private  SimpleMail simpleMail;
 /*
  *  注册账号
  * */	
@@ -46,34 +46,41 @@ public class UserAccountController {
 	@RequestMapping("/smsSend")
 	@ResponseBody
 	public String smsSend(@RequestParam String data){
-		JSONObject jsonObject = JSONObject.parseObject(data);
-		String mobilephone = jsonObject.getString("phonenumber");
+		JSONObject jsonObject =JSON.parseObject(data);
 		
+		String mobilephone = jsonObject.getString("mobilephone");
+		RegisterResult registResult = new RegisterResult();
 		//查询改手机号是否注册
 		
-		if(userAccountService.existUserAccountBySign(mobilephone)){
-			return "exist";
+		if(userAccountService.existUserAccountBySign(mobilephone,"mobilephone")){
+			registResult.setCode("2");
+			registResult.setMessage("手机号码已经注册");
 		} else {
 			if(registerCacheService.getTryCount(mobilephone)<6){
-				//随机生成六位数，并更新到缓存
-				registerCacheService.setConfirmCode(mobilephone, "666666");
+			int codeNum = (int)(Math.random()*1000000);
+				codeNum = codeNum>100000?codeNum:codeNum+100000;
+				registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 				registerCacheService.addTryCount(mobilephone);
+				
 				SubmitResult result;
-				SmsSender sms = new SmsSender(mobilephone,666666);
+				SmsSender sms = new SmsSender(mobilephone,codeNum);
 				result =  sms.send();
 				if(result!=null){
 					if(result.getCode()==2){
-						return "ok";
+						registResult.setCode("0");
+						registResult.setMessage("验证码发送成功");
 					}
 				} else {
-					return "failure";
+					registResult.setCode("1");
+					registResult.setMessage("验证码发送失败");
 				}
 			} else {
-				return "too many time";
+				registResult.setCode("3");
+				registResult.setMessage("发送超过5次");
 			}
 		}
 		
-		return "failure";
+		return JSON.toJSONString(registResult);
 	
 		
 	}
@@ -84,7 +91,7 @@ public class UserAccountController {
 	@ResponseBody
 	public String smsReceive(@RequestParam String data){
 		JSONObject jsonObject = JSONObject.parseObject(data);
-		String mobilephone = jsonObject.getString("phonenumber");
+		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
 		UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
@@ -96,17 +103,18 @@ public class UserAccountController {
 			userAccount.setPassword(password);
 			userAccount.setUserCatagory(userCatagory);
 			int id = userAccountService.registerAccount(userAccount);
-			registResult.setCode("0");
-			registResult.setMessage("id");
+			registerCacheService.updateRegisterCache(userAccount.getMobilephone());
+			registResult.setCode("5");
+			registResult.setMessage(String.valueOf(id));
 			
 		} else {
 			registerCacheService.addTryCount(mobilephone);
-			registResult.setCode("2");
+			registResult.setCode("4");
 			registResult.setMessage("验证码错误");
 		}
 		
 	
-		return "registersuccess";
+		return JSON.toJSONString(registResult);
 	}
 	
 	
@@ -114,30 +122,79 @@ public class UserAccountController {
 	//邮箱发送验证码
 	@RequestMapping("/mailSend")
 	@ResponseBody
-	public String mailSend(HttpServletRequest request,Model model){
+	public String mailSend(@RequestParam String data){
 		
+		JSONObject jsonObject =JSON.parseObject(data);
 		
+		String email = jsonObject.getString("email");
+		RegisterResult registResult = new RegisterResult();
+		//查询改邮箱是否注册
+		
+		if(userAccountService.existUserAccountBySign(email,"email")){
+			registResult.setCode("202");
+			registResult.setMessage("邮箱已经注册");
+		} else {
+		
+				int codeNum = (int)(Math.random()*1000000);
+				codeNum = codeNum>100000?codeNum:codeNum+100000;
+				registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
+				registerCacheService.addTryCount(email);
+				String subject = "天衡会员确认邮件";
+				String content = "您本次验证码是"+codeNum+"如果非本人操作，请忽略。";
+				String to = email;
+				simpleMail.sendMail( subject,  content,  to);
+				
+				SubmitResult result;
+				
+				registResult.setCode("0");
+				registResult.setMessage("发送邮件成功");
+			
+		}
+		
+		return JSON.toJSONString(registResult);
 	
-		return "registersuccess";
 	}
 	
 	
 	   //邮箱接收注册
 		@RequestMapping("/mailReceive")
 		@ResponseBody
-		public String mailReceive(HttpServletRequest request,Model model){
+		public String mailReceive(@RequestParam String data){
+
+			JSONObject jsonObject = JSONObject.parseObject(data);
+			String email = jsonObject.getString("email");
+			String confirmCode = jsonObject.getString("code");
+			String password =  jsonObject.getString("password");
+		//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+			RegisterResult registResult = new RegisterResult();
 			
+			if(registerCacheService.getConfirmCode(email).equals(confirmCode)){
+				UserAccount userAccount = new UserAccount();
+				userAccount.setEmail(email);
+				userAccount.setPassword(password);
+			//	userAccount.setUserCatagory(userCatagory);
+				int id = userAccountService.registerAccount(userAccount);
+				registerCacheService.updateRegisterCache(userAccount.getEmail());
+				registResult.setCode("5");
+				registResult.setMessage(String.valueOf(id));
+				
+			} else {
+				
+				registResult.setCode("4");
+				registResult.setMessage("验证码错误");
+			}
 			
 		
-			return "registersuccess";
+			return JSON.toJSONString(registResult);
 		}
 	
 
     /*
      *  查询账号
      * */
-    @ResponseBody  
+   
     @RequestMapping("/showAllAccount") 
+    @ResponseBody  
     public  String   findUserAccount(){
     	List<UserAccount> userAccountList ;
     	userAccountList = userAccountService.getUserAccountALL();
@@ -149,6 +206,48 @@ public class UserAccountController {
     }
     
     
+    /*
+     *  修改密码
+     * */
+ 
+    @RequestMapping("/findPassword") 
+    @ResponseBody  
+    public  String   findPassword(@RequestParam String data){
+    	
+    	JSONObject jsonObject =JSON.parseObject(data);
+		String mobilephone = jsonObject.getString("mobilephone");
+		RegisterResult registResult = new RegisterResult();
+		
+		if(!userAccountService.existUserAccountBySign(mobilephone,"mobilephone")){
+			registResult.setCode("103");
+			registResult.setMessage("用户不存在");
+		} else {
+		
+			int codeNum = (int)(Math.random()*1000000);
+				codeNum = codeNum>100000?codeNum:codeNum+100000;
+				registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
+			
+				
+				SubmitResult result;
+				SmsSender sms = new SmsSender(mobilephone,codeNum);
+				result =  sms.send();
+				if(result!=null){
+					if(result.getCode()==2){
+						registResult.setCode("0");
+						registResult.setMessage("验证码发送成功");
+					}
+				} else {
+					registResult.setCode("1");
+					registResult.setMessage("验证码发送失败");
+				}
+		
+		}
+		
+		return JSON.toJSONString(registResult);
+	
+		
+    }
+    
     
     /*
      *  变更账号
@@ -156,10 +255,33 @@ public class UserAccountController {
      * */
     
     @ResponseBody  
-    @RequestMapping("/change") 
-    public  String  changeUserAccount(){
+    @RequestMapping("/updatePassword") 
+    public  String  changeUserAccount(@RequestParam String data){
     	
-    	
-        return "change";
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+		String mobilephone = jsonObject.getString("mobilephone");
+		String confirmCode = jsonObject.getString("code");
+		String password =  jsonObject.getString("password");
+	//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+		RegisterResult registResult = new RegisterResult();
+		
+		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
+			UserAccount userAccount = new UserAccount();
+			userAccount.setMobilephone(mobilephone);
+			userAccount.setPassword(password);
+			//userAccount.setUserCatagory(userCatagory);
+			 userAccountService.updateUserAccount(userAccount);
+			registResult.setCode("5");
+			registResult.setMessage("密码修改成功");
+			
+		} else {
+			registerCacheService.addTryCount(mobilephone);
+			registResult.setCode("4");
+			registResult.setMessage("验证码错误");
+		}
+		
+	
+		return JSON.toJSONString(registResult);
+       
     }
 }

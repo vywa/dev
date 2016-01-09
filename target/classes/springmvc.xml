@@ -23,7 +23,7 @@
 	<mvc:default-servlet-handler />
 <context:annotation-config />    -->
     <!-- 把标记了@Controller注解的类转换为bean -->            
-    <context:component-scan base-package="com.hengyun.controller.logininfo" />
+    <context:component-scan base-package="com.hengyun.controller" />
 <mvc:annotation-driven /> 
 
 	<!--页面视图层信息 -->

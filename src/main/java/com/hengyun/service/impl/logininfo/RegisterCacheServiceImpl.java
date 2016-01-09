@@ -5,12 +5,14 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.hengyun.dao.impl.RedisClientTemplate;
 import com.hengyun.dao.logininfo.UserAccountDao;
-import com.hengyun.domain.loginInfo.RegisterCache;
 import com.hengyun.domain.loginInfo.constant.AccountStatus;
 import com.hengyun.service.logininfo.RegisterCacheService;
 
+@Service
 public  class RegisterCacheServiceImpl implements RegisterCacheService{
 
 	@Resource
@@ -66,6 +68,15 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		// TODO Auto-generated method stub
 		String countStr = redisClientTemplate.hget(sign, "tryCount");
 		return Integer.valueOf(countStr);
+	}
+
+	public void updateRegisterCache(String sign) {
+		// TODO Auto-generated method stub
+		Map<String,String> map = new HashMap();
+		map.put("tryCount","0");
+		map.put("status",AccountStatus.REGISTERED.toString());
+		
+		redisClientTemplate.hmset(sign,map);
 	}
 	
 	

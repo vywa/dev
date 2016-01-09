@@ -14,6 +14,9 @@ public interface RegisterCacheService {
 	//销毁缓存
 	public void destroyRegisterCache(String sign);
 	
+	//更新缓存
+	public void updateRegisterCache(String sign);
+	
 	//增加次数
 	public void addTryCount(String sign);
 	

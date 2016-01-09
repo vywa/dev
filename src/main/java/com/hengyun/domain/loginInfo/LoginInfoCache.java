@@ -12,9 +12,8 @@ import com.hengyun.domain.loginInfo.constant.UserCatagory;
 public class LoginInfoCache implements Serializable{
 
 	private String tocken;							//会话标识
-	
 
-	private int ID;												//用户ID
+	private int userId;												//用户ID
 	private String username;							//用户名称
 	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生，病人，游客）
 	public String getTocken() {
@@ -23,11 +22,13 @@ public class LoginInfoCache implements Serializable{
 	public void setTocken(String tocken) {
 		this.tocken = tocken;
 	}
-	public int getID() {
-		return ID;
+	
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public String getUsername() {
 		return username;

@@ -15,9 +15,7 @@ import com.hengyun.domain.loginInfo.constant.UserCatagory;
 public class LoginInfoLog implements Serializable{
 
 	
-	private int loginId;										//用户登陆信息id
-	
-	private int ID;												//用户ID
+	private int userId;												//用户ID
 	private LoginModel loginModel; 			//用户登陆方式（会员，第三方,手机动态登陆）
 	private LoginChannel loginChannel;			//用户登陆通道（手机，pad，网站等）
 	private String loginUsername;						//用户登陆名（手机号，邮箱，账号，第三方账号,动态随机用户名）
@@ -34,17 +32,13 @@ public class LoginInfoLog implements Serializable{
 	
 
 	
-	public int getLoginId() {
-		return loginId;
+	
+	
+	public int getUserId() {
+		return userId;
 	}
-	public void setLoginId(int loginId) {
-		this.loginId = loginId;
-	}
-	public int getID() {
-		return ID;
-	}
-	public void setID(int iD) {
-		ID = iD;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public LoginModel getLoginModel() {
 		return loginModel;
@@ -113,30 +107,6 @@ public class LoginInfoLog implements Serializable{
 		this.userLogoutTime = userLogoutTime;
 	}
 
-	
-	public LoginInfoLog(int loginId, int iD, LoginModel loginModel, LoginChannel loginChannel, String loginUsername,
-			String mobilephone, String password, UserCatagory catagory, double longitude, double latitude,
-			String userLoginIp, Date userLoginTime, Date userLogoutTime) {
-		super();
-		this.loginId = loginId;
-		ID = iD;
-		this.loginModel = loginModel;
-		this.loginChannel = loginChannel;
-		this.loginUsername = loginUsername;
-		this.mobilephone = mobilephone;
-		this.password = password;
-		this.catagory = catagory;
-		this.longitude = longitude;
-		this.latitude = latitude;
-		this.userLoginIp = userLoginIp;
-		this.userLoginTime = userLoginTime;
-		this.userLogoutTime = userLogoutTime;
-	
-	}
-	public LoginInfoLog() {
-		super();
-	}
-	
 	
 	
 	

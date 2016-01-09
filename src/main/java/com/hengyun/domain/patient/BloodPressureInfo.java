@@ -1,5 +1,6 @@
 package com.hengyun.domain.patient;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
@@ -7,14 +8,47 @@ import java.util.Date;
  *  血压信息
  * */
 
-public class BloodPressureInfo {
+public class BloodPressureInfo implements Serializable{
 
-	private int id;										//病人id
-	private String name;							//病人姓名
-	private Date examTime;					//测量时间
-	private double examDate;				//测量数据
-	private String examResult;				//测量结论（太低，低，微低，正常，微高，高，超高）
-	private String examStatus;				//测量状态
 	
+	private int userId;								//病人id
+	private long measureTime;					//测量时间
+	private int highBP;								//高压数据
+	private int lowBP;								//d低压数据
+	private int heartRate;								//测量心率
+
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public long getMeasureTime() {
+		return measureTime;
+	}
+	public void setMeasureTime(long measureTime) {
+		this.measureTime = measureTime;
+	}
+	public int getHighBP() {
+		return highBP;
+	}
+	public void setHighBP(int highBP) {
+		this.highBP = highBP;
+	}
+	public int getLowBP() {
+		return lowBP;
+	}
+	public void setLowBP(int lowBP) {
+		this.lowBP = lowBP;
+	}
+	public int getHeartRate() {
+		return heartRate;
+	}
+	public void setHeartRate(int heartRate) {
+		this.heartRate = heartRate;
+	}
+	
+
 	
 }
