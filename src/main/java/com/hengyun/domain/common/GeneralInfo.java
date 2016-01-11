@@ -9,16 +9,12 @@ import java.util.Date;
  * */
 public class GeneralInfo implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7369970801041651680L;
-
 	
 /*
  *  基本资料
  * */
-	private String ID;									//用户ID
+	
+	private String userId;						//用户ID
 	private String username;					//用户名
 	private String gender;						//性别
 	private int age;									//年龄
@@ -39,6 +35,8 @@ public class GeneralInfo implements Serializable{
 	 * */
 	private String email;							//邮箱
 	private String QQ;								//QQ
+	private String mobilephone;			//手机号
+	
 	
 	public float getHeight() {
 		return height;
@@ -58,10 +56,8 @@ public class GeneralInfo implements Serializable{
 	public void setQQ(String qQ) {
 		QQ = qQ;
 	}
-	private String mobilephone;			//手机号
-	public String getID() {
-		return ID;
-	}
+
+	
 	public String getNation() {
 		return nation;
 	}
@@ -102,11 +98,7 @@ public class GeneralInfo implements Serializable{
 		this.birthday = birthday;
 	}
 
-	
-	public void setID(String iD) {
-		ID = iD;
-	}
-	
+
 	public String getHometown() {
 		return hometown;
 	}
@@ -131,25 +123,13 @@ public class GeneralInfo implements Serializable{
 	public void setMobilephone(String mobilephone) {
 		this.mobilephone = mobilephone;
 	}
-	public GeneralInfo(String iD, String username, String gender, int age, Date birthday, String image, String nation,
-			float height, float weight, String hometown, String department, String email, String qQ,
-			String mobilephone) {
-		super();
-		ID = iD;
-		this.username = username;
-		this.gender = gender;
-		this.age = age;
-		this.birthday = birthday;
-		this.image = image;
-		this.nation = nation;
-		this.height = height;
-		this.weight = weight;
-		this.hometown = hometown;
-		this.department = department;
-		this.email = email;
-		QQ = qQ;
-		this.mobilephone = mobilephone;
+	public String getUserId() {
+		return userId;
 	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
 	
 	
 	

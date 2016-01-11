@@ -40,13 +40,13 @@ public class LoginInfoController {
 		loginInfo.setLoginUsername(username);
 		loginInfo.setPassword(password);
 		loginInfo.setUserLoginIp(ip);
-		
-		if(loginInfoService.loginByUsername(loginInfo, type)>0){
-			registResult.setCode("6");
-			registResult.setMessage("登陆成功");
+		String loginFlag = loginInfoService.loginByUsername(loginInfo, type);
+		if(!loginFlag.equals("failure")){
+			registResult.setCode("202");
+			registResult.setMessage(loginFlag);
 		}else {
 			registResult.setCode("104");
-			registResult.setMessage("登陆失败");
+			registResult.setMessage("login failure");
 		}
 
 		return JSON.toJSONString(registResult);
@@ -89,18 +89,19 @@ public class LoginInfoController {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
 		RegisterResult registResult = new RegisterResult();
-		String thiirdTocken = jsonObject.getString("userId");
+		
+	
+		String username = jsonObject.getString("openId");
+		String type= jsonObject.getString("type");
 		String userLoginIp = request.getRemoteAddr();
+		
 		LoginInfo loginInfo = new LoginInfo();
-		//loginInfo.setCatagory(catagory);
-		loginInfo.setUserLoginIp(userLoginIp);;
-		if(loginInfoService.loginByThirdPart(thiirdTocken,loginInfo)){
-			registResult.setCode("603");
-			registResult.setMessage("三方登陆成功");
-		}else {
-			registResult.setCode("105");
-			registResult.setMessage("三方登陆失败");
-		}
+		loginInfo.setLoginUsername(username);
+		loginInfo.setUserLoginIp(userLoginIp);
+		String tocken = loginInfoService.loginByThirdPart(type, loginInfo);
+		
+		registResult.setCode("203");
+		registResult.setMessage(tocken);
 		return JSON.toJSONString(registResult);
 	}
 
@@ -114,15 +115,11 @@ public class LoginInfoController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		RegisterResult registResult = new RegisterResult();
 		String tocken = jsonObject.getString("tocken");
-		if(loginInfoCacheService.valideSession(tocken)){
-			loginInfoService.logout(tocken);
-			registResult.setCode("601");
-			registResult.setMessage("退出成功");
-		} else {
-			registResult.setCode("602");
-			registResult.setMessage("已经退出");
-			
-		}
+		
+		loginInfoService.logout(tocken);
+		registResult.setCode("204");
+		registResult.setMessage("logout success");
+	
 		return  JSON.toJSONString(registResult);
 	}
 }

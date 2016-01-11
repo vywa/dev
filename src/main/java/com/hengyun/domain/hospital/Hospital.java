@@ -1,5 +1,6 @@
 package com.hengyun.domain.hospital;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.hengyun.domain.docter.Docter;
@@ -11,7 +12,7 @@ import com.hengyun.domain.location.Location;
  * 
 
  * */
-public class Hospital {
+public class Hospital implements Serializable{
 
 	private int id;																//医院ID
 	private String hospitalName;									//医院名称
@@ -23,4 +24,66 @@ public class Hospital {
 	private String WeiChatPublicNumber;				//医院公众号
 	private List<Docter> docterList;							//医生列表
 	private Location	location;										//医院坐标
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getHospitalName() {
+		return hospitalName;
+	}
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public List<AdministrativeOffice> getAdministrativeOfficeList() {
+		return administrativeOfficeList;
+	}
+	public void setAdministrativeOfficeList(List<AdministrativeOffice> administrativeOfficeList) {
+		this.administrativeOfficeList = administrativeOfficeList;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getHospitalIM() {
+		return hospitalIM;
+	}
+	public void setHospitalIM(String hospitalIM) {
+		this.hospitalIM = hospitalIM;
+	}
+	public String getWeiChatPublicNumber() {
+		return WeiChatPublicNumber;
+	}
+	public void setWeiChatPublicNumber(String weiChatPublicNumber) {
+		WeiChatPublicNumber = weiChatPublicNumber;
+	}
+	public List<Docter> getDocterList() {
+		return docterList;
+	}
+	public void setDocterList(List<Docter> docterList) {
+		this.docterList = docterList;
+	}
+	public Location getLocation() {
+		return location;
+	}
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+	
+	
 }

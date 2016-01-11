@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.logininfo.LoginInfoDao;
+import com.hengyun.dao.logininfo.UserAccountDao;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginInfoCache;
 import com.hengyun.domain.loginInfo.UserAccount;
@@ -36,6 +37,8 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	private LoginInfoLogService loginInfoLogService;
 	
 	@Resource
+	private UserAccountDao userAccountDao;
+	@Resource
 	private LoginInfoCacheService loginInfoCacheService;
 	
 	public List<LoginInfo> getLoginInfoAll() {
@@ -54,25 +57,36 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	 *  通过用户账号登陆
 	 * 
 	 * */
-	public int loginByUsername(LoginInfo loginInfo, String type) {
+	public String loginByUsername(LoginInfo loginInfo, String type) {
 		// TODO Auto-generated method stub
+	
+		
 		int code  = userAccountService.validateUserBySign(loginInfo.getLoginUsername(), type,loginInfo.getPassword());
 		if(code>0){
+			
+			Query query = null;
+			query = Query.query(Criteria.where("userId").is(code));
+			
+			LoginInfo temp = new LoginInfo();
+			temp = loginInfoDao.queryOne(query);
+			
+			 if(temp!=null){
+				 System.out.println(temp.getUserId());
+				 logout(loginInfo.getSessionid());
+			 }
 			loginInfo.setUserLoginTime(new Date());
+			
 			String tocken = TockenGenerator.generate(loginInfo.getLoginUsername());
 			loginInfo.setSessionid(tocken);
 			loginInfo.setUserId(code);
+			
 			loginInfoDao.save(loginInfo);
 			
-			LoginInfoCache loginInfoCache = new LoginInfoCache();
-			loginInfoCache.setTocken(tocken);
-			loginInfoCache.setUserId(code);
-			loginInfoCache.setUsername(loginInfo.getLoginUsername());
-			loginInfoCacheService.loadCache(loginInfoCache);
-			return code;
+		
+			return tocken;
 		} else {
 
-			return -1;
+			return "failure";
 		}
 		
 	}
@@ -97,12 +111,28 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	 *  通过第三方登陆
 	 * 
 	 * */
-	public boolean  loginByThirdPart(String tocken,LoginInfo loginInfo) {
+	public String  loginByThirdPart(String type,LoginInfo loginInfo) {
 		// TODO Auto-generated method stub
-		loginInfo.setLoginUsername(tocken);
+		UserAccount userAccount = new UserAccount();
+		int userId=0;
+			if(type.equals("QQ")){
+				userAccount.setQQ(loginInfo.getLoginUsername());
+				userId = userAccountService.registerThirdAccount(userAccount);
+			}else if(type.equals("weiChat")){
+				userAccount.setWeiChat(loginInfo.getLoginUsername());
+				userId = userAccountService.registerThirdAccount(userAccount);
+			} else if(type.equals("weibo")){
+				userAccount.setWeiBo(loginInfo.getLoginUsername());
+				userId = userAccountService.registerThirdAccount(userAccount);
+			}
+			//保存到用户账号数据库
+		//	userAccountDao.addUserAccount(userAccount);
+			String tocken = TockenGenerator.generate(loginInfo.getLoginUsername());
+			loginInfo.setUserId(userId);
+			loginInfo.setSessionid(tocken);
 		loginInfo.setUserLoginTime(new Date());
 		loginInfoDao.save(loginInfo);
-		return true;
+		return tocken;
 	}
 
 
@@ -111,14 +141,41 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	 * */
 	public boolean logout(String tocken) {
 		
-		int userId = loginInfoCacheService.getUserId(tocken);
-		Query query = Query.query(Criteria.where("userId").is(userId));
-		Update update =Update.update("sessionId","0");
+	//	int userId = loginInfoCacheService.getUserId(tocken);
+
+
+		Query query = Query.query(Criteria.where("sessionid").is(tocken));
 		
+		Update update =new Update();
+		
+		update.unset("sessionid").addToSet("userLogoutTime", new Date());
+
 		loginInfoDao.updateFirst(query, update);
-		loginInfoCacheService.destroyCache(tocken);
+	//	loginInfoCacheService.destroyCache(tocken);
 		
-		return false;
+		return true;
+	}
+
+	public int isOnline(String tocken){
+		Query query = null;
+		query = Query.query(Criteria.where("sessionid").is(tocken));
+		LoginInfo loginInfo = loginInfoDao.queryOne(query);
+		if(loginInfo!=null){
+			return loginInfo.getUserId();
+		} else {
+			return -1;
+		}
+	}
+	
+	//通过用户id获得tocken
+	public String getTockenById(int userId) {
+		// TODO Auto-generated method stub
+		Query query = null;
+		query = Query.query(Criteria.where("userId").is(userId));
+		LoginInfo loginInfo = loginInfoDao.queryOne(query);
+		String tocken = loginInfo.getSessionid();
+		
+		return tocken;
 	}
 
 

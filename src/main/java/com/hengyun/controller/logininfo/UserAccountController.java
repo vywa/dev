@@ -53,8 +53,8 @@ public class UserAccountController {
 		//查询改手机号是否注册
 		
 		if(userAccountService.existUserAccountBySign(mobilephone,"mobilephone")){
-			registResult.setCode("2");
-			registResult.setMessage("手机号码已经注册");
+			registResult.setCode("102");
+			registResult.setMessage("user exist");
 		} else {
 			if(registerCacheService.getTryCount(mobilephone)<6){
 			int codeNum = (int)(Math.random()*1000000);
@@ -67,16 +67,16 @@ public class UserAccountController {
 				result =  sms.send();
 				if(result!=null){
 					if(result.getCode()==2){
-						registResult.setCode("0");
-						registResult.setMessage("验证码发送成功");
+						registResult.setCode("205");
+						registResult.setMessage("test code send success");
 					}
 				} else {
-					registResult.setCode("1");
-					registResult.setMessage("验证码发送失败");
+					registResult.setCode("101");
+					registResult.setMessage("test code send fail");
 				}
 			} else {
-				registResult.setCode("3");
-				registResult.setMessage("发送超过5次");
+				registResult.setCode("106");
+				registResult.setMessage("too many time");
 			}
 		}
 		
@@ -94,23 +94,23 @@ public class UserAccountController {
 		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
-		UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+	//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
 		RegisterResult registResult = new RegisterResult();
 		
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
 			UserAccount userAccount = new UserAccount();
 			userAccount.setMobilephone(mobilephone);
 			userAccount.setPassword(password);
-			userAccount.setUserCatagory(userCatagory);
+		//	userAccount.setUserCatagory(userCatagory);
 			int id = userAccountService.registerAccount(userAccount);
 			registerCacheService.updateRegisterCache(userAccount.getMobilephone());
-			registResult.setCode("5");
+			registResult.setCode("205");
 			registResult.setMessage(String.valueOf(id));
 			
 		} else {
 			registerCacheService.addTryCount(mobilephone);
-			registResult.setCode("4");
-			registResult.setMessage("验证码错误");
+			registResult.setCode("107");
+			registResult.setMessage("test code error");
 		}
 		
 	
@@ -131,8 +131,8 @@ public class UserAccountController {
 		//查询改邮箱是否注册
 		
 		if(userAccountService.existUserAccountBySign(email,"email")){
-			registResult.setCode("202");
-			registResult.setMessage("邮箱已经注册");
+			registResult.setCode("102");
+			registResult.setMessage("user exist");
 		} else {
 		
 				int codeNum = (int)(Math.random()*1000000);
@@ -146,8 +146,8 @@ public class UserAccountController {
 				
 				SubmitResult result;
 				
-				registResult.setCode("0");
-				registResult.setMessage("发送邮件成功");
+				registResult.setCode("205");
+				registResult.setMessage("test code send success");
 			
 		}
 		
@@ -175,13 +175,13 @@ public class UserAccountController {
 			//	userAccount.setUserCatagory(userCatagory);
 				int id = userAccountService.registerAccount(userAccount);
 				registerCacheService.updateRegisterCache(userAccount.getEmail());
-				registResult.setCode("5");
+				registResult.setCode("201");
 				registResult.setMessage(String.valueOf(id));
 				
 			} else {
 				
-				registResult.setCode("4");
-				registResult.setMessage("验证码错误");
+				registResult.setCode("107");
+				registResult.setMessage("code error");
 			}
 			
 		
@@ -220,7 +220,7 @@ public class UserAccountController {
 		
 		if(!userAccountService.existUserAccountBySign(mobilephone,"mobilephone")){
 			registResult.setCode("103");
-			registResult.setMessage("用户不存在");
+			registResult.setMessage("user not exist");
 		} else {
 		
 			int codeNum = (int)(Math.random()*1000000);
@@ -233,12 +233,12 @@ public class UserAccountController {
 				result =  sms.send();
 				if(result!=null){
 					if(result.getCode()==2){
-						registResult.setCode("0");
-						registResult.setMessage("验证码发送成功");
+						registResult.setCode("205");
+						registResult.setMessage("test code send success");
 					}
 				} else {
-					registResult.setCode("1");
-					registResult.setMessage("验证码发送失败");
+					registResult.setCode("101");
+					registResult.setMessage("test code send failure");
 				}
 		
 		}
@@ -271,13 +271,13 @@ public class UserAccountController {
 			userAccount.setPassword(password);
 			//userAccount.setUserCatagory(userCatagory);
 			 userAccountService.updateUserAccount(userAccount);
-			registResult.setCode("5");
-			registResult.setMessage("密码修改成功");
+			registResult.setCode("206");
+			registResult.setMessage("password update success");
 			
 		} else {
 			registerCacheService.addTryCount(mobilephone);
-			registResult.setCode("4");
-			registResult.setMessage("验证码错误");
+			registResult.setCode("107");
+			registResult.setMessage("test code error");
 		}
 		
 	

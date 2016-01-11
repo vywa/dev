@@ -31,8 +31,7 @@ public class LoginInfo implements Serializable{
 	private  LoginStatus loginStatus ;					//用户登陆状态(登陆，未登录)
 	private String 				sessionid;					//登陆会话id
 	private int			loginCount;										//在线数量
-	
-	
+
 	
 	public int getUserId() {
 		return userId;

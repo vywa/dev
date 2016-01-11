@@ -63,34 +63,22 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 	// 用户是否存在
 	public boolean existUserAccountBySign(String sign, String type) {
 		// TODO Auto-generated method stub
-		// 查询缓存
-		boolean isExist = registerCacheService.existBySign(sign);
+	
 		Query query = null;
-		if (!isExist) {
-			// 检查是否存在
-			if (type.equals("mobilephone")) {
-				query = Query.query(Criteria.where("mobilephone").is(sign));
-			} else if (type.equals("email")) {
-				query = Query.query(Criteria.where("email").is(sign));
-			} else if (type.equals("username")) {
-				query = Query.query(Criteria.where("username").is(sign));
-			}
-			UserAccount userAccount = userAccountDao.queryOne(query);
-			if (userAccount == null) {
-				registerCacheService.loadRegisterCache(sign);
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			if (registerCacheService.getStatus(sign).equals(AccountStatus.REGISTERED)) {
-				return true;
-			} else {
-				return false;
-			}
-
+		if (type.equals("mobilephone")) {
+			query = Query.query(Criteria.where("mobilephone").is(sign));
+		} else if (type.equals("email")) {
+			query = Query.query(Criteria.where("email").is(sign));
+		} else if (type.equals("username")) {
+			query = Query.query(Criteria.where("username").is(sign));
 		}
-
+		UserAccount userAccount = userAccountDao.queryOne(query);
+		if (userAccount == null) {
+		
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	// 判断用户是否存在
@@ -115,6 +103,18 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			return userId;
 		}
 	
+	}
+
+	public int registerThirdAccount(UserAccount userAccount) {
+		// TODO Auto-generated method stub
+		return userAccountDao.addUserAccount(userAccount);
+	
+	}
+
+	public int validateThirdUserBySign(String sign, String type) {
+		// TODO Auto-generated method stub
+		
+		return 0;
 	}
 
 }

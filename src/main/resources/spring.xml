@@ -32,6 +32,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 <bean id="userAccountDao" class="com.hengyun.dao.impl.logininfo.UserAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="userAccountService" class="com.hengyun.service.impl.logininfo.UserAccountServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="informationService" class="com.hengyun.service.impl.information.InformationServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="loginInfoLogDao" class="com.hengyun.dao.impl.logininfo.LoginInfoLogDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="loginInfoLogService" class="com.hengyun.service.impl.logininfo.LoginInfoLogServiceImpl" parent="BaseServiceImpl"/>
 

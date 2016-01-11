@@ -1,15 +1,14 @@
 package com.hengyun.domain.friendcircle;
 
+import java.io.Serializable;
 import java.util.List;
-
-import com.hengyun.domain.common.GeneralPerson;
 
 
 /*
  * 
  *   朋友圈
  * */
-public class FriendCircle {
+public class FriendCircle implements Serializable{
 
 	private List<Friend> allFriendsList;			//朋友列表
 	

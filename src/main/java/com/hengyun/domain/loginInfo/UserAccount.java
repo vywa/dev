@@ -16,16 +16,18 @@ public class UserAccount implements Serializable{
 	 */
 
 	private int id;																			//用户ID
-	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生，病人，游客）
+	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生2，病人3，游客）
 	private String 							username;							//用户名
 	private String 							mobilephone;					//用户手机号
 	private String 							email;									//用户邮箱
+	
+	private String 							QQ;										//QQ
+	private String							weiChat;								//weiChat
+	private String							weiBo;									//weiBo
+	
 	private String							password;							//用户密码
 	private AccountStatus			accountStatus;					//用户账号状态
 	
-	
-	
-
 
 	public int getId() {
 		return id;
@@ -100,6 +102,36 @@ public class UserAccount implements Serializable{
 		public UserAccount() {
 		super();
 	}
+
+
+		public String getQQ() {
+			return QQ;
+		}
+
+
+		public void setQQ(String qQ) {
+			QQ = qQ;
+		}
+
+
+		public String getWeiChat() {
+			return weiChat;
+		}
+
+
+		public void setWeiChat(String weiChat) {
+			this.weiChat = weiChat;
+		}
+
+
+		public String getWeiBo() {
+			return weiBo;
+		}
+
+
+		public void setWeiBo(String weiBo) {
+			this.weiBo = weiBo;
+		}
 
 	
 	

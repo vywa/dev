@@ -1,5 +1,6 @@
 package com.hengyun.domain.forum;
 
+import java.io.Serializable;
 import java.util.List;
 
 /*
@@ -7,7 +8,7 @@ import java.util.List;
  * 
  * */
 
-public class PostCommnet {
+public class PostComment implements Serializable{
 
 	/*
 	 *  回复基本信息

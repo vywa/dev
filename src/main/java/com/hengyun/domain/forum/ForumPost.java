@@ -46,7 +46,7 @@ public class ForumPost implements Serializable {
 	 *   帖子回复
 	 *   
 	 * */
-	private 				List<PostCommnet>       commnetList;		//评论列表
+	private 				List<PostComment>       commnetList;		//评论列表
 	
 	
 	/*
