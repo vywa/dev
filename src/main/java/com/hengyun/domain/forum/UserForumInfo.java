@@ -17,6 +17,7 @@ public class UserForumInfo implements Serializable{
 	 * 
 	 *  论坛用户基本信息
 	 * */
+	private int id;																		//用户ｉｄ
 	
 	private ForumGeneralInfo	forumGeneralInfo;			//用户论坛基本信息
 	

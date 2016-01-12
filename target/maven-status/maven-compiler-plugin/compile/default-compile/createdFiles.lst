@@ -26,6 +26,7 @@ com/hengyun/domain/forum/ForumLoginInfo.class
 com/hengyun/domain/loginInfo/UserAccount.class
 com/hengyun/util/sms/SubmitResult.class
 com/hengyun/dao/friendcircle/FriendCircleDao.class
+com/hengyun/service/forum/ForumPostService.class
 com/hengyun/domain/friendcircle/FriendGroup.class
 com/hengyun/dao/impl/BaseMongodbDaoImpl.class
 com/hengyun/dao/forum/CommentContentDao.class
@@ -93,18 +94,21 @@ com/hengyun/util/sms/sender/StringUtil.class
 com/hengyun/service/impl/patient/BloodPressureInfoServiceImpl.class
 com/hengyun/service/impl/administrator/AdministratorServiceImpl.class
 com/hengyun/domain/casehistory/HospitalRecords.class
-com/hengyun/domain/common/GeneralInfo.class
+com/hengyun/service/impl/forum/ForumPostServiceImpl.class
 com/hengyun/domain/casehistory/AssistExamination.class
+com/hengyun/domain/information/GeneralPerson.class
 com/hengyun/domain/friendcircle/FriendCircle.class
 com/hengyun/service/logininfo/LoginInfoLogService.class
 com/hengyun/domain/loginInfo/LoginInfo.class
 com/hengyun/domain/casehistory/DiagnosisResult.class
+com/hengyun/domain/information/Information.class
 com/hengyun/domain/notice/CommonMessage.class
 com/hengyun/util/sms/SmsLocator.class
 com/hengyun/domain/casehistory/DiseaseDevelopHistory.class
 com/hengyun/dao/impl/administrator/AdministratorDaoImpl.class
 com/hengyun/domain/casehistory/DocterAdvice.class
 com/hengyun/controller/logininfo/LoginInfoController.class
+com/hengyun/domain/information/Icon.class
 com/hengyun/controller/forum/CommentController.class
 com/hengyun/dao/administrator/AdministratorDao.class
 com/hengyun/domain/casehistory/MarriageHistory.class
@@ -118,8 +122,8 @@ com/hengyun/dao/impl/patient/BloodSuggerInfoDaoImpl.class
 com/hengyun/domain/loginInfo/constant/LoginModel.class
 com/hengyun/dao/impl/logininfo/LoginInfoLogDaoImpl.class
 com/hengyun/dao/BaseMongodbDao.class
-com/hengyun/domain/common/GeneralPerson.class
 com/hengyun/domain/loginInfo/RegisterResult.class
+com/hengyun/dao/information/IconDao.class
 com/hengyun/dao/impl/logininfo/IndexCollectionDaoImpl.class
 com/hengyun/domain/loginInfo/constant/LoginStatus.class
 com/hengyun/service/impl/BaseServiceImpl.class
@@ -134,6 +138,7 @@ com/hengyun/dao/hospital/HospitalDao.class
 com/hengyun/domain/patient/PatientReTreateInfo.class
 com/hengyun/service/logininfo/RegisterCacheService.class
 com/hengyun/controller/forum/ForumController.class
+com/hengyun/dao/impl/information/IconDaoImpl.class
 com/hengyun/dao/impl/logininfo/LoginInfoDaoImpl.class
 com/hengyun/service/impl/information/InformationServiceImpl.class
 com/hengyun/domain/forum/StatisticInfo.class
@@ -167,6 +172,7 @@ com/hengyun/util/sms/Sms.class
 com/hengyun/controller/patient/BloodSuggerInfoController.class
 com/hengyun/dao/patient/BloodSuggerInfoDao.class
 com/hengyun/domain/docter/Docter.class
+com/hengyun/dao/impl/forum/ForumPostDaoImpl.class
 com/hengyun/domain/casehistory/CaseHistory.class
 com/hengyun/dao/impl/RedisDataSourceImpl.class
 com/hengyun/util/sms/SmsSoap.class

@@ -15,17 +15,19 @@ public class ForumPost implements Serializable {
 	 * 
 	 * */
 	
-	private String postID;						//帖子ID
+	private int id;						//帖子ID
 	
 	private int 	forumPlate;					//所属板块
 	
 	private String theme;						//主题
 	
-	private String author	;						//发帖作者
+	private int userId	;						//发帖作者
 	
 	private Date deliveryTime;				//发帖时间
 	
 	private String content;						//帖子内容
+	
+	private String title;								//帖子标题
 	
 	
 	/*
@@ -62,5 +64,123 @@ public class ForumPost implements Serializable {
 	private int				supportCount;			//支持次数
 	
 	private int 			oppositionCount;		//反对次数
+
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getForumPlate() {
+		return forumPlate;
+	}
+
+	public void setForumPlate(int forumPlate) {
+		this.forumPlate = forumPlate;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+
+	
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public Date getDeliveryTime() {
+		return deliveryTime;
+	}
+
+	public void setDeliveryTime(Date deliveryTime) {
+		this.deliveryTime = deliveryTime;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public List<PostComment> getCommnetList() {
+		return commnetList;
+	}
+
+	public void setCommnetList(List<PostComment> commnetList) {
+		this.commnetList = commnetList;
+	}
+
+	public int getViewCount() {
+		return viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+
+	public int getSupportCount() {
+		return supportCount;
+	}
+
+	public void setSupportCount(int supportCount) {
+		this.supportCount = supportCount;
+	}
+
+	public int getOppositionCount() {
+		return oppositionCount;
+	}
+
+	public void setOppositionCount(int oppositionCount) {
+		this.oppositionCount = oppositionCount;
+	}
+	
+	
 	
 }

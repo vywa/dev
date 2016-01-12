@@ -8,4 +8,5 @@ import com.hengyun.domain.forum.ForumPost;
  * */
 public interface ForumPostDao extends BaseMongodbDao<ForumPost,Integer>{
 
+	public int post(ForumPost post);
 }

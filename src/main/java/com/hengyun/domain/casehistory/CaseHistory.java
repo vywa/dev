@@ -2,8 +2,7 @@ package com.hengyun.domain.casehistory;
 
 import java.io.Serializable;
 
-
-import com.hengyun.domain.common.GeneralInfo;
+import com.hengyun.domain.information.Information;
 
 
 /*

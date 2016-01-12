@@ -35,8 +35,14 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="informationService" class="com.hengyun.service.impl.information.InformationServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="IconDao" class="com.hengyun.dao.impl.information.IconDaoImpl" parent="BaseMongodbDaoImpl"/>  
+
 <bean id="loginInfoLogDao" class="com.hengyun.dao.impl.logininfo.LoginInfoLogDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="loginInfoLogService" class="com.hengyun.service.impl.logininfo.LoginInfoLogServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="forumPostDao" class="com.hengyun.dao.impl.forum.ForumPostDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="forumPostService" class="com.hengyun.service.impl.forum.ForumPostServiceImpl" parent="BaseServiceImpl"/>
+
 
 <bean id="bloodPressureInfoDao" class="com.hengyun.dao.impl.patient.BloodPressureInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="bloodPressureInfoService" class="com.hengyun.service.impl.patient.BloodPressureInfoServiceImpl" parent="BaseServiceImpl"/>

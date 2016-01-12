@@ -1,23 +1,19 @@
 package com.hengyun.controller.forum;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.forum.ForumPost;
+import com.hengyun.service.forum.ForumPostService;
+import com.hengyun.service.logininfo.LoginInfoService;
 
 /*
  *  帖子管理
@@ -25,12 +21,28 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 @Controller  
 @RequestMapping("post")  
 public class PostController {   
-      
+    @Resource
+    private LoginInfoService loginInfoService;
+    
+	@Resource
+	private ForumPostService forumPostService;
+	
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addPost(@RequestParam String data,HttpServletRequest request){
+		ResponseCode response = new ResponseCode();
+		JSONObject jsonObject =JSON.parseObject(data);
+		ForumPost post = JSON.toJavaObject(jsonObject, ForumPost.class);
+		String tocken = request.getParameter("tocken");
+		if(forumPostService.post(post, tocken)>0){
+			response.setCode("209");
+			response.setMessage("post success");
+		} else{
+			response.setCode("111");
+			response.setMessage("post failure");
+		}
 		
-		return null;
+		return JSON.toJSONString(response);
 	}
 	
 	@RequestMapping("/set")
@@ -43,12 +55,26 @@ public class PostController {
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showPost(@RequestParam String data,HttpServletRequest request){
+		
 		return null;
 	}
 	
 	@RequestMapping("/edit")
 	@ResponseBody
 	public String editPost(@RequestParam String data,HttpServletRequest request){
+		return null;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String deletePost(@RequestParam String data,HttpServletRequest request){
+		ResponseCode response = new ResponseCode();
+	
+		String tocken = request.getParameter("tocken");
+		String idStr = request.getParameter("postId");
+		forumPostService.deleteById(Integer.valueOf(idStr));
+		response.setCode("210");
+		response.setMessage("delete success");
 		return null;
 	}
 	

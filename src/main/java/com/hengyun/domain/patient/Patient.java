@@ -3,7 +3,7 @@ package com.hengyun.domain.patient;
 import java.io.Serializable;
 
 import com.hengyun.domain.casehistory.CaseHistory;
-import com.hengyun.domain.common.GeneralPerson;
+import com.hengyun.domain.information.GeneralPerson;
 
 /*
  *  病人信息表

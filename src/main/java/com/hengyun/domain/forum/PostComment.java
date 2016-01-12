@@ -14,7 +14,7 @@ public class PostComment implements Serializable{
 	 *  回复基本信息
 	 * 
 	 * */
-	private int replyId;							//回复id
+	private int id;							//回复id
 	
 	private String type;						//回复的类型（主贴回复，别人评论回复）
 	
@@ -25,7 +25,7 @@ public class PostComment implements Serializable{
 	
 	private int 	replyerId;						//回复人ID
 	
-	private CommonContent 	commonContent;					//回复内容
+	private List<CommonContent> 	commonContents;					//回复内容
 	
 	
 	/*
@@ -38,6 +38,90 @@ public class PostComment implements Serializable{
 	
 
 	private List<CommonContent> 	commentList;				//回复的回复
+
+
+	
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	public int getReplyToId() {
+		return replyToId;
+	}
+
+
+	public void setReplyToId(int replyToId) {
+		this.replyToId = replyToId;
+	}
+
+
+	public String getReplyerName() {
+		return replyerName;
+	}
+
+
+	public void setReplyerName(String replyerName) {
+		this.replyerName = replyerName;
+	}
+
+
+	public int getReplyerId() {
+		return replyerId;
+	}
+
+
+	public void setReplyerId(int replyerId) {
+		this.replyerId = replyerId;
+	}
+
+
+	
+
+	public List<CommonContent> getCommonContents() {
+		return commonContents;
+	}
+
+
+	public void setCommonContents(List<CommonContent> commonContents) {
+		this.commonContents = commonContents;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public List<CommonContent> getCommentList() {
+		return commentList;
+	}
+
+
+	public void setCommentList(List<CommonContent> commentList) {
+		this.commentList = commentList;
+	}
 
 	
 	

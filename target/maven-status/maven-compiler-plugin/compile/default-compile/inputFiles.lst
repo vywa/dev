@@ -24,6 +24,7 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/impl/RedisDataSourceImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/sms/sender/SmsSender.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/logininfo/LoginInfoDao.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/service/forum/ForumPostService.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/DocterAdvice.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/controller/docter/DocterController.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/service/impl/doctor/DocterServiceImpl.java
@@ -37,7 +38,6 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/forum/ForumLoginInfo.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/logininfo/UserAccountDao.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/AnesthesiaConsent.java
-/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/common/GeneralInfo.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/sms/VersionInfoResult.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/loginInfo/RegisterResult.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/friendcircle/Friend.java
@@ -87,6 +87,8 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/service/impl/patient/BloodSuggerInfoServiceImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/common/Privilege.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/FirstDiagnosis.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/information/GeneralPerson.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/impl/information/IconDaoImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/impl/logininfo/LoginInfoLogDaoImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/impl/administrator/AdministratorDaoImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/sms/GetKeFuResult.java
@@ -103,6 +105,7 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/MarriageHistory.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/sms/GetReplyResult.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/controller/friendcircle/FriendCircleController.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/information/IconDao.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/PresentDiseaseHistory.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/service/impl/logininfo/LoginInfoCacheServiceImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/controller/notice/NoticeController.java
@@ -134,6 +137,7 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/AnalysisResult.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/hospital/Hospital.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/controller/forum/CommentController.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/information/Icon.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/HospitalizedRecordPreface.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/forum/ForumConfig.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/exception/BusinessException.java
@@ -163,11 +167,13 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/hospital/AdministrativeOffice.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/randomcode/TockenGenerator.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/sms/SmsSoap.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/service/impl/forum/ForumPostServiceImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/logininfo/LoginInfoLogDao.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/HospitalizedRecords.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/administrator/AdministratorDao.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/forum/StatisticInfo.java
-/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/common/GeneralPerson.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/administrator/Administrator.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/dao/impl/forum/ForumPostDaoImpl.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/forum/ForumGeneralInfo.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/information/Information.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/loginInfo/constant/AccountStatus.java
