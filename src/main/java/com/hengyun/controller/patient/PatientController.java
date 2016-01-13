@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /*
- *  医生管理
+ *  病人管理
  * */
 @Controller
 @RequestMapping("patient")

@@ -11,10 +11,11 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.forum.ForumPostDao;
+import com.hengyun.dao.forum.SecondCommentDao;
 import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.forum.ForumPost;
-import com.hengyun.domain.information.Information;
-import com.hengyun.service.forum.ForumPostService;
+import com.hengyun.domain.forum.SecondComment;
+import com.hengyun.service.forum.SecondCommentService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -23,8 +24,11 @@ import com.mongodb.gridfs.GridFSDBFile;
  *  　个人信息管理
  * */
 
-public class ForumPostServiceImpl extends BaseServiceImpl<ForumPost,Integer> implements ForumPostService{
+public class SecondCommentServiceImpl extends BaseServiceImpl<SecondComment,Integer> implements SecondCommentService{
 
+	@Resource
+	private SecondCommentDao secondCommentDao;
+	
 	@Resource
 	private ForumPostDao forumPostDao;
 	
@@ -89,12 +93,18 @@ public class ForumPostServiceImpl extends BaseServiceImpl<ForumPost,Integer> imp
 		return null;
 	}
 
-	public List<ForumPost> showAll() {
+	public int post(SecondComment comment, int commentId) {
+		// TODO Auto-generated method stub
+		return  secondCommentDao.addComment(comment, commentId);
+		
+		
+	}
+
+	public List<SecondComment> show() {
 		// TODO Auto-generated method stub
 		Query query = new Query();
-		query.addCriteria(Criteria.where("postId").exists(true));
-		return forumPostDao.queryList(query);
-		
+		query.addCriteria(Criteria.where("commentId").exists(true));
+		return secondCommentDao.queryList(query);
 	}
 
 }

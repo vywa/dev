@@ -15,13 +15,13 @@ public class ForumPost implements Serializable {
 	 * 
 	 * */
 	
-	private int id;						//帖子ID
+	private int id;										//帖子ID
 	
-	private int 	forumPlate;					//所属板块
+	private int 	forumPlateId;					//所属板块
 	
 	private String theme;						//主题
 	
-	private int userId	;						//发帖作者
+	private int userId	;							//发帖作者
 	
 	private Date deliveryTime;				//发帖时间
 	
@@ -48,7 +48,7 @@ public class ForumPost implements Serializable {
 	 *   帖子回复
 	 *   
 	 * */
-	private 				List<PostComment>       commnetList;		//评论列表
+	private 				List<Integer>       commnetList;		//评论列表
 	
 	
 	/*
@@ -67,6 +67,16 @@ public class ForumPost implements Serializable {
 
 	
 
+
+
+	public List<Integer> getCommnetList() {
+		return commnetList;
+	}
+
+	public void setCommnetList(List<Integer> commnetList) {
+		this.commnetList = commnetList;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -75,13 +85,17 @@ public class ForumPost implements Serializable {
 		this.id = id;
 	}
 
-	public int getForumPlate() {
-		return forumPlate;
+
+
+	public int getForumPlateId() {
+		return forumPlateId;
 	}
 
-	public void setForumPlate(int forumPlate) {
-		this.forumPlate = forumPlate;
+	public void setForumPlateId(int forumPlateId) {
+		this.forumPlateId = forumPlateId;
 	}
+
+
 
 	public String getTheme() {
 		return theme;
@@ -141,13 +155,7 @@ public class ForumPost implements Serializable {
 		this.level = level;
 	}
 
-	public List<PostComment> getCommnetList() {
-		return commnetList;
-	}
-
-	public void setCommnetList(List<PostComment> commnetList) {
-		this.commnetList = commnetList;
-	}
+	
 
 	public int getViewCount() {
 		return viewCount;

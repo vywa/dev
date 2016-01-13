@@ -17,13 +17,29 @@ public class Hospital implements Serializable{
 	private int id;																//医院ID
 	private String hospitalName;									//医院名称
 	private String address;												//医院地址
-	private List<AdministrativeOffice> administrativeOfficeList;		//医院科室列表
+	private String level;														//级别
+	private List<Integer> OfficeList;							//医院科室列表
 	private String telephone;											//医院电话
 	private String email;													//医院邮件
 	private String hospitalIM;										//医院即时通讯号
 	private String WeiChatPublicNumber;				//医院公众号
-	private List<Docter> docterList;							//医生列表
+
 	private Location	location;										//医院坐标
+	
+	
+
+	public List<Integer> getOfficeList() {
+		return OfficeList;
+	}
+	public void setOfficeList(List<Integer> officeList) {
+		OfficeList = officeList;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	public int getId() {
 		return id;
 	}
@@ -42,12 +58,7 @@ public class Hospital implements Serializable{
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public List<AdministrativeOffice> getAdministrativeOfficeList() {
-		return administrativeOfficeList;
-	}
-	public void setAdministrativeOfficeList(List<AdministrativeOffice> administrativeOfficeList) {
-		this.administrativeOfficeList = administrativeOfficeList;
-	}
+	
 	public String getTelephone() {
 		return telephone;
 	}
@@ -72,12 +83,7 @@ public class Hospital implements Serializable{
 	public void setWeiChatPublicNumber(String weiChatPublicNumber) {
 		WeiChatPublicNumber = weiChatPublicNumber;
 	}
-	public List<Docter> getDocterList() {
-		return docterList;
-	}
-	public void setDocterList(List<Docter> docterList) {
-		this.docterList = docterList;
-	}
+	
 	public Location getLocation() {
 		return location;
 	}

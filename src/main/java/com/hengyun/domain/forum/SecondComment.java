@@ -5,11 +5,11 @@ import java.util.Date;
 import java.util.List;
 
 /*
- *  		帖子回复
+ *  		帖子回复的回复
  * 
  * */
 
-public class PostComment implements Serializable{
+public class SecondComment implements Serializable{
 
 	/*
 	 *  回复基本信息
@@ -25,10 +25,9 @@ public class PostComment implements Serializable{
 	
 	private int 	replyerId;						//回复人ID
 	
+	private CommentContent 	commonContents;					//二次回复内容
 	
 	private Date 		replyTime;												//回复时间
-	
-	private CommentContent comment;						//回复内容
 	
 	/*
 	 * 
@@ -38,8 +37,6 @@ public class PostComment implements Serializable{
 
 	private String status;						//回复状态 (屏蔽，正常)
 	
-
-	private List<Integer> 	commentList;				//回复的回复
 
 
 	
@@ -53,6 +50,18 @@ public class PostComment implements Serializable{
 		this.id = id;
 	}
 
+
+	
+
+
+	public CommentContent getCommonContents() {
+		return commonContents;
+	}
+
+
+	public void setCommonContents(CommentContent commonContents) {
+		this.commonContents = commonContents;
+	}
 
 
 	public int getReplyToId() {
@@ -85,6 +94,7 @@ public class PostComment implements Serializable{
 	}
 
 
+
 	public Date getReplyTime() {
 		return replyTime;
 	}
@@ -104,17 +114,5 @@ public class PostComment implements Serializable{
 		this.status = status;
 	}
 
-
-	public List<Integer> getCommentList() {
-		return commentList;
-	}
-
-
-	public void setCommentList(List<Integer> commentList) {
-		this.commentList = commentList;
-	}
-
-
-	
 	
 }

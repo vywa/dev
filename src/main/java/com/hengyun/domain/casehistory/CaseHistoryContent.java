@@ -1,8 +1,7 @@
 package com.hengyun.domain.casehistory;
 
+import java.io.Serializable;
 import java.util.Date;
-
-import com.hengyun.domain.hospital.AdministrativeOffice;
 
 /*
  * 
@@ -16,20 +15,108 @@ import com.hengyun.domain.hospital.AdministrativeOffice;
  * 
  * */
 
-public class CaseHistoryContent {
+public class CaseHistoryContent implements Serializable{
 
 	private Date treatTime;					//就诊时间
-	private AdministrativeOffice  administrativeOffice;			//科室信息
-	private ChiefComplaint chiefComplaint;								//主诉
-	private PresentDiseaseHistory presentDiseaseHistory;		//现病史
-	private PastDiseaseHistory		pastDiseaseHistory;					//既病史
+	private int  officeId;			//科室信息
+	private String chiefComplaint;								//主诉
+	private String presentDiseaseHistory;		//现病史
+	private String		pastDiseaseHistory;					//既病史
 	private String			positiveSigns;										//阳性体征
 	private String		negativeSigns;									//	阴性体征
-	private AssistExamination	assistExamination;						//辅助检查结果
-	private DiagnosisResult		diagnosisResult;							//诊断
-	private DocterAdvice					docterAdvice;										//治疗意见
+	private String	assistExamination;						//辅助检查结果
+	private String		diagnosisResult;							//诊断
+	private String					docterAdvice;										//治疗意见
 	
 	private String 						docterName;										//医生签名
+
+	public Date getTreatTime() {
+		return treatTime;
+	}
+
+	public void setTreatTime(Date treatTime) {
+		this.treatTime = treatTime;
+	}
+
+	public int getOfficeId() {
+		return officeId;
+	}
+
+	public void setOfficeId(int officeId) {
+		this.officeId = officeId;
+	}
+
+	public String getChiefComplaint() {
+		return chiefComplaint;
+	}
+
+	public void setChiefComplaint(String chiefComplaint) {
+		this.chiefComplaint = chiefComplaint;
+	}
+
+	public String getPresentDiseaseHistory() {
+		return presentDiseaseHistory;
+	}
+
+	public void setPresentDiseaseHistory(String presentDiseaseHistory) {
+		this.presentDiseaseHistory = presentDiseaseHistory;
+	}
+
+	public String getPastDiseaseHistory() {
+		return pastDiseaseHistory;
+	}
+
+	public void setPastDiseaseHistory(String pastDiseaseHistory) {
+		this.pastDiseaseHistory = pastDiseaseHistory;
+	}
+
+	public String getPositiveSigns() {
+		return positiveSigns;
+	}
+
+	public void setPositiveSigns(String positiveSigns) {
+		this.positiveSigns = positiveSigns;
+	}
+
+	public String getNegativeSigns() {
+		return negativeSigns;
+	}
+
+	public void setNegativeSigns(String negativeSigns) {
+		this.negativeSigns = negativeSigns;
+	}
+
+	public String getAssistExamination() {
+		return assistExamination;
+	}
+
+	public void setAssistExamination(String assistExamination) {
+		this.assistExamination = assistExamination;
+	}
+
+	public String getDiagnosisResult() {
+		return diagnosisResult;
+	}
+
+	public void setDiagnosisResult(String diagnosisResult) {
+		this.diagnosisResult = diagnosisResult;
+	}
+
+	public String getDocterAdvice() {
+		return docterAdvice;
+	}
+
+	public void setDocterAdvice(String docterAdvice) {
+		this.docterAdvice = docterAdvice;
+	}
+
+	public String getDocterName() {
+		return docterName;
+	}
+
+	public void setDocterName(String docterName) {
+		this.docterName = docterName;
+	}
 	
 	
 	

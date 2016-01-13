@@ -1,5 +1,7 @@
 package com.hengyun.controller.forum;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,30 +13,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.forum.ForumPost;
+import com.hengyun.domain.forum.PostComment;
+import com.hengyun.domain.forum.SecondComment;
 import com.hengyun.service.forum.ForumPostService;
+import com.hengyun.service.forum.PostCommentService;
+import com.hengyun.service.forum.SecondCommentService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
 /*
- *  帖子管理
+ *  二次回复管理
  * */
 @Controller  
-@RequestMapping("post")  
-public class PostController {   
+@RequestMapping("recomment")  
+public class SecondCommentController {   
     @Resource
     private LoginInfoService loginInfoService;
     
 	@Resource
 	private ForumPostService forumPostService;
 	
+	@Resource 
+	private PostCommentService postCommentService;
+	
+	@Resource 
+	private SecondCommentService secondCommentService;
+	
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addPost(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		ForumPost post = JSON.toJavaObject(jsonObject, ForumPost.class);
-		String tocken = request.getParameter("tocken");
-		if(forumPostService.post(post, tocken)>0){
+		SecondComment comment = JSON.toJavaObject(jsonObject, SecondComment.class);
+		String idStr = request.getParameter("commentId");
+	//	String tocken = request.getParameter("tocken");
+		if(secondCommentService.post(comment, Integer.valueOf(idStr))>0){
 			response.setCode("209");
 			response.setMessage("post success");
 		} else{
@@ -54,9 +66,10 @@ public class PostController {
 	
 	@RequestMapping("/show")
 	@ResponseBody
-	public String showPost(@RequestParam String data,HttpServletRequest request){
+	public String showComment(HttpServletRequest request){
+		List<SecondComment> commentList = secondCommentService.show();
+		   return JSON.toJSONString(commentList);
 		
-		return null;
 	}
 	
 	@RequestMapping("/edit")
@@ -67,12 +80,12 @@ public class PostController {
 	
 	@RequestMapping("/delete")
 	@ResponseBody
-	public String deletePost(@RequestParam String data,HttpServletRequest request){
+	public String deleteComment(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 	
 		String tocken = request.getParameter("tocken");
-		String idStr = request.getParameter("postId");
-		forumPostService.deleteById(Integer.valueOf(idStr));
+		String idStr = request.getParameter("commentId");
+		secondCommentService.deleteById(Integer.valueOf(idStr));
 		response.setCode("210");
 		response.setMessage("delete success");
 		return null;

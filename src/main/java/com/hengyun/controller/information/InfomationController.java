@@ -3,6 +3,7 @@ package com.hengyun.controller.information;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -119,6 +120,15 @@ public class InfomationController {
 		 return JSON.toJSONString(response);
 	}
 	
+	@RequestMapping("/show")
+	@ResponseBody
+	public String show(){
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("userId").exists(true));
+		List<Information> information = informationService.queryList(query);
+		 return JSON.toJSONString(information);
+	}
 	
 	//查询用户信息
 	@RequestMapping("/query")

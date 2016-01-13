@@ -14,31 +14,45 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.hospital.Hospital;
-import com.hengyun.domain.loginInfo.UserAccount;
-import com.hengyun.service.hospital.HospitalService;
+import com.hengyun.domain.hospital.Office;
+import com.hengyun.service.hospital.OfficeService;
 
 /*
- *  医院管理
+ *  科室管理
  * 
  * */
 @Controller
-@RequestMapping("hospital")
-public class HospitalController {
+@RequestMapping("office")
+public class OfficeController {
 	
 	@Resource 
-	private HospitalService hospitalService;
+	private OfficeService officeService;
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public String addHospital(@RequestParam String data,HttpServletRequest request){
+	public String addOffice(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);
-		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
-		hospitalService.save(hospital);
+		Office office = JSON.toJavaObject(jsonObject, Office.class);
+		officeService.save(office);
 		
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
 		response.setMessage("edit success");
 		 return JSON.toJSONString(response);
+	}
+	
+	@RequestMapping("/addDocter")
+	@ResponseBody
+	public String addDocter(HttpServletRequest request){
+		String idStr = request.getParameter("docterId");
+		String officeId = request.getParameter("officeId");
+		officeService.addDocter(Integer.valueOf(idStr), Integer.valueOf(officeId));
+		
+		ResponseCode response = new ResponseCode();
+		response.setCode("206");
+		response.setMessage("edit success");
+		 return JSON.toJSONString(response);
+				
 	}
 	
 	@RequestMapping("/set")
@@ -50,17 +64,18 @@ public class HospitalController {
 	
 	@RequestMapping("/showAll")
 	@ResponseBody
-	public String queryHospital(HttpServletRequest request){
-		List<Hospital> hospitalList ;
-    	hospitalList = hospitalService.queryAll();
+	public String queryOffice(HttpServletRequest request){
+		List<Office> office ;
+    	office = officeService.queryAll();
 
-    	 String jsonString= JSON.toJSONString(hospitalList);  
+    	 String jsonString= JSON.toJSONString(office);  
         return jsonString;  
 	}
 	
 	@RequestMapping("/edit")
 	@ResponseBody
 	public String editHospital(@RequestParam String data,HttpServletRequest request){
+		
 		return null;
 	}
 	

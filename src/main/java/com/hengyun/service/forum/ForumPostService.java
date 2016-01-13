@@ -11,4 +11,6 @@ public interface ForumPostService  extends BaseService<ForumPost,Integer> {
 	
 	public List<ForumPost> show(String tocken);
 	
+	public List<ForumPost> showAll();
+	
 }

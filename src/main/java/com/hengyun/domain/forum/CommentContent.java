@@ -6,7 +6,7 @@ import java.io.Serializable;
  *  论坛回复内容
  * 
  * */
-public class CommonContent implements Serializable{
+public class CommentContent implements Serializable{
 
 	private String contentType;					//回复内容类型 (文本，图片，声音，视频)
 	

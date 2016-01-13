@@ -12,6 +12,7 @@ import com.hengyun.dao.forum.ForumPostDao;
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.domain.common.IndexCollection;
 import com.hengyun.domain.forum.ForumPost;
+import com.hengyun.domain.forum.PostComment;
 import com.hengyun.domain.information.Information;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -22,7 +23,7 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 
 /*
- *  上传文件
+ *  帖子
  * */
 
 public class ForumPostDaoImpl extends BaseMongodbDaoImpl<ForumPost,Integer> implements ForumPostDao{
@@ -36,12 +37,12 @@ public class ForumPostDaoImpl extends BaseMongodbDaoImpl<ForumPost,Integer> impl
 
 	public int post(ForumPost post) {
 		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
+	
 		Query query = Query.query(Criteria.where("postID").gt(0));
         Update update = new Update();
         update.inc("postID", 1);
         
-       // this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+     
 		IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 		int userId = index.getPostID();
 		post.setId(userId);
@@ -49,6 +50,8 @@ public class ForumPostDaoImpl extends BaseMongodbDaoImpl<ForumPost,Integer> impl
 
 		 return userId;
 	}
+
+	
 
     
 }
