@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -30,8 +32,10 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 	public List<BloodSuggerInfo> getInfoByTime(long startTime, long endTime,int userId) {
 		// TODO Auto-generated method stub
 		Query query = new Query();
-        Criteria criteria = Criteria.where("measureTime").gt(startTime).lte(endTime).andOperator(Criteria.where("userId").is(userId));
+		Criteria criteria = Criteria.where("measureTime").gt(startTime).lte(endTime).andOperator(Criteria.where("userId").is(userId));
+	    
         query.addCriteria(criteria);
+        query.with(new Sort(Direction.ASC, "measureTime"));
 		return bloodSuggerInfoDao.queryList(query);
 	}
 }

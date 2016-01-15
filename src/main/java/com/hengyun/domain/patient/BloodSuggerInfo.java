@@ -10,19 +10,20 @@ import java.util.Date;
 public class BloodSuggerInfo implements Serializable{
 
 	
-	private int iuserId;								//病人ID
+	private int userId;								//病人ID
 
 	private long measureTime;			//测量时间
 	private double bsValue;			//血糖值
 	private int measureType;				//测量类型
 	
-	public int getIuserId() {
-		return iuserId;
-	}
-	public void setIuserId(int iuserId) {
-		this.iuserId = iuserId;
-	}
+	
 
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
 	public long getMeasureTime() {
 		return measureTime;
 	}

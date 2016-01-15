@@ -16,17 +16,17 @@ public class UserAccount implements Serializable{
 	 */
 
 	private int id;																			//用户ID
-	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生2，病人3，游客）
+	private String 							catagory; 								//用户类型（系统管理员=1,用户管理员，医生2，病人3，游客）
 	private String 							username;							//用户名
 	private String 							mobilephone;					//用户手机号
 	private String 							email;									//用户邮箱
-	
+	private String							workNum;							//工号
 	private String 							QQ;										//QQ
 	private String							weiChat;								//weiChat
 	private String							weiBo;									//weiBo
 	
 	private String							password;							//用户密码
-	private AccountStatus			accountStatus;					//用户账号状态
+	private String 							status;									//用户账号状态
 	
 
 	public int getId() {
@@ -39,13 +39,36 @@ public class UserAccount implements Serializable{
 	}
 
 
-	public UserCatagory getUserCatagory() {
-		return userCatagory;
+
+	public String getWorkNum() {
+		return workNum;
 	}
 
 
-	public void setUserCatagory(UserCatagory userCatagory) {
-		this.userCatagory = userCatagory;
+	public void setWorkNum(String workNum) {
+		this.workNum = workNum;
+	}
+
+
+	public String getCatagory() {
+		return catagory;
+	}
+
+
+	public void setCatagory(String catagory) {
+		this.catagory = catagory;
+	}
+
+
+	
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 
@@ -88,15 +111,6 @@ public class UserAccount implements Serializable{
 		this.password = password;
 	}
 
-
-	public AccountStatus getAccountStatus() {
-		return accountStatus;
-	}
-
-
-	public void setAccountStatus(AccountStatus accountStatus) {
-		this.accountStatus = accountStatus;
-	}
 
 
 		public UserAccount() {

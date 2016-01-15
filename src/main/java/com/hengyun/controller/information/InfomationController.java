@@ -3,6 +3,7 @@ package com.hengyun.controller.information;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +24,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.information.Icon;
+import com.hengyun.domain.information.InfoResponse;
 import com.hengyun.domain.information.Information;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
@@ -48,23 +51,27 @@ public class InfomationController {
 	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
 	    {  
 	    	String tocken = request.getParameter("tocken");
-	    	tocken = "1452511202973DA08826AD948805063D8240168FE2F53";
+	    	ResponseCode response = new ResponseCode();
 	    	int userId = loginInfoService.isOnline(tocken);
+	    	if(userId>0){
 	    	    String originalfilename = image.getOriginalFilename();
 	    	    String filename = userId+originalfilename;
-		    	ResponseCode response = new ResponseCode();
+		    	
 		      if(image.isEmpty()){
 		    	  response.setCode("110");
 		    	  response.setMessage("upload image failure");
 		    	  }else{
+		    		
+		    		  
+		    		
 		    		  IconDao.save(image.getInputStream(),filename);
-		    		  Query query = Query.query(Criteria.where("userId").is(userId));
+		    		  Query query2 = Query.query(Criteria.where("userId").is(userId));
 		    		  Update update = Update.update("iconUrl", originalfilename);
-		    		  informationService.updateFirst(query, update);
+		    		  informationService.updateFirst(query2, update);
 		    		  response.setCode("207");
 		    		  response.setMessage("upload image success");
 		    	  }
-		      
+	    	}
 		      return JSON.toJSONString(response);
 	      
 	    }
@@ -73,11 +80,14 @@ public class InfomationController {
 	    @RequestMapping("/download")
 	    @ResponseBody
 	    public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
-	     	ResponseCode responseCode = new ResponseCode();
-	    	response.setContentType("image/jpeg"); // 设置返回内容格式
-	    	String filename = request.getParameter("image");
 	    	String tocken = request.getParameter("tocken");
+	    	ResponseCode responseCode = new ResponseCode();
 	    	int userId = loginInfoService.isOnline(tocken);
+	    	if(userId>0){
+	     	
+	    	response.setContentType("image/jpeg"); // 设置返回内容格式
+	    	String filename = request.getParameter("iconUrl");
+	    
 	    	String icon = userId+filename;
 	    	GridFSDBFile gridFSDBFile = IconDao.getByFileName(icon);
 	    	InputStream in = gridFSDBFile.getInputStream();
@@ -91,6 +101,7 @@ public class InfomationController {
     		os.close();
     		responseCode.setCode("208");
     		responseCode.setMessage("download success");
+	    	}
     		return  JSON.toJSONString(responseCode);
 	    }
 	    
@@ -130,25 +141,37 @@ public class InfomationController {
 		 return JSON.toJSONString(information);
 	}
 	
-	//查询用户信息
-	@RequestMapping("/query")
+	//查询加载信息
+	@RequestMapping("/load")
 	@ResponseBody
-	public String queryInfo(HttpServletRequest request){
-		ResponseCode response = new ResponseCode();
+	public String queryInfo(@RequestParam String data,HttpServletRequest request){
+		InfoResponse response = new InfoResponse();
 		String tocken = request.getParameter("tocken");
+		JSONObject jsonObject =JSON.parseObject(data);
+		
+		String timeStamp = jsonObject.getString("recordTime");
 		int userId = loginInfoService.isOnline( tocken);
 		 if(userId>0){
 		
-			 Information information = informationService.query(tocken);
+			 Information information = informationService.query(userId);
 			 if(information != null){
-				 response.setCode("206");
-				 response.setMessage( JSON.toJSONString(information));
+				 long recordTime = Long.valueOf(information.getRecordTime());
+				 if(recordTime>Long.valueOf(timeStamp)){
 				
+				 response.setCode("206");
+				 response.setInfo(information);
+				 } else {
+					 response.setCode("207");
+					 response.setInfo(null);
+				 }
+			 }else {
+				 response.setCode("206");
+				 response.setInfo(null);
 			 }
 			
 		 } else if(userId<0){
 			 response.setCode("109");
-			 response.setMessage("user not login");
+			 response.setInfo(null);
 		 }
 		 return JSON.toJSONString(response);
 	}
@@ -159,15 +182,24 @@ public class InfomationController {
 	public String updateInfo(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
+		Information info = JSON.toJavaObject(jsonObject, Information.class);
+
 		String tocken = request.getParameter("tocken");
 		int userId = loginInfoService.isOnline( tocken);
 		 if(userId>0){
-			 Information information = JSON.toJavaObject(jsonObject, Information.class);
-			 informationService.update(information, tocken);
-		
+			
+			 long recordTime = new Date().getTime();
+			 info.setRecordTime(String.valueOf(recordTime));
+			 Query query =Query.query(Criteria.where("userId").is(userId));
+			 Information temp =informationService.queryOne(query);
+			 if(temp==null){
+				 informationService.add(info, userId);
+			 } else {
+			 informationService.update(info, userId);
+			 }
 				 response.setCode("206");
-				 response.setMessage("update success");
-		
+				 response.setMessage(String.valueOf(recordTime));
+			 
 		 } else if(userId<0){
 			 response.setCode("109");
 			 response.setMessage("user not login");

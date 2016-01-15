@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -42,8 +44,9 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	public List<BloodPressureInfo> getInfoByTime(long begin, long end,int userId) {
 		// TODO Auto-generated method stub
 		Query query = new Query();
-        Criteria criteria = Criteria.where("measureTime").gt(begin).lte(end).andOperator(Criteria.where("userId").is(userId));
-        query.addCriteria(criteria);
+     Criteria criteria = Criteria.where("measureTime").gt(begin).lte(end).andOperator(Criteria.where("userId").is(userId));
+		 
+        query.addCriteria(criteria).with(new Sort(Direction.ASC, "measureTime"));
 		return bloodPressureInfoDao.queryList(query);
 	}
 

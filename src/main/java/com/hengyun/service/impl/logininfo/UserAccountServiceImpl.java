@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.logininfo.UserAccountDao;
+import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.UserAccount;
-import com.hengyun.domain.loginInfo.constant.AccountStatus;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
@@ -46,6 +46,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 	// 注册账号
 	public int registerAccount(UserAccount userAccount) {
 		// TODO Auto-generated method stub
+		
 		return userAccountDao.addUserAccount(userAccount);
 
 	}
@@ -71,6 +72,8 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			query = Query.query(Criteria.where("email").is(sign));
 		} else if (type.equals("username")) {
 			query = Query.query(Criteria.where("username").is(sign));
+		} else if(type.equals("workNum")){
+			query = Query.query(Criteria.where("workNum").is(sign));
 		}
 		UserAccount userAccount = userAccountDao.queryOne(query);
 		if (userAccount == null) {
@@ -81,10 +84,10 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		}
 	}
 
-	// 判断用户是否存在
-	public int validateUserBySign(String sign, String type,String password) {
+	// 判断用户身份是否合法
+	public LoginResult validateUserBySign(String sign, String type,String password) {
 		// TODO Auto-generated method stub
-
+		LoginResult loginResult = new LoginResult();
 		Query query = null;
 
 		// 检查是否存在
@@ -94,27 +97,64 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			query = Query.query(Criteria.where("email").is(sign).andOperator(Criteria.where("password").is(password)));
 		} else if (type.equals("username")) {
 			query = Query.query(Criteria.where("username").is(sign).andOperator(Criteria.where("password").is(password)));
+				
+		}if (type.equals("workNum")) {
+			query = Query.query(Criteria.where("workNum").is(sign).andOperator(Criteria.where("password").is(password)));
 		}
 		UserAccount userAccount = userAccountDao.queryOne(query);
 		if (userAccount == null) {
-			return -1;
+			return null;
 		} else {
 			int userId = userAccount.getId();
-			return userId;
+			//暂时将用户id放入code中
+			loginResult.setCode(String.valueOf(userId));	
+			if(userAccount.getCatagory().equals("doctor")){
+				loginResult.setUserCode(2);
+			} else if(userAccount.getCatagory().equals("patient")) {
+				loginResult.setUserCode(3);
+			}	else if(userAccount.getCatagory().equals("admin")){
+				loginResult.setUserCode(1);
+			} else if(userAccount.getCatagory().equals("root")){
+				loginResult.setUserCode(0);
+			} else if(userAccount.getCatagory().equals("third")) {
+				loginResult.setUserCode(4);
+			} else {
+				loginResult.setUserCode(5);					//游客???
+			}
+			return loginResult;
 		}
 	
 	}
 
 	public int registerThirdAccount(UserAccount userAccount) {
 		// TODO Auto-generated method stub
+		
+		//设置病人标志
+		userAccount.setCatagory("patient");
 		return userAccountDao.addUserAccount(userAccount);
 	
 	}
 
-	public int validateThirdUserBySign(String sign, String type) {
+	public UserAccount validateThirdUserBySign(String sign, String type) {
 		// TODO Auto-generated method stub
-		
-		return 0;
+		UserAccount userAccount=null ;
+		if(type.equals("QQ")){
+			Query query = Query.query(Criteria.where("QQ").is(sign));
+			userAccount = userAccountDao.queryOne(query);
+		}else if(type.equals("weiChat")){
+			Query query = Query.query(Criteria.where("weiChat").is(sign));
+			userAccount = userAccountDao.queryOne(query);
+		} else if(type.equals("weiBo")){
+			Query query = Query.query(Criteria.where("weiBo").is(sign));
+			userAccount = userAccountDao.queryOne(query);
+		}
+		if(userAccount!=null){
+			return userAccount;
+		}
+	
+		return null;
 	}
+
+
 
 }

@@ -25,7 +25,7 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		// TODO Auto-generated method stub
 		Map<String,String> map = new HashMap();
 		map.put("tryCount", "1");
-		map.put("status",AccountStatus.UNREGISTERED.toString());
+		map.put("status","unregistered");
 		
 		redisClientTemplate.hmset(sign,map);
 	}
@@ -74,7 +74,7 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		// TODO Auto-generated method stub
 		Map<String,String> map = new HashMap();
 		map.put("tryCount","0");
-		map.put("status",AccountStatus.REGISTERED.toString());
+		map.put("status","registered");
 		
 		redisClientTemplate.hmset(sign,map);
 	}

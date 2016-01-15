@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.hospital.Hospital;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.domain.loginInfo.constant.UserCatagory;
@@ -94,14 +96,14 @@ public class UserAccountController {
 		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
-	//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+		
 		RegisterResult registResult = new RegisterResult();
 		
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
 			UserAccount userAccount = new UserAccount();
 			userAccount.setMobilephone(mobilephone);
 			userAccount.setPassword(password);
-		//	userAccount.setUserCatagory(userCatagory);
+			userAccount.setCatagory("patient");
 			int id = userAccountService.registerAccount(userAccount);
 			registerCacheService.updateRegisterCache(userAccount.getMobilephone());
 			registResult.setCode("205");
@@ -144,7 +146,6 @@ public class UserAccountController {
 				String to = email;
 				simpleMail.sendMail( subject,  content,  to);
 				
-				SubmitResult result;
 				
 				registResult.setCode("205");
 				registResult.setMessage("test code send success");
@@ -165,14 +166,14 @@ public class UserAccountController {
 			String email = jsonObject.getString("email");
 			String confirmCode = jsonObject.getString("code");
 			String password =  jsonObject.getString("password");
-		//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+			
 			RegisterResult registResult = new RegisterResult();
 			
 			if(registerCacheService.getConfirmCode(email).equals(confirmCode)){
 				UserAccount userAccount = new UserAccount();
 				userAccount.setEmail(email);
 				userAccount.setPassword(password);
-			//	userAccount.setUserCatagory(userCatagory);
+				userAccount.setCatagory("patient");
 				int id = userAccountService.registerAccount(userAccount);
 				registerCacheService.updateRegisterCache(userAccount.getEmail());
 				registResult.setCode("201");
@@ -189,11 +190,36 @@ public class UserAccountController {
 		}
 	
 
+		/*
+		 * 
+		 * 医生注册
+		 * 
+		 * */
+		
+		@RequestMapping("/register")
+		@ResponseBody
+		public String docterRegister(@RequestParam String data){
+			JSONObject jsonObject = JSONObject.parseObject(data);
+			ResponseCode response = new ResponseCode();
+			UserAccount account = JSON.toJavaObject(jsonObject, UserAccount.class);
+			String username = jsonObject.getString("workNum");
+			
+			if(userAccountService.existUserAccountBySign(username,"workNum")){
+				response.setCode("102");
+				response.setMessage("user exist");
+			} else{
+			int id = userAccountService.registerAccount(account);
+			response.setCode("201");
+			response.setMessage(String.valueOf(id));
+			}
+			 return JSON.toJSONString(response);
+		}
+		
     /*
      *  查询账号
      * */
    
-    @RequestMapping("/showAllAccount") 
+    @RequestMapping("/show") 
     @ResponseBody  
     public  String   findUserAccount(){
     	List<UserAccount> userAccountList ;
@@ -262,14 +288,14 @@ public class UserAccountController {
 		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
-	//	UserCatagory userCatagory = (UserCatagory)jsonObject.get("UserCatagory");
+	
 		RegisterResult registResult = new RegisterResult();
 		
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
 			UserAccount userAccount = new UserAccount();
 			userAccount.setMobilephone(mobilephone);
 			userAccount.setPassword(password);
-			//userAccount.setUserCatagory(userCatagory);
+			
 			 userAccountService.updateUserAccount(userAccount);
 			registResult.setCode("206");
 			registResult.setMessage("password update success");

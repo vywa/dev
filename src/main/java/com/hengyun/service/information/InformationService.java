@@ -10,11 +10,11 @@ import com.mongodb.gridfs.GridFSDBFile;
 
 public interface InformationService  extends BaseService<Information,Integer> {
 
-	public int add(Information generalInfo,String tocken);
+	public int add(Information information,int userId);
 	
-	public Information query(String tocken);
+	public Information query(int userId);
 	
-	public int update(Information information ,String tocken);
+	public int update(Information information ,int userId);
 	
 	  public void save(InputStream in,String filename);
 	  

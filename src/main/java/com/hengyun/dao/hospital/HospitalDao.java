@@ -8,4 +8,5 @@ import com.hengyun.domain.hospital.Hospital;
  * */
 public interface HospitalDao extends BaseMongodbDao<Hospital,Integer>{
 
+
 }

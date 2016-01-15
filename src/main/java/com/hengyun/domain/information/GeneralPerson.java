@@ -1,82 +1,132 @@
 package com.hengyun.domain.information;
 
 
-import com.hengyun.domain.forum.UserForumInfo;
-import com.hengyun.domain.friendcircle.FriendCircle;
-import com.hengyun.domain.location.Location;
-import com.hengyun.domain.loginInfo.LoginInfo;
-import com.hengyun.domain.loginInfo.UserAccount;
-import com.hengyun.domain.notice.Notice;
-import com.hengyun.domain.shopping.Shopping;
+import java.io.Serializable;
 
 /*
  *  通用功能的人
  * */
 
 
-public  class GeneralPerson {
+public  class GeneralPerson implements Serializable{
 	
-	private int ID;																//用户id
-	
-	private Information	generalInfo;							//个人基本信息
-	
-	private UserAccount	userAccount;							//个人账号信息
-	
-	private LoginInfo		loginInfo;									//用户登陆信息	
-	
-	private UserForumInfo			userForumInfo;					//用户论坛信息
-	
-	private FriendCircle		friendCircle;								//朋友圈
-	
-	private Notice				notice;										//通知信息
+	private int id;																//用户id
 	
 	
 	
-	private Shopping	shopping;									//用户购物信息
+	private int	 informationId;							//个人基本信息
 	
-	public Information getGeneralInfo() {
-		return generalInfo;
-	}
-	public void setGeneralInfo(Information generalInfo) {
-		this.generalInfo = generalInfo;
-	}
-	public UserAccount getUserAccount() {
-		return userAccount;
-	}
-	public void setUserAccount(UserAccount userAccount) {
-		this.userAccount = userAccount;
-	}
-	public LoginInfo getLoginInfo() {
-		return loginInfo;
-	}
-	public void setLoginInfo(LoginInfo loginInfo) {
-		this.loginInfo = loginInfo;
-	}
-	public UserForumInfo getUserForumInfo() {
-		return userForumInfo;
-	}
-	public void setUserForumInfo(UserForumInfo userForumInfo) {
-		this.userForumInfo = userForumInfo;
-	}
-	public FriendCircle getFriendCircle() {
-		return friendCircle;
-	}
-	public void setFriendCircle(FriendCircle friendCircle) {
-		this.friendCircle = friendCircle;
-	}
-	public Notice getNotice() {
-		return notice;
-	}
-	public void setNotice(Notice notice) {
-		this.notice = notice;
-	}
+	private int 	userAccountId;							//个人账号信息
 	
-	public Shopping getShopping() {
-		return shopping;
-	}
-	public void setShopping(Shopping shopping) {
-		this.shopping = shopping;
+	private int		loginInfoId;									//用户登陆信息	
+	
+	private int		userForumInfoId;					//用户论坛信息
+	
+	private int		friendCircleId;								//朋友圈
+	
+	private int				noticeId;										//通知信息
+	
+	
+	
+	private int	shoppingId;									//用户购物信息
+
+
+
+	public int getId() {
+		return id;
 	}
 
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+
+	public int getInformationId() {
+		return informationId;
+	}
+
+
+
+	public void setInformationId(int informationId) {
+		this.informationId = informationId;
+	}
+
+
+
+	public int getUserAccountId() {
+		return userAccountId;
+	}
+
+
+
+	public void setUserAccountId(int userAccountId) {
+		this.userAccountId = userAccountId;
+	}
+
+
+
+	public int getLoginInfoId() {
+		return loginInfoId;
+	}
+
+
+
+	public void setLoginInfoId(int loginInfoId) {
+		this.loginInfoId = loginInfoId;
+	}
+
+
+
+	public int getUserForumInfoId() {
+		return userForumInfoId;
+	}
+
+
+
+	public void setUserForumInfoId(int userForumInfoId) {
+		this.userForumInfoId = userForumInfoId;
+	}
+
+
+
+	public int getFriendCircleId() {
+		return friendCircleId;
+	}
+
+
+
+	public void setFriendCircleId(int friendCircleId) {
+		this.friendCircleId = friendCircleId;
+	}
+
+
+
+	public int getNoticeId() {
+		return noticeId;
+	}
+
+
+
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
+	}
+
+
+
+	public int getShoppingId() {
+		return shoppingId;
+	}
+
+
+
+	public void setShoppingId(int shoppingId) {
+		this.shoppingId = shoppingId;
+	}
+	
+	
+	
 	
 }

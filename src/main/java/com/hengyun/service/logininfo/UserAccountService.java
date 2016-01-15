@@ -2,8 +2,8 @@ package com.hengyun.service.logininfo;
 
 import java.util.List;
 
+import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.UserAccount;
-
 import com.hengyun.service.BaseService;
 
 public interface UserAccountService  extends BaseService<UserAccount,Integer>{
@@ -15,12 +15,14 @@ public interface UserAccountService  extends BaseService<UserAccount,Integer>{
 
 		public int registerAccount(UserAccount userAccount);
 		
+
+		
 		//第三方登陆注册
 		public int registerThirdAccount(UserAccount userAccount);
 		
 		//验证用户是否有效,返回用户userId
-		public int validateUserBySign(String sign, String type,String password) ;
+		public LoginResult validateUserBySign(String sign, String type,String password) ;
 		
 		//验证第三方用户是否存在
-		public int validateThirdUserBySign(String sign, String type) ;
+		public UserAccount validateThirdUserBySign(String sign, String type) ;
 }

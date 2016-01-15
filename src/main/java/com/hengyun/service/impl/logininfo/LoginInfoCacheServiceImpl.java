@@ -51,10 +51,10 @@ public class LoginInfoCacheServiceImpl implements LoginInfoCacheService{
 
 	
 	
-	public UserCatagory getUserCatagory(String tocken) {
+	public String getUserCatagory(String tocken) {
 		// TODO Auto-generated method stub
 		String catagory = redisClientTemplate.hget(tocken, "UserCatagory");
-		return UserCatagory.valueOf(catagory);
+		return catagory;
 	}
 
 	public boolean loginByTocken(String tocken) {

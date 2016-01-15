@@ -1,8 +1,8 @@
 package com.hengyun.service.logininfo;
 
-import com.hengyun.domain.loginInfo.LoginInfo;
+
 import com.hengyun.domain.loginInfo.LoginInfoCache;
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
+
 
 /*
  *  用户登陆会话缓存
@@ -22,7 +22,7 @@ public interface LoginInfoCacheService {
 	public int getUserId(String tocken);
 	
 	//查询用户权限
-	public UserCatagory getUserCatagory(String tocken);
+	public String getUserCatagory(String tocken);
 	
 	//查询是否在缓存
 	public boolean loginByTocken(String tocken) ;

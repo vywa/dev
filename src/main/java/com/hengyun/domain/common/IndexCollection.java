@@ -9,10 +9,19 @@ public class IndexCollection implements Serializable{
 
 	private int docterID;									//初始值100000000
 	private int patientID;								//初始值200000000
+	private int adminID;									//管理员０
 	private int postID;										//帖子ｉｄ
 	private int commnetId;							//回复ｉｄ
 	private int forumTemplateId;				//板块ｉｄ
 	
+	
+	
+	public int getAdminID() {
+		return adminID;
+	}
+	public void setAdminID(int adminID) {
+		this.adminID = adminID;
+	}
 	public int getPostID() {
 		return postID;
 	}

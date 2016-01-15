@@ -1,5 +1,7 @@
 package com.hengyun.controller.logininfo;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.loginInfo.LoginInfo;
+import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
@@ -30,7 +34,7 @@ public class LoginInfoController {
 	public String loginByUsername(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
-		RegisterResult registResult = new RegisterResult();
+		
 		
 		String type= jsonObject.getString("type");
 		String username = jsonObject.getString("username");
@@ -40,16 +44,20 @@ public class LoginInfoController {
 		loginInfo.setLoginUsername(username);
 		loginInfo.setPassword(password);
 		loginInfo.setUserLoginIp(ip);
-		String loginFlag = loginInfoService.loginByUsername(loginInfo, type);
-		if(!loginFlag.equals("failure")){
-			registResult.setCode("202");
-			registResult.setMessage(loginFlag);
+		LoginResult loginResult = loginInfoService.loginByUsername(loginInfo, type);
+		if(loginResult!=null){
+				
+				loginResult.setCode("202");
+				
+				return JSON.toJSONString(loginResult);
 		}else {
-			registResult.setCode("104");
-			registResult.setMessage("login failure");
+			LoginResult result = new LoginResult();
+			result.setCode("104");
+			result.setMessage("login failure");
+			return JSON.toJSONString(result);
 		}
 
-		return JSON.toJSONString(registResult);
+		
 	}
 
 	/*
@@ -88,7 +96,7 @@ public class LoginInfoController {
 	public String loginByThirdPart(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
-		RegisterResult registResult = new RegisterResult();
+		
 		
 	
 		String username = jsonObject.getString("openId");
@@ -98,11 +106,9 @@ public class LoginInfoController {
 		LoginInfo loginInfo = new LoginInfo();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setUserLoginIp(userLoginIp);
-		String tocken = loginInfoService.loginByThirdPart(type, loginInfo);
-		
-		registResult.setCode("203");
-		registResult.setMessage(tocken);
-		return JSON.toJSONString(registResult);
+		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo);
+		loginResult.setCode("203");
+		return JSON.toJSONString(loginResult);
 	}
 
 	/*
@@ -111,15 +117,34 @@ public class LoginInfoController {
 	 */
 	@RequestMapping("/logout")
 	@ResponseBody
-	public String logout(@RequestParam String data) {
-		JSONObject jsonObject =JSON.parseObject(data);
-		RegisterResult registResult = new RegisterResult();
-		String tocken = jsonObject.getString("tocken");
+	public String logout(HttpServletRequest request) {
+		
+		ResponseCode response = new ResponseCode();
+		String tocken = request.getParameter("tocken");
 		
 		loginInfoService.logout(tocken);
-		registResult.setCode("204");
-		registResult.setMessage("logout success");
+		
+		response.setCode("204");
+		response.setMessage("logout success");
 	
-		return  JSON.toJSONString(registResult);
+		return  JSON.toJSONString(response);
+	}
+	
+	
+	
+	/*
+	 *  显示账号
+	 * */
+	@RequestMapping("/show")
+	@ResponseBody
+	public String show() {
+		
+		List<LoginInfo> loginInfoList ;
+		loginInfoList =loginInfoService.getLoginInfoAll();
+
+    	 String jsonString= JSON.toJSONString(loginInfoList);  
+           
+    	
+        return jsonString;  
 	}
 }

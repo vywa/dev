@@ -1,10 +1,12 @@
 package com.hengyun.controller.patient;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.PressureResponse;
+import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodPressureInfoService;
 
 /*
@@ -29,26 +33,39 @@ public class BloodPressureInfoController {
 	@Resource
 	private BloodPressureInfoService  bloodPressureInfoService;
 	
+	@Resource
+	private LoginInfoService loginInfoService;
 	
-	@RequestMapping("/showLog")
+	@RequestMapping("/show")
 	@ResponseBody
-	public String showBlood(@RequestParam String data){
+	public String showBlood(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
+		PressureResponse response = new PressureResponse();
+		String tocken = request.getParameter("tocken");
 		
-		int userId = jsonObject.getInteger("userId");
+		int userId = loginInfoService.isOnline(tocken);
+		
+		if(userId<0){
+			response.setCode("112");
+			response.setBloodPressureInfo(null);
+		} else {
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId);
-				
-		System.out.println(bloodList);
-		String result = JSONObject.toJSONString(bloodList);
-		return result;
+			
+		
+		response.setCode("211");
+		response.setBloodPressureInfo(bloodList);
+		}
+		return  JSONObject.toJSONString(response);
 	}
 	
 	@RequestMapping("/showAll")
 	@ResponseBody
 	public String showBlood(){
 		Query query = Query.query(Criteria.where("userId").exists(true));
+	
+		query.with(new Sort(Direction.DESC, "measureTime"));
 		
 		List<BloodPressureInfo> list =bloodPressureInfoService.queryList(query);
 		String result = JSONObject.toJSONString(list);
@@ -56,26 +73,26 @@ public class BloodPressureInfoController {
 	}
 	
 	
+	
 	//上传数据
 	@RequestMapping("/upload")
 	@ResponseBody
-	public String  upload(@RequestParam String data){
+	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
 		JSONObject jsonObject =JSON.parseObject(data);
+		String tocken = request.getParameter("tocken");
+		HealthInfoResponse response = new HealthInfoResponse();
 		
-		int userId = jsonObject.getInteger("userId");
+		int userId = loginInfoService.isOnline(tocken);
+		if(userId<0){
+			response.setCode("-1");
+			response.setMessage("record falure");
+		} else {
 		long date = jsonObject.getLongValue("measureTime");
-	    
-	//     SimpleDateFormat sdf= new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");  
-	   //  sdf.format(new Date(date));
-		//Date measureTime = new Date(date);
 		int highBP = jsonObject.getIntValue("highBP");
 		int lowBP = jsonObject.getIntValue("lowBP");
 		int heartRate = jsonObject.getIntValue("heartRate");
-		
 	
-		
-		HealthInfoResponse response = new HealthInfoResponse();
 		BloodPressureInfo blood = new BloodPressureInfo();
 		blood.setUserId(userId);
 		blood.setMeasureTime(date);
@@ -87,8 +104,9 @@ public class BloodPressureInfoController {
 		bloodPressureInfoService.save(blood);
 		response.setCode("0");
 		response.setMessage("record success");
-		String result = JSON.toJSONString(response);
-		return result;
+	
+		}
+		return JSON.toJSONString(response);
 		
 	}
 }

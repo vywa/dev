@@ -1,5 +1,7 @@
 package com.hengyun.dao.impl.patient;
 
+import java.util.List;
+
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.patient.BloodSuggerInfoDao;
 import com.hengyun.domain.patient.BloodSuggerInfo;
@@ -14,5 +16,6 @@ public class BloodSuggerInfoDaoImpl extends BaseMongodbDaoImpl<BloodSuggerInfo,I
 		// TODO Auto-generated method stub
 		return BloodSuggerInfo.class;
 	}
+
 
 }

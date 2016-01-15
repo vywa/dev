@@ -28,15 +28,13 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 	private LoginInfoService loginInfoService;
 	
 	//添加资料
-	public int add(Information generalInfo,String tocken) {
+	public int add(Information generalInfo,int userId) {
 		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
+	
 			generalInfo.setUserId(userId);
-		informationDao.save(generalInfo);
-			return 0;
-		} 
-		return -1;
+			informationDao.save(generalInfo);
+			return userId;
+
 	}
 	
 	//保存文件
@@ -51,29 +49,31 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 		return this.retrieveFileOne(filename);
 	}
 
-	public Information query(String tocken) {
+	public Information query(int userId) {
 		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
+	
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			Information information = informationDao.queryOne(query);
+			if(information!=null){
 			return information;
-		} 
-		return null;
+			}
+			else 
+				return null;
+		
 	}
 
 	//更新资料
-	public int update(Information information, String tocken) {
+	public int update(Information information, int userId) {
 		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
+	
 			Query query = Query.query(Criteria.where("userId").is(userId));
-			Update update = Update.update("age", 50).set("height", information.getHeight()).
-					set("weight", information.getWeight()).set("gender",information.getGender()).set("age", information.getAge());
-			informationDao.updateFirst(query, update);
-			return 0;
-		} 
-			return -1;
+		
+			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).
+					set("weight", information.getWeight()).set("sex",information.getSex()).
+					set("birthday", information.getBirthday()).
+					set("trueName", information.getTrueName());
+			informationDao.updateInser(query, update);
+			return userId;
 	
 	}
 
