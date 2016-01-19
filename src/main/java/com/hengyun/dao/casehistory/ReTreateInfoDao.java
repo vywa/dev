@@ -8,4 +8,5 @@ import com.hengyun.domain.casehistory.ReTreateInfo;
  * */
 public interface ReTreateInfoDao extends BaseMongodbDao<ReTreateInfo,Integer>{
 
+	public int addReTreate(ReTreateInfo reTreateInfo);
 }

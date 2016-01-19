@@ -13,5 +13,8 @@ public interface BloodPressureInfoService extends BaseService<BloodPressureInfo,
 	
 	//获取某个区段的信息
 	public List<BloodPressureInfo> getInfoByTime(long startTime,long endTime ,int userId);
+
 	
+	//获取最近一天数据
+	public List<BloodPressureInfo> getlatestTime(int userId) ;
 }

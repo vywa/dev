@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.PressureResponse;
 import com.hengyun.domain.patient.SuggerResponse;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
@@ -70,6 +72,28 @@ public class BloodSuggerInfoController {
 		List<BloodSuggerInfo> list =bloodSuggerInfoService.queryList(query);
 		String result = JSONObject.toJSONString(list);
 		return result;
+	}
+	
+	@RequestMapping("/latestDay")
+	@ResponseBody
+	public String lates(HttpServletRequest request){
+	
+		SuggerResponse response = new SuggerResponse();
+		String tocken = request.getParameter("tocken");
+		
+		int userId = loginInfoService.isOnline(tocken);
+		
+		if(userId<0){
+			response.setCode("112");
+			response.setBloodSuggerInfo(null);
+		} else {
+			
+		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getlatestTime(userId);
+
+		response.setCode("211");
+		response.setBloodSuggerInfo(bloodList);
+		}
+		return  JSONObject.toJSONString(response);
 	}
 	
 	

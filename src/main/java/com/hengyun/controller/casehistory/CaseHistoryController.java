@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,16 +33,31 @@ public class CaseHistoryController {
 	public String addCaseHistory(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
 		CaseHistory caseHistory = JSON.toJavaObject(jsonObject, CaseHistory.class);
-		caseHistoryService.save(caseHistory);
+		caseHistoryService.addCaseHistory(caseHistory);
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
 		response.setMessage("add success");
 		 return JSON.toJSONString(response);
 	}
 	
+	//条件查询
+	@RequestMapping("/dquery")
+	@ResponseBody
+	public String showdocterCaseHistory(@RequestParam String data, HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		int docterId = jsonObject.getIntValue("docterId");
+		List<CaseHistory> caseHistoryList ;
+		Query query = Query.query(Criteria.where("docterId").is(docterId));
+		caseHistoryList = caseHistoryService.queryList(query);
+
+    	 String jsonString= JSON.toJSONString(caseHistoryList);  
+           
+    	
+        return jsonString;  
+	}
 	
 	
-	@RequestMapping("/query")
+	@RequestMapping("/show")
 	@ResponseBody
 	public String queryCaseHistory(HttpServletRequest request){
 		
@@ -53,13 +70,16 @@ public class CaseHistoryController {
         return jsonString;  
 	}
 	
-	
-	@RequestMapping("/show")
+	//条件查询
+	@RequestMapping("/query")
 	@ResponseBody
-	public String showAllCaseHistory(HttpServletRequest request){
-		
+	public String showAllCaseHistory(@RequestParam String data, HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		int patientId = jsonObject.getIntValue("patientId");
+		int docterId = jsonObject.getIntValue("docterId");
 		List<CaseHistory> caseHistoryList ;
-		caseHistoryList = caseHistoryService.queryAll();
+		Query query = Query.query(Criteria.where("patientId").is(patientId).andOperator(Criteria.where("docterId").is(docterId)));
+		caseHistoryList = caseHistoryService.queryList(query);
 
     	 String jsonString= JSON.toJSONString(caseHistoryList);  
            

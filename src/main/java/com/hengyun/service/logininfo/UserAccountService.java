@@ -10,12 +10,15 @@ public interface UserAccountService  extends BaseService<UserAccount,Integer>{
 
 		public UserAccount getUserAccountById(int id);
 		public boolean existUserAccountBySign(String sign,String type);
+		public int existUser(String sign,String type);
+		
 		public List<UserAccount> getUserAccountALL();
 		public void updateUserAccount(UserAccount userAccount) ;
 
 		public int registerAccount(UserAccount userAccount);
 		
-
+		//改变用户找好绑定信息
+		public int change(String type,String username,int userId);
 		
 		//第三方登陆注册
 		public int registerThirdAccount(UserAccount userAccount);

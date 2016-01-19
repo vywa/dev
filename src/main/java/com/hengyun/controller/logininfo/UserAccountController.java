@@ -3,7 +3,11 @@ package com.hengyun.controller.logininfo;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,10 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.hospital.Hospital;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
+import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.util.mail.SimpleMail;
@@ -39,6 +42,9 @@ public class UserAccountController {
 	
 	@Resource
 	private  SimpleMail simpleMail;
+	
+	@Resource
+	private LoginInfoService loginInfoService;
 /*
  *  注册账号
  * */	
@@ -231,6 +237,20 @@ public class UserAccountController {
         return jsonString;  
     }
     
+    @RequestMapping("/query") 
+    @ResponseBody  
+    public  String   queryAccount(@RequestParam String data){
+    	JSONObject jsonObject =JSON.parseObject(data);
+    	int id = jsonObject.getIntValue("id");
+    	UserAccount userAccount =null;
+    	
+    	userAccount=userAccountService.queryById(id);
+
+    	 String jsonString= JSON.toJSONString(userAccount);  
+           
+    	
+        return jsonString;  
+    }
     
     /*
      *  修改密码
@@ -276,13 +296,87 @@ public class UserAccountController {
     
     
     /*
-     *  变更账号
+     *  邮箱找密码
+     * */
+ 
+    @RequestMapping("/emailassword") 
+    @ResponseBody  
+    public  String   emailPassword(@RequestParam String data){
+    	
+    	JSONObject jsonObject =JSON.parseObject(data);
+		String email = jsonObject.getString("email");
+		RegisterResult registResult = new RegisterResult();
+		
+		if(!userAccountService.existUserAccountBySign(email,"email")){
+			registResult.setCode("103");
+			registResult.setMessage("user not exist");
+		} else {
+		
+			int codeNum = (int)(Math.random()*1000000);
+				codeNum = codeNum>100000?codeNum:codeNum+100000;
+				registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
+				registerCacheService.addTryCount(email);
+				String subject = "天衡会员邮件找回密码";
+				String content = "您本次验证码是"+codeNum+"如果非本人操作，请忽略。";
+				String to = email;
+				simpleMail.sendMail( subject,  content,  to);
+
+						registResult.setCode("205");
+						registResult.setMessage("test code send success");
+		}
+		
+		
+		return JSON.toJSONString(registResult);
+	
+		
+    }
+    
+    /*
+     *  邮箱重置密码
+     * 
+     * */
+    
+    @ResponseBody  
+    @RequestMapping("/emailReset") 
+    public  String  emailReset(@RequestParam String data){
+    	
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+		String email = jsonObject.getString("email");
+		String confirmCode = jsonObject.getString("code");
+		String password =  jsonObject.getString("password");
+	
+		RegisterResult registResult = new RegisterResult();
+		int userId = userAccountService.existUser(email, "email");
+		if(userId>0){
+		if(registerCacheService.getConfirmCode(email).equals(confirmCode)){
+			Query query = Query.query(Criteria.where("email").is(email));
+			Update update = Update.update("password", password);
+			 userAccountService.updateFirst(query, update);
+			registResult.setCode("206");
+			registResult.setMessage(String.valueOf(userId));
+			
+		} else {
+			registerCacheService.addTryCount(email);
+			registResult.setCode("107");
+			registResult.setMessage("test code error");
+		}
+		}else {
+			registResult.setCode("103");
+			registResult.setMessage("user not exist");
+		}
+	
+		return JSON.toJSONString(registResult);
+       
+    }
+    
+    /*
+     *  手机重置密码
      * 
      * */
     
     @ResponseBody  
     @RequestMapping("/updatePassword") 
-    public  String  changeUserAccount(@RequestParam String data){
+    public  String  updatePassword(@RequestParam String data){
     	
     	JSONObject jsonObject = JSONObject.parseObject(data);
 		String mobilephone = jsonObject.getString("mobilephone");
@@ -290,24 +384,80 @@ public class UserAccountController {
 		String password =  jsonObject.getString("password");
 	
 		RegisterResult registResult = new RegisterResult();
-		
+		int  userId = userAccountService.existUser(mobilephone,"mobilephone");
+		if(userId>0){
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
-			UserAccount userAccount = new UserAccount();
-			userAccount.setMobilephone(mobilephone);
-			userAccount.setPassword(password);
-			
-			 userAccountService.updateUserAccount(userAccount);
+			Query query = Query.query(Criteria.where("mobilephone").is(mobilephone));
+			Update update = Update.update("password", password);
+			 userAccountService.updateFirst(query, update);
 			registResult.setCode("206");
-			registResult.setMessage("password update success");
+			registResult.setMessage(String.valueOf(userId));
 			
 		} else {
 			registerCacheService.addTryCount(mobilephone);
 			registResult.setCode("107");
 			registResult.setMessage("test code error");
 		}
-		
+		}else {
+			registResult.setCode("103");
+			registResult.setMessage("user not exist");
+		}
 	
 		return JSON.toJSONString(registResult);
        
     }
+    
+    //修改密码
+    @ResponseBody  
+    @RequestMapping("/changePassword") 
+    public  String  changePassword(@RequestParam String data,HttpServletRequest request){
+    	
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	String password = jsonObject.getString("password");
+    	String tocken = request.getParameter("tocken");
+    	ResponseCode response = new ResponseCode();
+    	int userId = loginInfoService.isOnline(tocken);
+    	if(userId>0){
+    		Query query = Query.query(Criteria.where("id").is(userId));
+    		Update update = Update.update("password", password);
+    		userAccountService.updateFirst(query, update);
+    		response.setCode("206");
+    		response.setMessage("edit success ");
+    	} else {
+    		response.setCode("116");
+    		response.setMessage("unlogin ");
+    	}
+
+		return JSON.toJSONString(response);
+       
+    }
+    
+    /*
+     *  更改绑定信息
+     * */
+    @ResponseBody  
+    @RequestMapping("/change") 
+    public  String  change(@RequestParam String data,HttpServletRequest request){
+    	
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	String type = jsonObject.getString("type");
+		String username = jsonObject.getString("username");
+	
+    	String tocken = request.getParameter("tocken");
+    	ResponseCode response = new ResponseCode();
+    	int userId = loginInfoService.isOnline(tocken);
+    	if(userId>0){
+    		userAccountService.change(type, username, userId);
+    		response.setCode("206");
+    		response.setMessage("edit success ");
+    	} else {
+    		response.setCode("116");
+    		response.setMessage("unlogin ");
+    	}
+	
+	
+		return JSON.toJSONString(response);
+       
+    }
+    
 }

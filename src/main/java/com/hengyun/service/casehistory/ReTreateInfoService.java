@@ -10,5 +10,6 @@ public interface ReTreateInfoService  extends BaseService<ReTreateInfo,Integer> 
 
 	public List<ReTreateInfo> queryAll();
 	
+	public int addReTreateInfo(ReTreateInfo reTreateInfo);
 	
 }

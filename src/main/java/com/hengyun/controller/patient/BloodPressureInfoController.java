@@ -60,6 +60,29 @@ public class BloodPressureInfoController {
 		return  JSONObject.toJSONString(response);
 	}
 	
+	@RequestMapping("/latestDay")
+	@ResponseBody
+	public String lates(HttpServletRequest request){
+	
+		PressureResponse response = new PressureResponse();
+		String tocken = request.getParameter("tocken");
+		
+		int userId = loginInfoService.isOnline(tocken);
+		
+		if(userId<0){
+			response.setCode("112");
+			response.setBloodPressureInfo(null);
+		} else {
+			
+		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getlatestTime(userId);
+
+		response.setCode("211");
+		response.setBloodPressureInfo(bloodList);
+		}
+		return  JSONObject.toJSONString(response);
+	}
+	
+	
 	@RequestMapping("/showAll")
 	@ResponseBody
 	public String showBlood(){

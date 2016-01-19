@@ -8,4 +8,5 @@ import com.hengyun.domain.friendcircle.FriendCircle;
  * */
 public interface FriendCircleDao extends BaseMongodbDao<FriendCircle,Integer>{
 
+	
 }

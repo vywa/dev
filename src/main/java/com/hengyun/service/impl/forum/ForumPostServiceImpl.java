@@ -92,7 +92,7 @@ public class ForumPostServiceImpl extends BaseServiceImpl<ForumPost,Integer> imp
 	public List<ForumPost> showAll() {
 		// TODO Auto-generated method stub
 		Query query = new Query();
-		query.addCriteria(Criteria.where("postId").exists(true));
+		query.addCriteria(Criteria.where("id").exists(true));
 		return forumPostDao.queryList(query);
 		
 	}

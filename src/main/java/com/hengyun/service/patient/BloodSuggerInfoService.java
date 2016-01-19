@@ -14,4 +14,7 @@ public interface BloodSuggerInfoService extends BaseService<BloodSuggerInfo,Inte
 		
 		//获取某个区段的信息
 		public List<BloodSuggerInfo> getInfoByTime(long startTime,long endTime,int userId);
+		
+		//获取最近一天数据
+		public List<BloodSuggerInfo> getlatestTime(int userId) ;
 }

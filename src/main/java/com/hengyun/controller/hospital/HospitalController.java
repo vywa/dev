@@ -5,6 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +21,7 @@ import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.hospital.HospitalService;
 
 /*
- *  医院管理
+ *  医生管理
  * 
  * */
 @Controller
@@ -41,6 +44,23 @@ public class HospitalController {
 		 return JSON.toJSONString(response);
 	}
 	
+	@RequestMapping("/update")
+	@ResponseBody
+	public String updateHospital(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
+		Query query = Query.query(Criteria.where("id").is(hospital.getId()));
+		Update update = Update.update("hospitalName",hospital.getHospitalName());
+		hospitalService.updateInser(query, update);
+	//	hospitalService.save(hospital);
+		
+		
+		ResponseCode response = new ResponseCode();
+		response.setCode("206");
+		response.setMessage("update success");
+		 return JSON.toJSONString(response);
+	}
+	
 	@RequestMapping("/set")
 	@ResponseBody
 	public String setHospital(@RequestParam String data,HttpServletRequest request){
@@ -58,10 +78,28 @@ public class HospitalController {
         return jsonString;  
 	}
 	
+	@RequestMapping("/query")
+	@ResponseBody
+	public String queryHospital(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		int id = jsonObject.getIntValue("id");
+		Hospital hospital = hospitalService.queryById(id);
+		return  JSON.toJSONString(hospital);  
+	}
+	
 	@RequestMapping("/edit")
 	@ResponseBody
 	public String editHospital(@RequestParam String data,HttpServletRequest request){
 		return null;
+	}
+	
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String deleteHospital(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		int id = jsonObject.getIntValue("id");
+		hospitalService.deleteById(id);
+		return "delete hospital sucess";
 	}
 	
 	

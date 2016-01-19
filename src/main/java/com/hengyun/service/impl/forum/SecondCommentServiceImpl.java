@@ -52,47 +52,7 @@ public class SecondCommentServiceImpl extends BaseServiceImpl<SecondComment,Inte
 		return this.retrieveFileOne(filename);
 	}
 
-
-
-	//更新资料
-	public int update(ForumPost forumPost,String tocken) {
-		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
-			Query query = Query.query(Criteria.where("userId").is(userId));
-			Update update = Update.update("title","title").set("title", "hello");
-			forumPostDao.updateFirst(query, update);
-			return 0;
-		} 
-			return -1;
 	
-	}
-
-	public int  post(ForumPost forumPost,String tocken) {
-		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline( tocken);
-		if(userId>0){
-			forumPost.setUserId(userId);
-			forumPost.setDeliveryTime(new Date());
-			int postId = forumPostDao.post(forumPost);
-			return postId;
-		}
-		return -1;
-	}
-
-	
-
-	public List<ForumPost> show(String tocken) {
-		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
-			Query query = Query.query(Criteria.where("userId").is(userId));
-			List<ForumPost> forumPost = forumPostDao.queryList(query);
-			return forumPost;
-		} 
-		return null;
-	}
-
 	public int post(SecondComment comment, int commentId) {
 		// TODO Auto-generated method stub
 		return  secondCommentDao.addComment(comment, commentId);
@@ -103,7 +63,7 @@ public class SecondCommentServiceImpl extends BaseServiceImpl<SecondComment,Inte
 	public List<SecondComment> show() {
 		// TODO Auto-generated method stub
 		Query query = new Query();
-		query.addCriteria(Criteria.where("commentId").exists(true));
+		query.addCriteria(Criteria.where("commentID").exists(true));
 		return secondCommentDao.queryList(query);
 	}
 

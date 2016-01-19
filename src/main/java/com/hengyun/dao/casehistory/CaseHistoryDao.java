@@ -8,4 +8,5 @@ import com.hengyun.domain.casehistory.CaseHistory;
  * */
 public interface CaseHistoryDao extends BaseMongodbDao<CaseHistory,Integer>{
 
+	public int addCaseHistory(CaseHistory caseHistory);
 }

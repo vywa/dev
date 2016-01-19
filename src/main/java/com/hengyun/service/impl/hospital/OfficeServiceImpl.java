@@ -24,7 +24,7 @@ public class OfficeServiceImpl extends BaseServiceImpl<Office,Integer> implement
 
 	public List<Office> queryAll() {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("id").exists(true));
+		Query query = Query.query(Criteria.where("officeId").exists(true));
 		return officeDao.queryList(query);
 		
 	}

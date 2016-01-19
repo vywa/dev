@@ -29,6 +29,11 @@ public class CaseHistoryServiceImpl extends BaseServiceImpl<CaseHistory,Integer>
 		
 	}
 
+	public int addCaseHistory(CaseHistory caseHistory) {
+		// TODO Auto-generated method stub
+		return caseHistoryDao.addCaseHistory(caseHistory);
+	}
+
 
 	
 	

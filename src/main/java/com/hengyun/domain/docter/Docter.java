@@ -45,7 +45,5 @@ public class Docter extends GeneralPerson implements Serializable{
 		this.patients = patients;
 	}
 	
-	
-
 
 }

@@ -22,7 +22,7 @@ public class Hospital implements Serializable{
 	private String telephone;											//医院电话
 	private String email;													//医院邮件
 	private String hospitalIM;										//医院即时通讯号
-	private String WeiChatPublicNumber;				//医院公众号
+	private String weiChatNumber;				//医院公众号
 
 	private Location	location;										//医院坐标
 	
@@ -77,18 +77,19 @@ public class Hospital implements Serializable{
 	public void setHospitalIM(String hospitalIM) {
 		this.hospitalIM = hospitalIM;
 	}
-	public String getWeiChatPublicNumber() {
-		return WeiChatPublicNumber;
-	}
-	public void setWeiChatPublicNumber(String weiChatPublicNumber) {
-		WeiChatPublicNumber = weiChatPublicNumber;
-	}
+	
 	
 	public Location getLocation() {
 		return location;
 	}
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	public String getWeiChatNumber() {
+		return weiChatNumber;
+	}
+	public void setWeiChatNumber(String weiChatNumber) {
+		this.weiChatNumber = weiChatNumber;
 	}
 	
 	

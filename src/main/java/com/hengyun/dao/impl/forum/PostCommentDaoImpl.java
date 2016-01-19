@@ -32,7 +32,8 @@ public class PostCommentDaoImpl extends BaseMongodbDaoImpl<PostComment,Integer> 
         
      
 		IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
-		int userId = index.getCommnetId();
+		int userId = index.getCommentID();
+		
 		comment.setId(userId);
 		comment.setReplyToId(postId);
 		this.mongoTemplate.save(comment);

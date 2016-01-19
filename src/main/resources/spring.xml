@@ -25,6 +25,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  
    <bean id="BaseServiceImpl" class="com.hengyun.service.impl.BaseServiceImpl" abstract="true" />
 
+<!-- 自增表索引 -->
 <bean id="indexCollectionDao" class="com.hengyun.dao.impl.logininfo.IndexCollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
 
 <!-- 登陆注册 -->
@@ -54,6 +55,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 <bean id="officeDao" class="com.hengyun.dao.impl.hospital.OfficeDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="officeService" class="com.hengyun.service.impl.hospital.OfficeServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="docterDao" class="com.hengyun.dao.impl.hospital.DocterDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="docterService" class="com.hengyun.service.impl.hospital.DocterServiceImpl" parent="BaseServiceImpl"/>
+
 <!-- 病历模块 -->
 
 <bean id="caseHistoryDao" class="com.hengyun.dao.impl.casehistory.CaseHistoryDaoImpl" parent="BaseMongodbDaoImpl"/>  
@@ -81,6 +85,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 <bean id="forumAuthorityDao" class="com.hengyun.dao.impl.forum.ForumAuthorityDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="forumAuthorityService" class="com.hengyun.service.impl.forum.ForumAuthorityServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="multiMediaDao" class="com.hengyun.dao.impl.forum.MultiMediaDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="multiMediaService" class="com.hengyun.service.impl.forum.MultiMediaServiceImpl" parent="BaseServiceImpl"/>
+
 <!-- 病人健康数据 -->
 
 <bean id="bloodPressureInfoDao" class="com.hengyun.dao.impl.patient.BloodPressureInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
@@ -89,6 +96,9 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 <bean id="bloodSuggerInfoDao" class="com.hengyun.dao.impl.patient.BloodSuggerInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="bloodSuggerInfoService" class="com.hengyun.service.impl.patient.BloodSuggerInfoServiceImpl" parent="BaseServiceImpl"/>
 
+<!-- 朋友圈 -->
+<bean id="friendCircleDao" class="com.hengyun.dao.impl.friendcircle.FriendCircleDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="friendCircleService" class="com.hengyun.service.impl.friendcircle.FriendCircleServiceImpl" parent="BaseServiceImpl"/>
 
 
 <!-- 

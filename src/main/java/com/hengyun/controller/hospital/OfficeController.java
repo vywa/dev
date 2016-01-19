@@ -5,6 +5,9 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,16 +58,23 @@ public class OfficeController {
 				
 	}
 	
-	@RequestMapping("/set")
+	@RequestMapping("/update")
 	@ResponseBody
-	public String setHospital(@RequestParam String data,HttpServletRequest request){
-		
-		return null;
+	public String updateOfficel(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		Office office = JSON.toJavaObject(jsonObject, Office.class);
+		Query query = Query.query(Criteria.where("officeId").is(office.getOfficeId()));
+		Update update = Update.update("hospitalId", office.getHospitalId()).set("officeName", office.getOfficeName()).set("description", office.getDescription());
+		officeService.updateFirst(query, update);
+		ResponseCode response = new ResponseCode();
+		response.setCode("206");
+		response.setMessage("edit success");
+		 return JSON.toJSONString(response);
 	}
 	
-	@RequestMapping("/showAll")
+	@RequestMapping("/show")
 	@ResponseBody
-	public String queryOffice(HttpServletRequest request){
+	public String showOffice(HttpServletRequest request){
 		List<Office> office ;
     	office = officeService.queryAll();
 
@@ -79,5 +89,13 @@ public class OfficeController {
 		return null;
 	}
 	
+	@RequestMapping("/query")
+	@ResponseBody
+	public String queryOffice(HttpServletRequest request){
+		String idStr =  request.getParameter("officeId");
+		Query query = Query.query(Criteria.where("officeId").is(Integer.valueOf(idStr)));
+		Office office = officeService.queryOne(query);
+		return  JSON.toJSONString(office);  
+	}
 	
 }

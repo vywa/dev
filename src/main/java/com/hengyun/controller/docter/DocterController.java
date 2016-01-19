@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *  医生管理
  * */
 @Controller
-@RequestMapping("docter")
+@RequestMapping("doctor")
 public class DocterController {
 	
 	
+	//管理员添加医生
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addDocter(@RequestParam String data,HttpServletRequest request){

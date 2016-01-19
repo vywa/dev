@@ -62,7 +62,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		
 		LoginResult loginResult  = userAccountService.validateUserBySign(loginInfo.getLoginUsername(), type,loginInfo.getPassword());
 		if(loginResult!=null){
-			int userId = Integer.valueOf(loginResult.getCode());
+			int userId = Integer.valueOf(loginResult.getUserId());
 		
 				String old = getTockenById(userId);
 				if(old!=null){
@@ -70,7 +70,13 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				}
 				System.out.println(userId+" old "+old);
 				loginInfo.setUserLoginTime(new Date());
-				
+				 if(loginResult.getUserCode()==3){
+					 loginInfo.setCatagory("patient");
+				 } else if(loginResult.getUserCode()==2){
+					 loginInfo.setCatagory("doctor");
+				 }else if(loginResult.getUserCode()==1){
+					 loginInfo.setCatagory("admin");
+				 }
 				String tocken = TockenGenerator.generate(loginInfo.getLoginUsername());
 				
 				loginInfo.setSessionid(tocken);
@@ -115,8 +121,10 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				userId = userAccountService.registerThirdAccount(login);
 				loginInfo.setUserId(userId);
 				loginResult.setUserCode(3);
+				loginResult.setUserId(userId);
 				 } else {
 					 loginInfo.setUserId(userAccount.getId());
+					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);
@@ -133,9 +141,11 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 login.setWeiChat(loginInfo.getLoginUsername());
 				userId = userAccountService.registerThirdAccount(login);
 				loginInfo.setUserId(userId);
+				loginResult.setUserId(userId);
 				loginResult.setUserCode(3);
 				 }else {
 					 loginInfo.setUserId(userAccount.getId());
+					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);
@@ -152,9 +162,11 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 login.setWeiBo(loginInfo.getLoginUsername());
 				userId = userAccountService.registerThirdAccount(login);
 				loginInfo.setUserId(userId);
+				loginResult.setUserId(userId);
 				loginResult.setUserCode(3);
 				 }else {
 					 loginInfo.setUserId(userAccount.getId());
+					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);

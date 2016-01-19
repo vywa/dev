@@ -40,7 +40,10 @@ public class PostCommentController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		PostComment comment = JSON.toJavaObject(jsonObject, PostComment.class);
 		String idStr = request.getParameter("postId");
-	//	String tocken = request.getParameter("tocken");
+		String tocken = request.getParameter("tocken");
+		int userId = loginInfoService.isOnline( tocken);
+		if(userId>0){
+			comment.setReplyerId(userId);
 		if(postCommentService.comment(comment, Integer.valueOf(idStr))>0){
 			response.setCode("209");
 			response.setMessage("post success");
@@ -48,7 +51,7 @@ public class PostCommentController {
 			response.setCode("111");
 			response.setMessage("post failure");
 		}
-		
+		}
 		return JSON.toJSONString(response);
 	}
 	

@@ -34,7 +34,7 @@ public class SecondCommentDaoImpl extends BaseMongodbDaoImpl<SecondComment,Integ
         
      
 		IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
-		int userId = index.getCommnetId();
+		int userId = index.getCommentID();
 		comment.setId(userId);
 		comment.setReplyToId(commentId);
 		comment.setReplyTime(new Date());

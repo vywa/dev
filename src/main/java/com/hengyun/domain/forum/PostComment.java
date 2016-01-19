@@ -44,6 +44,16 @@ public class PostComment implements Serializable{
 
 	
 
+	public CommentContent getComment() {
+		return comment;
+	}
+
+
+	public void setComment(CommentContent comment) {
+		this.comment = comment;
+	}
+
+
 	public int getId() {
 		return id;
 	}

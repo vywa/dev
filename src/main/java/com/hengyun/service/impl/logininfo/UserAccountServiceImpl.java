@@ -84,6 +84,29 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		}
 	}
 
+	// 用户是否存在
+		public int existUser(String sign, String type) {
+			// TODO Auto-generated method stub
+		
+			Query query = null;
+			if (type.equals("mobilephone")) {
+				query = Query.query(Criteria.where("mobilephone").is(sign));
+			} else if (type.equals("email")) {
+				query = Query.query(Criteria.where("email").is(sign));
+			} else if (type.equals("username")) {
+				query = Query.query(Criteria.where("username").is(sign));
+			} else if(type.equals("workNum")){
+				query = Query.query(Criteria.where("workNum").is(sign));
+			}
+			UserAccount userAccount = userAccountDao.queryOne(query);
+			if (userAccount == null) {
+			
+				return -1;
+			} else {
+				return userAccount.getId();
+			}
+		}
+	
 	// 判断用户身份是否合法
 	public LoginResult validateUserBySign(String sign, String type,String password) {
 		// TODO Auto-generated method stub
@@ -107,7 +130,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		} else {
 			int userId = userAccount.getId();
 			//暂时将用户id放入code中
-			loginResult.setCode(String.valueOf(userId));	
+			loginResult.setUserId(userId);
 			if(userAccount.getCatagory().equals("doctor")){
 				loginResult.setUserCode(2);
 			} else if(userAccount.getCatagory().equals("patient")) {
@@ -153,6 +176,28 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		}
 	
 		return null;
+	}
+
+	public int change(String type, String sign,int userId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("id").is(userId));
+		Update update =null;
+		if(type.equals("QQ")){
+			 update= Update.update("QQ", sign);
+			
+		}else if(type.equals("weiChat")){
+			 update= Update.update("weiChat", sign);
+		
+		} else if(type.equals("weiBo")){
+			 update= Update.update("weiBo", sign);
+			
+		}else if (type.equals("mobilephone")) {
+			 update= Update.update("mobilephone", sign);
+		} else if (type.equals("email")) {
+			 update= Update.update("email", sign);
+		}
+		userAccountDao.updateFirst(query, update);
+		return 1;
 	}
 
 

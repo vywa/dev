@@ -1,6 +1,8 @@
 package com.hengyun.service.impl.patient;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -40,6 +42,23 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		return bloodPressureInfoDao.queryList(query);
 	}
 
+	public List<BloodPressureInfo> getlatestTime(int userId) {
+		// TODO Auto-generated method stub
+		Query query = new Query();
+     Criteria criteria = Criteria.where("userId").is(userId);
+		 
+        query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
+		long time= info.getMeasureTime();
+		Date date = new Date(time);
+		
+		Calendar   calendar   =   new   GregorianCalendar(); 
+	     calendar.setTime(date); 
+	     calendar.add(calendar.DATE,-1);
+	     date=calendar.getTime();  
+	     long startTime = date.getTime();
+	     return getInfoByTime(startTime,time,userId);
+	}
 
 	public List<BloodPressureInfo> getInfoByTime(long begin, long end,int userId) {
 		// TODO Auto-generated method stub

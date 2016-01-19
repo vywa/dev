@@ -28,6 +28,11 @@ public class ReTreateInfoServiceImpl extends BaseServiceImpl<ReTreateInfo,Intege
 		
 	}
 
+	public int addReTreateInfo(ReTreateInfo reTreateInfo) {
+		// TODO Auto-generated method stub
+		return reTreateInfoDao.addReTreate(reTreateInfo);
+	}
+
 
 	
 

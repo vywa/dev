@@ -61,9 +61,7 @@ public class InfomationController {
 		    	  response.setCode("110");
 		    	  response.setMessage("upload image failure");
 		    	  }else{
-		    		
-		    		  
-		    		
+
 		    		  IconDao.save(image.getInputStream(),filename);
 		    		  Query query2 = Query.query(Criteria.where("userId").is(userId));
 		    		  Update update = Update.update("iconUrl", originalfilename);
@@ -138,6 +136,7 @@ public class InfomationController {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").exists(true));
 		List<Information> information = informationService.queryList(query);
+	//	List<Information> information = informationService.getPage(query, 0, 3);
 		 return JSON.toJSONString(information);
 	}
 	

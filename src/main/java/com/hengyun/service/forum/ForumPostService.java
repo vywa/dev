@@ -13,4 +13,5 @@ public interface ForumPostService  extends BaseService<ForumPost,Integer> {
 	
 	public List<ForumPost> showAll();
 	
+	
 }

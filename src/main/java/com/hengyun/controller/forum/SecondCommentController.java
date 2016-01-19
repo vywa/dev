@@ -44,16 +44,20 @@ public class SecondCommentController {
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		SecondComment comment = JSON.toJavaObject(jsonObject, SecondComment.class);
-		String idStr = request.getParameter("commentId");
-	//	String tocken = request.getParameter("tocken");
-		if(secondCommentService.post(comment, Integer.valueOf(idStr))>0){
-			response.setCode("209");
-			response.setMessage("post success");
-		} else{
-			response.setCode("111");
-			response.setMessage("post failure");
-		}
+		String idStr = request.getParameter("commentID");
+		String tocken = request.getParameter("tocken");
+		int userId = loginInfoService.isOnline( tocken);
+		if(userId>0){
+			comment.setReplyerId(userId);
 		
+			if(secondCommentService.post(comment, Integer.valueOf(idStr))>0){
+				response.setCode("209");
+				response.setMessage("post success");
+			} else{
+				response.setCode("111");
+				response.setMessage("post failure");
+			}
+		}
 		return JSON.toJSONString(response);
 	}
 	
@@ -72,11 +76,7 @@ public class SecondCommentController {
 		
 	}
 	
-	@RequestMapping("/edit")
-	@ResponseBody
-	public String editPost(@RequestParam String data,HttpServletRequest request){
-		return null;
-	}
+	
 	
 	@RequestMapping("/delete")
 	@ResponseBody
@@ -84,7 +84,8 @@ public class SecondCommentController {
 		ResponseCode response = new ResponseCode();
 	
 		String tocken = request.getParameter("tocken");
-		String idStr = request.getParameter("commentId");
+		String idStr = request.getParameter("commentID");
+		//删除对应的评论
 		secondCommentService.deleteById(Integer.valueOf(idStr));
 		response.setCode("210");
 		response.setMessage("delete success");

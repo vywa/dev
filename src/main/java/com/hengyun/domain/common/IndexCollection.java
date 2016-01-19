@@ -9,13 +9,27 @@ public class IndexCollection implements Serializable{
 
 	private int docterID;									//初始值100000000
 	private int patientID;								//初始值200000000
+	private int caseHistoryID;						//病历初值
+	private int reTreateInfoID;						//回访表
 	private int adminID;									//管理员０
 	private int postID;										//帖子ｉｄ
-	private int commnetId;							//回复ｉｄ
-	private int forumTemplateId;				//板块ｉｄ
+	private int commentID;							//回复ｉｄ
+	private int forumTemplateID;				//板块ｉｄ
 	
 	
 	
+	public int getReTreateInfoID() {
+		return reTreateInfoID;
+	}
+	public void setReTreateInfoID(int reTreateInfoID) {
+		this.reTreateInfoID = reTreateInfoID;
+	}
+	public int getCaseHistoryID() {
+		return caseHistoryID;
+	}
+	public void setCaseHistoryID(int caseHistoryID) {
+		this.caseHistoryID = caseHistoryID;
+	}
 	public int getAdminID() {
 		return adminID;
 	}
@@ -28,12 +42,10 @@ public class IndexCollection implements Serializable{
 	public void setPostID(int postID) {
 		this.postID = postID;
 	}
-	public int getCommnetId() {
-		return commnetId;
-	}
-	public void setCommnetId(int commnetId) {
-		this.commnetId = commnetId;
-	}
+
+	
+	
+	
 	public int getDocterID() {
 		return docterID;
 	}
@@ -46,11 +58,17 @@ public class IndexCollection implements Serializable{
 	public void setPatientID(int patientID) {
 		this.patientID = patientID;
 	}
-	public int getForumTemplateId() {
-		return forumTemplateId;
+	public int getCommentID() {
+		return commentID;
 	}
-	public void setForumTemplateId(int forumTemplateId) {
-		this.forumTemplateId = forumTemplateId;
+	public void setCommentID(int commentID) {
+		this.commentID = commentID;
+	}
+	public int getForumTemplateID() {
+		return forumTemplateID;
+	}
+	public void setForumTemplateID(int forumTemplateID) {
+		this.forumTemplateID = forumTemplateID;
 	}
 	
 	

@@ -79,6 +79,22 @@ public class ReTreateInfo implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public ReTreateInfo(int id, int docterId, int patientId, Date viewTime, Date receiveTime, String content,
+			String status) {
+		super();
+		this.id = 0;
+		this.docterId = docterId;
+		this.patientId = patientId;
+		this.viewTime = viewTime;
+		this.receiveTime = receiveTime;
+		this.content = "未填写";
+		this.status = "unhandled";
+	}
+
+	public ReTreateInfo() {
+		super();
+	}
 	
 	
 	
