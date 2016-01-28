@@ -1,0 +1,46 @@
+#content {
+	width:1000px;
+	height:800px;
+	
+	margin:0 auto;
+}
+
+#adaptor{
+	width:1000px;
+	height:500px;
+	position:absolute;
+	top:50%;
+	left:50%;margin-left:-500px;margin-top:-250px}
+
+#left {float:left;
+	width:500px;
+	height:500px;
+	
+	background-color:green;
+
+}
+
+#lcontent{
+	width:500px;
+	height:500px;
+	position:absolute;
+	top:50%;
+	left:50%;margin-left:-300px;
+	
+}
+
+#right {
+	float:right;
+	background-color:red;
+	width:500px;
+	height:500px;
+	margin:0 auto;
+}
+#rcontent{
+	width:500px;
+	height:500px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-left:150px;
+}

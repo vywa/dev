@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+xmlns:context="http://www.springframework.org/schema/context" 
+   xmlns:aop="http://www.springframework.org/schema/aop" 
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:tx="http://www.springframework.org/schema/tx"  
+    xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd      
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+	http://www.springframework.org/schema/aop  
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/context        
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://www.springframework.org/schema/cache
+     http://www.springframework.org/schema/cache/spring-cache.xsd" >
+     
+     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager" p:cache-manager-ref="ehcacheManager"/>
+
+   <bean id="ehcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:config-location="pringEhcache.xml"/>
+	<!-- 定义CacheManager -->
+
+   <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+      <!-- 指定配置文件的位置 -->
+      <property name="configLocation" value="/WEB-INF/config/ehcache.xml"/>
+      <!-- 指定新建的CacheManager的名称 -->
+      <property name="cacheManagerName" value="cacheManagerName"/>
+   </bean>
+
+  
+
+   <!-- 定义一个Ehcache -->
+   <bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+      <property name="cacheName" value="user"/>
+      <property name="cacheManager" ref="cacheManager"/>
+   </bean>
+
+<cache:advice id="cacheAdvice" cache-manager="cacheManager">
+      <cache:caching cache="users">
+         <cache:cacheable method="findById" key="#p0"/>
+         <cache:cacheable method="find" key="#user.id"/>
+         <cache:cache-evict method="deleteAll" all-entries="true"/>
+      </cache:caching>
+   </cache:advice>
+   
+   
+   <aop:config proxy-target-class="false">
+      <aop:advisor advice-ref="cacheAdvice" pointcut="execution(* com.xxx.UserService.*(..))"/>
+   </aop:config>
+	
+</beans>

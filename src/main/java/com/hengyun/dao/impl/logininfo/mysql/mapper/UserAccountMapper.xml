@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <mapper namespace="com.hengyun.dao.logininfo.mysql.UserAccountDao">  
+      
+        <resultMap type="UserAccount" id="userAccount">  
+            <id property="id" column="id"/>  
+            <result property="catagory" column="catagory"/>  
+            <result property="username" column="username"/>  
+            <result property="mobilephone" column="mobilephone"/>
+            <result property="password" column="password"/>  
+        </resultMap>  
+          
+        <!-- 查询账号，根据id -->  
+        <select id="queryById" parameterType="int" resultType="UserAccount" resultMap="userAccount">  
+            <![CDATA[ 
+                SELECT * from USERACCOUNT UA
+                    WHERE UA.ID = #{id}  
+            ]]>   
+        </select>  
+          
+        <!-- 查询账号列表 -->  
+        <select id="query"  parameterType="UserAccount" resultMap="userAccount">  
+            <![CDATA[ 
+                SELECT * from USERACCOUNT 
+                 
+            ]]>   
+        </select>  
+       <!-- trim使用 --> 
+        <select id="">
+        select * from useraccount
+        <trim prefix="where" prefixOverrides="OR|AND">
+        
+        </trim>
+        </select>
+        <!-- choose -->
+          <select id="">
+        select * from useraccount
+       <where>
+     
+       
+  
+       </where>
+  
+        </select>
+        
+        <!-- 添加账号 -->
+        <insert id="insert" parameterType="UserAccount">
+        	insert into useraccount (id,catagory,username,mobilephone,password) 
+        		values (#{id},#{catagory},#{username},#{mobilephone},#{password})
+        </insert>
+          
+          <!-- 更新账号 -->
+          <update id="update" parameterType="UserAccount">
+          update useraccount 
+          set catagory = #{catagory},
+          		username=#{username},
+          		mobilephone=#{mobilephone},
+          		password=#{password}
+          </update>
+          
+          <delete id="delete" parameterType="UserAccount">
+          	delete from useraccount 
+          		where id= #{id}
+          </delete>
+    </mapper>  

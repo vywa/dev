@@ -1,0 +1,951 @@
+[INFO] [2016-01-23 09:35:06][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 09:35:06][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 09:35:06][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 09:35:07][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 09:35:07][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 09:35:07][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 09:35:07][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 09:35:07][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:35:07 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:35:07][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 09:35:07][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 09:35:07][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 09:35:07][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 09:42:03][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 09:42:03][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 09:42:03][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:42:03 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:42:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 09:42:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 09:42:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 09:42:03][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 09:42:04][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 09:42:04][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:112}] to 192.168.31.114:27017
+[INFO] [2016-01-23 09:42:04][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2871652}
+[INFO] [2016-01-23 09:42:04][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 09:42:04][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-42112-1453513324453-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 09:42:04][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:42:04][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:42:04][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:42:04][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:42:04][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:42:03 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:42:04][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 09:43:11][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 09:43:11][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 09:43:11][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:43:11 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:43:11][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 09:43:11][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 09:43:11][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 09:43:11][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 09:43:12][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 09:43:12][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:113}] to 192.168.31.114:27017
+[INFO] [2016-01-23 09:43:12][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=421045}
+[INFO] [2016-01-23 09:43:12][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 09:43:12][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-49650-1453513392297-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 09:43:12][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:43:12][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:43:12][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:43:12][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:43:12][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:43:11 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:43:12][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 09:47:18][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 09:47:18][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 09:47:18][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:47:18 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:47:18][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 09:47:18][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 09:47:18][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 09:47:18][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 09:47:18][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 09:47:19][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:114}] to 192.168.31.114:27017
+[INFO] [2016-01-23 09:47:19][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=378815}
+[INFO] [2016-01-23 09:47:19][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 09:47:19][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-42565-1453513639208-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 09:47:19][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:47:19][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:47:19][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 09:47:19][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 09:47:19][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:47:18 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:47:19][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 09:59:37][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 09:59:37][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 09:59:37][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 09:59:38][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 09:59:38][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 09:59:38][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 09:59:38][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 09:59:38][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 09:59:38 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 09:59:38][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 09:59:38][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 09:59:38][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 09:59:38][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-01-23 09:59:38][org.springframework.context.support.GenericApplicationContext]Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginInfoCacheServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginInfoDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: protected org.springframework.data.mongodb.core.MongoTemplate com.hengyun.dao.impl.BaseMongodbDaoImpl.mongoTemplate; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener] for bean with name 'consumerSessionAwareMessageListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+[ERROR] [2016-01-23 09:59:38][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8] to prepare test instance [com.hengyun.service.impl.message.ProducerConsumerTest@3e8c3cb]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginInfoCacheServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginInfoDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: protected org.springframework.data.mongodb.core.MongoTemplate com.hengyun.dao.impl.BaseMongodbDaoImpl.mongoTemplate; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener] for bean with name 'consumerSessionAwareMessageListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:838)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 25 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'loginInfoDao': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: protected org.springframework.data.mongodb.core.MongoTemplate com.hengyun.dao.impl.BaseMongodbDaoImpl.mongoTemplate; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener] for bean with name 'consumerSessionAwareMessageListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:202)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:512)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
+	... 41 more
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: protected org.springframework.data.mongodb.core.MongoTemplate com.hengyun.dao.impl.BaseMongodbDaoImpl.mongoTemplate; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener] for bean with name 'consumerSessionAwareMessageListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:573)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:331)
+	... 54 more
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener] for bean with name 'consumerSessionAwareMessageListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1445)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:445)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:423)
+	at org.springframework.beans.factory.BeanFactoryUtils.beanNamesForTypeIncludingAncestors(BeanFactoryUtils.java:220)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1116)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:545)
+	... 56 more
+Caused by: java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ConsumerSessionAwareMessageListener
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:250)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:394)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1344)
+	... 66 more
+[INFO] [2016-01-23 10:00:44][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:00:44][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:00:44][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:00:44][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:00:44][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:00:44][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:00:45][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:00:45 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:00:45][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 10:00:45][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 10:00:45][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:115}] to 192.168.31.114:27017
+[INFO] [2016-01-23 10:00:45][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=339011}
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 10:00:45][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-54858-1453514445597-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 10:00:45][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:00:45][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:00:45][com.hengyun.service.impl.message.ConsumerSessionAwareMessageListener]收到一条消息
+[INFO] [2016-01-23 10:00:45][com.hengyun.service.impl.message.ConsumerSessionAwareMessageListener]消息内容是:  测试SessionAwareMessageListener
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:00:45 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:00:45][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[INFO] [2016-01-23 10:00:45][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 10:46:26][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:46:26][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:46:26][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:46:26][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:46:26][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:46:26][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:46:26][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:46:26][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:46:26 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:46:27][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:46:27][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:46:27][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:46:27][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-01-23 10:46:27][org.springframework.context.support.GenericApplicationContext]Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ResponseQueueListener] for bean with name 'responseQueueListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ResponseQueueListener
+[ERROR] [2016-01-23 10:46:27][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8] to prepare test instance [com.hengyun.service.impl.message.ProducerConsumerTest@78123e82]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ResponseQueueListener] for bean with name 'responseQueueListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ResponseQueueListener
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:838)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 25 more
+Caused by: org.springframework.beans.factory.CannotLoadBeanClassException: Cannot find class [com.tiantian.springintejms.listener.ResponseQueueListener] for bean with name 'responseQueueListener' defined in class path resource [springJms.xml]; nested exception is java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ResponseQueueListener
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.determineTargetType(AbstractAutowireCapableBeanFactory.java:628)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.predictBeanType(AbstractAutowireCapableBeanFactory.java:597)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.isFactoryBean(AbstractBeanFactory.java:1445)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doGetBeanNamesForType(DefaultListableBeanFactory.java:445)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:423)
+	at org.springframework.beans.factory.BeanFactoryUtils.beanNamesForTypeIncludingAncestors(BeanFactoryUtils.java:220)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1116)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:508)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
+	... 41 more
+Caused by: java.lang.ClassNotFoundException: com.tiantian.springintejms.listener.ResponseQueueListener
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:381)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:424)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:331)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:357)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:250)
+	at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:394)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doResolveBeanClass(AbstractBeanFactory.java:1397)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:1344)
+	... 56 more
+[INFO] [2016-01-23 10:48:00][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:48:00][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:48:00][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:48:01][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:48:01 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:48:01][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-01-23 10:48:01][org.springframework.context.support.GenericApplicationContext]Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+[ERROR] [2016-01-23 10:48:01][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8] to prepare test instance [com.hengyun.service.impl.message.ProducerConsumerTest@3f6b0be5]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:838)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 25 more
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1126)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:508)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
+	... 41 more
+[INFO] [2016-01-23 10:52:25][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:52:25][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:52:25][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:52:25 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:52:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:52:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:52:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:52:25][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-01-23 10:52:26][org.springframework.context.support.GenericApplicationContext]Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+[ERROR] [2016-01-23 10:52:26][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8] to prepare test instance [com.hengyun.service.impl.message.ProducerConsumerTest@3f6b0be5]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:838)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 25 more
+Caused by: org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type [javax.jms.Destination] is defined: expected single matching bean but found 4: responseQueue,adapterQueue,queueDestination,sessionAwareQueue
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1126)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:508)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
+	... 41 more
+[INFO] [2016-01-23 10:53:48][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:53:48][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:53:48][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:53:48 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:53:48][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:53:48][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:53:48][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:53:48][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 10:53:49][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 10:53:49][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:116}] to 192.168.31.114:27017
+[INFO] [2016-01-23 10:53:49][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=398850}
+[INFO] [2016-01-23 10:53:49][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 10:53:49][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-39338-1453517629341-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 10:53:49][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:53:49][com.hengyun.service.impl.message.ConsumerSessionAwareMessageListener]收到一条消息
+[INFO] [2016-01-23 10:53:49][com.hengyun.service.impl.message.ConsumerSessionAwareMessageListener]消息内容是:  测试SessionAwareMessageListener
+[WARN] [2016-01-23 10:53:49][org.springframework.jms.listener.DefaultMessageListenerContainer]Execution of JMS message listener failed, and no ErrorHandler has been set.
+org.springframework.jms.listener.adapter.ListenerExecutionFailedException: Failed to invoke target method 'handleMessage' with arguments {测试MessageListenerAdapter}; nested exception is java.lang.NoSuchMethodException: com.hengyun.service.impl.message.ConsumerListener.handleMessage(java.lang.String)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.invokeListenerMethod(MessageListenerAdapter.java:315)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.onMessage(MessageListenerAdapter.java:230)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:721)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:681)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:651)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:315)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:253)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1150)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1142)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1039)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NoSuchMethodException: com.hengyun.service.impl.message.ConsumerListener.handleMessage(java.lang.String)
+	at java.lang.Class.getMethod(Class.java:1786)
+	at org.springframework.util.MethodInvoker.prepare(MethodInvoker.java:174)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.invokeListenerMethod(MessageListenerAdapter.java:300)
+	... 10 more
+[INFO] [2016-01-23 10:53:49][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:53:49][com.hengyun.service.impl.message.ConsumerMessageListener]接收到一条纯文本消息
+[WARN] [2016-01-23 10:53:49][org.springframework.jms.listener.DefaultMessageListenerContainer]Execution of JMS message listener failed, and no ErrorHandler has been set.
+org.springframework.jms.listener.adapter.ListenerExecutionFailedException: Failed to invoke target method 'handleMessage' with arguments {测试MessageListenerAdapter}; nested exception is java.lang.NoSuchMethodException: com.hengyun.service.impl.message.ConsumerListener.handleMessage(java.lang.String)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.invokeListenerMethod(MessageListenerAdapter.java:315)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.onMessage(MessageListenerAdapter.java:230)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:721)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:681)
+	at org.springframework.jms.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:651)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.doReceiveAndExecute(AbstractPollingMessageListenerContainer.java:315)
+	at org.springframework.jms.listener.AbstractPollingMessageListenerContainer.receiveAndExecute(AbstractPollingMessageListenerContainer.java:253)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.invokeListener(DefaultMessageListenerContainer.java:1150)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.executeOngoingLoop(DefaultMessageListenerContainer.java:1142)
+	at org.springframework.jms.listener.DefaultMessageListenerContainer$AsyncMessageListenerInvoker.run(DefaultMessageListenerContainer.java:1039)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NoSuchMethodException: com.hengyun.service.impl.message.ConsumerListener.handleMessage(java.lang.String)
+	at java.lang.Class.getMethod(Class.java:1786)
+	at org.springframework.util.MethodInvoker.prepare(MethodInvoker.java:174)
+	at org.springframework.jms.listener.adapter.MessageListenerAdapter.invokeListenerMethod(MessageListenerAdapter.java:300)
+	... 10 more
+[INFO] [2016-01-23 10:53:49][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:53:48 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:53:49][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 10:55:25][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:55:25][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:55:25][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:55:25 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:55:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:55:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:55:25][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:55:25][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 10:55:25][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 10:55:26][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:117}] to 192.168.31.114:27017
+[INFO] [2016-01-23 10:55:26][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=2067437}
+[INFO] [2016-01-23 10:55:26][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 10:55:26][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-47388-1453517726229-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 10:55:26][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:55:26][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:55:26][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:55:25 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:55:26][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 10:58:08][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 10:58:08][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 10:58:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 10:58:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 10:58:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 10:58:09][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 10:58:09][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:58:09 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 10:58:09][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 10:58:09][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 10:58:09][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:118}] to 192.168.31.114:27017
+[INFO] [2016-01-23 10:58:09][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=319342}
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 10:58:09][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-41013-1453517889620-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 10:58:09][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:58:09][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 10:58:09 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 10:58:09][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:32:08][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:32:08][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:32:08][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:32:08 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:32:08][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:32:08][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:32:08][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:32:08][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:32:08][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:32:08][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:119}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:32:08][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=356423}
+[INFO] [2016-01-23 11:32:08][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:32:09][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-57238-1453519928937-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:32:09][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:32:09][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:32:09][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:32:08 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:32:09][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:39:13][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:39:13][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:39:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:39:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:39:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:39:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:39:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:39:13][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:39:13 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:39:14][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:39:14][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:39:14][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:120}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:39:14][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=426892}
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:39:14][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-46721-1453520354498-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:39:14][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:39:14][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:39:13 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:39:14][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:42:16][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:42:16][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:42:16][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:42:16][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:42:16][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:42:17][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:42:17][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:42:17 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:42:17][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:42:17][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:42:17][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:121}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:42:17][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=348514}
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:42:17][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-42981-1453520537585-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:42:17][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:42:17][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:42:17 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:42:17][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:48:01][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:48:01][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:48:01][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:48:01 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:48:01][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:48:01][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:48:02][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:48:02][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:122}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:48:02][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=408087}
+[INFO] [2016-01-23 11:48:02][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:48:02][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-52908-1453520882443-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:48:02][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:48:02][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:48:02][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:48:01 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:48:02][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:49:13][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:49:13][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:49:13][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:49:14][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:49:14][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:49:14][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:49:14][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:49:14][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:49:14 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:49:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:49:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:49:14][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:49:14][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:49:14][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:49:14][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:123}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:49:14][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=431786}
+[INFO] [2016-01-23 11:49:14][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:49:14][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-44942-1453520954835-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:49:14][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:49:15][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:49:15][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:49:14 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:49:15][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:52:20][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:52:20][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:52:21][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:52:21 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:52:21][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:52:21][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:52:21][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:52:21][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:52:21][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:52:21][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:124}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:52:21][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=330728}
+[INFO] [2016-01-23 11:52:22][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:52:22][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-48389-1453521142181-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:52:22][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:52:22][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:52:22][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:52:21 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:52:22][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:53:03][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:53:03][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:53:03][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:03 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:53:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:53:03][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:53:03][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:53:04][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:53:04][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:125}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:53:04][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=464761}
+[INFO] [2016-01-23 11:53:04][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:53:04][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-43120-1453521184306-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:53:04][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:04][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:04][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:03 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:04][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:53:15][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:53:15][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:53:15][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:53:15][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:53:15][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:53:15][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:53:15][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:53:15][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:15 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:53:16][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:53:16][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:53:16][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:126}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:53:16][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=363096}
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:53:16][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-42841-1453521196507-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:53:16][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:16][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:15 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:16][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:53:36][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:53:36][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:53:36][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:53:36][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:53:37][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:53:37][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:53:37][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:53:37][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:37 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:37][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:53:37][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:53:37][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:53:37][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:53:37][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:53:37][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:127}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:53:37][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=298293}
+[INFO] [2016-01-23 11:53:37][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:53:37][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-48740-1453521217642-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:53:37][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:37][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:53:38][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:53:37 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:53:38][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:54:02][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:54:02][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:54:02][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:02 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:54:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:54:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:54:02][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:54:02][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:54:02][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:128}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:54:02][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=489568}
+[INFO] [2016-01-23 11:54:02][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:54:03][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-43703-1453521242956-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:54:03][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:03][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:03][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:02 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:03][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:54:19][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:54:19][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:54:19][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:19 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:19][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:54:19][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:54:19][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:54:19][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:54:20][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:54:20][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:129}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:54:20][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=367125}
+[INFO] [2016-01-23 11:54:20][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:54:20][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-43595-1453521260360-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:54:20][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:20][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:20][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:19 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:20][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:54:58][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:54:58][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:54:58][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:54:58][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:54:58][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:54:58][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:54:59][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:59 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:54:59][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:54:59][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:54:59][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:130}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:54:59][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=488575}
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:54:59][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-44021-1453521299607-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:54:59][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:59][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:54:59 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:54:59][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:58:01][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:58:01][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:58:01][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:58:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:58:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:58:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:58:02][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:58:02][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:58:02 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:58:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:58:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:58:02][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:58:02][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:58:02][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:58:02][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:131}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:58:02][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=526178}
+[INFO] [2016-01-23 11:58:02][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:58:02][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-36380-1453521482780-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:58:02][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:58:03][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:58:03][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:58:02 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:58:03][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:58:34][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:58:34][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:58:34][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:58:34][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:58:34][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:58:34][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:58:34][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:58:34][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:58:34 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:58:35][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:58:35][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:58:35][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:132}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:58:35][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=466388}
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:58:35][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-46835-1453521515481-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:58:35][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:58:35][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:58:34 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:58:35][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:59:09][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:59:09][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:59:09][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:59:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:59:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:59:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:59:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:59:10][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:59:10 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:59:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:59:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:59:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:59:10][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:59:10][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:59:10][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:133}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:59:10][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=362000}
+[INFO] [2016-01-23 11:59:10][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:59:10][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-35246-1453521550799-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:59:10][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:59:11][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:59:11][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:59:10 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:59:11][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-23 11:59:42][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-23 11:59:42][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@402a079c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@59ec2012, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4cf777e8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f686d1f, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3fee9989, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@73ad2d6]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springJms.xml]
+[INFO] [2016-01-23 11:59:43][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:59:43 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:59:43][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-23 11:59:43][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-23 11:59:43][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-23 11:59:43][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-01-23 11:59:43][org.mongodb.driver.cluster]Cluster created with settings {hosts=[192.168.31.114:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=50}
+[INFO] [2016-01-23 11:59:43][org.mongodb.driver.connection]Opened connection [connectionId{localValue:1, serverValue:134}] to 192.168.31.114:27017
+[INFO] [2016-01-23 11:59:43][org.mongodb.driver.cluster]Monitor thread successfully connected to server with description ServerDescription{address=192.168.31.114:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[2, 6, 3]}, minWireVersion=0, maxWireVersion=2, electionId=null, maxDocumentSize=16777216, roundTripTimeNanos=349571}
+[INFO] [2016-01-23 11:59:43][org.springframework.context.support.DefaultLifecycleProcessor]Starting beans in phase 2147483647
+[INFO] [2016-01-23 11:59:43][org.springframework.jms.connection.SingleConnectionFactory]Established shared JMS Connection: ActiveMQConnection {id=ID:bob-OptiPlex-3020-47050-1453521583853-1:1,clientId=null,started=false}
+[INFO] [2016-01-23 11:59:43][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:59:44][com.hengyun.service.impl.message.ProducerServiceImpl]生产者产生一条消息
+[INFO] [2016-01-23 11:59:44][org.springframework.context.support.GenericApplicationContext]Closing org.springframework.context.support.GenericApplicationContext@4b4523f8: startup date [Sat Jan 23 11:59:43 CST 2016]; root of context hierarchy
+[INFO] [2016-01-23 11:59:44][org.springframework.context.support.DefaultLifecycleProcessor]Stopping beans in phase 2147483647
+[INFO] [2016-01-24 17:38:09][org.springframework.test.context.support.DefaultTestContextBootstrapper]Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+[INFO] [2016-01-24 17:38:09][org.springframework.test.context.support.DefaultTestContextBootstrapper]Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@32709393, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3d99d22e, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@49fc609f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@cd2dae5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3a883ce7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4973813a]
+[INFO] [2016-01-24 17:38:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [spring.xml]
+[INFO] [2016-01-24 17:38:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [springMongodb.xml]
+[INFO] [2016-01-24 17:38:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [redis.xml]
+[INFO] [2016-01-24 17:38:10][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [javamail.xml]
+[INFO] [2016-01-24 17:38:10][org.springframework.context.support.GenericApplicationContext]Refreshing org.springframework.context.support.GenericApplicationContext@7a1ebcd8: startup date [Sun Jan 24 17:38:10 CST 2016]; root of context hierarchy
+[INFO] [2016-01-24 17:38:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [mongodb.properties]
+[INFO] [2016-01-24 17:38:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [redis.properties]
+[INFO] [2016-01-24 17:38:10][org.springframework.context.support.PropertySourcesPlaceholderConfigurer]Loading properties file from class path resource [javamail.properties]
+[INFO] [2016-01-24 17:38:10][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[WARN] [2016-01-24 17:38:10][org.springframework.context.support.GenericApplicationContext]Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.jms.core.JmsTemplate] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup=, name=, description=, authenticationType=CONTAINER, type=class java.lang.Object, mappedName=)}
+[ERROR] [2016-01-24 17:38:10][org.springframework.test.context.TestContextManager]Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@49fc609f] to prepare test instance [com.hengyun.service.message.impl.ProducerConsumerTest@503d687a]
+java.lang.IllegalStateException: Failed to load ApplicationContext
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:124)
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:83)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:117)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:83)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:228)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:230)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:249)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
+	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'producerServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.jms.core.JmsTemplate] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup=, name=, description=, authenticationType=CONTAINER, type=class java.lang.Object, mappedName=)}
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:311)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1214)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:543)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:838)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:537)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:125)
+	at org.springframework.test.context.support.AbstractGenericContextLoader.loadContext(AbstractGenericContextLoader.java:60)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.delegateLoading(AbstractDelegatingSmartContextLoader.java:109)
+	at org.springframework.test.context.support.AbstractDelegatingSmartContextLoader.loadContext(AbstractDelegatingSmartContextLoader.java:261)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:98)
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:116)
+	... 31 more
+Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type [org.springframework.jms.core.JmsTemplate] found for dependency: expected at least 1 bean which qualifies as autowire candidate for this dependency. Dependency annotations: {@javax.annotation.Resource(shareable=true, lookup=, name=, description=, authenticationType=CONTAINER, type=class java.lang.Object, mappedName=)}
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.raiseNoSuchBeanDefinitionException(DefaultListableBeanFactory.java:1373)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1119)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1014)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.autowireResource(CommonAnnotationBeanPostProcessor.java:508)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.getResource(CommonAnnotationBeanPostProcessor.java:486)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor$ResourceElement.getResourceToInject(CommonAnnotationBeanPostProcessor.java:615)
+	at org.springframework.beans.factory.annotation.InjectionMetadata$InjectedElement.inject(InjectionMetadata.java:169)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
+	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
+	... 47 more
