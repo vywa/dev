@@ -58,10 +58,10 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		redisClientTemplate.hset(sign, "confirmCode", confirmCode);
 	}
 
-	public AccountStatus getStatus(String sign) {
+	public String getStatus(String sign) {
 		// TODO Auto-generated method stub
 		String status = redisClientTemplate.hget(sign,"status");
-		 return AccountStatus.valueOf(status);
+		 return status;
 	}
 
 	public int getTryCount(String sign) {

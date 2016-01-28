@@ -3,6 +3,8 @@ package com.hengyun.controller.information;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +12,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -24,9 +28,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.information.Icon;
 import com.hengyun.domain.information.InfoResponse;
 import com.hengyun.domain.information.Information;
+import com.hengyun.domain.information.NickIcon;
+import com.hengyun.domain.information.NickIconResponse;
+import com.hengyun.domain.information.UploadImageResponse;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -38,6 +44,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 @RequestMapping("info")
 public class InfomationController {
 	
+	 private static final Logger log = LoggerFactory.getLogger(InfomationController.class);
 	@Resource
 	private LoginInfoService loginInfoService;
 	@Resource
@@ -46,28 +53,49 @@ public class InfomationController {
 	private IconDao	IconDao;
 	
 
-	    @RequestMapping("/upload")  
+	    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
 	    @ResponseBody
 	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
 	    {  
 	    	String tocken = request.getParameter("tocken");
-	    	ResponseCode response = new ResponseCode();
+	    	UploadImageResponse response = new UploadImageResponse();
+	    	String baseUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=";
 	    	int userId = loginInfoService.isOnline(tocken);
 	    	if(userId>0){
 	    	    String originalfilename = image.getOriginalFilename();
-	    	    String filename = userId+originalfilename;
+	    	    String filename = userId+new Date().getTime()+originalfilename;
 		    	
 		      if(image.isEmpty()){
 		    	  response.setCode("110");
 		    	  response.setMessage("upload image failure");
 		    	  }else{
-
+		    		  
+		    		  //图片存在，替换
+		    		  if(IconDao.exist(filename)!=null){
+			    		  IconDao.updateIcon(image.getInputStream(),filename);
+			    		  Query query2 = Query.query(Criteria.where("userId").is(userId));
+			    		  long recordTime = Long.valueOf(new Date().getTime());
+			    		  Update update = Update.update("iconUrl", baseUrl+filename).set("recordTime", recordTime);
+			    		  informationService.updateFirst(query2, update);
+			    		  log.info("用户 "+userId+" 更新图像成功");
+			    		  response.setCode("207");
+			    		  response.setMessage(String.valueOf(recordTime));
+			    		  
+			    		  response.setIconUrl(baseUrl+filename);
+			    		  response.setRecordTime(recordTime);
+		    	  }else {
 		    		  IconDao.save(image.getInputStream(),filename);
 		    		  Query query2 = Query.query(Criteria.where("userId").is(userId));
-		    		  Update update = Update.update("iconUrl", originalfilename);
+		    		  long recordTime = Long.valueOf(new Date().getTime());
+		    		  Update update = Update.update("iconUrl", baseUrl+filename).set("recordTime", recordTime);
 		    		  informationService.updateFirst(query2, update);
+		    		  log.info("用户 "+userId+" 保存图像成功");
 		    		  response.setCode("207");
 		    		  response.setMessage("upload image success");
+		    	
+		    		  response.setIconUrl(baseUrl+filename);
+		    		  response.setRecordTime(recordTime);
+		    	  }
 		    	  }
 	    	}
 		      return JSON.toJSONString(response);
@@ -80,16 +108,24 @@ public class InfomationController {
 	    public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
 	    	String tocken = request.getParameter("tocken");
 	    	ResponseCode responseCode = new ResponseCode();
-	    	int userId = loginInfoService.isOnline(tocken);
-	    	if(userId>0){
+	    	InputStream in = null;
+	    	OutputStream os = null;
+	    	//int userId = loginInfoService.isOnline(tocken);
+	    	//if(userId>0){
 	     	
 	    	response.setContentType("image/jpeg"); // 设置返回内容格式
 	    	String filename = request.getParameter("iconUrl");
 	    
-	    	String icon = userId+filename;
+	    	String icon = filename;
 	    	GridFSDBFile gridFSDBFile = IconDao.getByFileName(icon);
-	    	InputStream in = gridFSDBFile.getInputStream();
-	    	OutputStream os = response.getOutputStream();  //创建输出流
+	    	try{
+	    	 in = gridFSDBFile.getInputStream();
+	    	} catch(Exception ex){
+	    		log.error("图片不存在，获取默认图片");
+	    		GridFSDBFile gridFSDBFile2 = IconDao.getByFileName("200000010temp.jpg");
+	    		in = gridFSDBFile2.getInputStream();
+	    	}
+	    	 os = response.getOutputStream();  //创建输出流
     		byte[] b = new byte[1024];  
     		while( in.read(b)!= -1){ 
     		os.write(b);     
@@ -99,37 +135,14 @@ public class InfomationController {
     		os.close();
     		responseCode.setCode("208");
     		responseCode.setMessage("download success");
-	    	}
+	    	
     		return  JSON.toJSONString(responseCode);
 	    }
 	    
 	   
-	//添加用户信息
-	@RequestMapping("/add")
-	@ResponseBody
-	public String addInfo(@RequestParam String data,HttpServletRequest request){
-		String tocken = request.getParameter("tocken");
-		JSONObject jsonObject =JSON.parseObject(data);
-		Information generalInfo = JSON.toJavaObject(jsonObject, Information.class);
-		int userId = loginInfoService.isOnline( tocken);
-		
-		
-		ResponseCode response = new ResponseCode();
-	
-		 if(userId>0){
-			 generalInfo.setUserId(userId);
-			 informationService.save(generalInfo);
-			 response.setCode("206");
-			 response.setMessage("edit success");
-		 } else if(userId<0){
-			 response.setCode("109");
-			 response.setMessage("user not login");
-		 }
 
-		 return JSON.toJSONString(response);
-	}
 	
-	@RequestMapping("/show")
+	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show(){
 		
@@ -140,7 +153,7 @@ public class InfomationController {
 		 return JSON.toJSONString(information);
 	}
 	
-	//查询加载信息
+	//登陆加载信息
 	@RequestMapping("/load")
 	@ResponseBody
 	public String queryInfo(@RequestParam String data,HttpServletRequest request){
@@ -176,26 +189,35 @@ public class InfomationController {
 	}
 	
 	//更新用户信息
-	@RequestMapping("/update")
+	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String updateInfo(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		Information info = JSON.toJavaObject(jsonObject, Information.class);
-
+		
 		String tocken = request.getParameter("tocken");
 		int userId = loginInfoService.isOnline( tocken);
 		 if(userId>0){
 			
 			 long recordTime = new Date().getTime();
 			 info.setRecordTime(String.valueOf(recordTime));
+			
 			 Query query =Query.query(Criteria.where("userId").is(userId));
-			 Information temp =informationService.queryOne(query);
-			 if(temp==null){
+			 Information temp=null;
+			try {
+				temp = informationService.queryOne(query);
+				if(temp!=null){
+					
+				}
+				 informationService.update(info, userId);
+			} catch (NullPointerException ex) {
+				//加载默认图片
+				  String fileUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
+				 info.setIconUrl(fileUrl);
+				 info.setRecordTime(String.valueOf(new Date().getTime()));
 				 informationService.add(info, userId);
-			 } else {
-			 informationService.update(info, userId);
-			 }
+			}
 				 response.setCode("206");
 				 response.setMessage(String.valueOf(recordTime));
 			 
@@ -208,12 +230,27 @@ public class InfomationController {
 	
 	
 	
-	@RequestMapping("/delete")
+	@RequestMapping(value="/nickName",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String deleteInfo(HttpServletRequest request){
-		String tocken = request.getParameter("tocken");
+	public String getnickName(HttpServletRequest request){
+		NickIconResponse response = new NickIconResponse();
+		//String tocken = request.getParameter("tocken");
+		int userId =Integer.valueOf( request.getParameter("userId"));
+	//	int userId = loginInfoService.isOnline( tocken);
+		if(userId>0){
+			Query query =Query.query(Criteria.where("userId").is(userId));
+			 Information temp =informationService.queryOne(query);
+			 String nickname = temp.getTrueName();
+			 String iconUrl = temp.getIconUrl();
+			 NickIcon nickIcon = new NickIcon();
+			 nickIcon.setNickname(nickname);
+			 nickIcon.setIconUrl(iconUrl);
+			 response.setCode("206");
+			 response.setMessage("返回用户昵称和图像");
+			 response.setNickIcon(nickIcon);
+		}
 		
-		return null;
+		 return JSON.toJSONString(response);
 	}
 	
 }

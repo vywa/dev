@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.ForumAuthority;
+import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.service.forum.ForumAuthorityService;
 import com.hengyun.service.forum.ForumPostService;
 import com.hengyun.service.forum.PostCommentService;
@@ -72,11 +73,21 @@ public class UserAuthorityController {
 	}
 	
 	
-	
-	@RequestMapping("/edit")
+	//是否允许发帖
+	@RequestMapping(value="/allow",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String editPost(@RequestParam String data,HttpServletRequest request){
-		return null;
+	public String allowPost(HttpServletRequest request){
+		String tocken = request.getParameter("tocken");
+		int userId = loginInfoService.isOnline(tocken);
+		ForumResponseCode response = new ForumResponseCode();
+		if(userId>0){
+		response.setResponseCode(0);
+		response.setDescription("允许发帖");
+		} else {
+			response.setResponseCode(-1);
+			response.setDescription("不允许发帖");
+		}
+		 return JSON.toJSONString(response);
 	}
 	
 	@RequestMapping("/delete")
@@ -91,5 +102,6 @@ public class UserAuthorityController {
 		response.setMessage("delete success");
 		return null;
 	}
+	
 	
 }

@@ -1,9 +1,12 @@
 package com.hengyun.service.impl.information;
 
 import java.io.InputStream;
+import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -21,6 +24,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 
 public class InformationServiceImpl extends BaseServiceImpl<Information,Integer> implements InformationService{
 
+	 private static final Logger log = LoggerFactory.getLogger(InformationServiceImpl.class);
 	@Resource 
 	private InformationDao informationDao;
 	@Resource
@@ -32,7 +36,11 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 		// TODO Auto-generated method stub
 	
 			generalInfo.setUserId(userId);
+			 String fileUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
+			generalInfo.setIconUrl(fileUrl);
+			generalInfo.setRecordTime(String.valueOf(new Date().getTime()));
 			informationDao.save(generalInfo);
+			log.info("用户: "+userId +"基本资料保存成功");
 			return userId;
 
 	}
@@ -71,8 +79,10 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).
 					set("weight", information.getWeight()).set("sex",information.getSex()).
 					set("birthday", information.getBirthday()).
-					set("trueName", information.getTrueName());
-			informationDao.updateInser(query, update);
+					set("trueName", information.getTrueName()).
+					set("recordTime",String.valueOf(new Date().getTime())).set("iconUrl", information.getIconUrl());;
+			informationDao.updateFirst(query, update);
+			log.info("用户 "+userId+" 资料修改成功");
 			return userId;
 	
 	}

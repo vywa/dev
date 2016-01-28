@@ -10,7 +10,8 @@ import java.util.List;
  * */
 public class FriendCircle implements Serializable{
 
-	private int userId;											//圈子主人ｉｄ
+	private int userId;											//圈子主人id
+	
 	private List<Friend> allFriendsList;			//朋友列表
 	
 	private List<Friend> docters;						//医生列表
@@ -19,7 +20,7 @@ public class FriendCircle implements Serializable{
 	
 	
 	
-	private List<Friend> friendList;		//好友分组
+	private List<Friend> friendList;		//好友列表
 	
 	private List<Friend>  unhandlerFriendList;			//请求好友列表
 	

@@ -14,6 +14,7 @@
 		<spring.version>4.2.3.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.2.6</mybatis.version>
+		 <org.aspectj-version>1.6.10</org.aspectj-version>  
 		<!-- log4j日志文件管理包版本 -->
 		<slf4j.version>1.7.7</slf4j.version>
 		<log4j.version>1.2.17</log4j.version>
@@ -42,6 +43,11 @@
 			<version>${spring.version}</version>
 		</dependency>
 
+	<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
@@ -108,7 +114,13 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.30</version>
 		</dependency>
-		<!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->
+		<!-- 导入druid包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.16</version>
+		</dependency>
+		<!-- 导入dbcp包 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
@@ -129,13 +141,8 @@
 		</dependency>
 
 		<!-- 格式化对象，方便输出日志 -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.1.41</version>
-		</dependency>
-
-
+	
+		<!-- 导入slf日志 -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -148,8 +155,13 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 		<!-- log end -->
-
-		<!-- 映入JSON -->
+		<!-- 导入fastjson -->
+	<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.41</version>
+		</dependency>
+		<!-- 引入jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -173,9 +185,14 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
-
-
-
+	<!-- 验证码生成 -->
+	<!-- 
+	 <dependency>  
+	        <groupId>com.google.code</groupId>  
+	        <artifactId>kaptcha</artifactId>  
+	        <version>2.3.2</version>  
+	    </dependency>
+  -->
 		<!-- 上传组件包 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -194,7 +211,14 @@
 			<artifactId>aspectjweaver</artifactId>
 			<version>1.8.7</version>
 		</dependency>
-
+	 			<!-- AspectJ -->  
+	 			
+        <dependency>  
+            <groupId>org.aspectj</groupId>  
+            <artifactId>aspectjrt</artifactId>  
+            <version>${org.aspectj-version}</version>  
+        </dependency>   
+		
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -246,25 +270,24 @@
 			<version>1.6</version>
 		</dependency>
 
-
-
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.16</version>
-		</dependency>
-
 		<dependency>
 			<groupId>net.sf.ezmorph</groupId>
 			<artifactId>ezmorph</artifactId>
 			<version>1.0.6</version>
 		</dependency>
-
+	<!-- redis客户端 -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.8.0</version>
 		</dependency>
+		<!-- memcache客户端 -->
+<dependency>
+	<groupId>com.whalin</groupId>
+	<artifactId>Memcached-Java-Client</artifactId>
+	<version>3.0.2</version>
+</dependency>
+
 
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -306,6 +329,7 @@
 			<version>1.6.1</version>
 		</dependency>
 
+	<!-- shiro 依赖 -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
@@ -324,7 +348,14 @@
 			<version>1.2.4</version>
 		</dependency>
 
-
+	<!-- shiro-redis配置 -->
+	<!-- 
+	<dependency>
+	        <groupId>org.crazycake</groupId>
+	        <artifactId>shiro-redis</artifactId>
+	        <version>2.4.2.1-RELEASE</version>
+	    </dependency>
+	     -->
 		<!-- mongodb驱动 -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
@@ -339,6 +370,19 @@
 			<version>1.8.0.RELEASE</version>
 		</dependency>
 
+	<!-- 引入activemq -->
+		 <dependency>  
+            <groupId>javax.annotation</groupId>  
+            <artifactId>jsr250-api</artifactId>  
+            <version>1.0</version>  
+        </dependency>  
+        
+        <dependency>  
+            <groupId>org.apache.activemq</groupId>  
+            <artifactId>activemq-core</artifactId>  
+            <version>5.7.0</version>  
+        </dependency>  
+	
 		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>
@@ -351,10 +395,21 @@
 			<version>1.5.1</version>
 		</dependency>
 	</dependencies>
-
-
+ 
 
 	<build>
+	<pluginManagement>
+	<plugins> 
+         <plugin>
+    <artifactId>maven-compiler-plugin</artifactId>
+    <version>3.1</version>
+    <configuration>
+        <source>1.8</source>
+        <target>1.8</target>
+    </configuration>
+</plugin>
+    </plugins>
+	</pluginManagement>
 		<finalName>healthcloudserver</finalName>
 		<defaultGoal>compile</defaultGoal>
 	</build>

@@ -12,12 +12,18 @@ public class IndexCollection implements Serializable{
 	private int caseHistoryID;						//病历初值
 	private int reTreateInfoID;						//回访表
 	private int adminID;									//管理员０
-	private int postID;										//帖子ｉｄ
-	private int commentID;							//回复ｉｄ
-	private int forumTemplateID;				//板块ｉｄ
+	private int postID;										//帖子id
+	private int commentID;							//回复id
+	private int forumTemplateID;				//板块id
+	private int multiMediaID;						//多媒体信息id
 	
 	
-	
+	public int getMultiMediaID() {
+		return multiMediaID;
+	}
+	public void setMultiMediaID(int multiMediaID) {
+		this.multiMediaID = multiMediaID;
+	}
 	public int getReTreateInfoID() {
 		return reTreateInfoID;
 	}

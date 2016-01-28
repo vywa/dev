@@ -2,6 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 xmlns:tx="http://www.springframework.org/schema/tx"  xmlns:aop="http://www.springframework.org/schema/aop"
+ xmlns:cache="http://www.springframework.org/schema/cache"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd        
 	http://www.springframework.org/schema/context        
@@ -9,18 +10,22 @@ xmlns:tx="http://www.springframework.org/schema/tx"  xmlns:aop="http://www.sprin
 	http://www.springframework.org/schema/tx 
 http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
    http://www.springframework.org/schema/aop 
-http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+http://www.springframework.org/schema/cache
+     http://www.springframework.org/schema/cache/spring-cache.xsd">
 
 	<!-- 注解支持 -->
 	<context:component-scan base-package="com.hengyun.service.impl,com.hengyun.dao" /> 
-	
+	  
 	<import resource="classpath:springMongodb.xml"/> 
 	<import resource="classpath:redis.xml"/>
 	<import resource="classpath:javamail.xml"/>
-	
+	<!-- <import resource="classpath:springMemcache.xml"/> -->
+	<!-- <import resource="classpath:springEhache.xml"/> -->
+	 <import resource="classpath:springJms.xml"/> 
+	<!-- <import resource="classpath:springShiro.xml"/> --> 
  	<!-- <import resource="classpath:springMybatis.xml"/> --> 
- 	 <!-- <import resource="classpath:com/healthcloudserver/resources/springShiro.xml"/> --> 
-
+ 
 
 	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  
    <bean id="BaseServiceImpl" class="com.hengyun.service.impl.BaseServiceImpl" abstract="true" />
@@ -73,11 +78,17 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 <!-- 论坛模块 -->
 
+<bean id="subjectDao" class="com.hengyun.dao.impl.forum.SubjectDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="subjectService" class="com.hengyun.service.impl.forum.SubjectServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="forumPostDao" class="com.hengyun.dao.impl.forum.ForumPostDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="forumPostService" class="com.hengyun.service.impl.forum.ForumPostServiceImpl" parent="BaseServiceImpl"/>
 
 <bean id="postCommentDao" class="com.hengyun.dao.impl.forum.PostCommentDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="postCommentService" class="com.hengyun.service.impl.forum.PostCommentServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="replySubjectDao" class="com.hengyun.dao.impl.forum.ReplySubjectDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="replySubjectService" class="com.hengyun.service.impl.forum.ReplySubjectServiceImpl" parent="BaseServiceImpl"/>
 
 <bean id="secondCommentDao" class="com.hengyun.dao.impl.forum.SecondCommentDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="secondCommentService" class="com.hengyun.service.impl.forum.SecondCommentServiceImpl" parent="BaseServiceImpl"/>

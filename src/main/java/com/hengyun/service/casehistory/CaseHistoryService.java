@@ -3,7 +3,6 @@ package com.hengyun.service.casehistory;
 import java.util.List;
 
 import com.hengyun.domain.casehistory.CaseHistory;
-import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.BaseService;
 
 

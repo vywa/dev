@@ -2,12 +2,6 @@ package com.hengyun.domain.loginInfo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-import com.hengyun.domain.loginInfo.constant.LoginChannel;
-import com.hengyun.domain.loginInfo.constant.LoginModel;
-import com.hengyun.domain.loginInfo.constant.LoginStatus;
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
 
 /*
  *  用户登陆基本信息

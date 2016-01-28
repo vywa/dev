@@ -27,8 +27,6 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
      *
      * @author bob
      *                
-     * @param t
-     * @return
      */
     public void save(T t){
         this.mongoTemplate.save(t);

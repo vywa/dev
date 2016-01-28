@@ -7,6 +7,15 @@ public class Docter implements Serializable{
 
 	private String workNum;
 	private String name;
+	private int hospitalId;				//所属医院id
+
+	
+	public int getHospitalId() {
+		return hospitalId;
+	}
+	public void setHospitalId(int hospitalId) {
+		this.hospitalId = hospitalId;
+	}
 	public String getWorkNum() {
 		return workNum;
 	}

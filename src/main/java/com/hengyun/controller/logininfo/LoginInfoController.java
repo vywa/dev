@@ -1,5 +1,8 @@
 package com.hengyun.controller.logininfo;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
+import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
@@ -29,34 +34,77 @@ public class LoginInfoController {
 	@Resource
 	private LoginInfoCacheService loginInfoCacheService;
 	
-	@RequestMapping("/username")
+	@Resource
+	private InformationService informationService;
+	
+	@RequestMapping(value="/username",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String loginByUsername(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
-		
-		
+
 		String type= jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
+		String recordTime = jsonObject.getString("recordTime");
+		Date date= null;
+		if(recordTime.equals("none")){
+			try {
+				date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-1-1 00:00:00");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			recordTime = String.valueOf(date.getTime());
+		}
 		String ip = request.getLocalAddr();
 		LoginInfo loginInfo = new LoginInfo();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setPassword(password);
 		loginInfo.setUserLoginIp(ip);
-		LoginResult loginResult = loginInfoService.loginByUsername(loginInfo, type);
-		if(loginResult!=null){
-				
-				loginResult.setCode("202");
-				
-				return JSON.toJSONString(loginResult);
-		}else {
-			LoginResult result = new LoginResult();
-			result.setCode("104");
-			result.setMessage("login failure");
-			return JSON.toJSONString(result);
+		LoginResult loginResult;
+		try {
+			loginResult = loginInfoService.loginByUsername(loginInfo, type);
+			if(loginResult!=null){
+				System.out.println("用户登陆成功");
+			}
+		} catch (NullPointerException ex) {
+			// TODO Auto-generated catch block
+			loginResult = new LoginResult();
+			loginResult.setCode("104");
+			loginResult.setMessage("login failure");
+			return JSON.toJSONString(loginResult);
 		}
-
+	
+			int userId = loginResult.getUserId();
+			 if(userId>0){
+			
+				 Information information=null;
+				try {
+					information = informationService.query(userId);
+					
+					 long dbRecordTime = Long.valueOf(information.getRecordTime());
+					 if(dbRecordTime>Long.valueOf(recordTime)){
+						 loginResult.setInfo(information);
+						 loginResult.setCode("206");
+					 } else {
+						 loginResult.setCode("207");
+						 loginResult.setInfo(null);
+					 }
+				} catch (NullPointerException ex) {
+					// TODO Auto-generated catch block
+					Information info = new Information();
+					info.setUserId(userId);
+					info.setRecordTime(String.valueOf(new Date().getTime()));
+					informationService.add(info, userId);
+					loginResult.setCode("206");
+					 loginResult.setInfo(info);
+				}
+				
+		}
+				return JSON.toJSONString(loginResult);
+		
+				 
 		
 	}
 
@@ -96,18 +144,52 @@ public class LoginInfoController {
 	public String loginByThirdPart(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
-		
-		
-	
+		String recordTime = jsonObject.getString("recordTime");
+
 		String username = jsonObject.getString("openId");
 		String type= jsonObject.getString("type");
 		String userLoginIp = request.getRemoteAddr();
+		
+		Date date= null;
+		if(recordTime.equals("none")){
+			try {
+				date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-1-1 00:00:00");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			recordTime = String.valueOf(date.getTime());
+		}
+		
+		
 		
 		LoginInfo loginInfo = new LoginInfo();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setUserLoginIp(userLoginIp);
 		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo);
-		loginResult.setCode("203");
+		int userId = loginResult.getUserId();
+		 Information information;
+			try {
+				information = informationService.query(userId);
+				 long dbRecordTime = Long.valueOf(information.getRecordTime());
+				 if(dbRecordTime>Long.valueOf(recordTime)){
+					 loginResult.setInfo(information);
+					 loginResult.setCode("203");
+				 } else {
+					 loginResult.setCode("207");
+					 loginResult.setInfo(null);
+				 }
+			} catch (NullPointerException ex) {
+				// TODO Auto-generated catch block
+				Information info = new Information();
+				info.setUserId(userId);
+				info.setRecordTime(String.valueOf(new Date().getTime()));
+				informationService.add(info, userId);
+				loginResult.setCode("203");
+				 loginResult.setInfo(info);
+			}
+		
+	
 		return JSON.toJSONString(loginResult);
 	}
 

@@ -1,7 +1,6 @@
 package com.hengyun.domain.patient;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /*
  *  

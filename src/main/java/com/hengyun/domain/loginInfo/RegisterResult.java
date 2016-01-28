@@ -1,7 +1,5 @@
 package com.hengyun.domain.loginInfo;
 
-import java.util.Map;
-
 import com.hengyun.domain.common.BaseResponseCode;
 
 /*

@@ -17,7 +17,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.hospital.Hospital;
-import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.hospital.HospitalService;
 
 /*

@@ -1,6 +1,5 @@
 package com.hengyun.dao.impl.logininfo;
 
-import javax.annotation.Resource;
 
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.logininfo.LoginInfoDao;

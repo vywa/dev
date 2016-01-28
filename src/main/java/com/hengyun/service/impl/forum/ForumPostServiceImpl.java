@@ -13,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import com.hengyun.dao.forum.ForumPostDao;
 import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.forum.ForumPost;
-import com.hengyun.domain.information.Information;
 import com.hengyun.service.forum.ForumPostService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoService;

@@ -8,5 +8,4 @@ import com.hengyun.domain.loginInfo.UserAccount;
  * */
 public interface UserAccountDao extends BaseMongodbDao<UserAccount,Integer>{
 
-	public int addUserAccount(UserAccount userAccount);
 }

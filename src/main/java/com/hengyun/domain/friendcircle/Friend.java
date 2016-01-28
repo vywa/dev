@@ -13,13 +13,15 @@ public class Friend implements Serializable{
 	
 	private String loginStatus;							//登陆状态
 	
-	private String relation;							//关系状态,病人，好友
-//	private List<Privilege> privilegeList;			
-	//对朋友权限列表
-	private String privilege;							//权限列表
+	private String relation;							//关系医生，病人，好友
+	
 
 	
+	private String privilege;							//权限，聊天，看动态
+
 	
+
+
 	public String getRelation() {
 		return relation;
 	}

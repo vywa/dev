@@ -2,9 +2,7 @@ package com.hengyun.service.information;
 
 import java.io.InputStream;
 
-
 import com.hengyun.domain.information.Information;
-
 import com.hengyun.service.BaseService;
 import com.mongodb.gridfs.GridFSDBFile;
 

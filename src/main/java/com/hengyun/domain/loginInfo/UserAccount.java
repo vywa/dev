@@ -2,9 +2,6 @@ package com.hengyun.domain.loginInfo;
 
 import java.io.Serializable;
 
-import com.hengyun.domain.loginInfo.constant.AccountStatus;
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
-
 /*
  *  用户账号基本信息
  * */
@@ -145,6 +142,24 @@ public class UserAccount implements Serializable{
 
 		public void setWeiBo(String weiBo) {
 			this.weiBo = weiBo;
+		}
+
+
+		@Override
+		public String toString() {
+			StringBuffer sb = new StringBuffer();
+			sb.append("Id"+id+"\n");
+			sb.append("Catagory"+catagory+"\n");
+			sb.append("Username"+username+"\n");
+			sb.append("Mobilephone"+mobilephone+"\n");
+			sb.append("Email"+email+"\n");
+			sb.append("WorkNum"+workNum+"\n");
+			sb.append("QQ"+QQ+"\n");
+			sb.append("WeiChat"+weiChat+"\n");
+			sb.append("WeiBo"+weiBo+"\n");
+			sb.append("Wassword"+password+"\n");
+			sb.append("Wtatus"+status+"\n");
+			return sb.toString();
 		}
 
 	

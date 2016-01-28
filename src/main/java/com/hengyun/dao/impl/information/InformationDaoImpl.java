@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.information.Information;
@@ -21,6 +24,7 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 public class InformationDaoImpl extends BaseMongodbDaoImpl<Information,Integer> implements InformationDao{
 
+	private static final Logger Log = LoggerFactory.getLogger(InformationDaoImpl.class);
 
 	@Override
 	protected Class<Information> getEntityClass() {
@@ -68,12 +72,10 @@ public class InformationDaoImpl extends BaseMongodbDaoImpl<Information,Integer> 
    	    DB db = mongoTemplate.getDb();
      // 存储fs的根节点
       GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(Information.class));
-	
-    
-           
+
         GridFSInputFile gridFSInputFile =gridFS.createFile(in, "filename");  
         gridFSInputFile.save();  
-        
+        Log.info("save  file "+filename+"success");
         return;  
     }  
 	
@@ -104,6 +106,7 @@ public class InformationDaoImpl extends BaseMongodbDaoImpl<Information,Integer> 
 	
         DBObject query  = new BasicDBObject("filename", fileName);  
         GridFSDBFile gridFSDBFile = gridFS.findOne(query);  
+        Log.info("read file "+fileName+"success");
         return gridFSDBFile;  
     }  
     

@@ -1,7 +1,6 @@
 package com.hengyun.service.logininfo;
 
-import com.hengyun.domain.loginInfo.RegisterCache;
-import com.hengyun.domain.loginInfo.constant.AccountStatus;
+
 
 /*
  *  注册缓存
@@ -33,6 +32,6 @@ public interface RegisterCacheService {
 	public void setConfirmCode(String sign,String confirmCode);
 	
 	//查询用户状态
-	public AccountStatus getStatus(String sign);
+	public String getStatus(String sign);
 	
 }

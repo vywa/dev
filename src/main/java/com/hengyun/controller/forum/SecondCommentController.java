@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.forum.PostComment;
 import com.hengyun.domain.forum.SecondComment;
 import com.hengyun.service.forum.ForumPostService;
 import com.hengyun.service.forum.PostCommentService;

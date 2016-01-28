@@ -3,7 +3,6 @@ package com.hengyun.domain.hospital;
 import java.io.Serializable;
 import java.util.List;
 
-import com.hengyun.domain.docter.Docter;
 import com.hengyun.domain.location.Location;
 
 /*

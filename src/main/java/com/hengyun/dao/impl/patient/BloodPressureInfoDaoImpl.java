@@ -1,7 +1,5 @@
 package com.hengyun.dao.impl.patient;
 
-import javax.annotation.Resource;
-
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.patient.BloodPressureInfoDao;
 import com.hengyun.domain.patient.BloodPressureInfo;

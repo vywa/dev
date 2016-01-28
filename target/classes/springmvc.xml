@@ -22,27 +22,51 @@
 	<mvc:annotation-driven /> 
 	<mvc:default-servlet-handler />
 <context:annotation-config />    -->
+
     <!-- 把标记了@Controller注解的类转换为bean -->            
     <context:component-scan base-package="com.hengyun.controller" />
-<mvc:annotation-driven /> 
+     <!-- 默认的注解映射的支持 -->
+	<mvc:annotation-driven /> 
 
+	 <!-- 配置资源文件,防止被拦截 -->
+    <mvc:resources location="/WEB-INF/image/" mapping="/image/**"/>  
+    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>  
+    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
+
+	 <!-- 拦截器
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/*" />
+            <bean class="com.hengyun.util.interceptor.MyInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <value>/reglog</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+ -->
+ 
 	<!--页面视图层信息 -->
-	<bean id="viewResolver"
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass"
-			value="org.springframework.web.servlet.view.JstlView"></property>
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"	value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="prefix" value="/jsp/"></property> <!--页面的前辍名 -->
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
 
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+	
+  <!-- Jackson转换器 --> 
+    <bean id="jacksonHttpMessageConverter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
             <list>  
                 <ref bean="jsonHttpMessageConverter" />  
             </list>  
         </property>  
     </bean>  
-      
+    
     <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
         <property name="supportedMediaTypes">  
             <list>  
@@ -51,10 +75,23 @@
         </property>  
     </bean>  
 
-<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
-    <property name="maxUploadSize" value="10485760" />  
-</bean>
-	
+ 
+    <!-- fastjson转换器 -->  
+    <bean id="fastJsonHttpMessageConverter"  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"  >   
+        <property name="messageConverters">  
+           <list>  
+              <ref bean="fastJsonHttpMessageConverter" /><!-- json转换器 -->  
+           </list>  
+        </property>  
+     </bean>    
+
+	<!-- 文件上传 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+	    <property name="maxUploadSize" value="10485760" />  
+	</bean>
+		
+
 </beans>
 
 

@@ -1,9 +1,7 @@
 package com.hengyun.service.patient;
 
-import java.util.Date;
 import java.util.List;
 
-import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.service.BaseService;
 

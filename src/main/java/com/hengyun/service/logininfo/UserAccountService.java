@@ -10,11 +10,16 @@ public interface UserAccountService  extends BaseService<UserAccount,Integer>{
 
 		public UserAccount getUserAccountById(int id);
 		public boolean existUserAccountBySign(String sign,String type);
+		
+		//用户是否存在
 		public int existUser(String sign,String type);
 		
 		public List<UserAccount> getUserAccountALL();
-		public void updateUserAccount(UserAccount userAccount) ;
+		
+		//更改密码
+		public void updatePassword(String password,int userId) ;
 
+		//注册账号
 		public int registerAccount(UserAccount userAccount);
 		
 		//改变用户找好绑定信息

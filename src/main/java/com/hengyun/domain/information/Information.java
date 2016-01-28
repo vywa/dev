@@ -1,7 +1,6 @@
 package com.hengyun.domain.information;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /*
  *  用户个人基本信息

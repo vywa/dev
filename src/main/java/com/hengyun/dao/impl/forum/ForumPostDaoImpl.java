@@ -1,9 +1,5 @@
 package com.hengyun.dao.impl.forum;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -12,14 +8,6 @@ import com.hengyun.dao.forum.ForumPostDao;
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.domain.common.IndexCollection;
 import com.hengyun.domain.forum.ForumPost;
-import com.hengyun.domain.forum.PostComment;
-import com.hengyun.domain.information.Information;
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBObject;
-import com.mongodb.gridfs.GridFS;
-import com.mongodb.gridfs.GridFSDBFile;
-import com.mongodb.gridfs.GridFSInputFile;
 
 
 /*

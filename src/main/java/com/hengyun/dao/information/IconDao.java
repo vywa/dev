@@ -12,6 +12,9 @@ import com.mongodb.gridfs.GridFSDBFile;
  * */
 public interface IconDao extends BaseMongodbDao<Icon,Integer>{
 
+	//更新图片
+	public void updateIcon(InputStream in,String filename);
+	
 	 public void SaveFile(File file, String fileid, String filename);
 	
 	   public void save(InputStream in,String filename);
@@ -20,6 +23,7 @@ public interface IconDao extends BaseMongodbDao<Icon,Integer>{
 	   
 	   public GridFSDBFile getByFileName(String fileName);
 	   
+	   public String exist(String filename);
 	   
 	    // 取出文件
 	    public GridFSDBFile retrieveFileOne(String filename); 

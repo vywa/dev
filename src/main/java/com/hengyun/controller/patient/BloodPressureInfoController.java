@@ -36,11 +36,13 @@ public class BloodPressureInfoController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
+	//查询某个指定时间段的测量数据
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showBlood(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
 		PressureResponse response = new PressureResponse();
+		String user = jsonObject.getString("userId");
 		String tocken = request.getParameter("tocken");
 		
 		int userId = loginInfoService.isOnline(tocken);
@@ -66,7 +68,7 @@ public class BloodPressureInfoController {
 	
 		PressureResponse response = new PressureResponse();
 		String tocken = request.getParameter("tocken");
-		
+		//String user = jsonObject.getString("userId");
 		int userId = loginInfoService.isOnline(tocken);
 		
 		if(userId<0){

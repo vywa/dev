@@ -8,9 +8,9 @@
 </head>
 <body>
 
-<form action="info/upload" method="post" enctype="multipart/form-data">
+<form action="multiMedia/upload" method="post" enctype="multipart/form-data">
 
-请选择要上传的文件<input type=file name="image" size="10000000">
+请选择要上传的文件<input type=file name="media" size="10000000">
 <input type="submit" value="提交">
 </form>
 </body>

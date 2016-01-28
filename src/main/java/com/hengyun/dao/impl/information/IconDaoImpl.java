@@ -4,10 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.information.Icon;
-import com.hengyun.domain.information.Information;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBObject;
@@ -22,7 +26,7 @@ import com.mongodb.gridfs.GridFSInputFile;
 
 public class IconDaoImpl extends BaseMongodbDaoImpl<Icon,Integer> implements IconDao{
 
-
+	 private static final Logger log = LoggerFactory.getLogger(IconDaoImpl.class);
 	@Override
 	protected Class<Icon> getEntityClass() {
 		// TODO Auto-generated method stub
@@ -67,9 +71,7 @@ public class IconDaoImpl extends BaseMongodbDaoImpl<Icon,Integer> implements Ico
    	    DB db = mongoTemplate.getDb();
      // 存储fs的根节点
       GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(Icon.class));
-	
-    
-           
+
         GridFSInputFile gridFSInputFile =gridFS.createFile(in, filename);  
         gridFSInputFile.save();  
         
@@ -96,15 +98,64 @@ public class IconDaoImpl extends BaseMongodbDaoImpl<Icon,Integer> implements Ico
      * @param fileName 
      * @return 
      */  
-    public GridFSDBFile getByFileName(String fileName){  
+    public GridFSDBFile getByFileName(String fileName){
+    	GridFSDBFile gridFSDBFile = null;
    	    DB db = mongoTemplate.getDb();
      // 存储fs的根节点
       GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(Icon.class));
 	
         DBObject query  = new BasicDBObject("filename", fileName);  
-        GridFSDBFile gridFSDBFile = gridFS.findOne(query);  
+  
+        	 gridFSDBFile = gridFS.findOne(query);
+
         return gridFSDBFile;  
-    }  
+    }
+
+
+
+	@Override
+	public void updateIcon(InputStream in,String filename) {
+		// TODO Auto-generated method stub
+		Query	query = Query.query(Criteria.where("filename").is(filename));
+		
+		Icon icon = queryOne(query);
+		int id = icon.getId();
+		//删除原图片
+		this.deleteById(id);
+		//修改原图片名
+		/*
+		 * String oldName = icon.getFilename();
+		oldName = oldName+".bank";
+		Query	query2 = Query.query(Criteria.where("id").is(id));
+		Update update = Update.update("filename", oldName);
+	
+		this.updateFirst(query2, update);
+		*/
+		//存储新图片
+	    DB db = mongoTemplate.getDb();
+	     // 存储fs的根节点
+	    GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(Icon.class));
+		GridFSInputFile gridFSInputFile =gridFS.createFile(in, filename);  
+		
+	     gridFSInputFile.save();  
+	     
+	}
+
+
+
+	@Override
+	public String exist(String filename) {
+		// TODO Auto-generated method stub
+
+		Query	query = Query.query(Criteria.where("filename").is(filename));
+		Icon icon = queryOne(query);
+		if(icon!=null){
+		return icon.getFilename();
+		}
+		else {
+			return null;
+		}
+	}  
     
     
 }

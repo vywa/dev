@@ -1,8 +1,7 @@
 package com.hengyun.domain.loginInfo;
 
-import java.util.Map;
-
 import com.hengyun.domain.common.BaseResponseCode;
+import com.hengyun.domain.information.Information;
 
 /*
  *  注册返回码
@@ -13,6 +12,7 @@ public class LoginResult extends BaseResponseCode{
 
 	private int userId;							//用户userId;
 	
+	private Information info;				//用户基本资料
 	
 	public int getUserId() {
 		return userId;
@@ -28,6 +28,14 @@ public class LoginResult extends BaseResponseCode{
 
 	public void setUserCode(int userCode) {
 		this.userCode = userCode;
+	}
+
+	public Information getInfo() {
+		return info;
+	}
+
+	public void setInfo(Information info) {
+		this.info = info;
 	}
 
 	

@@ -4,13 +4,8 @@ import java.io.InputStream;
 
 import javax.annotation.Resource;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
-
 import com.hengyun.dao.forum.MultiMediaDao;
 import com.hengyun.domain.forum.MultiMedia;
-import com.hengyun.domain.information.Information;
 import com.hengyun.service.forum.MultiMediaService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoService;

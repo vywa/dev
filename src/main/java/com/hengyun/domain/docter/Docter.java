@@ -3,7 +3,6 @@ package com.hengyun.domain.docter;
 import java.io.Serializable;
 import java.util.List;
 
-import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.information.GeneralPerson;
 
 /*

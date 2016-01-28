@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.casehistory.CaseHistory;
+import com.hengyun.domain.casehistory.CaseHistoryResponse;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.CaseHistoryService;
 
@@ -45,15 +46,16 @@ public class CaseHistoryController {
 	@ResponseBody
 	public String showdocterCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
+		CaseHistoryResponse response = new CaseHistoryResponse();
 		int docterId = jsonObject.getIntValue("docterId");
 		List<CaseHistory> caseHistoryList ;
 		Query query = Query.query(Criteria.where("docterId").is(docterId));
 		caseHistoryList = caseHistoryService.queryList(query);
-
-    	 String jsonString= JSON.toJSONString(caseHistoryList);  
+		response.setCode("211");
+		response.setMessage("query success");
+		response.setList(caseHistoryList);
+    	  return JSON.toJSONString(response);  
            
-    	
-        return jsonString;  
 	}
 	
 	
@@ -75,16 +77,17 @@ public class CaseHistoryController {
 	@ResponseBody
 	public String showAllCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
+		CaseHistoryResponse response = new CaseHistoryResponse();
 		int patientId = jsonObject.getIntValue("patientId");
 		int docterId = jsonObject.getIntValue("docterId");
 		List<CaseHistory> caseHistoryList ;
 		Query query = Query.query(Criteria.where("patientId").is(patientId).andOperator(Criteria.where("docterId").is(docterId)));
 		caseHistoryList = caseHistoryService.queryList(query);
-
-    	 String jsonString= JSON.toJSONString(caseHistoryList);  
-           
-    	
-        return jsonString;  
+		response.setCode("211");
+		response.setMessage("query success");
+		response.setList(caseHistoryList);
+    	return  JSON.toJSONString(response);  
+       
 	}
 	
 	

@@ -18,7 +18,7 @@ public class LogInterceptor implements MethodInterceptor
 	{
 		Logger loger = Logger.getLogger(invocation.getClass());
 
-		loger.info("--Log By bob pan -----------------------------------------------------------------------------");
+		loger.info("-- -----------------------------------------------------------------------------");
 		loger.info(invocation.getMethod() + ":BEGIN!--(bob pan LOG)");// 方法前的操作
 		Object obj = invocation.proceed();// 执行需要Log的方法
 		loger.info(invocation.getMethod() + ":END!--(bob pan LOG)");// 方法后的操作

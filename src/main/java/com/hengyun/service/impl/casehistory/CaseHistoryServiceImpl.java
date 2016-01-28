@@ -9,7 +9,6 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.casehistory.CaseHistoryDao;
 import com.hengyun.domain.casehistory.CaseHistory;
-import com.hengyun.domain.hospital.Office;
 import com.hengyun.service.casehistory.CaseHistoryService;
 import com.hengyun.service.impl.BaseServiceImpl;
 

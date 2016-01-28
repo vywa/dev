@@ -21,6 +21,8 @@ public class ForumPost implements Serializable {
 	
 	private String theme;						//主题
 	
+	private int subjectType;					//问题类型 0一般，１精华，２我发出，３收藏
+	
 	private int userId	;							//发帖作者
 	
 	private Date deliveryTime;				//发帖时间
@@ -41,6 +43,14 @@ public class ForumPost implements Serializable {
 	
 	
 	
+	public int getSubjectType() {
+		return subjectType;
+	}
+
+	public void setSubjectType(int subjectType) {
+		this.subjectType = subjectType;
+	}
+
 	private String level;								//帖子等级(置顶，加精)
 	
 	

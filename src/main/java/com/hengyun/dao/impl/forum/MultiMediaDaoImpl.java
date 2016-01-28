@@ -1,7 +1,5 @@
 package com.hengyun.dao.impl.forum;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 
 import com.hengyun.dao.forum.MultiMediaDao;
@@ -28,8 +26,6 @@ public class MultiMediaDaoImpl extends BaseMongodbDaoImpl<MultiMedia,Integer> im
 		// TODO Auto-generated method stub
 		return MultiMedia.class;
 	}
-    
-	
 
 	
     public void save(InputStream in,String filename){  
@@ -37,6 +33,7 @@ public class MultiMediaDaoImpl extends BaseMongodbDaoImpl<MultiMedia,Integer> im
      // 存储fs的根节点
       GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(MultiMedia.class));
         GridFSInputFile gridFSInputFile =gridFS.createFile(in, filename);  
+      
         gridFSInputFile.save();  
         
         return;  
@@ -63,7 +60,7 @@ public class MultiMediaDaoImpl extends BaseMongodbDaoImpl<MultiMedia,Integer> im
     public GridFSDBFile getByFileName(String fileName){  
    	    DB db = mongoTemplate.getDb();
      // 存储fs的根节点
-      GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(Icon.class));
+      GridFS gridFS = new GridFS(db, this.getMongoTemplate().getCollectionName(MultiMedia.class));
 	
         DBObject query  = new BasicDBObject("filename", fileName);  
         GridFSDBFile gridFSDBFile = gridFS.findOne(query);  

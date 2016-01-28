@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.ForumPost;
-import com.hengyun.domain.hospital.Hospital;
 import com.hengyun.service.forum.ForumPostService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
@@ -100,6 +98,23 @@ public class ForumPostController {
 		return JSON.toJSONString(postList);
 	}
 	
+	@RequestMapping("/queryList")
+	@ResponseBody
+	public String queryList(@RequestParam String data,HttpServletRequest request){
+		//String tocken = request.getParameter("tocken");
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId");
+		int subjectId = jsonObject.getIntValue("subjectId");
+		int subjectType = jsonObject.getIntValue("subjectType");
+		int freshenType = jsonObject.getIntValue("freshenType");
+		String keyWord = jsonObject.getString("keyWord");
+		
+		//加载某人，某类，之前后包含关键字的帖子列表
+		List<ForumPost> postList = forumPostService.showAll();
+
+		return JSON.toJSONString(postList);
+	}
+	
 	//某个id对应的帖子
 	@RequestMapping("/index")
 	@ResponseBody
@@ -131,5 +146,6 @@ public class ForumPostController {
 		response.setMessage("delete success");
 		return JSON.toJSONString(response);
 	}
+	
 	
 }

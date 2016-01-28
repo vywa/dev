@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.hengyun.domain.common.Privilege;
 import com.hengyun.domain.friendcircle.FriendCircle;
-import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.notice.Notice;
 
 /*

@@ -1,19 +1,16 @@
 package com.hengyun.service.impl.forum;
 
 import java.io.InputStream;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.forum.ForumPostDao;
 import com.hengyun.dao.forum.SecondCommentDao;
 import com.hengyun.dao.information.InformationDao;
-import com.hengyun.domain.forum.ForumPost;
 import com.hengyun.domain.forum.SecondComment;
 import com.hengyun.service.forum.SecondCommentService;
 import com.hengyun.service.impl.BaseServiceImpl;

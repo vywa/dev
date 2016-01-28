@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -13,10 +15,10 @@ import com.hengyun.dao.logininfo.LoginInfoDao;
 import com.hengyun.dao.logininfo.UserAccountDao;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
+import com.hengyun.domain.loginInfo.ThirdLoginResult;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
-
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.util.randomcode.TockenGenerator;
@@ -27,6 +29,8 @@ import com.hengyun.util.randomcode.TockenGenerator;
 
 public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> implements LoginInfoService{
 
+	 private static final Logger log = LoggerFactory.getLogger(LoginInfoServiceImpl.class);
+	
 	@Resource 
 	private LoginInfoDao loginInfoDao;
 	
@@ -48,8 +52,6 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	/*
 	 *  登陆业务
 	 * */
-	
-
 
 	
 	/*
@@ -65,10 +67,12 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 			int userId = Integer.valueOf(loginResult.getUserId());
 		
 				String old = getTockenById(userId);
+				//检测用户是否登陆，已经登陆，则使其退出
 				if(old!=null){
 					logout(old);
+					log.debug(old + " 对应的用户 "+ userId + "已经退出");
 				}
-				System.out.println(userId+" old "+old);
+			
 				loginInfo.setUserLoginTime(new Date());
 				 if(loginResult.getUserCode()==3){
 					 loginInfo.setCatagory("patient");
@@ -82,6 +86,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				loginInfo.setSessionid(tocken);
 				loginInfo.setUserId(userId);
 				loginInfoDao.save(loginInfo);
+				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
 				loginResult.setMessage(tocken);
 				return loginResult;
 		}
@@ -111,23 +116,29 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	public LoginResult  loginByThirdPart(String type,LoginInfo loginInfo) {
 		// TODO Auto-generated method stub
 		UserAccount userAccount =null;
-		LoginResult loginResult = new LoginResult();
+		ThirdLoginResult loginResult = new ThirdLoginResult();
 		int userId=0;
+		//QQ第三方登陆
 			if(type.equals("QQ")){
 				userAccount =userAccountService.validateThirdUserBySign(loginInfo.getLoginUsername(),"QQ");
 				 if(userAccount==null){
+					 //用户不存在
 					 UserAccount login = new UserAccount();
 					 login.setQQ(loginInfo.getLoginUsername());
+				
 				userId = userAccountService.registerThirdAccount(login);
+				log.info("注册QQ账号: "+loginInfo.getLoginUsername()+"成功,用户id为: "+userId);
 				loginInfo.setUserId(userId);
 				loginResult.setUserCode(3);
 				loginResult.setUserId(userId);
+				loginResult.setRegister("register");
 				 } else {
 					 loginInfo.setUserId(userAccount.getId());
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);
+							log.debug("用户 "+userAccount.getId() +" 成功退出!");
 						}
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
@@ -140,15 +151,18 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 UserAccount login = new UserAccount();
 					 login.setWeiChat(loginInfo.getLoginUsername());
 				userId = userAccountService.registerThirdAccount(login);
+				log.info("注册微信账号: "+loginInfo.getLoginUsername()+"成功,用户id为: "+userId);
 				loginInfo.setUserId(userId);
 				loginResult.setUserId(userId);
 				loginResult.setUserCode(3);
+				loginResult.setRegister("register");
 				 }else {
 					 loginInfo.setUserId(userAccount.getId());
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);
+							log.debug("用户 "+userAccount.getId() +" 成功退出!");
 						}
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
@@ -161,15 +175,18 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 UserAccount login = new UserAccount();
 					 login.setWeiBo(loginInfo.getLoginUsername());
 				userId = userAccountService.registerThirdAccount(login);
+				log.info("注册微博账号: "+loginInfo.getLoginUsername()+"成功,用户id为: "+userId);
 				loginInfo.setUserId(userId);
 				loginResult.setUserId(userId);
 				loginResult.setUserCode(3);
+				loginResult.setRegister("register");
 				 }else {
 					 loginInfo.setUserId(userAccount.getId());
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
 							logout(old);
+							log.debug("用户 "+userAccount.getId() +" 成功退出!");
 						}
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
@@ -183,8 +200,9 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 			loginInfo.setSessionid(tocken);
 			loginInfo.setUserLoginTime(new Date());
 			
-			
+			//保存登陆信息
 			loginInfoDao.save(loginInfo);
+		
 			loginResult.setMessage(tocken);
 		
 			return loginResult;
@@ -198,14 +216,14 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		
 	//	int userId = loginInfoCacheService.getUserId(tocken);
 
-
 		Query query = Query.query(Criteria.where("sessionid").exists(true).andOperator(Criteria.where("sessionid").is(tocken)));
 		
 		Update update =new Update();
 		
 		update.unset("sessionid").addToSet("userLogoutTime", new Date());
-
+		//更新用户登陆状态为失效
 		loginInfoDao.updateFirst(query, update);
+		
 	//	loginInfoCacheService.destroyCache(tocken);
 		
 		return true;
@@ -219,6 +237,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		if(loginInfo!=null){
 			return loginInfo.getUserId();
 		} else {
+			//log.info("用户已经退出");
 			return -1;
 		}
 	}
@@ -231,7 +250,6 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		LoginInfo loginInfo = loginInfoDao.queryOne(query);
 		if(loginInfo!=null){
 		
-		System.out.println(loginInfo.toString());
 	
 		return loginInfo.getSessionid();
 		} else {

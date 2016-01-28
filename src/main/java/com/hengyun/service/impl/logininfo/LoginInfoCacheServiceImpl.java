@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.hengyun.dao.impl.RedisClientTemplate;
 import com.hengyun.dao.logininfo.LoginInfoDao;
 import com.hengyun.domain.loginInfo.LoginInfoCache;
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 
 @Service

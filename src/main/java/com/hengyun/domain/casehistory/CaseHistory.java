@@ -2,8 +2,6 @@ package com.hengyun.domain.casehistory;
 
 import java.io.Serializable;
 
-import com.hengyun.domain.information.Information;
-
 
 /*
  * 	病历基本信息，包括门诊病历首页，病历记录，化验单（检查报告），医学影像检查资料
