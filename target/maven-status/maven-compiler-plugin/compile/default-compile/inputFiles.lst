@@ -122,6 +122,7 @@
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/exception/ExceptionAdvisor.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/PhysicalExamination.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/util/randomcode/CreateCode.java
+/home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/controller/logininfo/CodeController.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/patient/HealthInfoResponse.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/PastDiseaseHistory.java
 /home/bob/data/healthcloudserver/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/OfficeSpecialInfo.java

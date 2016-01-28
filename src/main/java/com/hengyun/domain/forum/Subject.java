@@ -15,19 +15,34 @@ public class Subject implements Serializable {
 	private String title;								//标题
 	private int replyNum;						//回复数
 	private int subjectId;						//帖子
-	private boolean isLiked;					
-	private boolean isCollection;		
-	private String fileUrl;						
-	private int likeCount;
-	private String publishTime;
-	private int subjectType;
-	private String IocInfo;
-	private String videoUrl;
-	private String soundUrl;
-	private String authorPhotoImgUrl;
+	private boolean isLiked;					//是否被我赞过
+	private boolean isCollection;		//是否被我收藏过
+	private String fileUrl;							//附件url
+	private int likeCount;						//被多少人赞过
+	private String publishTime;				//发帖时间
+	private int subjectType;					//帖子类型
+	private String locInfo;							//具体的定位信息
+	private String videoUrl;						//视频地址
+	private String soundUrl;					//声音地址
+	private String authorPhotoImgUrl;				//作者图像
+	private double lng;							//定位的经度
+	private double lat;							//定位的纬度
 	
 	
 	
+	
+	public double getLng() {
+		return lng;
+	}
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+	public double getLat() {
+		return lat;
+	}
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
 	public String getVideoUrl() {
 		return videoUrl;
 	}
@@ -106,11 +121,14 @@ public class Subject implements Serializable {
 	public void setSubjectType(int subjectType) {
 		this.subjectType = subjectType;
 	}
-	public String getIocInfo() {
-		return IocInfo;
+
+	
+	
+	public String getLocInfo() {
+		return locInfo;
 	}
-	public void setIocInfo(String iocInfo) {
-		IocInfo = iocInfo;
+	public void setLocInfo(String locInfo) {
+		this.locInfo = locInfo;
 	}
 	public String getSoundUrl() {
 		return soundUrl;

@@ -12,8 +12,19 @@ public class LoginResult extends BaseResponseCode{
 
 	private int userId;							//用户userId;
 	
+	private String username;				//用户名
 	private Information info;				//用户基本资料
 	
+	
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public int getUserId() {
 		return userId;
 	}

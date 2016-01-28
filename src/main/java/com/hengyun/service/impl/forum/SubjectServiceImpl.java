@@ -12,16 +12,15 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.hengyun.dao.forum.ForumPostDao;
 import com.hengyun.dao.forum.SubjectDao;
-import com.hengyun.dao.information.InformationDao;
-import com.hengyun.domain.forum.ForumPost;
 import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.information.Information;
+import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.service.logininfo.UserAccountService;
 
 /*
  *  　个人信息管理
@@ -39,7 +38,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	private LoginInfoService loginInfoService;
 	
 	
-	
+	@Resource
+	private UserAccountService userAccountService;
 
 
 
@@ -76,7 +76,31 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd"); //格式化当前系统日期
 			String dateTime = dateFm.format(new java.util.Date());
 			forumPost.setPublishTime(dateTime);
-			forumPost.setAuthor(info.getTrueName());
+			
+			String forumName = null;
+			UserAccount account = userAccountService.queryById(userId);
+			String trueName = account.getUsername();
+			String mobilephone =account.getMobilephone();
+			String email =account.getEmail();
+			String qq = account.getQQ();
+			String weiChat = account.getWeiChat();
+			String weiBo = account.getWeiBo();
+		
+			if(trueName!=null){
+				forumName=trueName;
+			} else if(mobilephone!=null){
+				forumName=mobilephone;
+			} else if(email!=null){
+				forumName = email;
+			} else if(qq!=null){
+				forumName = qq;
+			} else if(weiChat!=null){
+				forumName = weiChat;
+			} else if(weiBo !=null){
+				forumName = weiBo;
+			} 
+			//设置用户昵称
+			forumPost.setAuthor(forumName);
 		
 			int postId = subjectDao.post(forumPost);
 			return postId;
@@ -89,15 +113,19 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		// TODO Auto-generated method stub
 		List<Subject> forumPost=null;
 			Query query = new Query();
-			Criteria criteria =Criteria.where("subjectType").is(subjectType);
-			  query.addCriteria(criteria).with(new Sort(Direction.DESC, "subjectId"));
+			Criteria criteria =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").gt(subjectId));
+			  query.addCriteria(criteria).with(new Sort(Direction.ASC, "subjectId"));
+				Query query2 = new Query();
+				Criteria criteria2 =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").lt(subjectId));
+				  query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
+				  
 			if(freshenType== -1){
-				forumPost=subjectDao.queryList(query);
-				// forumPost = subjectDao.getPage(query, subjectId, 10);
+				//forumPost=subjectDao.queryList(query);
+				forumPost = subjectDao.getPage(query, 0, 10);
 			}
 			else if(freshenType==1){
-				forumPost=subjectDao.queryList(query);
-				// forumPost = subjectDao.getPage(query, subjectId, -10);
+				//forumPost=subjectDao.queryList(query);
+				 forumPost = subjectDao.getPage(query2, 0, 10);
 			}
 			return forumPost;
 	

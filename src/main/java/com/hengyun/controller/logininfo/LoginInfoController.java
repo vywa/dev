@@ -20,9 +20,11 @@ import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
+import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.service.logininfo.UserAccountService;
 
 @Controller
 @RequestMapping("reglog")
@@ -31,6 +33,8 @@ public class LoginInfoController {
 	@Resource
 	private LoginInfoService loginInfoService;
 
+	@Resource
+	private UserAccountService userAccountService;
 	@Resource
 	private LoginInfoCacheService loginInfoCacheService;
 	
@@ -59,6 +63,7 @@ public class LoginInfoController {
 		}
 		String ip = request.getLocalAddr();
 		LoginInfo loginInfo = new LoginInfo();
+		UserAccount account = new UserAccount();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setPassword(password);
 		loginInfo.setUserLoginIp(ip);
@@ -82,13 +87,16 @@ public class LoginInfoController {
 				 Information information=null;
 				try {
 					information = informationService.query(userId);
-					
+					account = userAccountService.queryById(userId);
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
 					 if(dbRecordTime>Long.valueOf(recordTime)){
 						 loginResult.setInfo(information);
 						 loginResult.setCode("206");
+						 loginResult.setUsername(account.getUsername());
+						 
 					 } else {
 						 loginResult.setCode("207");
+						 loginResult.setUsername(account.getUsername());
 						 loginResult.setInfo(null);
 					 }
 				} catch (NullPointerException ex) {
@@ -99,6 +107,7 @@ public class LoginInfoController {
 					informationService.add(info, userId);
 					loginResult.setCode("206");
 					 loginResult.setInfo(info);
+					 loginResult.setUsername(account.getUsername());
 				}
 				
 		}
@@ -164,6 +173,7 @@ public class LoginInfoController {
 		
 		
 		LoginInfo loginInfo = new LoginInfo();
+		UserAccount account = new UserAccount();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setUserLoginIp(userLoginIp);
 		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo);
@@ -171,20 +181,25 @@ public class LoginInfoController {
 		 Information information;
 			try {
 				information = informationService.query(userId);
+				account = userAccountService.queryById(userId);
 				 long dbRecordTime = Long.valueOf(information.getRecordTime());
 				 if(dbRecordTime>Long.valueOf(recordTime)){
 					 loginResult.setInfo(information);
 					 loginResult.setCode("203");
+					 loginResult.setUsername(account.getUsername());
 				 } else {
 					 loginResult.setCode("207");
 					 loginResult.setInfo(null);
+					 loginResult.setUsername(account.getUsername());
 				 }
 			} catch (NullPointerException ex) {
 				// TODO Auto-generated catch block
 				Information info = new Information();
+				
 				info.setUserId(userId);
 				info.setRecordTime(String.valueOf(new Date().getTime()));
 				informationService.add(info, userId);
+				 loginResult.setUsername(account.getUsername());
 				loginResult.setCode("203");
 				 loginResult.setInfo(info);
 			}

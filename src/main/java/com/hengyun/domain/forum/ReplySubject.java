@@ -14,7 +14,7 @@ public class ReplySubject implements Serializable{
 	 *  回复基本信息
 	 */
 	
-	private int replyId;									//回帖的id
+	private int replyId;						//回帖的id
 	
 	private int 	userId;						//回复人ID
 	
@@ -26,13 +26,13 @@ public class ReplySubject implements Serializable{
 	
 	private  List<RepeatReply> repeatReply;					//对楼层的回复
 	
-	private String replyContent;
+	private String replyContent;				//回复内容
 	
 	private String replyLocInfo;				//回复地址信息
 	
-	private String replySoundUrl;
+	private String replySoundUrl;				//回帖的声音
 	
-	private List<String> replyImgUrls;
+	private List<String> replyImgUrls;		//回帖的图像
 
 	private String replyTime;					//回复时间
 	

@@ -16,7 +16,7 @@
     
           var str = "";
           for (i in msg) {
-              str += "<tr><td>" + msg[i].userId + "</td><td>" + "<img src=\"../info/download?iconUrl=temp.jpg&tocken="+"145292848417818510287653"+"\" />" + "</td><td>"+ 
+              str += "<tr><td>" + msg[i].userId + "</td><td>" + "<img src="+msg[i].getIconUrl+" />" + "</td><td>"+ 
             		  msg[i].trueName + "</td><td>" + msg[i].sex + "</td><td>" + 
               msg[i].birthday + "</td><td>" + msg[i].address + "</td><td>" +
               msg[i].height +"</td><td>" + msg[i].weight +"</td><td>" + msg[i].recordTime +"</td><td>" + 

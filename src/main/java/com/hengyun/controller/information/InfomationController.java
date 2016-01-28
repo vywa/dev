@@ -3,8 +3,6 @@ package com.hengyun.controller.information;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Date;
 import java.util.List;
 
@@ -33,8 +31,10 @@ import com.hengyun.domain.information.Information;
 import com.hengyun.domain.information.NickIcon;
 import com.hengyun.domain.information.NickIconResponse;
 import com.hengyun.domain.information.UploadImageResponse;
+import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.service.logininfo.UserAccountService;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /*
@@ -47,6 +47,8 @@ public class InfomationController {
 	 private static final Logger log = LoggerFactory.getLogger(InfomationController.class);
 	@Resource
 	private LoginInfoService loginInfoService;
+	@Resource
+	private UserAccountService userAccountService;
 	@Resource
 	private InformationService informationService;
 	@Resource
@@ -241,6 +243,25 @@ public class InfomationController {
 			Query query =Query.query(Criteria.where("userId").is(userId));
 			 Information temp =informationService.queryOne(query);
 			 String nickname = temp.getTrueName();
+			 UserAccount account = userAccountService.queryById(userId);
+			 String mobilephone = account.getMobilephone();
+			 String email = account.getEmail();
+			 String qq = account.getQQ();
+			 String weiChat = account.getWeiChat();
+			 String weiBo = account.getWeiBo();
+			 if(nickname==null){
+				 if(mobilephone != null){
+					 nickname = mobilephone;
+				 } else if(email!=null){
+					 nickname=email;
+				 } else if(qq!=null){
+					 nickname = qq;
+				 } else if(weiChat !=null){
+					 nickname = weiChat;
+				 } else if(weiBo !=null){
+					 nickname = weiBo;
+				 }
+			 }
 			 String iconUrl = temp.getIconUrl();
 			 NickIcon nickIcon = new NickIcon();
 			 nickIcon.setNickname(nickname);

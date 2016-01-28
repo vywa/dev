@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>衡云后台管理页面</title>
   <script language="javascript" type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
    <script language="javascript" type="text/javascript" src="<%=request.getContextPath() %>/js/SimpleTree.js"></script>
 	
@@ -27,7 +27,7 @@ $(function(){
 
 <div class="st_tree" style="width:20%;height:700px;background-color:yellow;float:left;">
 <ul>
-    <li><a href="#" ref="hyjm">欢迎界面</a></li>
+    <li><a href="#" ref="hyjm">回到主页</a></li>
     <li><a href="#" ref="xtgl">系统管理</a></li>
     <ul show="true">
         <li><a href="#" ref="yhgl">用户管理</a></li>
@@ -35,18 +35,32 @@ $(function(){
         <li><a href="#" ref="rzck">登陆管理</a></li>
     </ul>
      <li><a href="#" ref="ckgl">在线会诊</a></li>
+      <ul>
+            <li><a href="#" ref="yhgl">医生随访</a></li>
+            <li><a href="#" ref="rzck">病人回访</a></li>
+        </ul>
     <li><a href="#" ref="ckgl">医院管理</a></li>
     <ul>
         <li><a href="#" ref="kcgl">科室管理</a></li>
-      
+      	<li><a href="#" ref="fhgl">医院管理</a></li>
         <li><a href="#" ref="fhgl">医生管理</a></li>
         <ul>
-            <li><a href="#" ref="yhgl">科室管理</a></li>
-            <li><a href="#" ref="rzck">医生查看</a></li>
+            <li><a href="#" ref="yhgl">病人管理</a></li>
+            <li><a href="#" ref="rzck">病历查看</a></li>
         </ul>
     </ul>
       <li><a href="#" ref="ckgl">论坛管理</a></li>
+       <ul>
+            <li><a href="#" ref="yhgl">帖子管理</a></li>
+            <li><a href="#" ref="rzck">回复管理</a></li>
+             <li><a href="#" ref="rzck">模板管理</a></li>
+        </ul>
        <li><a href="#" ref="ckgl">在线商城</a></li>
+       <ul>
+            <li><a href="#" ref="yhgl">我的订单</a></li>
+            <li><a href="#" ref="rzck">商品展览</a></li>
+          
+        </ul>
 </ul>
 </div>
 <div class="cotent" style="width:80%;height:700px;background-color:red;float:right;">内容</div>

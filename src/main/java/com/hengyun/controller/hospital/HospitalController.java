@@ -49,7 +49,9 @@ public class HospitalController {
 		JSONObject jsonObject = JSONObject.parseObject(data);
 		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
 		Query query = Query.query(Criteria.where("id").is(hospital.getId()));
-		Update update = Update.update("hospitalName",hospital.getHospitalName());
+		Update update = Update.update("hospitalName",hospital.getHospitalName()).set("email", hospital.getEmail()).
+				set("hospitalIM", hospital.getHospitalIM()).set("level", hospital.getLevel()).set("telephone", hospital.getTelephone()).
+				set("address", hospital.getAddress()).set("weiChatNumber", hospital.getWeiChatNumber());
 		hospitalService.updateInser(query, update);
 	//	hospitalService.save(hospital);
 		

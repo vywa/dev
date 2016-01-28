@@ -153,6 +153,7 @@ com/hengyun/service/impl/shiro/ShiroCacheManager.class
 com/hengyun/service/impl/message/ProducerServiceImpl.class
 com/hengyun/service/hospital/DocterService.class
 com/hengyun/domain/casehistory/FirstDiagnosis.class
+com/hengyun/controller/logininfo/CodeController.class
 com/hengyun/dao/impl/logininfo/mysql/UserAccountDaoTest.class
 com/hengyun/domain/forum/UploadResponseCode.class
 com/hengyun/service/hospital/OfficeService.class

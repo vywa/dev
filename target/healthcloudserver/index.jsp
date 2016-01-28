@@ -23,8 +23,9 @@
 <div id="right">
 <div id="rcontent">
 <form id="form1" action="../reglog/username">
-<div>用户名:<input type="text"></div>
-<div>密　码:<input type="password"></div>
+<div>用户名:<input name="username" id="username"></div>
+<div>密　码:<input type="password" id="password"></div>
+<div>类    别:<input name="catagory" id="catagory"></div>
 <div>验证码:<img src="" /></div>
 <div><input type="button" value="登陆" onclick=login(); ></div>
 </form>

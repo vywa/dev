@@ -26,14 +26,13 @@ public class ReplySubjectDaoImpl extends BaseMongodbDaoImpl<ReplySubject,Integer
 	public int post(ReplySubject post) {
 		// TODO Auto-generated method stub
 	
-		Query query = Query.query(Criteria.where("commentId").gt(0));
+		Query query = Query.query(Criteria.where("commentID").gt(0));
         Update update = new Update();
-        update.inc("commentId", 1);
-        
+        update.inc("commentID", 1);
      
 		IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 		int sid = index.getCommentID();
-		post.setSubjectId(sid);
+		post.setReplyId(sid);
 		this.mongoTemplate.save(post);
 
 		 return sid;

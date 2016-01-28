@@ -10,9 +10,10 @@
 	 <link rel="stylesheet"  type="text/css"  href="<%=request.getContextPath() %>/css/hospital.css"/>
 </head>
 <body>
+<h2>天衡医院录入</h2>
 <div id="add">
 <form action="../hospital/add" id="form1" method="get">  
-<p>医院Id：<input type="text" name="id" id="id"/></p>  
+<p>医院代号：<input type="text" name="id" id="id"/></p>  
 <p>医院名：<input type="text" name="hospitalName" id="hospitalName"/></p>  
 <p>地址：<input type="text" name="address" id="address"/></p>    
 <p>等级：<input type="text" name="level" id="level"/></p>    

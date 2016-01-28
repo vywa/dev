@@ -18,9 +18,11 @@ import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.ReplyListResponseCode;
 import com.hengyun.domain.forum.ReplySubject;
 import com.hengyun.domain.information.Information;
+import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.forum.ReplySubjectService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.service.logininfo.UserAccountService;
 
 /*
  *  帖子管理
@@ -30,11 +32,14 @@ import com.hengyun.service.logininfo.LoginInfoService;
 public class ReplySubjectController {   
     @Resource
     private LoginInfoService loginInfoService;
-    
+    @Resource
+    private UserAccountService userAccountService;
 	@Resource
 	private ReplySubjectService replySubjectService;
 	@Resource
 	private InformationService informationService;
+	
+	
 	//发送回复
 	@RequestMapping(value="/add",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -49,10 +54,37 @@ public class ReplySubjectController {
 			Information info = new Information();
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			info = informationService.queryOne(query);
-			post.setReplyAuthor(info.getTrueName());
-			post.setReplyLocInfo(info.getIconUrl());
+			String forumName = null;
+			UserAccount account = userAccountService.queryById(userId);
+			String trueName = account.getUsername();
+			String mobilephone =account.getMobilephone();
+			String email =account.getEmail();
+			String qq = account.getQQ();
+			String weiChat = account.getWeiChat();
+			String weiBo = account.getWeiBo();
+		
+			if(trueName!=null){
+				forumName=trueName;
+			} else if(mobilephone!=null){
+				forumName=mobilephone;
+			} else if(email!=null){
+				forumName = email;
+			} else if(qq!=null){
+				forumName = qq;
+			} else if(weiChat!=null){
+				forumName = weiChat;
+			} else if(weiBo !=null){
+				forumName = weiBo;
+			} 
+			post.setReplyAuthor(forumName);
+			post.setReplyAuthorPhotoUrl(info.getIconUrl());
+			post.setUserId(userId);
+		
+		//	post.setReplyId(userId);
 		
 			replySubjectService.post(post, userId);
+			//更新帖子回复数目
+			
 			response.setResponseCode(0);
 			response.setDescription("发送成功");
 		} else {
@@ -80,7 +112,7 @@ public class ReplySubjectController {
 			response.setReplyList(postList);
 			response.setResponseCode(0);
 			response.setDescription("获取列表成功");
-			return JSON.toJSONString(postList);
+			return JSON.toJSONString(response);
 		}
 	
 }

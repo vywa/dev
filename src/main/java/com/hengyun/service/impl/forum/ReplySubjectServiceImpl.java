@@ -1,6 +1,6 @@
 package com.hengyun.service.impl.forum;
 
-import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,8 +14,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import com.hengyun.dao.forum.ReplySubjectDao;
 import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.forum.ReplySubject;
-import com.hengyun.domain.forum.Subject;
-import com.hengyun.domain.information.Information;
 import com.hengyun.service.forum.ReplySubjectService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoService;
@@ -57,16 +55,11 @@ public class ReplySubjectServiceImpl extends BaseServiceImpl<ReplySubject,Intege
 	//发帖
 	public int  post(ReplySubject forumPost,int userId) {
 		// TODO Auto-generated method stub
-	
-		if(userId>0){
-			Information info = new Information();
-			Query query = Query.query(Criteria.where("userId").is(userId));
-			info = informationDao.queryOne(query);
-
+			forumPost.setReplyTime(String.valueOf(new Date().getTime()));
+			
 			int postId = replySubjectDao.post(forumPost);
 			return postId;
-		}
-		return -1;
+	
 	}
 
 
@@ -76,11 +69,15 @@ public class ReplySubjectServiceImpl extends BaseServiceImpl<ReplySubject,Intege
 		
 			
 			Query query = new Query();
-			Criteria criteria =Criteria.where("userId").is(userId).andOperator(Criteria.where("replyId").is(replyId));
-			  query.addCriteria(criteria).with(new Sort(Direction.DESC, "replyId"));
+		//	query.addCriteria(Criteria.where("userId").is(userId).andOperator(Criteria.where("subjectId").is(subjectId).
+			///		andOperator(Criteria.where("replyId").gt(replyId))));
+			Criteria criteria =Criteria.where("userId").is(userId).andOperator(Criteria.where("replyId").gt(replyId).andOperator(Criteria.where("subjectId").is(subjectId)));
 			
-			forumPost = replySubjectDao.getPage(query, subjectId, 20);
-		
+			  query.addCriteria(criteria).with(new Sort(Direction.ASC, "replyId"));
+		//	query.query(Criteria.where("subjectId").is(subjectId).andOperator(Criteria.where("replyId").gt(replyId)));
+		//	forumPost = replySubjectDao.getPage(query, 0, 20);
+			//  Query query2 = Query.query(Criteria.where("replyId").exists(true));
+			  forumPost = replySubjectDao.queryList(query);
 			return forumPost;
 	
 	}
