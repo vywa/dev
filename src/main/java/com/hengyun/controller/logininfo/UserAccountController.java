@@ -18,15 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.PasswordResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.hospital.DocterService;
+import com.hengyun.service.impl.message.ProducerEmailServiceImpl;
+import com.hengyun.service.impl.message.ProducerSmsServiceImpl;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.service.util.EmailUtilService;
+import com.hengyun.service.util.SmsUtilService;
 import com.hengyun.util.mail.SimpleMail;
 import com.hengyun.util.sms.SubmitResult;
 import com.hengyun.util.sms.sender.SmsSender;
@@ -48,10 +51,23 @@ public class UserAccountController {
 	private RegisterCacheService registerCacheService;
 	
 	@Resource
-	private  SimpleMail simpleMail;
+	private  EmailUtilService emailService;
+	
+	@Resource
+	private SmsUtilService smsService;
+	
+	@Resource
+	private ProducerEmailServiceImpl producerEmailServiceImpl;
+	
+	@Resource
+	private ProducerSmsServiceImpl producerSmsServiceImpl;
+	
+	@Resource
+	private SimpleMail simpleMail;
 	
 	@Resource
 	private DocterService docterService;
+	
 	@Resource
 	private InformationService informationService;
 	
@@ -72,7 +88,7 @@ public class UserAccountController {
 			if(!registerCacheService.existBySign(mobilephone)){
 				registerCacheService.loadRegisterCache(mobilephone);
 			}
-			if(registerCacheService.getTryCount(mobilephone)<6){
+	//		if(registerCacheService.getTryCount(mobilephone)<6){
 				int codeNum = (int)(Math.random()*1000000);
 					codeNum = codeNum>100000?codeNum:codeNum+100000;
 					registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
@@ -89,10 +105,7 @@ public class UserAccountController {
 						log.error("手机号 "+mobilephone+" 发送短信失败");
 						return -3;
 					}
-				} else {
-					log.error("手机号 "+mobilephone+" 发送次数过多");
-					return -4;
-				}
+				
 		}
 		return -1;
 	}
@@ -108,7 +121,7 @@ public class UserAccountController {
 			if(!registerCacheService.existBySign(email)){
 				registerCacheService.loadRegisterCache(email);
 			}
-			if(registerCacheService.getTryCount(email)<6){
+		//	if(registerCacheService.getTryCount(email)<6){
 			int codeNum = (int)(Math.random()*1000000);
 			codeNum = codeNum>100000?codeNum:codeNum+100000;
 			registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
@@ -118,13 +131,32 @@ public class UserAccountController {
 			String to = email;
 			simpleMail.sendMail( subject,  content,  to);
 			return 2;
-		}else {
-			log.error("邮箱"+email+" 发送次数过多");
-			return -4;
-		}
+		
 		}
 	
 	}
+	
+	//发送短信邮箱测试
+	@RequestMapping(value="/smsTest",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String test(@RequestParam String data){
+		JSONObject jsonObject =JSON.parseObject(data);
+		String type = jsonObject.getString("type");
+		if(type.equals("mobilephone")){
+			String mobilephone = jsonObject.getString("mobilephone");
+			producerSmsServiceImpl.sendSms(mobilephone);
+		}
+		else if(type.equals("email")){
+			String email = jsonObject.getString("email");
+			producerEmailServiceImpl.sendEmail(email);
+		}
+		RegisterResult registResult = new RegisterResult();
+		registResult.setCode("205");
+		registResult.setMessage("验证码发送成功");
+		return  JSON.toJSONString(registResult);
+	}
+	
+	
 	
 	//短信发送
 	@RequestMapping(value="/smsSend",produces = "text/html;charset=UTF-8")
@@ -337,7 +369,7 @@ public class UserAccountController {
 		String mobilephone = jsonObject.getString("mobilephone");
 		RegisterResult registResult = new RegisterResult();
 		
-		if(userAccountService.existUser(mobilephone,"mobilephone")>0){
+		if(userAccountService.existUser(mobilephone,"mobilephone")<0){
 			registResult.setCode("103");
 			registResult.setMessage("用户未注册,不能修改密码");
 		} else {
@@ -661,7 +693,7 @@ public class UserAccountController {
 					return JSON.toJSONString(response);
 				}
 				}
-			else if(type.equals("username")){			//更改手机号
+			else if(type.equals("username")){			//更改用户名
 				if(userAccountService.existUser(username,"username")>0){
 					  response.setCode("103");
 	  		    		response.setMessage("用户名已经使用，请使用未使用用户名");

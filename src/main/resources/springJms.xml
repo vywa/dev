@@ -9,7 +9,7 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd   
         http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-40.xsd">  
         
-        <context:component-scan base-package="com.hengyun.service.impl.message" />  
+        <context:component-scan base-package="com.hengyun.service.impl.util" />  
         
         <!-- Spring提供的JMS工具类，它可以进行消息发送、接收等 -->  
         <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">  
@@ -29,80 +29,90 @@
         </bean>  
         
         
-           <!-- 回复队列 -->
-       <bean id="responseQueue" class="org.apache.activemq.command.ActiveMQQueue">  
-    <constructor-arg>  
-        <value>responseQueue</value>  
-    </constructor-arg>  
+	     <!-- 邮件回复队列 -->
+	    <bean id="emailResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+	    <constructor-arg>  
+	        <value>emailResponseQueue</value>  
+	    </constructor-arg>  
+		</bean>  
+	
+		     <!-- 短信回复队列 -->
+	       <bean id="smsResponseQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+	    <constructor-arg>  
+	        <value>smsResponseQueue</value>  
+	    </constructor-arg>  
+		</bean> 
+		 
+	         <!-- 回复队列对应的监听器 -->
+	      <bean id="smsResponseQueueListener" class="com.hengyun.service.impl.message.SmsReceiveQueueListener"/>
+	      <bean id="emailResponseQueueListener" class="com.hengyun.service.impl.message.EmailReceiveQueueListener"/>
+	        
+
+	           
+          <!-- 邮件请求接收队列 -->
+           <bean id="emailQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+           <constructor-arg>  
+               <value>emailQueue</value>  
+           </constructor-arg>  
+       </bean>   
+       
+   	<!-- 短信请求接收队列 -->
+	    <bean id="smsQueue" class="org.apache.activemq.command.ActiveMQQueue">  
+	           <constructor-arg>  
+	               <value>smsQueue</value>  
+	           </constructor-arg>  
+	       </bean>  
+
+       
+   <bean id="emailListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">  
+    <property name="delegate">  
+            <bean class="com.hengyun.service.impl.message.EmailListener"/>  
+        </property>  
+        <property name="defaultListenerMethod" value="handleMessage"/>   
+         <property name="defaultResponseDestination" ref="emailResponseQueue"/>  
+    </bean> 
+    
+       <bean id="smsListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">  
+       <property name="delegate">  
+            <bean class="com.hengyun.service.impl.message.SmsListener"/>  
+        </property>  
+        <property name="defaultListenerMethod" value="handleMessage"/>  
+        <property name="defaultResponseDestination" ref="smsResponseQueue"/>  
+    </bean>  
+
+
+	<!-- 邮件监听适配器对应的监听容器 -->
+	
+	<bean id="emailQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+	    <property name="connectionFactory" ref="connectionFactory"/>  
+	<property name="destination" ref="emailQueue"/>
+	    <property name="messageListener"  ref="emailListenerAdapter"/>
 	</bean>  
-           
-            <bean id="adapterQueue" class="org.apache.activemq.command.ActiveMQQueue">  
-            <constructor-arg>  
-                <value>adapterQueue</value>  
-            </constructor-arg>  
-        </bean>  
-           
-        <!--这个是队列目的地-->  
-        <bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">  
-            <constructor-arg>  
-                <value>queue</value>  
-            </constructor-arg>  
-        </bean>  
-         <!--这个是sessionAwareQueue目的地-->  
-    <bean id="sessionAwareQueue" class="org.apache.activemq.command.ActiveMQQueue">  
-        <constructor-arg>  
-            <value>sessionAwareQueue</value>  
-        </constructor-arg>  
-    </bean>  
     
     
-        <!-- 消息监听器 -->  
-        <bean id="consumerMessageListener" class="com.hengyun.service.impl.message.ConsumerMessageListener"/>
-        <!-- 可以获取session的MessageListener -->  
-    <bean id="consumerSessionAwareMessageListener" class="com.hengyun.service.impl.message.ConsumerSessionAwareMessageListener">  
-        <property name="destination" ref="queueDestination"/>  
-    </bean>  
-      
-        <!-- 消息监听适配器 -->  
-        <bean id="messageListenerAdapter" class="org.springframework.jms.listener.adapter.MessageListenerAdapter">  
-            <constructor-arg>  
-                <bean class="com.hengyun.service.impl.message.ConsumerListener"/>  
-            </constructor-arg>  
-        </bean>  
-        
-                  <!-- responseQueue对应的监听器 -->  
-		<bean id="responseQueueListener" class="com.hengyun.service.impl.message.ResponseQueueListener"/>
-			
-		
-  
-        
-      
-        <!-- 消息监听容器 -->  
-        <bean id="jmsContainer"  
-            class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
-            <property name="connectionFactory" ref="connectionFactory" />  
-            <property name="destination" ref="queueDestination" />  
-            <property name="messageListener" ref="consumerMessageListener" />  
-        </bean>  
-        
-          <bean id="sessionAwareListenerContainer"  
-        class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
-        <property name="connectionFactory" ref="connectionFactory" />  
-        <property name="destination" ref="sessionAwareQueue" />  
-        <property name="messageListener" ref="consumerSessionAwareMessageListener" />  
-    </bean>  
-    
-       <!-- 消息监听适配器对应的监听容器 -->  
-    <bean id="messageListenerAdapterContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
-        <property name="connectionFactory" ref="connectionFactory"/>  
-        <property name="destination" ref="adapterQueue"/>  
-        <property name="messageListener" ref="messageListenerAdapter"/><!-- 使用MessageListenerAdapter来作为消息监听器 -->  
-    </bean>  
-    
-    <!-- responseQueue对应的监听容器 -->  
-<bean id="responseQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
-    <property name="connectionFactory" ref="connectionFactory"/>  
-    <property name="destination" ref="responseQueue"/>  
-    <property name="messageListener" ref="responseQueueListener"/>  
-</bean>  
+    	<bean id="smsQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+	    <property name="connectionFactory" ref="connectionFactory"/>  
+	   <property name="destination" ref="smsQueue"/>
+	    <property name="messageListener"  ref="smsListenerAdapter"/>
+	    
+	</bean> 
+	
+	
+	
+	<!-- 回复队列对应的监听容器 -->
+	    <!--邮件响应对应的监听容器 -->  
+	<bean id="emailResponseQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+	    <property name="connectionFactory" ref="connectionFactory"/>  
+	    <property name="destination" ref="emailResponseQueue"/>  
+	    <property name="messageListener" ref="emailResponseQueueListener"/>
+	</bean>  
+
+
+	<!--短信响应对应的监听容器 -->  
+	<bean id="smsResponseQueueMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">  
+	    <property name="connectionFactory" ref="connectionFactory"/>  
+	    <property name="destination" ref="smsResponseQueue"/>  
+	    <property name="messageListener" ref="smsResponseQueueListener"/>
+	</bean>  
+
     </beans>  

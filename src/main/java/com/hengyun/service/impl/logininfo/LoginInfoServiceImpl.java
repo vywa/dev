@@ -88,6 +88,8 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				loginInfoDao.save(loginInfo);
 				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
 				loginResult.setMessage(tocken);
+				loginResult.setType(type);
+				loginResult.setLoginName(loginInfo.getLoginUsername());
 				return loginResult;
 		}
 		return null;

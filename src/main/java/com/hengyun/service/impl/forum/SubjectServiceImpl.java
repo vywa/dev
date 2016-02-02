@@ -73,7 +73,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			forumPost.setPublishTime(String.valueOf(new Date().getTime()));
 			String imageUrl = info.getIconUrl();
 			forumPost.setAuthorPhotoImgUrl(imageUrl);
-			SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd"); //格式化当前系统日期
+		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
 			String dateTime = dateFm.format(new java.util.Date());
 			forumPost.setPublishTime(dateTime);
 			

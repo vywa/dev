@@ -11,5 +11,5 @@ public interface SubjectDao extends BaseMongodbDao<Subject,Integer>{
 	//发帖
 	public int post(Subject post);
 	
-	
+	public int reply(int  subjectId);
 }

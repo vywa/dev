@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,12 +15,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.dao.forum.SubjectDao;
+import com.hengyun.domain.common.IndexCollection;
 import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.ReplyListResponseCode;
 import com.hengyun.domain.forum.ReplySubject;
+import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.forum.ReplySubjectService;
+import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
@@ -38,6 +43,8 @@ public class ReplySubjectController {
 	private ReplySubjectService replySubjectService;
 	@Resource
 	private InformationService informationService;
+	@Resource
+	private SubjectDao subjectDao;
 	
 	
 	//发送回复
@@ -84,7 +91,15 @@ public class ReplySubjectController {
 		
 			replySubjectService.post(post, userId);
 			//更新帖子回复数目
-			
+			Query query2 = Query.query(Criteria.where("subjectId").is(post.getSubjectId()));
+		//	Subject subject = subjectService.queryOne(query2);
+			//int count = subject.getReplyNum();
+			//count = count + 1;
+		
+			//Update upate2 = Update.update("replyNum", count); 
+		//	subjectService.updateFirst(query, upate2);
+			int num = subjectDao.reply(post.getSubjectId());
+			System.out.println("帖子 "+post.getSubjectId()+" 回复数量为"+num);
 			response.setResponseCode(0);
 			response.setDescription("发送成功");
 		} else {

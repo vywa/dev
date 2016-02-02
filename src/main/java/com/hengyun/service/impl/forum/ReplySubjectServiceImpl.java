@@ -15,6 +15,7 @@ import com.hengyun.dao.forum.ReplySubjectDao;
 import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.forum.ReplySubject;
 import com.hengyun.service.forum.ReplySubjectService;
+import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.logininfo.LoginInfoService;
 
@@ -26,6 +27,9 @@ public class ReplySubjectServiceImpl extends BaseServiceImpl<ReplySubject,Intege
 
 	@Resource
 	private ReplySubjectDao replySubjectDao;
+	
+	@Resource
+	private SubjectService subjectService;
 	
 	@Resource 
 	private InformationDao informationDao;
@@ -58,6 +62,7 @@ public class ReplySubjectServiceImpl extends BaseServiceImpl<ReplySubject,Intege
 			forumPost.setReplyTime(String.valueOf(new Date().getTime()));
 			
 			int postId = replySubjectDao.post(forumPost);
+		
 			return postId;
 	
 	}

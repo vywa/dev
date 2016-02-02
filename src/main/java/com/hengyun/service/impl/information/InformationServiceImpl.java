@@ -80,7 +80,7 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 					set("weight", information.getWeight()).set("sex",information.getSex()).
 					set("birthday", information.getBirthday()).
 					set("trueName", information.getTrueName()).
-					set("recordTime",String.valueOf(new Date().getTime())).set("iconUrl", information.getIconUrl());;
+					set("recordTime",String.valueOf(new Date().getTime()));
 			informationDao.updateFirst(query, update);
 			log.info("用户 "+userId+" 资料修改成功");
 			return userId;

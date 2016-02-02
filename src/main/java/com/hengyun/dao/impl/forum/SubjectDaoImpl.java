@@ -40,6 +40,17 @@ public class SubjectDaoImpl extends BaseMongodbDaoImpl<Subject,Integer> implemen
 		 return sid;
 	}
 
+	@Override
+	public int reply(int subjectId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("subjectId").is(subjectId));
+		  Update update = new Update();
+	        update.inc("replyNum", 1);
+	        Subject subject =  this.mongoTemplate.findAndModify(query, update, Subject.class);
+	        
+	           return subject.getReplyNum();
+	}
+
 
 
     
