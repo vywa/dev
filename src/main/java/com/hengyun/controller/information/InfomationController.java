@@ -143,7 +143,6 @@ public class InfomationController {
 	    
 	   
 
-	
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show(){

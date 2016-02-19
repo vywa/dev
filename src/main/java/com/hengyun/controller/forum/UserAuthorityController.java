@@ -22,7 +22,7 @@ import com.hengyun.service.forum.SecondCommentService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
 /*
- *  二次回复管理
+ *  用户权限验证
  * */
 @Controller  
 @RequestMapping("authority")  

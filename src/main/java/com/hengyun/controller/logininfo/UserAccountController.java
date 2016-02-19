@@ -28,6 +28,7 @@ import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.service.logininfo.mysql.AccountService;
 import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
 import com.hengyun.util.mail.SimpleMail;
@@ -46,6 +47,9 @@ public class UserAccountController {
 	 private static final Logger log = LoggerFactory.getLogger(UserAccountController.class);
 	@Resource
 	private UserAccountService userAccountService;
+	
+	@Resource 
+	private AccountService accountService;
 	
 	@Resource
 	private RegisterCacheService registerCacheService;
@@ -73,6 +77,7 @@ public class UserAccountController {
 	
 	@Resource
 	private LoginInfoService loginInfoService;
+	
 /*
  *  注册账号
  * */	
@@ -135,29 +140,7 @@ public class UserAccountController {
 		}
 	
 	}
-	
-	//发送短信邮箱测试
-	@RequestMapping(value="/smsTest",produces = "text/html;charset=UTF-8")
-	@ResponseBody
-	public String test(@RequestParam String data){
-		JSONObject jsonObject =JSON.parseObject(data);
-		String type = jsonObject.getString("type");
-		if(type.equals("mobilephone")){
-			String mobilephone = jsonObject.getString("mobilephone");
-			producerSmsServiceImpl.sendSms(mobilephone);
-		}
-		else if(type.equals("email")){
-			String email = jsonObject.getString("email");
-			producerEmailServiceImpl.sendEmail(email);
-		}
-		RegisterResult registResult = new RegisterResult();
-		registResult.setCode("205");
-		registResult.setMessage("验证码发送成功");
-		return  JSON.toJSONString(registResult);
-	}
-	
-	
-	
+
 	//短信发送
 	@RequestMapping(value="/smsSend",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -190,6 +173,7 @@ public class UserAccountController {
 		
 	}
 	
+	
 
     //短信接收注册
 	@RequestMapping("/smsReceive")
@@ -203,11 +187,16 @@ public class UserAccountController {
 		RegisterResult registResult = new RegisterResult();
 		
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
+			
 			UserAccount userAccount = new UserAccount();
+			
 			userAccount.setMobilephone(mobilephone);
 			userAccount.setPassword(password);
 			userAccount.setCatagory("patient");
+			
+			
 			int id = userAccountService.registerAccount(userAccount);
+		
 			
 			registerCacheService.updateRegisterCache(userAccount.getMobilephone());
 			registResult.setCode("205");
@@ -270,7 +259,10 @@ public class UserAccountController {
 				userAccount.setEmail(email);
 				userAccount.setPassword(password);
 				userAccount.setCatagory("patient");
+				
 				int id = userAccountService.registerAccount(userAccount);
+				
+				
 				registerCacheService.updateRegisterCache(userAccount.getEmail());
 				registResult.setCode("201");
 				registResult.setMessage(String.valueOf(id));

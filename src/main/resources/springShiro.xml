@@ -9,9 +9,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 	http://www.springframework.org/schema/data/mongo
 	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
 
+	<!--shiro通过一个filter控制权限 -->
 	 <bean id="ShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	 
     <property name="securityManager" ref="securityManager"/>
-
+    <!-- 用户在请求无权限的情况下，跳转到这个url -->
+	<property name="unauthorizedUrl" value="/reglog/failure"/>
     <property name="filterChainDefinitions">
         <value>
             /login.jsp = anon
@@ -41,6 +44,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
          to use shiro's native sessions (see the JavaDoc for more): -->
     <!-- <property name="sessionMode" value="native"/> -->
 </bean>
+
+
 <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>  
 
 <!-- shiro redisManager -->
@@ -96,10 +101,11 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
         <constructor-arg ref="memcachedClient" />  
     </bean>  
 
-<!-- cacheManager -->
-<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
-    <property name="redisManager" ref="redisManager" />
-</bean>
+	<!-- cacheManager -->
+	<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
+	    <property name="redisManager" ref="redisManager" />
+	</bean>
+
 
     <!-- 过滤链配置 -->  
         <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  

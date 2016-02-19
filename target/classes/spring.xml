@@ -20,11 +20,10 @@ http://www.springframework.org/schema/cache
 	<import resource="classpath:springMongodb.xml"/> 
 	<import resource="classpath:redis.xml"/>
 	<import resource="classpath:javamail.xml"/>
-	<!-- <import resource="classpath:springMemcache.xml"/> -->
-	<!-- <import resource="classpath:springEhache.xml"/> -->
+
 	 <import resource="classpath:springJms.xml"/> 
 	<!-- <import resource="classpath:springShiro.xml"/> --> 
- 	<!-- <import resource="classpath:springMybatis.xml"/> --> 
+ 	 <import resource="classpath:springMybatis.xml"/>
  
 
 	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  

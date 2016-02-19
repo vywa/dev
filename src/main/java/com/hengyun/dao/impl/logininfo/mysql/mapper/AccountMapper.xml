@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+    <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+    <mapper namespace="com.hengyun.dao.logininfo.mysql.AccountDao">  
+      
+        <resultMap type="UserAccount" id="userAccount">  
+            <id property="id" column="id"/>  
+            <result property="catagory" column="catagory"/>  
+            <result property="username" column="username"/>  
+            <result property="mobilephone" column="mobilephone"/>
+            <result property="password" column="password"/>  
+             <result property="workNum" column="workNum"/>  
+            <result property="QQ" column="QQ"/>  
+            <result property="weiBo" column="weiBo"/>
+            <result property="weiChat" column="weiChat"/>  
+              <result property="status" column="status"/>
+        </resultMap>  
+          
+        <!-- 查询账号，根据id -->  
+        <select id="queryById" parameterType="int" resultType="UserAccount" resultMap="userAccount">  
+            
+                SELECT * from useraccount UA
+                    WHERE UA.ID = #{id}  
+       
+        </select>  
+        
+        <select id="showAll"  resultType="UserAccount" resultMap="userAccount">  
+          
+                SELECT * from useraccount
+        </select>  
+          
+        <!-- 查询账号列表 -->  
+        <select id="query"  parameterType="UserAccount" resultMap="userAccount">  
+         
+                SELECT * from useraccount 
+                 <where>
+          			<choose>
+          				<when test="username != null " >
+          					username=#{username,jdbcType=varchar}
+          				</when>
+          				<when test="mobilephone !=null  ">
+          					and mobilephone=#{mobilephone,jdbcType=varchar}
+          				</when>
+          					<when test="email !=null ">
+          					and email=#{email,jdbcType=varchar}
+          				</when>
+          					<when test="workNum !=null  ">
+          					and workNum=#{workNum,jdbcType=varchar}
+          				</when>
+          				<when test="id !=null ">
+          					and id=#{id,jdbcType=varchar}
+          				</when>
+          				<otherwise></otherwise>
+          			</choose>
+          		</where>
+          
+        </select> 
+        
+          <!-- 根据其他条件查询账号 -->  
+        <select id="queryOne"  parameterType="UserAccount" resultMap="userAccount">  
+         
+                SELECT * from useraccount 
+                   <where>
+          			<choose>
+          				<when test="username != null  " >
+          					username=#{username,jdbcType=VARCHAR}
+          				</when>
+          				<when test="mobilephone !=null  ">
+          					and mobilephone=#{mobilephone,jdbcType=VARCHAR}
+          				</when>
+          					<when test="email !=null">
+          					and email=#{email,jdbcType=VARCHAR}
+          				</when>
+          					<when test="workNum !=null ">
+          					and workNum=#{workNum,jdbcType=VARCHAR}
+          				</when>
+          				<when test="id !=null">
+          					and id=#{id,jdbcType=INTEGER}
+          				</when>
+          				<otherwise></otherwise>
+          			</choose>
+          		</where>
+          
+        </select>  
+         
+        <!-- 添加账号 -->
+        <insert id="insert" parameterType="UserAccount">
+        		insert into useraccount (catagory,username,mobilephone,email,password,
+        		status,workNum,QQ,weiChat,weiBo) 
+        		values (#{catagory},#{username},#{mobilephone},#{email},#{password},
+        		#{status},#{workNum},#{QQ},#{weiChat},#{weiBo})
+        </insert>
+          
+          <!-- 更新账号 -->
+          <update id="update" parameterType="UserAccount">
+          update useraccount 
+          <trim prefix="set" suffixOverrides=",">
+          	<if test="catagory !=null  ">
+          		catagory = #{catagory}
+          	</if>
+          	<if test="username != null ">
+          		username=#{username}
+          	</if>
+          	<if test="mobilephone != null  ">
+          		mobilephone = #{mobilephone}
+          	</if>
+          	<if test="emaile != null ">
+          		email = #{email}
+          	</if>
+          	<if test="password != null ">
+          		password = #{password}
+          	</if>
+          	<if test="status != null ">
+          		status = #{status}
+          	</if>
+          	<if test="workNum != null  ">
+          		workNum = #{workNum}
+          	</if>
+          	<if test="QQ != null ">
+          		QQ = #{QQ}
+          	</if>
+          	<if test="weiChat != null  ">
+          		weiChat =#{weiChat}
+          	</if>
+          	<if test="weiBo != null  ">
+          		weiBo = #{weiBo}
+          	</if>
+          </trim>
+          
+        <where>
+          			<choose>
+          				<when test="username != null " >
+          					username=#{username,jdbcType=VARCHAR}
+          				</when>
+          				<when test="mobilephone !=null  ">
+          					and mobilephone=#{mobilephone,jdbcType=VARCHAR}
+          				</when>
+          				<when test="id !=null  ">
+          					and id=#{id,jdbcType=VARCHAR}
+          				</when>
+          				<otherwise></otherwise>
+          			</choose>
+          		</where>
+          </update>
+          
+          <!-- 删除账号 -->
+          <delete id="delete" parameterType="UserAccount">
+          	delete from useraccount 
+          		<where>
+          			<choose>
+          				<when test="username != null " >
+          					username=#{username,jdbcType=VARCHAR}
+          				</when>
+          				<when test="mobilephone !=null ">
+          					and mobilephone=#{mobilephone,jdbcType=VARCHAR}
+          				</when>
+          				<when test="id !=null ">
+          					and id=#{id,jdbcType=VARCHAR}
+          				</when>
+          				<otherwise></otherwise>
+          			</choose>
+          		</where>
+          </delete>
+    </mapper>  

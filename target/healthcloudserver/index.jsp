@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>衡云后台管理首页</title>
+<!-- 
   <script language="javascript" type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
     <script language="javascript" type="text/javascript" src="../js/login.js"></script>
 	 <link rel="stylesheet"  type="text/css"  href="<%=request.getContextPath() %>/css/home.css"/>
@@ -33,5 +34,6 @@
 </div>
 </div>
 </div>
+ -->
 </body>
 </html>

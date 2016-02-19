@@ -36,52 +36,20 @@ xmlns:context="http://www.springframework.org/schema/context"
         <property name="filters" value="mergeStat" />  
     </bean>  
 
-	<!-- openfire数据源 -->
-	  <bean name="dataSourceOpenfire" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
-        <property name="url" value="${openfire.url}" />  
-        <property name="username" value="${openfire.username}" />  
-        <property name="password" value="${openfire.password}" />  
-        <property name="initialSize" value="1" />  
-        <property name="maxActive" value="20" />  
-        <property name="minIdle" value="1" />  
-        <property name="maxWait" value="60000" />  
-        <property name="validationQuery" value="${validationQuery}" />  
-        <property name="testOnBorrow" value="false" />  
-        <property name="testOnReturn" value="false" />  
-        <property name="testWhileIdle" value="true" />  
-        <property name="timeBetweenEvictionRunsMillis" value="60000" />  
-        <property name="minEvictableIdleTimeMillis" value="25200000" />  
-        <property name="removeAbandoned" value="true" />  
-        <property name="removeAbandonedTimeout" value="1800" />  
-        <property name="logAbandoned" value="true" />  
-        <property name="filters" value="mergeStat" />  
-    </bean>  
 	
  	<!-- myBatis文件 -->  
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+    	<property name="typeAliasesPackage" value="com.hengyun.domain.loginInfo"/>
         <property name="dataSource" ref="dataSource" />  
-        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/logininfo/mysql/*Mapper.xml" />  
+        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/logininfo/mysql/mapper/*Mapper.xml" />  
     </bean>  
-    
-    <!-- 配置类 -->
-      <bean id="sqlSessionFactoryOpenfire" class="org.mybatis.spring.SqlSessionFactoryBean">  
-     <property name="typeAliasesPackage" value="com.hengyun.model.logininfo"/>
-        <property name="dataSource" ref="dataSource" />  
-        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/authority/mapping/*Mapper.xml" />  
-    </bean>  
-  
+
   <!-- dao扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
         <property name="basePackage" value="com.hengyun.dao.logininfo.mysql" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>  
   
-	<!--
-	<bean id="userAccount" class="org.mybatis.spring.MapperFactoryBean">  
-	    <property name="mapperInterface" value="com.manager.data.StudentMapper" />  
-	    <property name="sqlSessionFactory" ref="sqlSessionFactory" />  
-	</bean>  
-    -->
     
     
     <!-- 配置事务管理器 -->  
@@ -101,14 +69,17 @@ xmlns:context="http://www.springframework.org/schema/context"
             <tx:method name="*" propagation="SUPPORTS" />  
         </tx:attributes>  
     </tx:advice>  
+    
+    
     <!-- aop代理设置 -->
+    <!-- 
     <aop:config>  
-        <aop:pointcut id="transactionPointcut" expression="execution(* com.hengyun.service.authority.*(..)) 
-        OR execution(* com.hengyun.service.logininfo.mysql..*.*.(..))" />  
+        <aop:pointcut id="transactionPointcut" expression=" execution(* com.hengyun.service.logininfo.mysql.*.*.(..))" />  
         <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />  
     </aop:config>  
-    
+     -->
     <!-- 配置druid监控spring jdbc -->  
+    <!-- 
     <bean id="druid-stat-interceptor" class="com.alibaba.druid.support.spring.stat.DruidStatInterceptor">  
     </bean>  
     <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">  
@@ -121,5 +92,6 @@ xmlns:context="http://www.springframework.org/schema/context"
     </bean>  
     <aop:config>  
         <aop:advisor advice-ref="druid-stat-interceptor" pointcut-ref="druid-stat-pointcut" />  
-    </aop:config>  
+    </aop:config>
+     -->  
 </beans>
