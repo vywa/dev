@@ -108,13 +108,11 @@ public class InfomationController {
 	    @RequestMapping("/download")
 	    @ResponseBody
 	    public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
-	    	String tocken = request.getParameter("tocken");
+	    	
 	    	ResponseCode responseCode = new ResponseCode();
 	    	InputStream in = null;
 	    	OutputStream os = null;
-	    	//int userId = loginInfoService.isOnline(tocken);
-	    	//if(userId>0){
-	     	
+
 	    	response.setContentType("image/jpeg"); // 设置返回内容格式
 	    	String filename = request.getParameter("iconUrl");
 	    

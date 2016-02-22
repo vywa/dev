@@ -48,7 +48,7 @@
                             <value>/reglog/username</value>
                             
                               <value>/info/nickName</value>
-                            
+                              <value>/info/download</value>
                             
                         <value>/account/register</value>
                           <value>/account/mailReceive</value>
