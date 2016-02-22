@@ -132,10 +132,10 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
             class="com.silvery.security.shiro.service.impl.SimpleFilterChainDefinitionsService">  
             <property name="definitions">  
                 <value>  
-                    /static/** = anon  
-                    /admin/user/login.do = anon  
+                      
+                    /hospital/** = anon  
                     /test/** = role[user,admin]  
-                    /abc/** = authc  
+                    /bloodPressure/** = authc  
                 </value>  
             </property>  
         </bean>  

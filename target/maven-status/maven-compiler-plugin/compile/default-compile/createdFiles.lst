@@ -12,6 +12,7 @@ com/hengyun/service/friendcircle/FriendCircleService.class
 com/hengyun/domain/casehistory/SurgeryConsent.class
 com/hengyun/domain/casehistory/CaseHistoryPreface.class
 com/hengyun/util/sms/SmsSoapStub.class
+com/hengyun/domain/loginInfo/RolesPermission.class
 com/hengyun/dao/forum/SubjectDao.class
 com/hengyun/util/sms/SubmitResult.class
 com/hengyun/service/impl/shiro/RolesAuthorizationFilter.class
@@ -73,7 +74,6 @@ com/hengyun/domain/casehistory/ReTreateInfo.class
 com/hengyun/domain/forum/Subject.class
 com/hengyun/domain/hospital/Hospital.class
 com/hengyun/domain/casehistory/HospitalizedRecords.class
-com/hengyun/util/interceptor/MyInterceptor.class
 com/hengyun/service/impl/shiro/SimpleMapCache.class
 com/hengyun/service/impl/hospital/DocterServiceImpl.class
 com/hengyun/util/sms/SmsSoapProxy.class
@@ -131,6 +131,7 @@ com/hengyun/service/impl/logininfo/mysql/AccountServiceImpl.class
 com/hengyun/service/message/SmsProducerService.class
 com/hengyun/domain/casehistory/DeathDangerousNotice.class
 com/hengyun/service/impl/message/ProducerEmailServiceImpl.class
+com/hengyun/util/interceptor/LoginInterceptor.class
 com/hengyun/service/impl/friendcircle/FriendCircleServiceImpl.class
 com/hengyun/domain/casehistory/MedicalVedio.class
 com/hengyun/domain/forum/PostListResponseCode.class
@@ -161,6 +162,7 @@ com/hengyun/service/impl/casehistory/TreateWaitServiceImpl.class
 com/hengyun/dao/impl/forum/PostCommentDaoImpl.class
 com/hengyun/dao/impl/notice/FriendCircleNoticeDao.class
 com/hengyun/dao/impl/information/InformationDaoImpl.class
+com/hengyun/util/shiro/MongodbRealm.class
 com/hengyun/service/shiro/SimpleCacheManager.class
 com/hengyun/service/impl/util/SmsUtilServiceImpl.class
 com/hengyun/service/impl/patient/BloodSuggerInfoServiceImpl.class
@@ -245,6 +247,8 @@ com/hengyun/dao/impl/forum/SecondCommentDaoImpl.class
 com/hengyun/service/logininfo/mysql/AccountService.class
 com/hengyun/domain/casehistory/DiseaseDevelopHistory.class
 com/hengyun/domain/forum/Vedio.class
+com/hengyun/util/regex/Validator.class
+com/hengyun/domain/location/UserRoles.class
 com/hengyun/controller/logininfo/LoginInfoController.class
 com/hengyun/domain/casehistory/MarriageHistory.class
 com/hengyun/controller/administrator/AdministratorController.class
@@ -257,6 +261,7 @@ com/hengyun/dao/impl/logininfo/IndexCollectionDaoImpl.class
 com/hengyun/domain/loginInfo/ThirdLoginResult.class
 com/hengyun/domain/loginInfo/constant/AccountStatus.class
 com/hengyun/domain/forum/SecondComment.class
+com/hengyun/util/log/PlatformLogger.class
 com/hengyun/service/impl/shiro/SimpleFilterChainDefinitionService.class
 com/hengyun/domain/casehistory/AnalysisResult.class
 com/hengyun/controller/hospital/HospitalController.class

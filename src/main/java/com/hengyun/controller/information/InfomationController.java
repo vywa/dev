@@ -161,6 +161,7 @@ public class InfomationController {
 		InfoResponse response = new InfoResponse();
 		String tocken = request.getParameter("tocken");
 		JSONObject jsonObject =JSON.parseObject(data);
+		int id =(int)request.getAttribute("userId");
 		
 		String timeStamp = jsonObject.getString("recordTime");
 		int userId = loginInfoService.isOnline( tocken);

@@ -1,30 +1,36 @@
 package com.hengyun.util.log;
 
-
+import java.util.Date;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.apache.log4j.Logger;
 
 /**
- * Spring 统一日志处理实现类
- * @author bob
- * 
- */
-public class LogInterceptor implements MethodInterceptor
-{
+* @author bob E-mail:panbaoan@thealth.cn
+* @version 创建时间：2016年2月22日 下午1:48:08
+* 日志处理
+*/
+public class LogInterceptor implements MethodInterceptor {
 
-	public Object invoke(MethodInvocation invocation) throws Throwable
-	{
-		Logger loger = Logger.getLogger(invocation.getClass());
-
-		loger.info("-- -----------------------------------------------------------------------------");
-		loger.info(invocation.getMethod() + ":BEGIN!--(bob pan LOG)");// 方法前的操作
-		Object obj = invocation.proceed();// 执行需要Log的方法
-		loger.info(invocation.getMethod() + ":END!--(bob pan LOG)");// 方法后的操作
-		loger.info("-------------------------------------------------------------------------------------------------");
-
-		return obj;
+	@Override
+	public Object invoke(MethodInvocation invoke) throws Throwable {
+		// TODO Auto-generated method stub
+		Object[] object = invoke.getArguments();
+		
+		try {
+		
+			String date = new Date().toLocaleString();
+			PlatformLogger.info("开始时间"+date);
+			Object returnObject = invoke.proceed();
+			
+			String date2 = new Date().toLocaleString();
+			PlatformLogger.info("结束时间"+date2);
+			return returnObject;
+		} catch (Throwable throwable) {
+			// TODO Auto-generated catch block
+			throwable.printStackTrace();
+		}
+		return null;
 	}
 
 }

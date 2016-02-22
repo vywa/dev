@@ -15,22 +15,22 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 	<!-- Spring 统一日志处理   LogInterceptor拦截器 配置　-->     
 <bean id="logLnterceptor" class="com.hengyun.util.log.LogInterceptor"/>  
 <!-- Spring 统一异常处理  ExceptionAdvisor配置 -->  
-<bean id="exceptionHandler" class="com.hengyun.util.exception.ExceptionAdvisor"></bean>  
+ <bean id="exceptionHandler" class="com.hengyun.util.exception.ExceptionAdvisor"></bean>
   
     <!-- Bean自动代理处理器 配置-->    
 <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator" >  
    <property name="beanNames">  
     <list>    <!-- 配置需要进行日志记录的Service和Dao -->  
-        <value>commonDao</value>  
+        <value>*Dao</value>  
                 <!-- 配置所有Service结尾命名的Bean，即所有Service层的类都要经过exceptionHandler异常处理类 -->   
         <value>*Service</value>  <!-- Service层的Bean ID 命名要以Service结尾 -->  
     </list>  
    </property>  
    <property name="interceptorNames">  
     <list>  
-         <value>exceptionHandler</value>  
+       <!--   <value>exceptionHandler</value> -->  
          <value>logLnterceptor</value>  
-         <!--<value>transactionInterceptor</value>-->  
+        <value>exceptionHandler</value>
     </list>  
    </property>  
 </bean>  

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  *  管理员操作
  * */
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("admin")
 public class AdministratorController {
 	
 	@RequestMapping("/add")
@@ -18,12 +18,21 @@ public class AdministratorController {
 		return null;
 	}
 	
-	@RequestMapping("/set")
+	//管理员登陆
+	@RequestMapping("/login")
 	@ResponseBody
-	public String setForum(){
+	public String adminLogin(){
 		
+		return "manager";
+	}
+	
+	//登陆首页
+	@RequestMapping("/home")
+	@ResponseBody
+	public String home(){
 		return null;
 	}
+	
 	
 	@RequestMapping("/show")
 	@ResponseBody

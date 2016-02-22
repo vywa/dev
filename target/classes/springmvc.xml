@@ -33,21 +33,35 @@
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>  
     <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 
-	 <!-- 拦截器
+	 <!-- 配置拦截器，多个拦截器顺序执行-->
 
     <mvc:interceptors>
+         
         <mvc:interceptor>
-            <mvc:mapping path="/*" />
-            <bean class="com.hengyun.util.interceptor.MyInterceptor">
-                <property name="excludedUrls">
+            <mvc:mapping path="/**" />
+            <bean class="com.hengyun.util.interceptor.LoginInterceptor">
+                <property name="allowUrls">
                     <list>
-                        <value>/reglog</value>
+                    <!-- 如果请求中包含以下路径，则不进行拦截 -->
+                        <value>/reglog/show</value>
+                          <value>/reglog/thirdPart</value>
+                            <value>/reglog/username</value>
+                            
+                              <value>/info/nickName</value>
+                            
+                            
+                        <value>/account/register</value>
+                          <value>/account/mailReceive</value>
+                            <value>/account/mailSend</value>
+                              <value>/account/smsReceive</value>
+                                <value>/account/smsSend</value>
                     </list>
                 </property>
             </bean>
+           
         </mvc:interceptor>
     </mvc:interceptors>
- -->
+ 
  
 	<!--页面视图层信息 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

@@ -134,8 +134,11 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				loginResult.setUserCode(3);
 				loginResult.setUserId(userId);
 				loginResult.setRegister("register");
+				
 				 } else {
+					
 					 loginInfo.setUserId(userAccount.getId());
+					 
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
 						if(old!=null){
@@ -204,7 +207,11 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 			
 			//保存登陆信息
 			loginInfoDao.save(loginInfo);
+			Query query = Query.query(Criteria.where("_id").is(loginInfo.getUserId()));
+			UserAccount account = userAccountService.queryOne(query);
+			String password = account.getPassword();
 		
+			loginResult.setPassword(password);
 			loginResult.setMessage(tocken);
 		
 			return loginResult;

@@ -9,6 +9,18 @@ import com.hengyun.domain.information.Information;
 public class ThirdLoginResult extends LoginResult{
 
 	private String register;					//是否是第一次注册
+	
+	private String password;				//用户密码
+	
+	
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public String getRegister() {
 		return register;

@@ -69,10 +69,12 @@ public class HospitalController {
 		return null;
 	}
 	
-	@RequestMapping("/showAll")
+	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryHospital(HttpServletRequest request){
 		List<Hospital> hospitalList ;
+		int id =(int)request.getAttribute("userId");
+		System.out.println("用户id是："+id);
     	hospitalList = hospitalService.queryAll();
 
     	 String jsonString= JSON.toJSONString(hospitalList);  

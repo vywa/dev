@@ -17,7 +17,14 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     
-    
+    <!-- logback加载 -->
+    <context-param>  
+         <param-name>logbackConfigLocation</param-name>  
+         <param-value>classpath:logback.xml</param-value>  
+	</context-param>  
+	<listener>  
+	         <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>  
+	</listener>  
 
  <servlet>
  <servlet-name>springmvc</servlet-name>  
@@ -50,8 +57,9 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern> /</url-pattern>
 	</filter-mapping>
+	
 	<!-- shiro 权限管理 -->
-	<!-- 
+	 <!-- 
 	<filter>
     <filter-name>shiroFilter</filter-name>
     <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -65,6 +73,8 @@
     <url-pattern>/*</url-pattern>
 </filter-mapping>
 	 -->
+	
+	
 	<servlet-mapping> 
 	<servlet-name>default</servlet-name>
     <url-pattern>*.jpg</url-pattern>   
