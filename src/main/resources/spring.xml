@@ -30,6 +30,19 @@ http://www.springframework.org/schema/cache
 	<bean id="BaseMongodbDaoImpl" class="com.hengyun.dao.impl.BaseMongodbDaoImpl" abstract="true" />  
    <bean id="BaseServiceImpl" class="com.hengyun.service.impl.BaseServiceImpl" abstract="true" />
 
+<!--  管理员操作 -->
+<bean id="permissionDao" class="com.hengyun.dao.impl.administrator.PermissionDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="permissionService" class="com.hengyun.service.impl.administrator.PermissionServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="resourcesDao" class="com.hengyun.dao.impl.administrator.ResourcesDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="resourcesService" class="com.hengyun.service.impl.administrator.ResourcesServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="rolesDao" class="com.hengyun.dao.impl.administrator.RolesDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="rolesService" class="com.hengyun.service.impl.administrator.RolesServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="userRoleDao" class="com.hengyun.dao.impl.administrator.UserRoleDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="userRoleService" class="com.hengyun.service.impl.administrator.UserRoleServiceImpl" parent="BaseServiceImpl"/>
+
 <!-- 自增表索引 -->
 <bean id="indexCollectionDao" class="com.hengyun.dao.impl.logininfo.IndexCollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
 

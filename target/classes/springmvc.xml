@@ -49,7 +49,12 @@
                             
                               <value>/info/nickName</value>
                               <value>/info/download</value>
-                            
+                              
+                             <value>/permission</value>
+                             <value>/resources</value>
+                              <value>/roles</value>
+                              <value>/userRole</value>
+                             
                         <value>/account/register</value>
                           <value>/account/mailReceive</value>
                             <value>/account/mailSend</value>
