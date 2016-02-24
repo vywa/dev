@@ -55,6 +55,7 @@ public class InfomationController {
 	private IconDao	IconDao;
 	
 
+		//加载用户图像
 	    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
 	    @ResponseBody
 	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
@@ -105,6 +106,7 @@ public class InfomationController {
 	    }
 	          
 	
+	    //下载用户图像
 	    @RequestMapping("/download")
 	    @ResponseBody
 	    public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
@@ -141,6 +143,7 @@ public class InfomationController {
 	    
 	   
 
+	 //显示用户信息
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show(){
@@ -229,7 +232,7 @@ public class InfomationController {
 	}
 	
 	
-	
+	//获取用户昵称
 	@RequestMapping(value="/nickName",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getnickName(HttpServletRequest request){

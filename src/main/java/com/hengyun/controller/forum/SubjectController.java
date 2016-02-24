@@ -77,6 +77,7 @@ public class SubjectController {
 		 return JSON.toJSONString(response);
 	}
 	
+	//设置帖子
 	@RequestMapping("/set")
 	@ResponseBody
 	public String setPost(@RequestParam String data,HttpServletRequest request){

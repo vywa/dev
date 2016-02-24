@@ -65,6 +65,11 @@
             </bean>
            
         </mvc:interceptor>
+        
+        <mvc:interceptor>
+          <mvc:mapping path="/**" />
+        	 <bean class="com.hengyun.util.interceptor.AuthenticateInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
  
  

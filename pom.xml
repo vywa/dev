@@ -183,6 +183,21 @@
 	    <artifactId>jcl-over-slf4j</artifactId>  
 	    <version>1.7.12</version>  
 	</dependency>  
+	
+	<!-- 导入kafka
+	<dependency>
+		<groupId>org.apache.kafka</groupId>
+		<artifactId>kafka_2.10</artifactId>
+		<version>0.9.0.0</version>
+	</dependency>--> 
+	
+
+<!-- 引入flume-ng 
+	<dependency>
+		<groupId>org.apache.flume</groupId>
+		<artifactId>flume-ng-core</artifactId>
+		<version>1.6.0</version>
+	</dependency>-->
 
 		<!-- 导入fastjson -->
 	<dependency>
@@ -464,7 +479,7 @@
 	  <version>9.3.7.v20160115</version>
 	
             <configuration>   
-            <webDefaultXml>src/main/resources/jetty/webdefault.xml</webDefaultXml>  
+           
                 <webAppSourceDirectory>src/main/webapp</webAppSourceDirectory>  
                 <scanIntervalSeconds>3</scanIntervalSeconds>  
                 <contextPath>/</contextPath>  

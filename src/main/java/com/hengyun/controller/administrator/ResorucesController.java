@@ -45,6 +45,7 @@ public class ResorucesController {
 		return JSON.toJSONString(responseCode);
 	}
 	
+	//查询所有资源
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showResource(){

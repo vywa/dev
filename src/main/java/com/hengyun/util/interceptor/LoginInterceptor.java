@@ -58,6 +58,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if(loginUserId>0){
 			//设置查询者的userId
 			int userId = loginUserId;
+			//将请求者userId设置进请求
 			request.setAttribute("userId", userId);
 			PlatformLogger.info("通过拦截器了");
 			return true;
