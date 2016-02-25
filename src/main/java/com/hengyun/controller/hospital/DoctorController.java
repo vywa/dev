@@ -43,10 +43,24 @@ public class DoctorController {
 	}
 	
 	
+	@RequestMapping("/queryDoctor")
+	@ResponseBody
+	public String showHospitalDocter(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		int hospitalId = jsonObject.getIntValue("hospitalId");
+		List<Docter> docterList ;
+		docterList = docterService.queryByHospital(hospitalId);
+    	 String jsonString= JSON.toJSONString(docterList);  
+        return jsonString;  
+	}
+	
 	
 	@RequestMapping("/show")
 	@ResponseBody
-	public String showDocter(HttpServletRequest request){
+	public String showDocter(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject = JSONObject.parseObject(data);
+		int hospitalId = jsonObject.getIntValue("hospitalId");
+		
 		List<Docter> docterList ;
 		docterList = docterService.queryAll();
 

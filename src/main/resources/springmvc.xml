@@ -50,6 +50,10 @@
                               <value>/info/nickName</value>
                               <value>/info/download</value>
                               
+                              <value>/hospital</value>
+                              <value>/office</value>
+                              <value>/docter</value>
+                              
                              <value>/permission</value>
                              <value>/resources</value>
                               <value>/roles</value>
@@ -65,11 +69,12 @@
             </bean>
            
         </mvc:interceptor>
-        
+      <!--   
         <mvc:interceptor>
           <mvc:mapping path="/**" />
         	 <bean class="com.hengyun.util.interceptor.AuthenticateInterceptor"></bean>
         </mvc:interceptor>
+         -->
     </mvc:interceptors>
  
  

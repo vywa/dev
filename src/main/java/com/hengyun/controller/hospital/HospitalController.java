@@ -53,7 +53,7 @@ public class HospitalController {
 				set("hospitalIM", hospital.getHospitalIM()).set("level", hospital.getLevel()).set("telephone", hospital.getTelephone()).
 				set("address", hospital.getAddress()).set("weiChatNumber", hospital.getWeiChatNumber());
 		hospitalService.updateInser(query, update);
-	//	hospitalService.save(hospital);
+	
 		
 		
 		ResponseCode response = new ResponseCode();
@@ -73,8 +73,7 @@ public class HospitalController {
 	@ResponseBody
 	public String queryHospital(HttpServletRequest request){
 		List<Hospital> hospitalList ;
-		int id =(int)request.getAttribute("userId");
-		System.out.println("用户id是："+id);
+		
     	hospitalList = hospitalService.queryAll();
 
     	 String jsonString= JSON.toJSONString(hospitalList);  

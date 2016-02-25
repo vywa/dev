@@ -45,6 +45,16 @@ public class DocterServiceImpl extends BaseServiceImpl<Docter,Integer> implement
 		}
 		return false;
 	}
+
+	//查询某个医院的医生
+	@Override
+	public List<Docter> queryByHospital(int hospitalId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("hospitalId").is(hospitalId));
+		List<Docter> docterList = docterDao.queryList(query);
+		
+		return docterList;
+	}
 	
 
 }

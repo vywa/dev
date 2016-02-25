@@ -19,6 +19,8 @@ public interface ResourcesService extends BaseService<Resources,Integer>{
 	//查看资源
 	public List<Resources> queryAllResource();
 	
+	
+	
 	//给资源添加权限
 	public void addPermission(Resources resource ,Permission permission);
 	

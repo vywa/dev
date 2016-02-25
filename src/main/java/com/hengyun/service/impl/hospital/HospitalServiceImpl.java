@@ -29,5 +29,6 @@ public class HospitalServiceImpl extends BaseServiceImpl<Hospital,Integer> imple
 	}
 	
 	
+	
 
 }
