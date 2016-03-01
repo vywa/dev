@@ -1,4 +1,4 @@
-package com.hengyun.controller.docter;
+package com.hengyun.controller.doctor;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * */
 @Controller
 @RequestMapping("doctor")
-public class DocterController {
+public class DoctorController {
 	
 	
 	//管理员添加医生

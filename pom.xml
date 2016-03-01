@@ -141,8 +141,6 @@
 			<version>${log4j.version}</version>
 		</dependency>
 
-
-
 		<!-- 格式化对象，方便输出日志 -->
 	
 		<!-- 导入slf日志 -->
@@ -185,19 +183,23 @@
 	</dependency>  
 	
 	<!-- 导入kafka
+	 
 	<dependency>
 		<groupId>org.apache.kafka</groupId>
 		<artifactId>kafka_2.10</artifactId>
 		<version>0.9.0.0</version>
-	</dependency>--> 
-	
+	</dependency>
+	 -->
 
 <!-- 引入flume-ng 
+
 	<dependency>
 		<groupId>org.apache.flume</groupId>
 		<artifactId>flume-ng-core</artifactId>
 		<version>1.6.0</version>
-	</dependency>-->
+	</dependency>
+-->
+
 
 		<!-- 导入fastjson -->
 	<dependency>

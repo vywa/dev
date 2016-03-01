@@ -37,6 +37,10 @@ public class BloodSuggerInfoController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
+	/*
+	 * 
+	 * 查询用户特定时间段血糖数据
+	 * */
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
@@ -62,6 +66,41 @@ public class BloodSuggerInfoController {
 		return  JSONObject.toJSONString(sugger);
 	}
 	
+	/*
+	 * 
+	 * 医生查询用户特定时间段血糖数据
+	 * */
+	@RequestMapping("/doctorShow")
+	@ResponseBody
+	public String doctorShow(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		String tocken = request.getParameter("tocken");
+		int user = jsonObject.getIntValue("userId");
+		SuggerResponse sugger = new SuggerResponse();
+		int userId = loginInfoService.isOnline(tocken);
+		if(userId<0){
+			sugger.setCode("112");
+			sugger.setBloodSuggerInfo(null);
+		} else {
+		
+		long startTime = jsonObject.getLongValue("startTime");
+		long endTime =jsonObject.getLongValue("endTime");
+		
+		
+		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, user);
+	
+		sugger.setCode("211");
+		sugger.setBloodSuggerInfo(bloodList);
+		}
+		return  JSONObject.toJSONString(sugger);
+	}
+	
+	
+	
+	/*
+	 *  查询所有用户血糖信息
+	 *  
+	 * */
 	@RequestMapping("/showAll")
 	@ResponseBody
 	public String showBloodSuggerAll(HttpServletRequest request){
@@ -75,6 +114,10 @@ public class BloodSuggerInfoController {
 		return result;
 	}
 	
+	/*
+	 * 
+	 * 查询最近一段时间用户的血糖信息(单位为天，周，月)
+	 * */
 	@RequestMapping("/latestDay")
 	@ResponseBody
 	public String lates(HttpServletRequest request){
@@ -107,7 +150,12 @@ public class BloodSuggerInfoController {
 	}
 	
 	
-	//上传数据
+	
+	
+	/*
+	 *  上传用户血糖数据
+	 * 
+	 * */
 	@RequestMapping("/upload")
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){

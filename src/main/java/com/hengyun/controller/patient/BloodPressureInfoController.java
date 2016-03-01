@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -30,19 +32,26 @@ import com.hengyun.service.patient.BloodPressureInfoService;
 @RequestMapping("bloodPressure")
 public class BloodPressureInfoController {
 
+	private static final Logger log = LoggerFactory.getLogger(BloodPressureInfoController.class);
+	
 	@Resource
 	private BloodPressureInfoService  bloodPressureInfoService;
 	
 	@Resource
 	private LoginInfoService loginInfoService;
 	
-	//查询某个指定时间段的测量数据
+	/*
+	 * 
+	 * 查询某个指定时间段的测量数据
+	 * 
+	 * */
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showBlood(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
 		PressureResponse response = new PressureResponse();
-		String user = jsonObject.getString("userId");
+		
+		//String user = jsonObject.getString("userId");
 		String tocken = request.getParameter("tocken");
 		
 		int userId = loginInfoService.isOnline(tocken);
@@ -62,6 +71,10 @@ public class BloodPressureInfoController {
 		return  JSONObject.toJSONString(response);
 	}
 	
+	/*
+	 * 
+	 *  获取最近一段时间数据记录(单位是天，周，月)
+	 * */
 	@RequestMapping("/latestDay")
 	@ResponseBody
 	public String lates(HttpServletRequest request){
@@ -84,7 +97,43 @@ public class BloodPressureInfoController {
 		return  JSONObject.toJSONString(response);
 	}
 	
+	/*
+	 * 
+	 * 	医生查询某个用户的血压记录
+	 * */
+	@RequestMapping("/doctorShow")
+	@ResponseBody
+	public String doctorShow(@RequestParam String data,HttpServletRequest request){
+		
+		JSONObject jsonObject =JSON.parseObject(data);
+		PressureResponse response = new PressureResponse();
+		
+		//String user = jsonObject.getString("userId");
+		String tocken = request.getParameter("tocken");
+		int userId2 = jsonObject.getIntValue("userId");
+		int userId = loginInfoService.isOnline(tocken);
+		
+		if(userId<0){
+			response.setCode("112");
+			response.setBloodPressureInfo(null);
+		} else {
+		long startTime = jsonObject.getLongValue("startTime");
+		long endTime =jsonObject.getLongValue("endTime");
+		
+		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId2);
+			
+		
+		response.setCode("211");
+		response.setBloodPressureInfo(bloodList);
+		}
+		return  JSONObject.toJSONString(response);
+		
+	}
 	
+	/*
+	 * 
+	 * 	查询某个用户的血压记录
+	 * */
 	@RequestMapping("/showAll")
 	@ResponseBody
 	public String showBlood(){
@@ -99,7 +148,10 @@ public class BloodPressureInfoController {
 	
 	
 	
-	//上传数据
+	/*
+	 * 
+	 *  上传用户的血压数据
+	 * */
 	@RequestMapping("/upload")
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){

@@ -7,17 +7,19 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 	http://www.springframework.org/schema/context        
 	http://www.springframework.org/schema/context/spring-context-4.0.xsd
 	http://www.springframework.org/schema/data/mongo
-	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd">
+	http://www.springframework.org/schema/data/mongo/spring-mongo-1.8.xsd"
+	default-lazy-init="true">
 
-	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+	<description>shiro 安全配置</description>
+	<!-- shiro过滤器 -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" depends-on="roleOrFilter">
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="/admin/login" />
         <property name="successUrl" value="/admin/home" />
         <property name="unauthorizedUrl" value="/admin/login" />
         <property name="filters">
             <map>
-                <entry key="anno" value-ref="anno"/>
-                <entry key="authc" value-ref="authc"/>
+                <entry key="roleOrFilter" value-ref="roleOrFilter"/>
             </map>
         </property>
         
@@ -27,22 +29,39 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
                 <entry key="authc" value="authc"/>
             </map>
         </property>
-        <property name="filterChainDefinitions">
-            <value>
-                /admin/login=anon
-                /admin/validCode=anon
-                /user/**=authc
-                /role/**=authc
-                /permission/**=authc
-                /**=authc
-            </value>
+        <!-- shiro连接约束配置，使用自定义的动态获取资源类 -->
+        <property name="filterChainDefinitions" ref="chainDefinationSectionMetaSource">
+          
         </property>
     </bean>
+    
+    <bean id="chainDefinationSectionMetaSource"  >
+    
+    </bean>
+    <!-- 用户授权信息cache -->
+  
+    
     <bean id="authc" class="com.util.filter.MyAccessFilter"/>
     <bean id="anno" class="org.apache.shiro.web.filter.authc.AnonymousFilter"/>
+    
+    <!-- shiro业务类 -->
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="myRealm"/>
     </bean>
-    <bean id="myRealm" class="com.util.MysqlJdbcRealM"/>
+    
+    <!-- 自定义realm -->
+    <bean id="mongodbRealm" class="ccom.hengyun.util.shiro.MongodbRealm" depends-on="userDao,taskDao">
+    	<property name="accountService" ref="accountService"></property>
+    	<property name="credentialsMatcher" >
+    		<bean class="org.apache.shiro.authc.credential.HashedCredentailsMatcher">
+    			<property name="hashAlgorithmName"  value="MD5"></property>
+    		</bean>
+    	</property>
+    </bean>
 
+	<!-- 自定义角色 roles[admin,doctor,patient,guest]-->
+	<bean id="roleOrFilter" class="com.hengyun.util.shiro.CustomRolesAuthorizationFilter"></bean>
+
+	<!-- 自定义验证拦截器 -->
+	<bean id="myAuthenFilter" class="com.hengyun.util.shiro.CodeFormAuthenticationFilter"></bean>
 </beans>

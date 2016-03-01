@@ -16,6 +16,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/*
+ *  验证码类
+ * */
 @Controller
 @RequestMapping("validate")
 public class CodeController {

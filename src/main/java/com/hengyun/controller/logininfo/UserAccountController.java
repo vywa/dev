@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -38,6 +39,7 @@ import com.hengyun.util.sms.sender.SmsSender;
 
 /*
  *  用户账号管理，包括注册账号，修改账号等操作
+ *  
  * */
 
 @Controller
@@ -78,11 +80,12 @@ public class UserAccountController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
-/*
- *  注册账号
- * */	
+
 	
-	//发送短信
+	/*
+	 * 
+	 *  发送短信
+	 * */
 	public int  sms(String mobilephone){
 		//手机是否注册
 		if(userAccountService.existUser(mobilephone,"mobilephone")>0){
@@ -96,6 +99,7 @@ public class UserAccountController {
 	//		if(registerCacheService.getTryCount(mobilephone)<6){
 				int codeNum = (int)(Math.random()*1000000);
 					codeNum = codeNum>100000?codeNum:codeNum+100000;
+				
 					registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 					registerCacheService.addTryCount(mobilephone);
 					
@@ -115,7 +119,10 @@ public class UserAccountController {
 		return -1;
 	}
 	
-	//发送邮件
+	/*
+	 *  发送邮件
+	 * 
+	 * */
 	public int email(String email){
 		
 		if(userAccountService.existUser(email,"email")>0){
@@ -141,7 +148,39 @@ public class UserAccountController {
 	
 	}
 
-	//短信发送
+	/*
+	 * 
+	 *  绑定亲情号请求
+	 * 
+	 * */
+		@RequestMapping(value="/bindRelative",produces = "text/html;charset=UTF-8")
+		@ResponseBody
+		public String bindRelative(@RequestParam String data){
+			JSONObject jsonObject =JSON.parseObject(data);
+			
+			String mobilephone = jsonObject.getString("mobilephone");
+			int codeNum = (int)(Math.random()*1000000);
+			codeNum = codeNum>100000?codeNum:codeNum+100000;
+			registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
+			registerCacheService.addTryCount(mobilephone);
+			
+			SubmitResult result;
+			SmsSender sms = new SmsSender(mobilephone,codeNum);
+			result =  sms.send();
+			
+			ResponseCode responseCode = new ResponseCode();
+			responseCode.setCode("206");
+			responseCode.setMessage("请求发送成功");
+			
+			return JSON.toJSONString(responseCode);
+		
+			
+		}
+	
+	/*
+	 * 短信发送
+	 * 
+	 * */
 	@RequestMapping(value="/smsSend",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String smsSend(@RequestParam String data){
@@ -175,7 +214,10 @@ public class UserAccountController {
 	
 	
 
-    //短信接收注册
+    /*
+     * 短信接收注册
+     * 
+     * */
 	@RequestMapping("/smsReceive")
 	@ResponseBody
 	public String smsReceive(@RequestParam String data){
@@ -191,6 +233,8 @@ public class UserAccountController {
 			UserAccount userAccount = new UserAccount();
 			
 			userAccount.setMobilephone(mobilephone);
+			//加密密码
+			String encryptedPassword = new Md5Hash(password).toString();
 			userAccount.setPassword(password);
 			userAccount.setCatagory("patient");
 			
@@ -214,7 +258,10 @@ public class UserAccountController {
 	
 	
 	
-	//邮箱发送验证码
+	/*
+	 * 邮箱发送验证码
+	 * 
+	 * */
 	@RequestMapping("/mailSend")
 	@ResponseBody
 	public String mailSend(@RequestParam String data){
@@ -242,7 +289,10 @@ public class UserAccountController {
 	}
 	
 	
-	   //邮箱接收注册
+	   /*
+	    * 邮箱接收注册
+	    * 
+	    * */
 		@RequestMapping("/mailReceive")
 		@ResponseBody
 		public String mailReceive(@RequestParam String data){
@@ -280,7 +330,7 @@ public class UserAccountController {
 
 		/*
 		 * 
-		 * 医生注册
+		 *  医生注册
 		 * 
 		 * */
 		
@@ -312,6 +362,7 @@ public class UserAccountController {
 		
     /*
      *  查询账号
+     *  
      * */
    
     @RequestMapping("/show") 
@@ -326,7 +377,10 @@ public class UserAccountController {
         return jsonString;  
     }
     
-    //查询userId用户信息
+    /*
+     * 查询userId账户信息
+     * 
+     * */
     @RequestMapping("/query") 
     @ResponseBody  
     public  String   queryAccount(@RequestParam String data){
@@ -351,6 +405,7 @@ public class UserAccountController {
     
     /*
      *  修改密码
+     *  
      * */
  
     @RequestMapping(value="/findPassword",produces = "text/html;charset=UTF-8") 
@@ -397,6 +452,7 @@ public class UserAccountController {
     
     /*
      *  邮箱找密码
+     *  
      * */
  
     @RequestMapping("/emailpassword") 
@@ -513,7 +569,10 @@ public class UserAccountController {
        
     }
     
-    //在线修改密码
+    /*
+     * 在线修改密码
+     * 
+     * */
     @ResponseBody  
     @RequestMapping("/changePassword") 
     public  String  changePassword(@RequestParam String data,HttpServletRequest request){
@@ -545,6 +604,7 @@ public class UserAccountController {
     
     /*
      *  验证更改绑定合法
+     *  
      * */
     @ResponseBody  
     @RequestMapping(value="/validate",produces = "text/html;charset=UTF-8") 
@@ -615,6 +675,7 @@ public class UserAccountController {
     
     /*
      *  更改第三方绑定信息
+     *  
      * */
     @ResponseBody
     @RequestMapping("/changeThird")
@@ -643,6 +704,7 @@ public class UserAccountController {
     
     /*
      *  更改手机邮箱绑定信息
+     *  
      * */
     @ResponseBody  
     @RequestMapping("/change") 
@@ -701,7 +763,6 @@ public class UserAccountController {
     		response.setCode("116");
     		response.setMessage("unlogin ");
     	}
-	
 	
 		return JSON.toJSONString(response);
        

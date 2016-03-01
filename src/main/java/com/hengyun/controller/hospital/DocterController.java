@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,17 @@ import com.hengyun.service.hospital.DocterService;
  * */
 @Controller
 @RequestMapping("docter")
-public class DoctorController {
+public class DocterController {
+	
+	private static final Logger log = LoggerFactory.getLogger(DocterController.class);
 	
 	@Resource 
 	private DocterService docterService;
 	
+	/*
+	 *  添加医生
+	 *  
+	 * */
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addHospital(@RequestParam String data,HttpServletRequest request){
@@ -54,7 +62,9 @@ public class DoctorController {
         return jsonString;  
 	}
 	
-	
+	/*
+	 *  查询某个医院的医生
+	 * */
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showDocter(@RequestParam String data,HttpServletRequest request){
@@ -68,6 +78,10 @@ public class DoctorController {
         return jsonString;  
 	}
 	
+	/*
+	 *  查询某个工号医生信息
+	 *  
+	 * */
 	@RequestMapping("/query")
 	@ResponseBody
 	public String queryDocter(@RequestParam String data,HttpServletRequest request){
@@ -77,6 +91,7 @@ public class DoctorController {
 		Docter docter = docterService.queryOne(query);
 		return  JSON.toJSONString(docter);  
 	}
+	
 	
 	@RequestMapping("/edit")
 	@ResponseBody

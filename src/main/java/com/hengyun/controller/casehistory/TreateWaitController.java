@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,13 +20,17 @@ import com.hengyun.service.casehistory.TreateWaitService;
 
 /*
  * 就诊管理
+ * 
  * */
 @Controller
 @RequestMapping("treate")
 public class TreateWaitController {
 	
+	private static final Logger log = LoggerFactory.getLogger(TreateWaitController.class);
+	
 	@Resource
 	private TreateWaitService treateWaitService;
+	
 	
 	@RequestMapping("/add")
 	@ResponseBody
@@ -48,8 +54,6 @@ public class TreateWaitController {
 		treateWaitList = treateWaitService.queryAll();
 
     	 String jsonString= JSON.toJSONString(treateWaitList);  
-           
-    	
         return jsonString;  
 	}
 	

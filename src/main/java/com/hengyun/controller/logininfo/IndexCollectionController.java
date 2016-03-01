@@ -33,6 +33,10 @@ public class IndexCollectionController {
 		return "init success";
 	}
 	
+	/*
+	 * 显示所有索引
+	 * 
+	 * */
 	@RequestMapping("/show")
 	@ResponseBody
 	public String show(){

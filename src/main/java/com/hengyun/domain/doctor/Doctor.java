@@ -1,4 +1,4 @@
-package com.hengyun.domain.docter;
+package com.hengyun.domain.doctor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.hengyun.domain.information.GeneralPerson;
  * */
 
 
-public class Docter extends GeneralPerson implements Serializable{
+public class Doctor extends GeneralPerson implements Serializable{
 
 	private List<Integer>			caseHistory;									//医生参与的病历	
 

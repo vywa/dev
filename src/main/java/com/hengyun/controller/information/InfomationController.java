@@ -55,7 +55,10 @@ public class InfomationController {
 	private IconDao	IconDao;
 	
 
-		//加载用户图像
+		/*
+		 * 加载用户图像
+		 * 
+		 * */
 	    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
 	    @ResponseBody
 	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
@@ -106,7 +109,10 @@ public class InfomationController {
 	    }
 	          
 	
-	    //下载用户图像
+	    /*
+	     * 下载用户图像
+	     * 
+	     * */
 	    @RequestMapping("/download")
 	    @ResponseBody
 	    public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
@@ -143,7 +149,10 @@ public class InfomationController {
 	    
 	   
 
-	 //显示用户信息
+	 /*
+	  * 显示所有用户信息
+	  * 
+	  * */
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show(){
@@ -155,14 +164,17 @@ public class InfomationController {
 		 return JSON.toJSONString(information);
 	}
 	
-	//登陆加载信息
+	/*
+	 * 登陆加载信息
+	 * 
+	 * */
 	@RequestMapping("/load")
 	@ResponseBody
 	public String queryInfo(@RequestParam String data,HttpServletRequest request){
 		InfoResponse response = new InfoResponse();
 		String tocken = request.getParameter("tocken");
 		JSONObject jsonObject =JSON.parseObject(data);
-		int id =(int)request.getAttribute("userId");
+		//int id =(int)request.getAttribute("userId");
 		
 		String timeStamp = jsonObject.getString("recordTime");
 		int userId = loginInfoService.isOnline( tocken);
@@ -191,7 +203,10 @@ public class InfomationController {
 		 return JSON.toJSONString(response);
 	}
 	
-	//更新用户信息
+	/*
+	 * 更新用户信息
+	 * 
+	 * */
 	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String updateInfo(@RequestParam String data,HttpServletRequest request){
@@ -232,7 +247,10 @@ public class InfomationController {
 	}
 	
 	
-	//获取用户昵称
+	/*
+	 * 获取用户昵称
+	 * 
+	 * */
 	@RequestMapping(value="/nickName",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String getnickName(HttpServletRequest request){

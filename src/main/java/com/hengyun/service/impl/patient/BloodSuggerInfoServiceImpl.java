@@ -72,4 +72,43 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		     return getInfoByTime(startTime,time,userId);
 			}
 	}
+
+
+	/*
+	 *  获取用户某个最近时间端的血糖记录
+	 * 
+	 * */
+	@Override
+	public List<BloodSuggerInfo> getlatestTime(int userId, int count, String type) {
+		// TODO Auto-generated method stub
+		Query  query = new Query();
+	     Criteria criteria = Criteria.where("userId").is(userId);
+			 
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
+			if(info == null) {
+				log.info("病人:  "+userId +"最近没有血糖测量数据");
+				return null;
+			}else {
+			long time= info.getMeasureTime();
+		
+			Date date = new Date(time);
+			log.info(MessageFormat.format("病人最近的血糖测量时间为: {0}", date.toLocaleString()));
+			
+			Calendar   calendar   =   new   GregorianCalendar(); 
+		     calendar.setTime(date); 
+		     if(type.equals("day")){
+		     calendar.add(Calendar.DATE,-1);
+		     } else if(type.equals("week")){
+		    	 calendar.add(Calendar.WEEK_OF_YEAR,-1);
+		     } else if(type.equals("month")){
+		    	 calendar.add(Calendar.MONTH,-1);
+		     }
+		     date=calendar.getTime();  
+		     long startTime = date.getTime();
+		
+		     return getInfoByTime(startTime,time,userId);
+			}
+		
+	}
 }

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -27,9 +29,14 @@ import com.hengyun.service.casehistory.ReTreateInfoService;
 @RequestMapping("retreate")
 public class ReTreateInfoController {
 	
+	private static final Logger log = LoggerFactory.getLogger(ReTreateInfoController.class);
+	
 	@Resource
 	private ReTreateInfoService reTreateInfoService;
 	
+	/*
+	 *  添加回访
+	 * */
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addReTreate(@RequestParam String data,HttpServletRequest request){
@@ -44,7 +51,9 @@ public class ReTreateInfoController {
 	}
 	
 	
-	
+	/*
+	 *  添加某个医生的所有回访请求
+	 * */
 	@RequestMapping("/query")
 	@ResponseBody
 	public String queryReTreateInfo(@RequestParam String data,HttpServletRequest request){
@@ -74,6 +83,11 @@ public class ReTreateInfoController {
     	
         return jsonString;  
 	}
+	
+	/*
+	 *  处理回访请求
+	 * 
+	 * */
 	@RequestMapping("/handle")
 	@ResponseBody
 	public String updateReTreate(@RequestParam String data,HttpServletRequest request){

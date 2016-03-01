@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
@@ -26,9 +28,15 @@ import com.hengyun.service.casehistory.CaseHistoryService;
 @RequestMapping("casehistory")
 public class CaseHistoryController {
 	
+	private static final Logger log = LoggerFactory.getLogger(CaseHistoryController.class);
+	
 	@Resource
 	private CaseHistoryService caseHistoryService;
 	
+	/*
+	 *  添加病历
+	 *  
+	 * */
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addCaseHistory(@RequestParam String data,HttpServletRequest request){
@@ -41,7 +49,10 @@ public class CaseHistoryController {
 		 return JSON.toJSONString(response);
 	}
 	
-	//条件查询
+	/*
+	 *  查询某个医生所有病人病历信息
+	 *  
+	 * */
 	@RequestMapping("/dquery")
 	@ResponseBody
 	public String showdocterCaseHistory(@RequestParam String data, HttpServletRequest request){
@@ -61,7 +72,7 @@ public class CaseHistoryController {
 	
 	@RequestMapping("/show")
 	@ResponseBody
-	public String queryCaseHistory(HttpServletRequest request){
+	public String showAllCaseHistory(HttpServletRequest request){
 		
 		List<CaseHistory> caseHistoryList ;
 		caseHistoryList = caseHistoryService.queryAll();
@@ -72,10 +83,12 @@ public class CaseHistoryController {
         return jsonString;  
 	}
 	
-	//条件查询
+	/*
+	 *  查询某个医生的某个病人病历
+	 * */
 	@RequestMapping("/query")
 	@ResponseBody
-	public String showAllCaseHistory(@RequestParam String data, HttpServletRequest request){
+	public String queryCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		int patientId = jsonObject.getIntValue("patientId");

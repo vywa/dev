@@ -76,8 +76,8 @@ public class ReplySubjectServiceImpl extends BaseServiceImpl<ReplySubject,Intege
 			Query query = new Query();
 		//	query.addCriteria(Criteria.where("userId").is(userId).andOperator(Criteria.where("subjectId").is(subjectId).
 			///		andOperator(Criteria.where("replyId").gt(replyId))));
-			Criteria criteria =Criteria.where("userId").is(userId).andOperator(Criteria.where("replyId").gt(replyId).andOperator(Criteria.where("subjectId").is(subjectId)));
-			
+		//	Criteria criteria =Criteria.where("userId").is(userId).andOperator(Criteria.where("replyId").gt(replyId).andOperator(Criteria.where("subjectId").is(subjectId)));
+			Criteria criteria =Criteria.where("subjectId").is(subjectId).andOperator(Criteria.where("replyId").gt(replyId));
 			  query.addCriteria(criteria).with(new Sort(Direction.ASC, "replyId"));
 		//	query.query(Criteria.where("subjectId").is(subjectId).andOperator(Criteria.where("replyId").gt(replyId)));
 		//	forumPost = replySubjectDao.getPage(query, 0, 20);

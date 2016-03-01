@@ -120,6 +120,9 @@ http://www.springframework.org/schema/cache
 <bean id="bloodSuggerInfoDao" class="com.hengyun.dao.impl.patient.BloodSuggerInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="bloodSuggerInfoService" class="com.hengyun.service.impl.patient.BloodSuggerInfoServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="habitInfoDao" class="com.hengyun.dao.impl.patient.HabitInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="habitInfoService" class="com.hengyun.service.impl.patient.HabitInfoServiceImpl" parent="BaseServiceImpl"/>
+
 <!-- 朋友圈 -->
 <bean id="friendCircleDao" class="com.hengyun.dao.impl.friendcircle.FriendCircleDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="friendCircleService" class="com.hengyun.service.impl.friendcircle.FriendCircleServiceImpl" parent="BaseServiceImpl"/>
@@ -132,10 +135,10 @@ http://www.springframework.org/schema/cache
 
 <bean id="patientDao" class="com.hengyun.dao.impl.mongodb.PatientDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="patientService" class="com.hengyun.service.impl.mongodb.PatientServiceImpl" parent="BaseServiceImpl"/>
-
-<bean id="docterDao" class="com.hengyun.dao.impl.mongodb.DocterDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="docterService" class="com.hengyun.service.impl.mongodb.DocterServiceImpl" parent="BaseServiceImpl"/>
  -->
+<bean id="doctorDao" class="com.hengyun.dao.impl.doctor.DoctorDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="doctorService" class="com.hengyun.service.impl.doctor.DoctorServiceImpl" parent="BaseServiceImpl"/>
+
 
 <!-- redis配置 -->
 <bean id="redisDataSourceImpl" class="com.hengyun.dao.impl.RedisDataSourceImpl">

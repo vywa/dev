@@ -8,6 +8,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +32,8 @@ import com.hengyun.service.logininfo.UserAccountService;
 @RequestMapping("reglog")
 public class LoginInfoController {
 
+	private static final Logger log = LoggerFactory.getLogger(LoginInfoController.class);
+	
 	@Resource
 	private LoginInfoService loginInfoService;
 
@@ -41,6 +45,9 @@ public class LoginInfoController {
 	@Resource
 	private InformationService informationService;
 	
+	/*
+	 *  用户名账号登陆
+	 * */
 	@RequestMapping(value="/username",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String loginByUsername(@RequestParam String data,HttpServletRequest request) {
@@ -230,7 +237,7 @@ public class LoginInfoController {
 	
 	
 	/*
-	 *  显示账号
+	 *  显示所有账号
 	 * */
 	@RequestMapping("/show")
 	@ResponseBody
