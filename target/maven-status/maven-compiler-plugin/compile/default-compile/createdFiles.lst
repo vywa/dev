@@ -1,5 +1,7 @@
 com/hengyun/controller/logininfo/IndexCollectionController.class
+com/hengyun/controller/logininfo/mysql/LoginController.class
 com/hengyun/domain/forum/ForumGeneralInfo.class
+com/hengyun/service/logininfo/mysql/LoginService.class
 com/hengyun/util/sms/GetKeFuResult.class
 com/hengyun/service/impl/shiro/SimpleCacheManagerImpl.class
 com/hengyun/domain/information/NickIconResponse.class
@@ -16,6 +18,7 @@ com/hengyun/dao/impl/forum/ForumAuthorityDaoImpl.class
 com/hengyun/domain/monitor/Transaction.class
 com/hengyun/service/impl/message/SmsServiceImpl.class
 com/hengyun/domain/common/ResponseCode.class
+com/hengyun/service/impl/logininfo/mysql/LoginServiceImpl.class
 com/hengyun/service/logininfo/UserAccountService.class
 com/hengyun/service/impl/logininfo/LoginInfoServiceImpl.class
 com/hengyun/domain/information/InfoResponse.class

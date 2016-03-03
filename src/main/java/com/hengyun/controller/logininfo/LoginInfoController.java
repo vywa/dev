@@ -161,7 +161,6 @@ public class LoginInfoController {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
 		String recordTime = jsonObject.getString("recordTime");
-
 		String username = jsonObject.getString("openId");
 		String type= jsonObject.getString("type");
 		String userLoginIp = request.getRemoteAddr();
@@ -177,9 +176,9 @@ public class LoginInfoController {
 			recordTime = String.valueOf(date.getTime());
 		}
 		
-		
-		
+
 		LoginInfo loginInfo = new LoginInfo();
+		//创建账号
 		UserAccount account = new UserAccount();
 		loginInfo.setLoginUsername(username);
 		loginInfo.setUserLoginIp(userLoginIp);

@@ -56,8 +56,7 @@ public class BloodSuggerInfoController {
 		
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
-		
-		System.out.println(userId);
+
 		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, userId);
 	
 		sugger.setCode("211");
@@ -85,7 +84,6 @@ public class BloodSuggerInfoController {
 		
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
-		
 		
 		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, user);
 	
@@ -175,6 +173,7 @@ public class BloodSuggerInfoController {
 		int measureType = jsonObject.getIntValue("measureType");
 
 		BloodSuggerInfo sugger = new BloodSuggerInfo();
+		
 		sugger.setUserId(userId);
 		sugger.setBsValue(bsValue);
 		sugger.setMeasureTime(date);	

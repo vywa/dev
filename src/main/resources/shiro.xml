@@ -50,14 +50,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
     </bean>
     
     <!-- 自定义realm -->
-    <bean id="mongodbRealm" class="ccom.hengyun.util.shiro.MongodbRealm" depends-on="userDao,taskDao">
+    <bean id="myRealm" class="com.hengyun.util.shiro.MyRealm"></bean>
+    
+    <!-- <bean id="mongodbRealm" class="ccom.hengyun.util.shiro.MongodbRealm" depends-on="userDao,taskDao">
     	<property name="accountService" ref="accountService"></property>
     	<property name="credentialsMatcher" >
     		<bean class="org.apache.shiro.authc.credential.HashedCredentailsMatcher">
     			<property name="hashAlgorithmName"  value="MD5"></property>
     		</bean>
     	</property>
-    </bean>
+    </bean> -->
 
 	<!-- 自定义角色 roles[admin,doctor,patient,guest]-->
 	<bean id="roleOrFilter" class="com.hengyun.util.shiro.CustomRolesAuthorizationFilter"></bean>
