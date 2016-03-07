@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.patient.HabitInfoDao;
-import com.hengyun.domain.patient.HabitInfo;
+import com.hengyun.domain.casehistory.HabitInfo;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.patient.HabitInfoService;
 

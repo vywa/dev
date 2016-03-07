@@ -211,8 +211,6 @@ public class UserAccountController {
 	
 		
 	}
-	
-	
 
     /*
      * 短信接收注册

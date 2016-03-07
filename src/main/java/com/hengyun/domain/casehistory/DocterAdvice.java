@@ -1,9 +1,13 @@
 package com.hengyun.domain.casehistory;
 
+import java.io.Serializable;
+
 /*
  * 
- * 医嘱
+ * 医嘱信息描述
+ * 
  * */
-public class DocterAdvice {
+public class DocterAdvice implements Serializable{
 
+	
 }

@@ -1,7 +1,7 @@
 package com.hengyun.dao.patient;
 
 import com.hengyun.dao.BaseMongodbDao;
-import com.hengyun.domain.patient.HabitInfo;
+import com.hengyun.domain.casehistory.HabitInfo;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn

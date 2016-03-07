@@ -129,5 +129,69 @@ public class ReplySubjectController {
 			response.setDescription("获取列表成功");
 			return JSON.toJSONString(response);
 		}
+		
+		//删除帖子的回复
+				@RequestMapping(value="/deleteReply",produces = "text/html;charset=UTF-8")
+				@ResponseBody
+				public String deleteReply(@RequestParam String data,HttpServletRequest request){
+					//String tocken = request.getParameter("tocken");
+					ReplyListResponseCode response = new ReplyListResponseCode();
+					JSONObject jsonObject =JSON.parseObject(data);
+					int userId = jsonObject.getIntValue("userId");
+					int subjectId = jsonObject.getIntValue("subjectId");
+					int replyId = jsonObject.getIntValue("replyId");
+			
+					
+					//加载某人，某类，之前后包含关键字的帖子列表
+					replySubjectService.delete(replyId);
+					
+					response.setResponseCode(0);
+					response.setDescription("删除帖子成功");
+					return JSON.toJSONString(response);
+				}
+				
+				//针对回复发表回复
+				@RequestMapping(value="/reReply",produces = "text/html;charset=UTF-8")
+				@ResponseBody
+				public String reReply(@RequestParam String data,HttpServletRequest request){
+					//String tocken = request.getParameter("tocken");
+					ReplyListResponseCode response = new ReplyListResponseCode();
+					JSONObject jsonObject =JSON.parseObject(data);
+					
+					ReplySubject post = JSON.toJavaObject(jsonObject, ReplySubject.class);
+					int userId = jsonObject.getIntValue("userId");
+					int subjectId = jsonObject.getIntValue("subjectId");
+					int replyId = jsonObject.getIntValue("replyId");
+			
+					
+					//加载某人，某类，之前后包含关键字的帖子列表
+					replySubjectService.save(post);
+					
+					response.setResponseCode(0);
+					response.setDescription("发表帖子成功");
+					return JSON.toJSONString(response);
+				}
+				
+				//删除回复发表回复
+				@RequestMapping(value="/deletereReply",produces = "text/html;charset=UTF-8")
+				@ResponseBody
+				public String deletereReply(@RequestParam String data,HttpServletRequest request){
+					//String tocken = request.getParameter("tocken");
+					ReplyListResponseCode response = new ReplyListResponseCode();
+					JSONObject jsonObject =JSON.parseObject(data);
+					
+					ReplySubject post = JSON.toJavaObject(jsonObject, ReplySubject.class);
+					int userId = jsonObject.getIntValue("userId");
+					int subjectId = jsonObject.getIntValue("subjectId");
+					int replyId = jsonObject.getIntValue("replyId");
+			
+					
+					//加载某人，某类，之前后包含关键字的帖子列表
+					replySubjectService.delete(replyId);
+					
+					response.setResponseCode(0);
+					response.setDescription("删除帖子成功");
+					return JSON.toJSONString(response);
+				}
 	
 }

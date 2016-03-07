@@ -74,7 +74,7 @@ public class SubjectController {
 		ForumResponseCode response = new ForumResponseCode();
 		response.setResponseCode(0);
 		response.setDescription("更新成功");
-		 return JSON.toJSONString(response);
+		return JSON.toJSONString(response);
 	}
 	
 	//设置帖子

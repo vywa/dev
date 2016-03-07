@@ -1,5 +1,6 @@
 package com.hengyun.domain.patient;
 
+import com.hengyun.domain.casehistory.HabitInfo;
 import com.hengyun.domain.common.ResponseCode;
 
 /**

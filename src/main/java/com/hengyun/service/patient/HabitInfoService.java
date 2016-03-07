@@ -1,6 +1,6 @@
 package com.hengyun.service.patient;
 
-import com.hengyun.domain.patient.HabitInfo;
+import com.hengyun.domain.casehistory.HabitInfo;
 import com.hengyun.service.BaseService;
 
 /**

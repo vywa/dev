@@ -2,8 +2,7 @@ package com.hengyun.dao.impl.patient;
 
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.patient.HabitInfoDao;
-
-import com.hengyun.domain.patient.HabitInfo;
+import com.hengyun.domain.casehistory.HabitInfo;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn

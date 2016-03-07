@@ -1,5 +1,6 @@
 package com.hengyun.domain.casehistory;
 
+import java.io.Serializable;
 
 /*
  * 住院病历
@@ -7,7 +8,7 @@ package com.hengyun.domain.casehistory;
  * 特殊检查(特殊治疗)同意书、病危(重)通知书、医嘱单、辅助检查报告单、体温单、医学影像检查资料、病理资料等。
  * */
 
-public class HospitalizedRecords {
+public class HospitalizedRecords implements Serializable{
 
 	private HospitalizedRecordPreface hospitalizedRecordPreface;			//住院病历首页
 	private HospitalRecords hospitalRecords;														//入院记录

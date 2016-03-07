@@ -22,7 +22,9 @@ import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.CaseHistoryService;
 
 /*
- *  病历管理，设置
+ *  
+ *  病历管理，设置控制器
+ *  
  * */
 @Controller
 @RequestMapping("casehistory")
@@ -34,10 +36,11 @@ public class CaseHistoryController {
 	private CaseHistoryService caseHistoryService;
 	
 	/*
+	 * 
 	 *  添加病历
 	 *  
 	 * */
-	@RequestMapping("/add")
+	@RequestMapping(value="/add",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String addCaseHistory(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -45,15 +48,16 @@ public class CaseHistoryController {
 		caseHistoryService.addCaseHistory(caseHistory);
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
-		response.setMessage("add success");
+		response.setMessage("添加病历成功");
 		 return JSON.toJSONString(response);
 	}
 	
 	/*
+	 * 
 	 *  查询某个医生所有病人病历信息
 	 *  
 	 * */
-	@RequestMapping("/dquery")
+	@RequestMapping(value="/dquery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showdocterCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -63,30 +67,38 @@ public class CaseHistoryController {
 		Query query = Query.query(Criteria.where("docterId").is(docterId));
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
-		response.setMessage("query success");
+		response.setMessage("查询病历成功");
 		response.setList(caseHistoryList);
     	  return JSON.toJSONString(response);  
            
 	}
 	
-	
-	@RequestMapping("/show")
+	/*
+	 * 
+	 *  显示所有病历
+	 * 
+	 * */
+	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showAllCaseHistory(HttpServletRequest request){
 		
 		List<CaseHistory> caseHistoryList ;
 		caseHistoryList = caseHistoryService.queryAll();
-
-    	 String jsonString= JSON.toJSONString(caseHistoryList);  
+		CaseHistoryResponse response = new CaseHistoryResponse();
+		response.setCode("211");
+		response.setMessage("显示病历成功");
+    	response.setList(caseHistoryList);
            
     	
-        return jsonString;  
+        return  JSON.toJSONString(response);  
 	}
 	
 	/*
+	 *  
 	 *  查询某个医生的某个病人病历
+	 *  
 	 * */
-	@RequestMapping("/query")
+	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -97,11 +109,53 @@ public class CaseHistoryController {
 		Query query = Query.query(Criteria.where("patientId").is(patientId).andOperator(Criteria.where("docterId").is(docterId)));
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
-		response.setMessage("query success");
+		response.setMessage("查询病人病历成功");
 		response.setList(caseHistoryList);
     	return  JSON.toJSONString(response);  
        
 	}
 	
+	/*
+	 *  
+	 *  修改病历信息
+	 *  
+	 * */
+	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String updateCaseHistory(@RequestParam String data, HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		CaseHistoryResponse response = new CaseHistoryResponse();
+		int patientId = jsonObject.getIntValue("patientId");
+		int docterId = jsonObject.getIntValue("docterId");
+		List<CaseHistory> caseHistoryList ;
+		Query query = Query.query(Criteria.where("patientId").is(patientId).andOperator(Criteria.where("docterId").is(docterId)));
+		caseHistoryList = caseHistoryService.queryList(query);
+		response.setCode("211");
+		response.setMessage("更新病人病历成功");
+		response.setList(caseHistoryList);
+    	return  JSON.toJSONString(response);  
+       
+	}
 	
+	/*
+	 *  
+	 *  设置病历信息
+	 *  
+	 * */
+	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String setCaseHistory(@RequestParam String data, HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		CaseHistoryResponse response = new CaseHistoryResponse();
+		int patientId = jsonObject.getIntValue("patientId");
+		int docterId = jsonObject.getIntValue("docterId");
+		List<CaseHistory> caseHistoryList ;
+		Query query = Query.query(Criteria.where("patientId").is(patientId).andOperator(Criteria.where("docterId").is(docterId)));
+		caseHistoryList = caseHistoryService.queryList(query);
+		response.setCode("211");
+		response.setMessage("设置病人病历成功");
+		response.setList(caseHistoryList);
+    	return  JSON.toJSONString(response);  
+       
+	}
 }

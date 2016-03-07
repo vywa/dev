@@ -1,11 +1,13 @@
 package com.hengyun.domain.casehistory;
 
+import java.io.Serializable;
+
 /*
  *  入院记录包括：患者一般情况
  * */
-public class HospitalRecords {
+public class HospitalRecords implements Serializable{
 
-	private PatientGeneralInfo	patientGeneralInfo;					//患者一般情况
+	private PatientInfo	patientGeneralInfo;					//患者一般情况
 	private ChiefComplaint			chiefComplaint;							//主诉
 	private PresentDiseaseHistory presentDiseaseHistory;	//现病史
 	private PastDiseaseHistory	pastDiseaseHistory;					//既往病史
