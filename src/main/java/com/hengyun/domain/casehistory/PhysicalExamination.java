@@ -1,43 +1,51 @@
 package com.hengyun.domain.casehistory;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
 
 /*
+ * 
  * 体格检查
- * 内容包括体温、脉搏、呼吸、血压，一般情况，皮肤、粘膜，全身浅表淋巴结，
- * 头部及其器官，颈部，胸部(胸廓、肺部、心脏、血管)，腹部(肝、脾等)，
- * 直肠肛门，外生殖器，脊柱，四肢，神经系统等。
+ * 
  * */
 public class PhysicalExamination implements Serializable{
 
-	private double temperature;
-	private int heatBeat;
-	private int breath;
-	private int bloodPrussure;
-	public double getTemperature() {
-		return temperature;
-	}
-	public void setTemperature(double temperature) {
-		this.temperature = temperature;
-	}
-	public int getHeatBeat() {
-		return heatBeat;
-	}
-	public void setHeatBeat(int heatBeat) {
-		this.heatBeat = heatBeat;
-	}
-	public int getBreath() {
-		return breath;
-	}
-	public void setBreath(int breath) {
-		this.breath = breath;
-	}
-	public int getBloodPrussure() {
-		return bloodPrussure;
-	}
-	public void setBloodPrussure(int bloodPrussure) {
-		this.bloodPrussure = bloodPrussure;
-	}
+	private int caseHistoryId;						//病历id
+
+	private List<HashMap<Integer,Integer>> sitBloodPressure;				//座位血压
+	private List<HashMap<Integer,Integer>> dynamic;								//动态血压
+	
+	
+	private List<HashMap<Integer,Integer>> lowLimbBloodPressure;		//下肢血压
+	private int heartBeat;							//心率
+	
+	private boolean heartRegular;				//心律
+	private int weight;										//体重
+	private int height;										//身高
+	private float waistline;								//腰围
+	private int weightIndex;							//体重指数
+	private boolean pale;								//面色苍白
+	private boolean edema;							//浮肿
+	private boolean anemia;						//贫血
+	private boolean hypertrophy;				//扁桃体肥大
+	private boolean palate;							//软腭松弛
+	
+	private List<HashMap<String ,Boolean>> thyroidGland;		//甲状腺
+	private List<HashMap<String ,Boolean>> kidney;		//肾脏
+	private boolean lowLimbEdema;						//下肢水肿
+	private boolean cushingFace;								
+	private boolean hyperthyroidismExophthalmos;		//甲亢突眼症
+	private boolean cerebralInfarction;									//脑梗后遗症
+	private boolean brainBlood;												//脑出血后遗症
+	
+	private  List<HashMap<String,Boolean>> noise;				//杂音
+	
+	private int eyeDamage;															//眼底损害几级
+	private String dynamicPulse;													//动脉搏动
+	private String nerveSystem;													//神经系统
+	
+	private String other;																	//其他
 	
 	
 }

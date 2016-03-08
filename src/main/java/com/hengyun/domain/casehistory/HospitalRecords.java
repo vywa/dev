@@ -13,7 +13,7 @@ public class HospitalRecords implements Serializable{
 	private PastDiseaseHistory	pastDiseaseHistory;					//既往病史
 	private PersonalHistory		personalHistory;						//个人史
 	private MarriageHistory		marriageHistory;						//婚育史
-	private FamiliyHistory			familyHistory;								//家族史
+	private FamilyHistory			familyHistory;								//家族史
 	
 	private PhysicalExamination	physicalExcamination;		//体格检查
 	private OfficeSpecialInfo			officeSpecialInfo;					//专科情况

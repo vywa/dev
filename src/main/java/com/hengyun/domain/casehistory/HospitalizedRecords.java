@@ -18,7 +18,7 @@ public class HospitalizedRecords implements Serializable{
 	private BloodTransfusionConsent	bloodTransfusionConsent;			//输血同意书
 	private SpecialTreatmentConsent  	specialTreatmentConsent;			//特殊治疗通知书
 	private DeathDangerousNotice			deathDangerousNotice;					//病危通知书
-	private DocterAdvice								docterAdvice;										//医嘱（长期医嘱单和临时医嘱）
+	private DoctorAdvice								docterAdvice;										//医嘱（长期医嘱单和临时医嘱）
 	
 	private AssistExamination					assistExamination;							//辅助检查报告
 	private NurseReport								nurseReport;										//保温单

@@ -10,10 +10,11 @@ import java.util.List;
 */
 public class ChiefComplaint implements Serializable{
 
-	private int id;						//主诉编号
+	private int id;																				//主诉编号
 	private List<String> chiefComplaintContext;					//主诉内容
 	private int patientId;																//病人id
 	private int caseHistoryId;														//病历编号
+	
 	public int getId() {
 		return id;
 	}

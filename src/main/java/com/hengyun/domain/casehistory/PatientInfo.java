@@ -9,27 +9,59 @@ import java.util.Date;
 * 病人基本信息
 */
 public class PatientInfo implements Serializable{
-/*
-	姓名，性别，年龄，婚姻，民族，职业，出生地，
-	现住址，工作单位，身份证号，邮政编码，电话，
-	入院时间，记录时间，病史叙述者（注明可靠程度）
-	*/
-	private int id;
-	private String patientName;			
-	private String sex;		
-	private int age;
-	private boolean marrage;
-	private String ration;
-	private String hometown;
-	private String department;
-	private String workplace;
-	private String idCard;
-	private String potCode;
-	private String telephone;
-	private Date entryHospital;
-	private Date recordTime;
-	private String tellerName;
+
+	private int id;																				//病人id
 	
+	private String patientName;													//姓名
+	private String sex;																		//性别
+	private int age;																			//年龄
+	
+	private String ration;																	//民族
+	private String work;																	//职业
+	private String education;															//文化程度
+	
+	
+	private String idCard;																//身份证号
+	private String workAddress;													//单位地址
+	private String telephone;															//电话
+	
+	private String medicineCost;													//费用
+	private String emergencyPerson;											//紧急联系人
+	private String emergencyTel;													//紧急联系人电话
+	
+	private String infoSource;														//信息来源
+	private String introducer;														//介绍人
+	private int introducerCaseHistoryId;									//介绍人病历号
+	
+	private CostPay catagory;															//患者分类
+	private String other;																	//其他
+	private String chineseCure;														//中药治疗
+	
+	private String costPay;																//医保报销
+	
+	private boolean westChineseCure;									//中西医结合
+	
+	
+	public enum CostPay{
+		employee_health_insurance,
+		residents_medical_insurance,
+		leader_medical_insurance,
+		controy_count,
+		new_controy
+	}
+	
+	public CostPay getCatagory() {
+		return catagory;
+	}
+	public void setCatagory(CostPay catagory) {
+		this.catagory = catagory;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getPatientName() {
 		return patientName;
 	}
@@ -48,35 +80,23 @@ public class PatientInfo implements Serializable{
 	public void setAge(int age) {
 		this.age = age;
 	}
-	public boolean isMarrage() {
-		return marrage;
-	}
-	public void setMarrage(boolean marrage) {
-		this.marrage = marrage;
-	}
 	public String getRation() {
 		return ration;
 	}
 	public void setRation(String ration) {
 		this.ration = ration;
 	}
-	public String getHometown() {
-		return hometown;
+	public String getWork() {
+		return work;
 	}
-	public void setHometown(String hometown) {
-		this.hometown = hometown;
+	public void setWork(String work) {
+		this.work = work;
 	}
-	public String getDepartment() {
-		return department;
+	public String getEducation() {
+		return education;
 	}
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-	public String getWorkplace() {
-		return workplace;
-	}
-	public void setWorkplace(String workplace) {
-		this.workplace = workplace;
+	public void setEducation(String education) {
+		this.education = education;
 	}
 	public String getIdCard() {
 		return idCard;
@@ -84,11 +104,11 @@ public class PatientInfo implements Serializable{
 	public void setIdCard(String idCard) {
 		this.idCard = idCard;
 	}
-	public String getPotCode() {
-		return potCode;
+	public String getWorkAddress() {
+		return workAddress;
 	}
-	public void setPotCode(String potCode) {
-		this.potCode = potCode;
+	public void setWorkAddress(String workAddress) {
+		this.workAddress = workAddress;
 	}
 	public String getTelephone() {
 		return telephone;
@@ -96,30 +116,72 @@ public class PatientInfo implements Serializable{
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
-	public Date getEntryHospital() {
-		return entryHospital;
+	public String getMedicineCost() {
+		return medicineCost;
 	}
-	public void setEntryHospital(Date entryHospital) {
-		this.entryHospital = entryHospital;
+	public void setMedicineCost(String medicineCost) {
+		this.medicineCost = medicineCost;
 	}
-	public Date getRecordTime() {
-		return recordTime;
+	public String getEmergencyPerson() {
+		return emergencyPerson;
 	}
-	public void setRecordTime(Date recordTime) {
-		this.recordTime = recordTime;
+	public void setEmergencyPerson(String emergencyPerson) {
+		this.emergencyPerson = emergencyPerson;
 	}
-	public String getTellerName() {
-		return tellerName;
+	public String getEmergencyTel() {
+		return emergencyTel;
 	}
-	public void setTellerName(String tellerName) {
-		this.tellerName = tellerName;
+	public void setEmergencyTel(String emergencyTel) {
+		this.emergencyTel = emergencyTel;
 	}
-	public int getId() {
-		return id;
+	public String getInfoSource() {
+		return infoSource;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setInfoSource(String infoSource) {
+		this.infoSource = infoSource;
 	}
+	public String getIntroducer() {
+		return introducer;
+	}
+	public void setIntroducer(String introducer) {
+		this.introducer = introducer;
+	}
+	public int getIntroducerCaseHistoryId() {
+		return introducerCaseHistoryId;
+	}
+	public void setIntroducerCaseHistoryId(int introducerCaseHistoryId) {
+		this.introducerCaseHistoryId = introducerCaseHistoryId;
+	}
+	
+	public String getOther() {
+		return other;
+	}
+	public void setOther(String other) {
+		this.other = other;
+	}
+	public String getChineseCure() {
+		return chineseCure;
+	}
+	public void setChineseCure(String chineseCure) {
+		this.chineseCure = chineseCure;
+	}
+	public String getCostPay() {
+		return costPay;
+	}
+	public void setCostPay(String costPay) {
+		this.costPay = costPay;
+	}
+	public boolean isWestChineseCure() {
+		return westChineseCure;
+	}
+	public void setWestChineseCure(boolean westChineseCure) {
+		this.westChineseCure = westChineseCure;
+	}
+	
+	
+	
+	
+	
 	
 	
 	
