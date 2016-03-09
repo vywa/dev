@@ -142,7 +142,7 @@ public class CaseHistoryController {
 	 *  设置病历信息
 	 *  
 	 * */
-	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="/set",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String setCaseHistory(@RequestParam String data, HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);

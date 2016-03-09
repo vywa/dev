@@ -51,20 +51,15 @@ public class HabitInfoServiceImpl extends BaseServiceImpl<HabitInfo,Integer> imp
 		
 	}
 
-	/*
-	 *  更新用户健康数据
-	 * */
 	@Override
 	public void update(HabitInfo habitInfo) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("userId").is(habitInfo.getUserId()));
-		Update update = Update.update("cigarette", habitInfo.getCigarette()).addToSet("age", habitInfo.getAge()).
-				addToSet("wine", habitInfo.getWine()).addToSet("salt", habitInfo.getSalt()).
-				addToSet("weight", habitInfo.getWeight()).addToSet("inherit", habitInfo.isInherit());
-		
-		habitInfoDao.updateFirst(query, update);
 		
 	}
+
+	/*
+	 *  更新用户健康数据
+	 * */
 	
 	
 }

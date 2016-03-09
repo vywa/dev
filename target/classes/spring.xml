@@ -120,6 +120,9 @@ http://www.springframework.org/schema/cache
 <bean id="bloodSuggerInfoDao" class="com.hengyun.dao.impl.patient.BloodSuggerInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="bloodSuggerInfoService" class="com.hengyun.service.impl.patient.BloodSuggerInfoServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="healthTargetDao" class="com.hengyun.dao.impl.patient.HealthTargetDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="healthTargetService" class="com.hengyun.service.impl.patient.HealthTargetServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="habitInfoDao" class="com.hengyun.dao.impl.patient.HabitInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="habitInfoService" class="com.hengyun.service.impl.patient.HabitInfoServiceImpl" parent="BaseServiceImpl"/>
 

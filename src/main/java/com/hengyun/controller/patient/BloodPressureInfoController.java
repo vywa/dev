@@ -45,7 +45,7 @@ public class BloodPressureInfoController {
 	 * 查询某个指定时间段的测量数据
 	 * 
 	 * */
-	@RequestMapping("/show")
+	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBlood(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -75,7 +75,7 @@ public class BloodPressureInfoController {
 	 * 
 	 *  获取最近一段时间数据记录(单位是天，周，月)
 	 * */
-	@RequestMapping("/latestDay")
+	@RequestMapping(value="/latestDay",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String lates(HttpServletRequest request){
 	
@@ -101,7 +101,7 @@ public class BloodPressureInfoController {
 	 * 
 	 * 	医生查询某个用户的血压记录
 	 * */
-	@RequestMapping("/doctorShow")
+	@RequestMapping(value="/doctorShow",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
 		
@@ -134,7 +134,7 @@ public class BloodPressureInfoController {
 	 * 
 	 * 	查询某个用户的血压记录
 	 * */
-	@RequestMapping("/showAll")
+	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBlood(){
 		Query query = Query.query(Criteria.where("userId").exists(true));
@@ -152,7 +152,7 @@ public class BloodPressureInfoController {
 	 * 
 	 *  上传用户的血压数据
 	 * */
-	@RequestMapping("/upload")
+	@RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
@@ -186,4 +186,6 @@ public class BloodPressureInfoController {
 		return JSON.toJSONString(response);
 		
 	}
+	
+	
 }
