@@ -81,6 +81,24 @@ http://www.springframework.org/schema/cache
 <bean id="caseHistoryDao" class="com.hengyun.dao.impl.casehistory.CaseHistoryDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="caseHistoryService" class="com.hengyun.service.impl.casehistory.CaseHistoryServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="recipeDao" class="com.hengyun.dao.impl.casehistory.RecipeDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="recipeService"  class="com.hengyun.service.impl.casehistory.RecipeServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="doctorAdviceDao" class="com.hengyun.dao.impl.casehistory.DoctorAdviceDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="doctorAdviceService"  class="com.hengyun.service.impl.casehistory.DoctorAdviceServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="diagnosisDao" class="com.hengyun.dao.impl.casehistory.DiagnosisDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="diagnosisService"  class="com.hengyun.service.impl.casehistory.DiagnosisServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="affiliatedClinicalDiseaseDao" class="com.hengyun.dao.impl.casehistory.AffiliatedClinicalDiseaseDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="affiliatedClinicalDiseaseService" class="com.hengyun.service.impl.casehistory.AffiliatedClinicalDiseaseServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="riskFactorDao" class="com.hengyun.dao.impl.casehistory.RiskFactorDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="riskFactorService"  class="com.hengyun.service.impl.casehistory.RiskFactorServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="targetOrganDamageDao" class="com.hengyun.dao.impl.casehistory.TargetOrganDamageDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="targetOrganDamageService"  class="com.hengyun.service.impl.casehistory.TargetOrganDamageServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="reTreateInfoDao" class="com.hengyun.dao.impl.casehistory.ReTreateInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="reTreateInfoService"  class="com.hengyun.service.impl.casehistory.ReTreateInfoServiceImpl" parent="BaseServiceImpl"/>
 

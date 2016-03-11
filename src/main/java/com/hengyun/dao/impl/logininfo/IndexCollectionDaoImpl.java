@@ -33,7 +33,9 @@ public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,I
 		return true;
 	}
 
-	//索引自增
+	/*
+	 * 获取名称为name的自增索引
+	 * */
 	public int updateIndex(String name) {
 		// TODO Auto-generated method stub
 		int userId =0;
@@ -61,6 +63,48 @@ public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,I
 		        update.inc("adminID", 1);
 		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 				 userId = index.getAdminID();
+				 break;
+			case "recipeId":
+				 query = Query.query(Criteria.where("recipeId").gt(0));
+		         update = new Update();
+		        update.inc("recipeId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getRecipeId();
+				 break;
+			case "doctorAdviceId":
+				 query = Query.query(Criteria.where("doctorAdviceId").gt(0));
+		         update = new Update();
+		        update.inc("doctorAdviceId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getDoctorAdviceId();
+				 break;
+			case "riskFactorId":
+				 query = Query.query(Criteria.where("riskFactorId").gt(0));
+		         update = new Update();
+		        update.inc("riskFactorId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getRiskFactorId();
+				 break;
+			case "targetOrganDamageId":
+				 query = Query.query(Criteria.where("targetOrganDamageId").gt(0));
+		         update = new Update();
+		        update.inc("targetOrganDamageId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getTargetOrganDamageId();
+				 break;
+			case "affiliatedClinicalDiseaseId":
+				 query = Query.query(Criteria.where("affiliatedClinicalDiseaseId").gt(0));
+		         update = new Update();
+		        update.inc("affiliatedClinicalDiseaseId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getAffiliatedClinicalDiseaseId();
+				 break;
+			case "diagnosisId":
+				 query = Query.query(Criteria.where("diagnosisId").gt(0));
+		         update = new Update();
+		        update.inc("diagnosisId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getDiagnosisId();
 				 break;
 				 
 			default:

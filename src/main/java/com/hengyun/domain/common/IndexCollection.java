@@ -9,15 +9,67 @@ public class IndexCollection implements Serializable{
 
 	private int docterID;									//初始值100000000
 	private int patientID;								//初始值200000000
-	private int caseHistoryID;						//病历初值
+
 	private int reTreateInfoID;						//回访表
 	private int adminID;									//管理员０
+	
+	/*
+	 *  论坛模块索引
+	 * */
 	private int postID;										//帖子id
 	private int commentID;							//回复id
 	private int forumTemplateID;				//板块id
 	private int multiMediaID;						//多媒体信息id
 	
+	/*
+	 *  病历部分索引
+	 * 
+	 * */
+	private int caseHistoryID;						//病历初值
+	private int recipeId;									//处方id
+	private int doctorAdviceId;					//医嘱id
+	private int riskFactorId;							//危险因素id
+	private int targetOrganDamageId;		//器官受损id
+	private int affiliatedClinicalDiseaseId;		//伴随临床疾患
+	private int diagnosisId;							//诊断id
 	
+	
+	public int getDiagnosisId() {
+		return diagnosisId;
+	}
+	public void setDiagnosisId(int diagnosisId) {
+		this.diagnosisId = diagnosisId;
+	}
+	public int getAffiliatedClinicalDiseaseId() {
+		return affiliatedClinicalDiseaseId;
+	}
+	public void setAffiliatedClinicalDiseaseId(int affiliatedClinicalDiseaseId) {
+		this.affiliatedClinicalDiseaseId = affiliatedClinicalDiseaseId;
+	}
+	public int getTargetOrganDamageId() {
+		return targetOrganDamageId;
+	}
+	public void setTargetOrganDamageId(int targetOrganDamageId) {
+		this.targetOrganDamageId = targetOrganDamageId;
+	}
+	public int getRiskFactorId() {
+		return riskFactorId;
+	}
+	public void setRiskFactorId(int riskFactorId) {
+		this.riskFactorId = riskFactorId;
+	}
+	public int getDoctorAdviceId() {
+		return doctorAdviceId;
+	}
+	public void setDoctorAdviceId(int doctorAdviceId) {
+		this.doctorAdviceId = doctorAdviceId;
+	}
+	public int getRecipeId() {
+		return recipeId;
+	}
+	public void setRecipeId(int recipeId) {
+		this.recipeId = recipeId;
+	}
 	public int getMultiMediaID() {
 		return multiMediaID;
 	}

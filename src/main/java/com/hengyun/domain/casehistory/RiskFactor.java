@@ -9,8 +9,9 @@ import java.io.Serializable;
 */
 public class RiskFactor implements Serializable{
 
-	private int caseHistoryId;								//病历号
+	private int caseHistoryId;									//病历号
 	
+	private int riskFactorId;										//id
 	private int hightBloodPressure;						//高血压几级
 	private int age;														//年龄
 	private boolean cigerate;									//吸烟
@@ -19,13 +20,18 @@ public class RiskFactor implements Serializable{
 	private boolean vesselherit;								//早发心血管病家族史
 	private boolean fat;												//肥胖或腹型肥胖
 	
-	private boolean 	hcy;												//血同型半胱氨酸升高
+	private boolean 	hcy;										//血同型半胱氨酸升高
 	
-	private boolean hsCRP;										
+	private boolean hsCRP;										//高敏c反应蛋白
 	private boolean physicalActivity;					//体力活动
 	
 	
-	
+	public int getRiskFactorId() {
+		return riskFactorId;
+	}
+	public void setRiskFactorId(int riskFactorId) {
+		this.riskFactorId = riskFactorId;
+	}
 	public int getCaseHistoryId() {
 		return caseHistoryId;
 	}

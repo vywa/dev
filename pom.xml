@@ -202,7 +202,13 @@
 	</dependency>
 -->
 
-
+	<!-- 引入quartz -->
+	<dependency>
+		<groupId>org.quartz-scheduler</groupId>
+		<artifactId>quartz</artifactId>
+		<version>2.2.2</version>
+	</dependency>
+	
 		<!-- 导入fastjson -->
 	<dependency>
 			<groupId>com.alibaba</groupId>

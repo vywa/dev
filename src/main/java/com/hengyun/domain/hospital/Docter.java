@@ -5,6 +5,7 @@ import java.io.Serializable;
 //医生信息
 public class Docter implements Serializable{
 
+	
 	private String workNum;
 	private String name;
 	private String level;						//医生职称

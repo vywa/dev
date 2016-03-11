@@ -8,6 +8,7 @@ import com.hengyun.service.BaseService;
 
 public interface CaseHistoryService  extends BaseService<CaseHistory,Integer> {
 
+	public CaseHistory query(int caseHistoryId);
 	public List<CaseHistory> queryAll();
 	
 	public int addCaseHistory(CaseHistory caseHistory);

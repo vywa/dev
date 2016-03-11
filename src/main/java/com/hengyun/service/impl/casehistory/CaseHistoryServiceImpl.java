@@ -27,10 +27,27 @@ public class CaseHistoryServiceImpl extends BaseServiceImpl<CaseHistory,Integer>
 		return caseHistoryDao.queryList(query);
 		
 	}
+	
+	
 
 	public int addCaseHistory(CaseHistory caseHistory) {
 		// TODO Auto-generated method stub
 		return caseHistoryDao.addCaseHistory(caseHistory);
+	}
+
+
+	/*
+	 *  查询某个病历
+	 * */
+	@Override
+	public CaseHistory query(int caseHistoryId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("caseHistoryId").is(caseHistoryId));
+		CaseHistory caseHistory = caseHistoryDao.queryOne(query);
+		if(caseHistory != null){
+			return caseHistory;
+		}
+		return null;
 	}
 
 

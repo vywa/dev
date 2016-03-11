@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class AffiliatedClinicalDisease implements Serializable{
 
 	private int caseHistoryId;													//病历号
+	private int affiliatedClinicalDiseaseId;								//id
    private boolean 	cerebralVascularDisease;					//脑血管病
    private boolean cardiovascularDisease;						//心血管病
    private boolean kidneyDisease;										//肾脏疾病
@@ -57,6 +58,12 @@ public boolean isDiabetesMelliitus() {
 }
 public void setDiabetesMelliitus(boolean diabetesMelliitus) {
 	this.diabetesMelliitus = diabetesMelliitus;
+}
+public int getAffiliatedClinicalDiseaseId() {
+	return affiliatedClinicalDiseaseId;
+}
+public void setAffiliatedClinicalDiseaseId(int affiliatedClinicalDiseaseId) {
+	this.affiliatedClinicalDiseaseId = affiliatedClinicalDiseaseId;
 }
    
    

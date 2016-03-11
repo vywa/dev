@@ -36,6 +36,39 @@ xmlns:context="http://www.springframework.org/schema/context"
         <property name="filters" value="mergeStat" />  
     </bean>  
 
+	  <!-- openfire数据源 -->  
+    <bean name="openfire" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
+        <property name="url" value="${openfire.url}" />  
+        <property name="username" value="${openfire.username}" />  
+        <property name="password" value="${openfire.password}" />  
+        <property name="initialSize" value="1" />  
+        <property name="maxActive" value="20" />  
+        <property name="minIdle" value="1" />  
+        <property name="maxWait" value="60000" />  
+        <property name="validationQuery" value="${validationQuery}" />  
+        <property name="testOnBorrow" value="false" />  
+        <property name="testOnReturn" value="false" />  
+        <property name="testWhileIdle" value="true" />  
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />  
+        <property name="minEvictableIdleTimeMillis" value="25200000" />  
+        <property name="removeAbandoned" value="true" />  
+        <property name="removeAbandonedTimeout" value="1800" />  
+        <property name="logAbandoned" value="true" />  
+        <property name="filters" value="mergeStat" />  
+    </bean>  
+	
+	    <bean id="openfireSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+    	<property name="typeAliasesPackage" value="com.hengyun.domain.friendcircle"/>
+        <property name="dataSource" ref="openfire" />  
+        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/friendcircle/mysql/mapper/*Mapper.xml" />  
+    </bean>  
+
+  <!-- dao扫描 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.hengyun.dao.friendcircle.mysql" />  
+        <property name="sqlSessionFactoryBeanName" value="openfireSessionFactory" />  
+    </bean>  
+  
 	
  	<!-- myBatis文件 -->  
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  

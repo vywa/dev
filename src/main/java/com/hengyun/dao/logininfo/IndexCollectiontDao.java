@@ -10,6 +10,8 @@ public interface IndexCollectiontDao extends BaseMongodbDao<IndexCollection,Inte
 
 	public boolean load();
 	
-	//根据索引名称自增索引
+	/*
+	 * 根据索引名称自增索引
+	 * */
 	public int updateIndex(String name);
 }

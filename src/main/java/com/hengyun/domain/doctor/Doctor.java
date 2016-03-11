@@ -16,16 +16,15 @@ public class Doctor extends GeneralPerson implements Serializable{
 
 	private List<Integer>				patients;										//医生的病人列表
 	
-	private List<Integer>				retreats;										//回访列表
-	
-	
+	private List<Integer>				followPatient;										//随访列表
 
-	public List<Integer> getRetreats() {
-		return retreats;
+
+	public List<Integer> getFollowPatient() {
+		return followPatient;
 	}
 
-	public void setRetreats(List<Integer> retreats) {
-		this.retreats = retreats;
+	public void setFollowPatient(List<Integer> followPatient) {
+		this.followPatient = followPatient;
 	}
 
 	public List<Integer> getCaseHistory() {
