@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.casehistory.DoctorAdviceDao;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.casehistory.DoctorAdvice;
 import com.hengyun.service.casehistory.DoctorAdviceService;
 import com.hengyun.service.impl.BaseServiceImpl;
@@ -25,7 +25,7 @@ public class DoctorAdviceServiceImpl extends BaseServiceImpl<DoctorAdvice,Intege
 	private DoctorAdviceDao doctorAdviceDao;
 	
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 	
 	/*
 	 *  添加医嘱

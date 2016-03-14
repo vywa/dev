@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.casehistory.RecipeDao;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.casehistory.DoctorAdvice;
 import com.hengyun.domain.casehistory.Recipe;
 import com.hengyun.service.casehistory.RecipeService;
@@ -26,7 +26,7 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 	@Resource 
 	private RecipeDao recipeDao;
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 	/*
 	 *  添加处方
 	 * */

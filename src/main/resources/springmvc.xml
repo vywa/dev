@@ -35,7 +35,7 @@
 
 	 <!-- 配置拦截器，多个拦截器顺序执行-->
 
-<!-- 
+	<!-- 
     <mvc:interceptors>
          
         <mvc:interceptor>
@@ -75,9 +75,14 @@
             </bean>
            
         </mvc:interceptor>
-   
+        
+	<mvc:interceptor>
+	 <mvc:mapping path="/**" />
+	<bean class="com.hengyun.util.interceptor.AuthenticateInterceptor">
+	</bean>
+	</mvc:interceptor>   
     </mvc:interceptors>
-  -->
+	 -->
  
 	<!--页面视图层信息 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

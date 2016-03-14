@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.common.IndexCollection;
 
 
@@ -24,7 +24,7 @@ import com.hengyun.domain.common.IndexCollection;
 public class IndexCollectionController {
 
 	@Resource 
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 	
 	@RequestMapping("/init")
 	@ResponseBody

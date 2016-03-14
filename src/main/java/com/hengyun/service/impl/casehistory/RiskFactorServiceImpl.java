@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.casehistory.RiskFactorDao;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.casehistory.Diagnosis.DangerLevel;
 import com.hengyun.domain.casehistory.RiskFactor;
 import com.hengyun.service.casehistory.RiskFactorService;
@@ -24,7 +24,7 @@ public class RiskFactorServiceImpl extends BaseServiceImpl<RiskFactor,Integer> i
 	private RiskFactorDao riskFactorDao;
 	
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 	
 	/*
 	 *  添加危险因素

@@ -13,22 +13,37 @@ import java.util.List;
 
 public class UserRole implements Serializable{
 
-	private int userId;								//用户id
-	private List<Roles> roles;					//角色列表
+	private int userId;															//用户id
+	
+	//private List<Roles> roles;												角色列表
+
+	private List<Resources> resourceList;						//资源列表
+	
+	private Date lastModified;											//最近更改时间
+
+	
+	public List<Resources> getResourceList() {
+		return resourceList;
+	}
+	
+	public void setResourceList(List<Resources> resourceList) {
+		this.resourceList = resourceList;
+	}
+	
+	public Date getLastModified() {
+		return lastModified;
+	}
+	
+	public void setLastModified(Date lastModified) {
+		this.lastModified = lastModified;
+	}
 	
 	public int getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public List<Roles> getRoles() {
-		return roles;
-	}
-	public void setRoles(List<Roles> roles) {
-		this.roles = roles;
-	}
-	
-	
-	
+
 }

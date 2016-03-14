@@ -33,7 +33,18 @@ public class IndexCollection implements Serializable{
 	private int affiliatedClinicalDiseaseId;		//伴随临床疾患
 	private int diagnosisId;							//诊断id
 	
+	/*
+	 *  资源管理
+	 * */
+	private int resourceId;								//资源id
 	
+	
+	public int getResourceId() {
+		return resourceId;
+	}
+	public void setResourceId(int resourceId) {
+		this.resourceId = resourceId;
+	}
 	public int getDiagnosisId() {
 		return diagnosisId;
 	}

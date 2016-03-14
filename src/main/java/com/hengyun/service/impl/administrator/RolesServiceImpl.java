@@ -51,4 +51,10 @@ public class RolesServiceImpl extends BaseServiceImpl<Roles,Integer> implements 
 		return rolesList;
 	}
 
+	@Override
+	public void deleteRole(Roles role) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

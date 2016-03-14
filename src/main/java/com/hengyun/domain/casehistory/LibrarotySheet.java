@@ -11,6 +11,7 @@ import java.util.Date;
 public class LibrarotySheet implements Serializable{
 
 	private int sheetId;																	// 化验单id
+	
 	private String name;																	//病人名字
 	private String sex;																		//性别
 	private int age;																			//年龄

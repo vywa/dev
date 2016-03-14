@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.casehistory.TargetOrganDamageDao;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.casehistory.TargetOrganDamage;
 import com.hengyun.service.casehistory.TargetOrganDamageService;
 import com.hengyun.service.impl.BaseServiceImpl;
@@ -23,7 +23,7 @@ public class TargetOrganDamageServiceImpl extends BaseServiceImpl<TargetOrganDam
 	private TargetOrganDamageDao targetOrganDamageDao;
 	
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 	
 	/*
 	 *  添加记录

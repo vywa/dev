@@ -59,7 +59,9 @@ public class UserRoleController {
 		return JSON.toJSONString(responseCode);
 	}
 	
-	//hasPermission
+	/*
+	 *  用户对某个资源是否有权限操作
+	 * */
 	@RequestMapping(value="/hasPermission",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String hasPermission(HttpServletRequest request){

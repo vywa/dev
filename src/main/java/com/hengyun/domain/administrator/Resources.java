@@ -17,14 +17,12 @@ public class Resources implements Serializable{
 	private String description;										//资源描述
 	private String status;													//资源状态
 	
-	private List<Permission> permissionList;			//资源对应的权限列表
+//	private List<Permission> permissionList;			资源对应的权限列表
 	
 	private Date createTime;											//创建日期
 	private Date lastModifyTime;									//最近修改时间
 	
-	
-	
-	
+
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -39,14 +37,6 @@ public class Resources implements Serializable{
 
 	public void setLastModifyTime(Date lastModifyTime) {
 		this.lastModifyTime = lastModifyTime;
-	}
-
-	public List<Permission> getPermissionList() {
-		return permissionList;
-	}
-
-	public void setPermissionList(List<Permission> permissionList) {
-		this.permissionList = permissionList;
 	}
 
 	public String getStatus() {

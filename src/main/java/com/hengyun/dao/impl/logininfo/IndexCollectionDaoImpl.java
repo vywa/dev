@@ -5,14 +5,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.impl.BaseMongodbDaoImpl;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.common.IndexCollection;
 
 /*
  *  管理员数据访问层实现
  * */
 
-public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,Integer> implements IndexCollectiontDao{
+public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,Integer> implements IndexCollectionDao{
 
 	@Override
 	protected Class<IndexCollection> getEntityClass() {
@@ -106,7 +106,13 @@ public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,I
 		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 				 userId = index.getDiagnosisId();
 				 break;
-				 
+			case "resourceId":
+				 query = Query.query(Criteria.where("resourceId").gt(0));
+		         update = new Update();
+		        update.inc("resourceId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getResourceId();
+				 break;
 			default:
 				 break;
 		}

@@ -6,7 +6,7 @@ import com.hengyun.domain.common.IndexCollection;
 /*
  *  索引访问层
  * */
-public interface IndexCollectiontDao extends BaseMongodbDao<IndexCollection,Integer>{
+public interface IndexCollectionDao extends BaseMongodbDao<IndexCollection,Integer>{
 
 	public boolean load();
 	

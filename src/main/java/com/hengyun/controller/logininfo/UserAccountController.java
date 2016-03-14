@@ -339,7 +339,7 @@ public class UserAccountController {
 			ResponseCode response = new ResponseCode();
 			UserAccount account = JSON.toJavaObject(jsonObject, UserAccount.class);
 			String username = jsonObject.getString("workNum");
-			//查看用户是否存在，包括用户名合法及是否注册
+		
 			if(!docterService.exist(username)){
 				response.setCode("103");
 				response.setMessage("该医生为录入医院数据库");
@@ -402,6 +402,7 @@ public class UserAccountController {
     }
     
     /*
+     * 
      *  修改密码
      *  
      * */
@@ -587,9 +588,11 @@ public class UserAccountController {
     		Update update = Update.update("password", password);
     		userAccountService.updateFirst(query, update);
     		response.setCode("206");
+    		//初始密码123456
     		//返回原始密码以及userId，存放在message里面
     		response.setMessage(String.valueOf(userId));
     		response.setOldPassword(oldPassword);
+    		
     		
     	} else {
     		response.setCode("116");

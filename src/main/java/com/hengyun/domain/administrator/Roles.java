@@ -12,14 +12,14 @@ import java.util.List;
 public class Roles implements Serializable{
 
 	private int roleId;												//角色对应的id
-	private String roleName;									//角色名称
+	private String roleName;									//角色名称(医生，病人，管理员)
 	private String description;								//角色描述
 	
 	private List<Resources> resourceList;			//资源列表
+	
 	private Date createTime;									//创建时间
-	
-	
-	
+
+
 	public Date getCreateTime() {
 		return createTime;
 	}

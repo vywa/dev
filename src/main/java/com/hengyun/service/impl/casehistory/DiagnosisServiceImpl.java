@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.casehistory.DiagnosisDao;
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.domain.casehistory.AffiliatedClinicalDisease;
 import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.casehistory.Diagnosis;
@@ -31,7 +31,7 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 	private DiagnosisDao diagnosisDao;
 	
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 
 	@Resource
 	private RiskFactorService riskFactorService;

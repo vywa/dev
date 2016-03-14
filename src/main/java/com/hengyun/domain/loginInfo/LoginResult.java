@@ -19,9 +19,17 @@ public class LoginResult extends BaseResponseCode{
 	private String type ;							//类型
 	private String loginName;				//登陆名
 	
+	private boolean changePassword;	//医生需要修改密码
 	
-	
-	
+
+	public boolean isChangePassword() {
+		return changePassword;
+	}
+
+	public void setChangePassword(boolean changePassword) {
+		this.changePassword = changePassword;
+	}
+
 	public String getType() {
 		return type;
 	}

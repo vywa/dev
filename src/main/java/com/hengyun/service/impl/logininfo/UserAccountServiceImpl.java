@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.hengyun.dao.logininfo.IndexCollectiontDao;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.logininfo.UserAccountDao;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.LoginResult;
@@ -28,7 +28,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 	private UserAccountDao userAccountDao;
 
 	@Resource
-	private IndexCollectiontDao indexCollectionDao;
+	private IndexCollectionDao indexCollectionDao;
 					
 	@Resource
 	private RegisterCacheService registerCacheService;
@@ -60,7 +60,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			} else if(userAccount.getCatagory().equals("doctor")) {
 				userId = indexCollectionDao.updateIndex("doctor");
 				userAccount.setId(userId);
-
+				userAccount.setPassword("123456");
 			}else if(userAccount.getCatagory().equals("admin")) {
 				userId = indexCollectionDao.updateIndex("admin");
 				userAccount.setId(userId);

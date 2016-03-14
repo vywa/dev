@@ -49,10 +49,6 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		return loginInfoDao.queryList(query);
 	}
 
-	/*
-	 *  登陆业务
-	 * */
-
 	
 	/*
 	 *  通过用户账号登陆
@@ -65,7 +61,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		LoginResult loginResult  = userAccountService.validateUserBySign(loginInfo.getLoginUsername(), type,loginInfo.getPassword());
 		if(loginResult!=null){
 			int userId = Integer.valueOf(loginResult.getUserId());
-		
+			boolean isDoctor = false;
 				String old = getTockenById(userId);
 				//检测用户是否登陆，已经登陆，则使其退出
 				if(old!=null){
@@ -77,7 +73,11 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				 if(loginResult.getUserCode()==3){
 					 loginInfo.setCatagory("patient");
 				 } else if(loginResult.getUserCode()==2){
+					 
 					 loginInfo.setCatagory("doctor");
+					 if(loginInfo.getPassword().equals("123456")){
+						 isDoctor = true;
+					 }
 				 }else if(loginResult.getUserCode()==1){
 					 loginInfo.setCatagory("admin");
 				 }
@@ -87,6 +87,9 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				loginInfo.setUserId(userId);
 				loginInfoDao.save(loginInfo);
 				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
+				
+				loginResult.setChangePassword(isDoctor);
+			
 				loginResult.setMessage(tocken);
 				loginResult.setType(type);
 				loginResult.setLoginName(loginInfo.getLoginUsername());

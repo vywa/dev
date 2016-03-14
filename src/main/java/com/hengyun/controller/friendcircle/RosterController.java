@@ -38,16 +38,16 @@ public class RosterController {
 	// 获取好友列表
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String docterRequest(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+	public String docterRequest( HttpServletRequest request) {
+	//	JSONObject jsonObject = JSON.parseObject(data);
 		String tocken = request.getParameter("tocken");
-		int jid = jsonObject.getIntValue("userId");
+		//int jid = jsonObject.getIntValue("userId");
 		RosterResponse response = new RosterResponse();
-	//	int userId = loginInfoService.isOnline(tocken);
+		int userId = loginInfoService.isOnline(tocken);
 		
 	
 			// 查找是否已经在好友列表中
-			List<Integer> userList = rosterService.getFriendList(String.valueOf(jid));
+			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			List<Information> infos = new ArrayList<Information>();
 			
 			for(Integer temp :userList){
