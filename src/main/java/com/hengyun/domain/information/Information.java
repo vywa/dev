@@ -15,13 +15,15 @@ public class Information implements Serializable{
 	
 	private int userId;								//用户ID
 	private String trueName;					//姓名
-	private String sex;						//性别
+	private String sex;								//性别
 	
 	private String birthday;						//生日
 	private String iconUrl;							//用户图像地址
 	private String nation;						//民族
 	private String hometown;				//出生地
-	private String address;				//现住址
+	private String address;						//现住址
+	private int age;									//用户年龄
+	
 	
 	
 	private String height;							//身高
@@ -40,6 +42,12 @@ public class Information implements Serializable{
 	
 	
 	
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	public String getHeight() {
 		return height;
 	}

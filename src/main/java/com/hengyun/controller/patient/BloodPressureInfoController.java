@@ -50,16 +50,9 @@ public class BloodPressureInfoController {
 	public String showBlood(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
 		PressureResponse response = new PressureResponse();
+
+		int userId = (int)request.getAttribute("userId");
 		
-		//String user = jsonObject.getString("userId");
-		String tocken = request.getParameter("tocken");
-		
-		int userId = loginInfoService.isOnline(tocken);
-		
-		if(userId<0){
-			response.setCode("112");
-			response.setBloodPressureInfo(null);
-		} else {
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId);
@@ -67,7 +60,7 @@ public class BloodPressureInfoController {
 		
 		response.setCode("211");
 		response.setBloodPressureInfo(bloodList);
-		}
+		
 		return  JSONObject.toJSONString(response);
 	}
 	
@@ -80,20 +73,12 @@ public class BloodPressureInfoController {
 	public String lates(HttpServletRequest request){
 	
 		PressureResponse response = new PressureResponse();
-		String tocken = request.getParameter("tocken");
-		//String user = jsonObject.getString("userId");
-		int userId = loginInfoService.isOnline(tocken);
-		
-		if(userId<0){
-			response.setCode("112");
-			response.setBloodPressureInfo(null);
-		} else {
-			
+		int userId = (int)request.getAttribute("userId");
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getlatestTime(userId);
 
 		response.setCode("211");
 		response.setBloodPressureInfo(bloodList);
-		}
+		
 		return  JSONObject.toJSONString(response);
 	}
 	
@@ -101,38 +86,27 @@ public class BloodPressureInfoController {
 	 * 
 	 * 	医生查询某个用户的血压记录
 	 * */
-	@RequestMapping(value="/doctorShow",produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="/doctorQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
 		
 		JSONObject jsonObject =JSON.parseObject(data);
 		PressureResponse response = new PressureResponse();
-		
-		//String user = jsonObject.getString("userId");
-		String tocken = request.getParameter("tocken");
 		int userId2 = jsonObject.getIntValue("userId");
-		int userId = loginInfoService.isOnline(tocken);
-		
-		if(userId<0){
-			response.setCode("112");
-			response.setBloodPressureInfo(null);
-		} else {
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 		
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId2);
-			
-		
 		response.setCode("211");
 		response.setBloodPressureInfo(bloodList);
-		}
+		
 		return  JSONObject.toJSONString(response);
 		
 	}
 	
 	/*
 	 * 
-	 * 	查询某个用户的血压记录
+	 * 	查询所有用户的血压记录
 	 * */
 	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -157,19 +131,15 @@ public class BloodPressureInfoController {
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
 		JSONObject jsonObject =JSON.parseObject(data);
-		String tocken = request.getParameter("tocken");
 		HealthInfoResponse response = new HealthInfoResponse();
 		
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId<0){
-			response.setCode("-1");
-			response.setMessage("record falure");
-		} else {
+		int userId = (int)request.getAttribute("userId");
+		
 		long date = jsonObject.getLongValue("measureTime");
 		int highBP = jsonObject.getIntValue("highBP");
 		int lowBP = jsonObject.getIntValue("lowBP");
 		int heartRate = jsonObject.getIntValue("heartRate");
-	
+
 		BloodPressureInfo blood = new BloodPressureInfo();
 		blood.setUserId(userId);
 		blood.setMeasureTime(date);
@@ -182,7 +152,7 @@ public class BloodPressureInfoController {
 		response.setCode("0");
 		response.setMessage("record success");
 	
-		}
+	
 		return JSON.toJSONString(response);
 		
 	}

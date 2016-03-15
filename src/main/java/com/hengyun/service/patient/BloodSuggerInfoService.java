@@ -30,4 +30,9 @@ public interface BloodSuggerInfoService extends BaseService<BloodSuggerInfo,Inte
 		 * 
 		 * */
 		public List<BloodSuggerInfo> getlatestTime(int userId,int count,String type) ;
+		
+		/*
+		 *  血糖是否需要处理
+		 * */
+		public boolean needAlarm(BloodSuggerInfo bloodSuggerInfo);
 }

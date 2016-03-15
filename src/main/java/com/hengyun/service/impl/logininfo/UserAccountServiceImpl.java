@@ -68,6 +68,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			userAccountDao.save(userAccount);
 			//添加用户个人信息
 			Information information = new Information();
+			information.setMobilephone(userAccount.getMobilephone());
 			informationService.add(information, userId);
 			log.info("用户账号注册成功 , "+"身份为: "+userAccount.getCatagory()+" userId为: "+userId);
 			return userId;

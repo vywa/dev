@@ -114,4 +114,14 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		
 	}
 
+	/*
+	 *  血压是否需要报警
+	 *  连续两天血压高于一定值
+	 * */
+	@Override
+	public boolean needAlarm(BloodPressureInfo bloodPressureInfo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

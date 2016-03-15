@@ -18,6 +18,9 @@ public interface UserRoleService extends BaseService<UserRole,Integer>{
 	//添加用户资源
 	public void addUserRole(UserRole userRole);
 
+	//查询用户资源
+	public UserRole query(int userId);
+	
 	//用户添加资源
 	public void addResource(Resources resources ,int userId);
 	

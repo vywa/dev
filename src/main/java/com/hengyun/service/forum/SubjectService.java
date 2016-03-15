@@ -7,7 +7,7 @@ import com.hengyun.service.BaseService;
 
 public interface SubjectService  extends BaseService<Subject,Integer> {
 
-	public int post(Subject forumPost,String tocken);
+	public int post(Subject forumPost,int userId);
 	
 	public void delete(int subjectId);
 	

@@ -44,21 +44,54 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole,Integer> imple
 	private UserAccountService userAccountService;
 
 	/*
-	 *  添加角色表
+	 *  注册时添加角色表
 	 * */
 	@Override
 	public void addUserRole(UserRole userRole) {
 		// TODO Auto-generated method stub
-		
+		Query query = Query.query(Criteria.where("userId").is(userRole.getUserId()));
+		Query query2 = Query.query(Criteria.where("roleName").is(userRole.getRoleName()));
+
+			List<Resources> rlist = rolesService.queryOne(query2).getResourceList();
+			userRole.setResourceList(rlist);
+			userRoleDao.save(userRole);
+	
 	}
 
+	/*
+	 *  查询用户
+	 * */
+	@Override
+	public UserRole  query(int userId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("userId").is(userId));
+		UserRole userRole = userRoleDao.queryOne(query);
+		return userRole;
+	
+	}
+
+	
 	/*
 	 *  给用户添加资源
 	 * */
 	@Override
 	public void addResource(Resources resources, int userId) {
 		// TODO Auto-generated method stub
-		
+		Query query = Query.query(Criteria.where("userId").is(userId));
+		List<Resources> rlist = userRoleDao.queryOne(query).getResourceList();
+		boolean exist = false;
+		for(Resources temp : rlist){
+			if(temp.getResourceName().equals(resources.getResourceName())){
+				exist = true;
+				break;
+			}
+		}
+		if(!exist){
+			rlist.add(resources);
+			Update update = Update.update("resourceList", rlist);
+			userRoleDao.updateFirst(query, update);
+			log.info("用户添加了一个资源权限");
+		}
 	}
 
 	/*
@@ -67,16 +100,36 @@ public class UserRoleServiceImpl extends BaseServiceImpl<UserRole,Integer> imple
 	@Override
 	public void deleteResource(Resources resources, int userId) {
 		// TODO Auto-generated method stub
-		
+		Query query = Query.query(Criteria.where("userId").is(userId));
+		List<Resources> rlist = userRoleDao.queryOne(query).getResourceList();
+		CopyOnWriteArrayList<Resources> cow = new CopyOnWriteArrayList<Resources>(rlist);
+		for(Resources temp : cow){
+			if(temp.getResourceName().equals(resources.getResourceName())){
+				cow.remove(temp);
+				break;
+			}
+		}
+		Update update = Update.update("resourceList", cow);
+		userRoleDao.updateFirst(query, update);
+		log.info("用户删除了一个资源权限");
 	}
 
 	/*
-	 *  用户是否
+	 *  用户是否拥有该资源
 	 * */
 	@Override
 	public boolean hasResource(Resources resource, int userId) {
 		// TODO Auto-generated method stub
-		return false;
+		Query query = Query.query(Criteria.where("userId").is(userId));
+		List<Resources> rlist = userRoleDao.queryOne(query).getResourceList();
+		boolean hasResources = false;
+		for(Resources temp :rlist){
+			if(temp.getResourceName().equals(resource.getResourceName())){
+				hasResources = true;
+				break;
+			}
+		}
+		return hasResources;
 	}
 	
 	

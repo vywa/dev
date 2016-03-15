@@ -33,4 +33,10 @@ public interface BloodPressureInfoService extends BaseService<BloodPressureInfo,
 	 *  查询用户最近某个时间单位(天，日，月)的血压记录
 	 * */
 	public List<BloodPressureInfo> getlatestTime(int userId,int day,String type) ;
+	
+	/*
+	 *  是否异常，需要处理
+	 * */
+	public boolean needAlarm(BloodPressureInfo bloodPressureInfo);
+	
 }

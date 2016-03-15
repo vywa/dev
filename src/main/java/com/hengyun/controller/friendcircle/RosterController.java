@@ -1,6 +1,9 @@
 package com.hengyun.controller.friendcircle;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,19 +42,30 @@ public class RosterController {
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String docterRequest( HttpServletRequest request) {
-	//	JSONObject jsonObject = JSON.parseObject(data);
-		String tocken = request.getParameter("tocken");
-		//int jid = jsonObject.getIntValue("userId");
-		RosterResponse response = new RosterResponse();
-		int userId = loginInfoService.isOnline(tocken);
-		
+
+			RosterResponse response = new RosterResponse();
+			int userId = (int)request.getAttribute("userId");
+			
 	
 			// 查找是否已经在好友列表中
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			List<Information> infos = new ArrayList<Information>();
 			
 			for(Integer temp :userList){
-				infos.add(informationService.query(temp));
+				Information information = informationService.query(temp);
+				String birthday = information.getBirthday();
+				String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+				Date date2 = null; 
+				try {
+					date2 = simpleDateFormat.parse(digital);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				int age = new Date().getYear()-date2.getYear();
+				information.setAge(age);
+				infos.add(information);
 			}
 			response.setCode("206");
 			response.setMessage("查询成功");

@@ -63,11 +63,13 @@ public class InfomationController {
 	    @ResponseBody
 	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
 	    {  
-	    	String tocken = request.getParameter("tocken");
+	    	
 	    	UploadImageResponse response = new UploadImageResponse();
 	    	String baseUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=";
-	    	int userId = loginInfoService.isOnline(tocken);
-	    	if(userId>0){
+	    	
+	    	int userId = (int)request.getAttribute("userId");
+	    	
+	    
 	    	    String originalfilename = image.getOriginalFilename();
 	    	    String filename = userId+new Date().getTime()+originalfilename;
 		    	
@@ -103,7 +105,7 @@ public class InfomationController {
 		    		  response.setRecordTime(recordTime);
 		    	  }
 		    	  }
-	    	}
+	    	
 		      return JSON.toJSONString(response);
 	      
 	    }
@@ -172,13 +174,12 @@ public class InfomationController {
 	@ResponseBody
 	public String queryInfo(@RequestParam String data,HttpServletRequest request){
 		InfoResponse response = new InfoResponse();
-		String tocken = request.getParameter("tocken");
-		JSONObject jsonObject =JSON.parseObject(data);
-		//int id =(int)request.getAttribute("userId");
 		
+		JSONObject jsonObject =JSON.parseObject(data);
+
 		String timeStamp = jsonObject.getString("recordTime");
-		int userId = loginInfoService.isOnline( tocken);
-		 if(userId>0){
+	
+		int userId = (int)request.getAttribute("userId");
 		
 			 Information information = informationService.query(userId);
 			 if(information != null){
@@ -196,10 +197,7 @@ public class InfomationController {
 				 response.setInfo(null);
 			 }
 			
-		 } else if(userId<0){
-			 response.setCode("109");
-			 response.setInfo(null);
-		 }
+		
 		 return JSON.toJSONString(response);
 	}
 	
@@ -214,10 +212,8 @@ public class InfomationController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		Information info = JSON.toJavaObject(jsonObject, Information.class);
 		
-		String tocken = request.getParameter("tocken");
-		int userId = loginInfoService.isOnline( tocken);
-		 if(userId>0){
-			
+		int userId =(int)request.getAttribute("userId");
+	
 			 long recordTime = new Date().getTime();
 			 info.setRecordTime(String.valueOf(recordTime));
 			
@@ -239,10 +235,7 @@ public class InfomationController {
 				 response.setCode("206");
 				 response.setMessage(String.valueOf(recordTime));
 			 
-		 } else if(userId<0){
-			 response.setCode("109");
-			 response.setMessage("user not login");
-		 }
+		
 		 return JSON.toJSONString(response);
 	}
 	
@@ -255,10 +248,10 @@ public class InfomationController {
 	@ResponseBody
 	public String getnickName(HttpServletRequest request){
 		NickIconResponse response = new NickIconResponse();
-		//String tocken = request.getParameter("tocken");
-		int userId =Integer.valueOf( request.getParameter("userId"));
-	//	int userId = loginInfoService.isOnline( tocken);
-		if(userId>0){
+		
+		int userId =(int)request.getAttribute("userId");
+	
+		
 			Query query =Query.query(Criteria.where("userId").is(userId));
 			 Information temp =informationService.queryOne(query);
 			 String nickname = temp.getTrueName();
@@ -288,7 +281,7 @@ public class InfomationController {
 			 response.setCode("206");
 			 response.setMessage("返回用户昵称和图像");
 			 response.setNickIcon(nickIcon);
-		}
+		
 		
 		 return JSON.toJSONString(response);
 	}

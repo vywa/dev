@@ -1,3 +1,4 @@
+com/hengyun/service/impl/friendcircle/JPushServiceImpl.class
 com/hengyun/controller/logininfo/IndexCollectionController.class
 com/hengyun/controller/logininfo/mysql/LoginController.class
 com/hengyun/controller/casehistory/TargetOrganDamageController.class
@@ -146,6 +147,7 @@ com/hengyun/domain/administrator/Administrator.class
 com/hengyun/domain/friendcircle/Friend.class
 com/hengyun/service/impl/util/EmailUtilServiceImpl.class
 com/hengyun/domain/administrator/UserRole.class
+com/hengyun/dao/logininfo/IndexCollectionDao.class
 com/hengyun/service/impl/forum/PostCommentServiceImpl.class
 com/hengyun/service/casehistory/TreateWaitService.class
 com/hengyun/domain/forum/CommentContent.class
@@ -204,7 +206,6 @@ com/hengyun/service/util/EmailUtilService.class
 com/hengyun/dao/impl/patient/PatientDaoImpl.class
 com/hengyun/util/sms/ChangePasswordResult.class
 com/hengyun/dao/forum/MultiMediaDao.class
-com/hengyun/dao/logininfo/IndexCollectiontDao.class
 com/hengyun/service/forum/PostCommentService.class
 com/hengyun/dao/friendcircle/mysql/RosterDao.class
 com/hengyun/controller/administrator/PermissionController.class

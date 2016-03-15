@@ -94,6 +94,7 @@ public class LoginInfoController {
 				 Information information=null;
 				try {
 					information = informationService.query(userId);
+				
 					account = userAccountService.queryById(userId);
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
 					 if(dbRecordTime>Long.valueOf(recordTime)){

@@ -949,3 +949,63 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:88)
 	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:308)
 	... 47 more
+[INFO] [2016-03-14 20:21:03][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[INFO] [2016-03-14 20:21:03][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[WARN] [2016-03-14 20:21:04][cn.jpush.api.common.NativeHttpClient]Got error response - responseCode:400, responseContent:{"msg_id": 4288888898, "error": {"message": "cannot find user by this audience", "code": 1011}}
+[ERROR] [2016-03-14 20:21:04][cn.jpush.api.common.NativeHttpClient]Your request params is invalid. Please check them according to error message.
+[ERROR] [2016-03-14 20:21:04][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Should review the error, and fix the request
+{}
+	at cn.jpush.api.common.NativeHttpClient._sendRequest(NativeHttpClient.java:193)
+	at cn.jpush.api.common.NativeHttpClient.sendRequest(NativeHttpClient.java:63)
+	at cn.jpush.api.common.NativeHttpClient.sendPost(NativeHttpClient.java:55)
+	at cn.jpush.api.push.PushClient.sendPush(PushClient.java:109)
+	at cn.jpush.api.JPushClient.sendPush(JPushClient.java:73)
+	at com.hengyun.service.impl.friendcircle.JPushServiceImpl.main(JPushServiceImpl.java:26)
+[INFO] [2016-03-14 20:21:04][com.hengyun.service.impl.friendcircle.JPushServiceImpl]HTTP Status: 400
+[INFO] [2016-03-14 20:21:04][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Code: 1011
+[INFO] [2016-03-14 20:21:04][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Message: cannot find user by this audience
+[INFO] [2016-03-14 20:23:24][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[INFO] [2016-03-14 20:23:24][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[WARN] [2016-03-14 20:23:34][cn.jpush.api.common.NativeHttpClient]Got error response - responseCode:400, responseContent:{"msg_id": 560703089, "error": {"message": "cannot find user by this audience", "code": 1011}}
+[ERROR] [2016-03-14 20:23:34][cn.jpush.api.common.NativeHttpClient]Your request params is invalid. Please check them according to error message.
+[ERROR] [2016-03-14 20:23:34][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Should review the error, and fix the request
+{}
+	at cn.jpush.api.common.NativeHttpClient._sendRequest(NativeHttpClient.java:193)
+	at cn.jpush.api.common.NativeHttpClient.sendRequest(NativeHttpClient.java:63)
+	at cn.jpush.api.common.NativeHttpClient.sendPost(NativeHttpClient.java:55)
+	at cn.jpush.api.push.PushClient.sendPush(PushClient.java:109)
+	at cn.jpush.api.JPushClient.sendPush(JPushClient.java:73)
+	at com.hengyun.service.impl.friendcircle.JPushServiceImpl.main(JPushServiceImpl.java:26)
+[INFO] [2016-03-14 20:23:34][com.hengyun.service.impl.friendcircle.JPushServiceImpl]HTTP Status: 400
+[INFO] [2016-03-14 20:23:34][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Code: 1011
+[INFO] [2016-03-14 20:23:34][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Message: cannot find user by this audience
+[INFO] [2016-03-14 20:26:13][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[INFO] [2016-03-14 20:26:13][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[WARN] [2016-03-14 20:26:14][cn.jpush.api.common.NativeHttpClient]Got error response - responseCode:400, responseContent:{"msg_id": 560743561, "error": {"message": "cannot find user by this audience", "code": 1011}}
+[ERROR] [2016-03-14 20:26:14][cn.jpush.api.common.NativeHttpClient]Your request params is invalid. Please check them according to error message.
+[ERROR] [2016-03-14 20:26:14][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Should review the error, and fix the request
+{}
+	at cn.jpush.api.common.NativeHttpClient._sendRequest(NativeHttpClient.java:193)
+	at cn.jpush.api.common.NativeHttpClient.sendRequest(NativeHttpClient.java:63)
+	at cn.jpush.api.common.NativeHttpClient.sendPost(NativeHttpClient.java:55)
+	at cn.jpush.api.push.PushClient.sendPush(PushClient.java:109)
+	at cn.jpush.api.JPushClient.sendPush(JPushClient.java:73)
+	at com.hengyun.service.impl.friendcircle.JPushServiceImpl.main(JPushServiceImpl.java:26)
+[INFO] [2016-03-14 20:26:14][com.hengyun.service.impl.friendcircle.JPushServiceImpl]HTTP Status: 400
+[INFO] [2016-03-14 20:26:14][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Code: 1011
+[INFO] [2016-03-14 20:26:14][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Message: cannot find user by this audience
+[INFO] [2016-03-15 09:15:19][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[INFO] [2016-03-15 09:15:19][cn.jpush.api.common.NativeHttpClient]Created instance with _maxRetryTimes = 3
+[WARN] [2016-03-15 09:15:20][cn.jpush.api.common.NativeHttpClient]Got error response - responseCode:400, responseContent:{"msg_id": 1126349246, "error": {"message": "cannot find user by this audience", "code": 1011}}
+[ERROR] [2016-03-15 09:15:20][cn.jpush.api.common.NativeHttpClient]Your request params is invalid. Please check them according to error message.
+[ERROR] [2016-03-15 09:15:20][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Should review the error, and fix the request
+{}
+	at cn.jpush.api.common.NativeHttpClient._sendRequest(NativeHttpClient.java:193)
+	at cn.jpush.api.common.NativeHttpClient.sendRequest(NativeHttpClient.java:63)
+	at cn.jpush.api.common.NativeHttpClient.sendPost(NativeHttpClient.java:55)
+	at cn.jpush.api.push.PushClient.sendPush(PushClient.java:109)
+	at cn.jpush.api.JPushClient.sendPush(JPushClient.java:73)
+	at com.hengyun.service.impl.friendcircle.JPushServiceImpl.main(JPushServiceImpl.java:26)
+[INFO] [2016-03-15 09:15:20][com.hengyun.service.impl.friendcircle.JPushServiceImpl]HTTP Status: 400
+[INFO] [2016-03-15 09:15:20][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Code: 1011
+[INFO] [2016-03-15 09:15:20][com.hengyun.service.impl.friendcircle.JPushServiceImpl]Error Message: cannot find user by this audience

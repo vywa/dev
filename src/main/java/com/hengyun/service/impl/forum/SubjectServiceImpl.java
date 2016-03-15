@@ -58,11 +58,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	//发送帖子
-	public int  post(Subject forumPost,String tocken) {
+	public int  post(Subject forumPost,int userId) {
 		// TODO Auto-generated method stub
-		int userId = loginInfoService.isOnline( tocken);
-		if(userId>0){
-			
+		
 			Information info = new Information();
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			info = informationService.queryOne(query);
@@ -104,8 +102,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		
 			int postId = subjectDao.post(forumPost);
 			return postId;
-		}
-		return -1;
+		
 	}
 
 

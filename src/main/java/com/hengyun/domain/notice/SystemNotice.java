@@ -6,4 +6,5 @@ package com.hengyun.domain.notice;
  * */
 public class SystemNotice {
 
+	
 }

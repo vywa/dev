@@ -45,15 +45,11 @@ public class BloodSuggerInfoController {
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
-		String tocken = request.getParameter("tocken");
-		String user = jsonObject.getString("userId");
-		SuggerResponse sugger = new SuggerResponse();
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId<0){
-			sugger.setCode("112");
-			sugger.setBloodSuggerInfo(null);
-		} else {
+	
 		
+		SuggerResponse sugger = new SuggerResponse();
+		int userId =(int)request.getAttribute("userId");
+	
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 
@@ -61,7 +57,7 @@ public class BloodSuggerInfoController {
 	
 		sugger.setCode("211");
 		sugger.setBloodSuggerInfo(bloodList);
-		}
+	
 		return  JSONObject.toJSONString(sugger);
 	}
 	
@@ -69,18 +65,13 @@ public class BloodSuggerInfoController {
 	 * 
 	 * 医生查询用户特定时间段血糖数据
 	 * */
-	@RequestMapping("/doctorShow")
+	@RequestMapping("/doctorQuery")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
-		String tocken = request.getParameter("tocken");
+	
 		int user = jsonObject.getIntValue("userId");
 		SuggerResponse sugger = new SuggerResponse();
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId<0){
-			sugger.setCode("112");
-			sugger.setBloodSuggerInfo(null);
-		} else {
 		
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
@@ -89,7 +80,7 @@ public class BloodSuggerInfoController {
 	
 		sugger.setCode("211");
 		sugger.setBloodSuggerInfo(bloodList);
-		}
+		
 		return  JSONObject.toJSONString(sugger);
 	}
 	
@@ -103,9 +94,8 @@ public class BloodSuggerInfoController {
 	@ResponseBody
 	public String showBloodSuggerAll(HttpServletRequest request){
 		Query query = Query.query(Criteria.where("userId").exists(true));
-		String tocken = request.getParameter("tocken");
+	
 		
-		int userId = loginInfoService.isOnline(tocken);
 		
 		List<BloodSuggerInfo> list =bloodSuggerInfoService.queryList(query);
 		String result = JSONObject.toJSONString(list);
@@ -121,16 +111,11 @@ public class BloodSuggerInfoController {
 	public String lates(HttpServletRequest request){
 	
 		SuggerResponse response = new SuggerResponse();
-		String tocken = request.getParameter("tocken");
-		//String user = jsonObject.getString("userId");
+		
 		List<BloodSuggerInfo> bloodList = null;
-		int userId = loginInfoService.isOnline(tocken);
+		int userId = (int)request.getAttribute("userId");
 		
-		if(userId<0){
-			response.setCode("112");
-			response.setBloodSuggerInfo(null);
-		} else {
-		
+	
 			try{
 				bloodList = bloodSuggerInfoService.getlatestTime(userId);
 				if(bloodList!=null){
@@ -143,7 +128,7 @@ public class BloodSuggerInfoController {
 				response.setBloodSuggerInfo(null);
 			}
 		
-		}
+		
 		return  JSONObject.toJSONString(response);
 	}
 	
@@ -159,13 +144,9 @@ public class BloodSuggerInfoController {
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
 		JSONObject jsonObject =JSON.parseObject(data);
-		String tocken = request.getParameter("tocken");
+		
 		HealthInfoResponse response = new HealthInfoResponse();
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId<0){
-			response.setCode("-1");
-			response.setMessage("record failure");
-		} else {
+		int userId =(int) request.getAttribute("userId");
 		
 		long date = jsonObject.getLongValue("measureTime");
 	   
@@ -178,13 +159,13 @@ public class BloodSuggerInfoController {
 		sugger.setBsValue(bsValue);
 		sugger.setMeasureTime(date);	
 		sugger.setMeasureType(measureType);
-
+		
 		//保存数据
 		bloodSuggerInfoService.save(sugger);
 		response.setCode("0");
 		response.setMessage("record success");
 		
-		}
+	
 		return  JSON.toJSONString(response);
 		
 	}

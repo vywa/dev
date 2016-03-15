@@ -44,18 +44,12 @@ public class SubjectController {
 		ForumResponseCode response = new ForumResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		Subject post = JSON.toJavaObject(jsonObject, Subject.class);
-	
-		String tocken = request.getParameter("tocken");
-		int userId = loginInfoService.isOnline(tocken);
-		if(userId>0){
-			
-			subjectService.post(post, tocken);
-			response.setResponseCode(0);
-			response.setDescription("发帖成功");
-		} else {
-			response.setResponseCode(-1);
-			response.setDescription("发帖失败");
-		}
+		
+		int userId =(int) request.getAttribute("userId");
+		subjectService.post(post, userId);
+		response.setResponseCode(0);
+		response.setDescription("发帖成功");
+
 
 		return JSON.toJSONString(response);
 	}
@@ -113,7 +107,7 @@ public class SubjectController {
 	@RequestMapping(value="/queryList",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryList(@RequestParam String data,HttpServletRequest request){
-		//String tocken = request.getParameter("tocken");
+		
 		PostListResponseCode response = new PostListResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
@@ -136,7 +130,7 @@ public class SubjectController {
 	@RequestMapping(value="/delete",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String idPost(@RequestParam String data,HttpServletRequest request){
-	//	String tocken = request.getParameter("tocken");
+	
 		JSONObject jsonObject =JSON.parseObject(data);
 		PostListResponseCode response = new PostListResponseCode();
 		int subjectId = jsonObject.getIntValue("subjectId");

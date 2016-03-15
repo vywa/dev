@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /*
+ * 
  *  消息管理
+ *  
  * */
+
 @Controller
 @RequestMapping("notice")
 public class NoticeController {

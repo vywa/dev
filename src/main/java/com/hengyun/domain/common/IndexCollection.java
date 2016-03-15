@@ -38,7 +38,20 @@ public class IndexCollection implements Serializable{
 	 * */
 	private int resourceId;								//资源id
 	
+	/*
+	 *  通知
+	 * */
+	private int noticeId;									//通知id
 	
+	
+	
+	
+	public int getNoticeId() {
+		return noticeId;
+	}
+	public void setNoticeId(int noticeId) {
+		this.noticeId = noticeId;
+	}
 	public int getResourceId() {
 		return resourceId;
 	}

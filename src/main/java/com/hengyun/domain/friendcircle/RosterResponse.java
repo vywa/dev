@@ -18,6 +18,7 @@ public class RosterResponse extends ResponseCode{
 	public List<Information> getInfos() {
 		return infos;
 	}
+	
 
 	public void setInfos(List<Information> infos) {
 		this.infos = infos;

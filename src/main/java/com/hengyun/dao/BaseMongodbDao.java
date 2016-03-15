@@ -24,6 +24,7 @@ public interface BaseMongodbDao<T extends Serializable, PK extends Serializable>
 	    public Long getPageCount(Query query);
 	  //删除对象操作
 	    public void delete(T t);
+	    public void delete(Query query);
 	    //根据ｉｄ删除
 	    public void deleteById(PK id) ;
 	    //修改满足条件的一条记录

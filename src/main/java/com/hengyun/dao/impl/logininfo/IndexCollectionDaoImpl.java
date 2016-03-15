@@ -113,6 +113,13 @@ public class IndexCollectionDaoImpl extends BaseMongodbDaoImpl<IndexCollection,I
 		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 				 userId = index.getResourceId();
 				 break;
+			case "noticeId":
+				 query = Query.query(Criteria.where("noticeId").gt(0));
+		         update = new Update();
+		        update.inc("noticeId", 1);
+		         index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
+				 userId = index.getNoticeId();
+				 break;
 			default:
 				 break;
 		}

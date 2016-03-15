@@ -35,9 +35,9 @@
 
 	 <!-- 配置拦截器，多个拦截器顺序执行-->
 
-	<!-- 
+ 
     <mvc:interceptors>
-         
+
         <mvc:interceptor>
             <mvc:mapping path="/**" />
             <bean class="com.hengyun.util.interceptor.LoginInterceptor">
@@ -48,7 +48,7 @@
                           <value>/reglog/thirdPart</value>
                             <value>/reglog/username</value>
                             
-                              <value>/info/nickName</value>
+                           
                               <value>/info/download</value>
                               
                               <value>/hospital</value>
@@ -76,13 +76,47 @@
            
         </mvc:interceptor>
         
-	<mvc:interceptor>
-	 <mvc:mapping path="/**" />
-	<bean class="com.hengyun.util.interceptor.AuthenticateInterceptor">
-	</bean>
-	</mvc:interceptor>   
+
+			 <mvc:interceptor>
+			 <mvc:mapping path="/**" />
+			<bean class="com.hengyun.util.interceptor.AuthenticateInterceptor">
+			<property name="allowUrls">
+		                    <list>
+		                  
+		                        <value>/reglog/show</value>
+		                          <value>/reglog/thirdPart</value>
+		                            <value>/reglog/username</value>
+		                            
+		                            
+		                              <value>/info/download</value>
+		                              
+		                              <value>/hospital</value>
+		                              <value>/office</value>
+		                              <value>/docter</value>
+		                              
+		                              
+		                              
+		                             <value>/permission</value>
+		                             <value>/resources</value>
+		                              <value>/roles</value>
+		                              <value>/userRole</value>
+		                             
+		                        <value>/account/register</value>
+		                          <value>/account/mailReceive</value>
+		                            <value>/account/mailSend</value>
+		                              <value>/account/smsReceive</value>
+		                                <value>/account/smsSend</value>
+		                                 <value>/account/findPassword</value>
+		                                 <value>/account/findPassword</value>
+		                               
+		                    </list>
+		                </property>
+			</bean>
+			</mvc:interceptor>   
+			
+	
     </mvc:interceptors>
-	 -->
+	
  
 	<!--页面视图层信息 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">

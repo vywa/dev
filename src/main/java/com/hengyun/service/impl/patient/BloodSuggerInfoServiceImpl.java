@@ -111,4 +111,15 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 			}
 		
 	}
+
+	/*
+	 *  血糖是否需要报警
+	 *  血糖连续两天高于某一值
+	 * */
+	@Override
+	public boolean needAlarm(BloodSuggerInfo bloodSuggerInfo) {
+		// TODO Auto-generated method stub
+		
+		return false;
+	}
 }

@@ -15,6 +15,7 @@ public class UserRole implements Serializable{
 
 	private int userId;															//用户id
 	
+	private String roleName;												//角色名称
 	//private List<Roles> roles;												角色列表
 
 	private List<Resources> resourceList;						//资源列表
@@ -22,6 +23,15 @@ public class UserRole implements Serializable{
 	private Date lastModified;											//最近更改时间
 
 	
+	
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
 	public List<Resources> getResourceList() {
 		return resourceList;
 	}

@@ -70,7 +70,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
         return this.mongoTemplate.count(query, this.getEntityClass());
     }
     
-    //删除操作
+    
     
     //删除对象操作
     public void delete(T t){
@@ -78,6 +78,11 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
         this.mongoTemplate.remove(t);
     }
     
+  //删除操作
+    public void delete(Query query){
+        this.mongoTemplate.remove(query, this.getEntityClass());
+       
+    }
     
     //根据ｉｄ删除
     public void deleteById(PK id) {

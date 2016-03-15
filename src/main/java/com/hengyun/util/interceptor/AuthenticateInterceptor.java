@@ -23,6 +23,15 @@ public class AuthenticateInterceptor implements HandlerInterceptor{
 	@Resource 
 	private ResourcesService resourcesService;
 	
+	private String[] allowUrls;							//不拦截的资源
+	
+	public String[] getAllowUrls() {
+		return allowUrls;
+	}
+
+	public void setAllowUrls(String[] allowUrls) {
+		this.allowUrls = allowUrls;
+	}
 	/*
 	 * 检查用户对该资源是否有权限操作
 	 * */
@@ -30,7 +39,16 @@ public class AuthenticateInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		// TODO Auto-generated method stub
+		String requstUrl = request.getRequestURI().replace(request.getContextPath(), "");
+		if(null!=allowUrls ){
+			for(String url : allowUrls){
+				if(requstUrl.contains(url)){
+					return true;
+				}
+			}
+		}
 		try {
+			
 			int userId = (int)request.getAttribute("userId");
 			String requestUrl = request.getServletPath();
 			log.info("当前请求的地址是: "+requestUrl+",用户是: "+userId);
