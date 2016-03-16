@@ -226,16 +226,16 @@ public class UserAccountController {
 		
 		RegisterResult registResult = new RegisterResult();
 		
+		
 		if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
 			
 			UserAccount userAccount = new UserAccount();
 			
 			userAccount.setMobilephone(mobilephone);
-			//加密密码
+			
 			String encryptedPassword = new Md5Hash(password).toString();
 			userAccount.setPassword(password);
 			userAccount.setCatagory("patient");
-			
 			
 			int id = userAccountService.registerAccount(userAccount);
 		
@@ -245,7 +245,7 @@ public class UserAccountController {
 			registResult.setMessage(String.valueOf(id));
 			
 		} else {
-			//registerCacheService.addTryCount(mobilephone);
+			
 			registResult.setCode("107");
 			registResult.setMessage("test code error");
 		}

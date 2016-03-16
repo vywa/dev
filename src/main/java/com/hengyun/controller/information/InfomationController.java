@@ -246,12 +246,11 @@ public class InfomationController {
 	 * */
 	@RequestMapping(value="/nickName",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String getnickName(HttpServletRequest request){
+	public String getnickName(HttpServletRequest request,@RequestParam String data){
 		NickIconResponse response = new NickIconResponse();
-		
-		int userId =(int)request.getAttribute("userId");
-	
-		
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId");
+			
 			Query query =Query.query(Criteria.where("userId").is(userId));
 			 Information temp =informationService.queryOne(query);
 			 String nickname = temp.getTrueName();
@@ -261,6 +260,7 @@ public class InfomationController {
 			 String qq = account.getQQ();
 			 String weiChat = account.getWeiChat();
 			 String weiBo = account.getWeiBo();
+			 String workNum = account.getWorkNum();
 			 if(nickname==null){
 				 if(mobilephone != null){
 					 nickname = mobilephone;
@@ -272,6 +272,8 @@ public class InfomationController {
 					 nickname = weiChat;
 				 } else if(weiBo !=null){
 					 nickname = weiBo;
+				 } else if(workNum != null){
+					 nickname = workNum;
 				 }
 			 }
 			 String iconUrl = temp.getIconUrl();

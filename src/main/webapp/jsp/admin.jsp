@@ -318,12 +318,7 @@
 	                                required : true  
 	                            }  
 	                        }},     
-	                      {field:'level',title:'医院等级',width:100,editor : {  
-	                            type : 'validatebox',  
-	                            options : {  
-	                                required : true  
-	                            }  
-	                        }},    
+	                  
 	                        {field:'address',title:'地址',width:100,editor : {  
 	                            type : 'validatebox',  
 	                            options : {  
@@ -331,24 +326,6 @@
 	                            }  
 	                        }},    
 	                        {field:'telephone',title:'电话',width:100,editor : {  
-	                            type : 'validatebox',  
-	                            options : {  
-	                                required : true  
-	                            }  
-	                        }},    
-	                        {field:'email',title:'邮件',width:100,editor : {  
-	                            type : 'validatebox',  
-	                            options : {  
-	                                required : true  
-	                            }  
-	                        }},    
-	                        {field:'hospitalIM',title:'及时通信',width:100,editor : {  
-	                            type : 'validatebox',  
-	                            options : {  
-	                                required : true  
-	                            }  
-	                        }},    
-	                        {field:'weiChatNumber',title:'公众号',width:100,editor : {  
 	                            type : 'validatebox',  
 	                            options : {  
 	                                required : true  
@@ -387,10 +364,12 @@
 	                            $.messager.confirm('确定','您确定要删除吗',function(t){  
 	                                if(t)  
 	                                {  
-	                                      
+	                                	var string ="";
+	                                	var userId=rows[0].Cells["id"].Value;
+	                                
 	                                    $.ajax({  
 	                                        url : '../hospital/delete',  
-	                                        data : rows[0],  
+	                                        data :  'data={id:123456}',
 	                                        dataType : 'json',  
 	                                        success : function(r) {  
 	                                            if (r.success) {  
@@ -498,7 +477,7 @@
 	        });  
 	    })  
 	 </script> 
-    </div>
+ 
     
     <div id="tb" style="padding:5px;height:auto">
     

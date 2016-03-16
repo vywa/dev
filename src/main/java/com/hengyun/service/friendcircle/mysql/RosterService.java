@@ -10,4 +10,6 @@ import java.util.List;
 public interface RosterService {
 
 	public List<Integer> getFriendList(String username);
+	
+	public List<Integer> searchFriendList(String username,String searchName);
 }

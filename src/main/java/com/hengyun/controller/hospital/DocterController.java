@@ -52,7 +52,7 @@ public class DocterController {
 	}
 	
 	
-	@RequestMapping("/queryDoctor")
+	@RequestMapping(value="/queryDoctor",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showHospitalDocter(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);

@@ -1,3 +1,5 @@
+
+
 function add() {
 	 var data = $('#form1').serializeObject();   
 	$.ajax({

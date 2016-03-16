@@ -63,11 +63,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 			PlatformLogger.info("通过拦截器了");
 			return true;
 		} else {
-		PlatformLogger.info("未通过拦截器了");
+		PlatformLogger.info("未通过拦截器");
 		ResponseCode responseCode = new ResponseCode();
 		responseCode.setCode("109");
 		responseCode.setMessage("用户未登录");
-		response.setCharacterEncoding("utf-8");
+		response.setHeader("Content-type", "text/html;charset=UTF-8");		//浏览器用utf-8解析数据 
+		response.setCharacterEncoding("UTF-8");			//servlet用utf转码
 		response.getWriter().println(JSON.toJSONString(responseCode));
 		return false;
 		}
