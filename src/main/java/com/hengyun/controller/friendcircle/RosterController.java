@@ -92,7 +92,7 @@ public class RosterController {
 			RosterResponse response = new RosterResponse();
 			int userId = (int)request.getAttribute("userId");
 			JSONObject jsonObject = JSON.parseObject(data);
-			String searchName = jsonObject.getString("searchName");
+			String searchName = jsonObject.getString("key");
 			
 			// 查找是否已经在好友列表中
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));

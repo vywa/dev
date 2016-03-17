@@ -148,7 +148,8 @@ public class BloodPressureInfoController {
 		blood.setLowBP(lowBP);
 
 		//保存数据
-		bloodPressureInfoService.save(blood);
+		bloodPressureInfoService.addInfo(blood, userId);
+		
 		response.setCode("0");
 		response.setMessage("record success");
 	

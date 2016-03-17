@@ -9,6 +9,8 @@ import java.util.List;
 */
 public interface RosterService {
 
+	public int getDoctor(String username);
+	
 	public List<Integer> getFriendList(String username);
 	
 	public List<Integer> searchFriendList(String username,String searchName);

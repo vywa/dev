@@ -12,4 +12,13 @@ public interface CaseHistoryService  extends BaseService<CaseHistory,Integer> {
 	public List<CaseHistory> queryAll();
 	
 	public int addCaseHistory(CaseHistory caseHistory);
+	
+	//根据病历病人id
+	public int getPatientId(int caseHistoryId);
+	
+	//根据病历查找医生id
+	public int getDoctorId(int caseHistoryId);
+	
+	
+	
 }

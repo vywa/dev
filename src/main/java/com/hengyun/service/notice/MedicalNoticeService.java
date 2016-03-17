@@ -20,7 +20,7 @@ public interface MedicalNoticeService extends BaseService<MedicalNotice,Integer>
 	/*
 	 *  处理医疗通知
 	 * */
-	public void handleNotice(MedicalNotice medicalNotice);
+	public void handleNotice(int noticeId);
 	
 	/*
 	 *  查询某个医生的医疗通知

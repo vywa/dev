@@ -2,11 +2,18 @@ package com.hengyun.service.patient;
 
 import java.util.List;
 
+
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.service.BaseService;
 
 public interface BloodSuggerInfoService extends BaseService<BloodSuggerInfo,Integer>{
 
+	/*
+	 * 
+	 *  添加血糖记录
+	 * */
+	public void addInfo(BloodSuggerInfo bloodSuggerInfo,int userId);
+	
 	/*
 	 * 查询某个用户的血糖信息
 	 * 

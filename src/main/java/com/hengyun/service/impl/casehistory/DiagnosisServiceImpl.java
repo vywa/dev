@@ -19,6 +19,7 @@ import com.hengyun.service.casehistory.DiagnosisService;
 import com.hengyun.service.casehistory.RiskFactorService;
 import com.hengyun.service.casehistory.TargetOrganDamageService;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.patient.BloodPressureInfoService;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -43,6 +44,9 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 	private AffiliatedClinicalDiseaseService affiliatedClinicalDiseaseService;
 	
 	@Resource
+	private BloodPressureInfoService bloodPressureInfoService;
+	
+	@Resource
 	private CaseHistoryService caseHistoryService;
 	/*
 	 *  评估危险等级
@@ -54,8 +58,10 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 		RiskFactor riskFactor = caseHistory.getRiskFactor();
 		TargetOrganDamage tod = caseHistory.getTargetOrganDamage();
 		AffiliatedClinicalDisease acd = caseHistory.getAffiliatedClinicalDisease();
+		int patientId = caseHistoryService.getPatientId(caseHistoryId);
 		
-		int bloodLevel = riskFactor.getHightBloodPressure();
+		int bloodLevel = bloodPressureInfoService.getLevel(patientId);
+		riskFactor.setHightBloodPressure(bloodLevel);		
 		int riskCount = riskFactorService.DagerCount(riskFactor);
 		boolean damage = targetOrganDamangeService.hasDamage(tod);
 		boolean diabetesMelliitus = affiliatedClinicalDiseaseService.hasDiabetesMelliitus(acd);

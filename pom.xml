@@ -114,14 +114,16 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.30</version>
-			<scope>provided</scope>
+			
 		</dependency>
+		
 		<!-- 导入druid包 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
 		</dependency>
+		
 		<!-- 导入dbcp包 -->
 		<!-- 
 		<dependency>
@@ -157,7 +159,8 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-	<!-- logback -->
+		
+		<!-- logback -->
 		<dependency>
               <groupId>ch.qos.logback</groupId>
               <artifactId>logback-core</artifactId>
@@ -176,7 +179,7 @@
 	    <groupId>org.logback-extensions</groupId>  
 	    <artifactId>logback-ext-spring</artifactId>  
 	    <version>0.1.2</version>  
-	</dependency>  
+		</dependency>  
 	
 	<dependency>  
 	    <groupId>org.slf4j</groupId>  
@@ -209,6 +212,14 @@
 		<version>2.2.2</version>
 	</dependency>
 	
+		<!-- quartz-mongodb
+		<dependency>
+	  <groupId>com.novemberain</groupId>
+	  <artifactId>quartz-mongodb</artifactId>
+	  <version>1.8.0</version>
+		</dependency>
+	 -->
+	 
 		<!-- 导入fastjson -->
 	<dependency>
 			<groupId>com.alibaba</groupId>

@@ -55,9 +55,9 @@ public class MedicalNoticeServiceImpl extends BaseServiceImpl<MedicalNotice, Int
 	 *  处理一条消息
 	 * */
 	@Override
-	public void handleNotice(MedicalNotice medicalNotice) {
+	public void handleNotice(int  noticeId) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("noticeId").is(medicalNotice.getNoticeId()));
+		Query query = Query.query(Criteria.where("noticeId").is(noticeId));
 		Update update = Update.update("status", 1);
 		medicalNoticeDao.updateFirst(query, update);
 	}

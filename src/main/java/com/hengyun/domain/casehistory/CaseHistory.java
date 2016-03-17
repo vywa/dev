@@ -13,7 +13,7 @@ import java.util.Date;
 public class CaseHistory implements Serializable{
 
 	
-	private int caseHistoryId;															//病历编号
+	private int caseHistoryId;									//病历编号
 	
 	private int patientId;											//病人id
 	
@@ -47,7 +47,7 @@ public class CaseHistory implements Serializable{
 	
 	private SecondaryHypertensionIndication shi;		//继发高血压指征
 	
-	private RiskFactor riskFactor;								//危险因素
+	private RiskFactor riskFactor;													//危险因素
 	
 	private TargetOrganDamage targetOrganDamage;				//靶器官损害
 	

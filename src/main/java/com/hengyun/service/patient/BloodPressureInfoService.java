@@ -10,6 +10,15 @@ import com.hengyun.service.BaseService;
  * */
 public interface BloodPressureInfoService extends BaseService<BloodPressureInfo,Integer>{
 
+	
+	
+	
+	/*
+	 * 
+	 *  添加血压记录
+	 * */
+	public void addInfo(BloodPressureInfo bloodPressureInfo,int userId);
+	
 	/*
 	 * 查询某个用户的血压信息
 	 * 
@@ -32,11 +41,17 @@ public interface BloodPressureInfoService extends BaseService<BloodPressureInfo,
 	/*
 	 *  查询用户最近某个时间单位(天，日，月)的血压记录
 	 * */
+	
 	public List<BloodPressureInfo> getlatestTime(int userId,int day,String type) ;
+	
 	
 	/*
 	 *  是否异常，需要处理
 	 * */
 	public boolean needAlarm(BloodPressureInfo bloodPressureInfo);
 	
+	/*
+	 *  高血压等级
+	 * */
+	public int getLevel(int userId);
 }

@@ -17,6 +17,8 @@ public class AffiliatedClinicalDisease implements Serializable{
    private boolean peripheralVascularDisease;				//外周血管病
    private boolean retinopathy;											//视网膜病变
    private boolean diabetesMelliitus;									//糖尿病
+   
+   
 public int getCaseHistoryId() {
 	return caseHistoryId;
 }

@@ -54,7 +54,9 @@ http://www.springframework.org/schema/cache
 <bean id="userAccountDao" class="com.hengyun.dao.impl.logininfo.UserAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="userAccountService" class="com.hengyun.service.impl.logininfo.UserAccountServiceImpl" parent="BaseServiceImpl"/>
 
-
+<!-- 通知信息 -->
+<bean id="medicalNoticeDao" class="com.hengyun.dao.impl.notice.MedicalNoticeDaoImpl" parent="BaseMongodbDaoImpl"/>
+<bean id="medicalNoticeService" class="com.hengyun.service.impl.notice.MedicalNoticeServiceImpl" parent="BaseServiceImpl"/>
 <!-- 个人信息 -->
 
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  

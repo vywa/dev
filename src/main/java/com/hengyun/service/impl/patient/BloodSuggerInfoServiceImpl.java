@@ -16,8 +16,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.patient.BloodSuggerInfoDao;
+import com.hengyun.domain.notice.MedicalNotice;
+import com.hengyun.domain.notice.Notice.noticeType;
 import com.hengyun.domain.patient.BloodSuggerInfo;
+import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
 
 public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,Integer> implements BloodSuggerInfoService{
@@ -26,6 +30,31 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 	 
 	@Resource
 	private BloodSuggerInfoDao bloodSuggerInfoDao;
+	
+	@Resource
+	private RosterService rosterService;
+	
+	@Resource
+	private MedicalNoticeService medicalNoticeService;
+	/*
+	 *  添加血糖
+	 * */
+	@Override
+	public void addInfo(BloodSuggerInfo bloodSuggerInfo, int userId) {
+		// TODO Auto-generated method stub
+		bloodSuggerInfoDao.save(bloodSuggerInfo);
+		if(needAlarm(bloodSuggerInfo)){
+			int doctorId = rosterService.getDoctor(String.valueOf(userId));
+			MedicalNotice medicalNotice = new MedicalNotice();
+			medicalNotice.setNoticeFromId(doctorId);
+			medicalNotice.setNoticeType(1);
+			medicalNotice.setNoticeToId(userId);
+			medicalNotice.setType(noticeType.medical_notice);
+			medicalNotice.setSendTime(new Date());
+			medicalNotice.setContent("病人血糖危险");
+			medicalNoticeService.save(medicalNotice);
+		}
+	}
 	
 	public List<BloodSuggerInfo> getInfoById(int userId) {
 		// TODO Auto-generated method stub
@@ -119,7 +148,12 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 	@Override
 	public boolean needAlarm(BloodSuggerInfo bloodSuggerInfo) {
 		// TODO Auto-generated method stub
-		
+		if(bloodSuggerInfo.getBsValue()>30){
+			return true;
+		}
 		return false;
 	}
+
+
+	
 }

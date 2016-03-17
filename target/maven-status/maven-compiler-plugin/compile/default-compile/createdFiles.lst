@@ -355,6 +355,7 @@ com/hengyun/dao/impl/information/InformationDaoImpl.class
 com/hengyun/domain/casehistory/BloodBiochemical.class
 com/hengyun/service/administrator/UserRoleService.class
 com/hengyun/util/shiro/MongodbRealm.class
+com/hengyun/domain/notice/MedicalNoticeResponse.class
 com/hengyun/domain/doctor/Doctor.class
 com/hengyun/domain/patient/BloodSuggerInfo.class
 com/hengyun/util/randomcode/TockenGenerator.class

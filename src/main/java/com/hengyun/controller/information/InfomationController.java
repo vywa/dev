@@ -44,7 +44,8 @@ import com.mongodb.gridfs.GridFSDBFile;
 @RequestMapping("info")
 public class InfomationController {
 	
-	 private static final Logger log = LoggerFactory.getLogger(InfomationController.class);
+	private static final Logger log = LoggerFactory.getLogger(InfomationController.class);
+	 
 	@Resource
 	private LoginInfoService loginInfoService;
 	@Resource
@@ -70,8 +71,8 @@ public class InfomationController {
 	    	int userId = (int)request.getAttribute("userId");
 	    	
 	    
-	    	    String originalfilename = image.getOriginalFilename();
-	    	    String filename = userId+new Date().getTime()+originalfilename;
+    	    String originalfilename = image.getOriginalFilename();
+    	    String filename = userId+new Date().getTime()+originalfilename;
 		    	
 		      if(image.isEmpty()){
 		    	  response.setCode("110");
@@ -278,7 +279,7 @@ public class InfomationController {
 			 }
 			 String iconUrl = temp.getIconUrl();
 			 NickIcon nickIcon = new NickIcon();
-			 nickIcon.setNickname(nickname);
+			 nickIcon.setNickName(nickname);
 			 nickIcon.setIconUrl(iconUrl);
 			 response.setCode("206");
 			 response.setMessage("返回用户昵称和图像");
@@ -288,4 +289,53 @@ public class InfomationController {
 		 return JSON.toJSONString(response);
 	}
 	
+	/*
+	 * 获取用户信息
+	 * 
+	 * */
+	@RequestMapping(value="/getInfo",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String getInfo(HttpServletRequest request,@RequestParam String data){
+		NickIconResponse response = new NickIconResponse();
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId");
+			
+			Query query =Query.query(Criteria.where("userId").is(userId));
+			 Information temp =informationService.queryOne(query);
+			 String nickname = temp.getTrueName();
+			 String sex = temp.getSex();
+			 int age = temp.getAge();
+			 String birthday  = temp.getBirthday();
+			String home = temp.getHometown();
+			 UserAccount account = userAccountService.queryById(userId);
+			 String mobilephone = account.getMobilephone();
+			 String email = account.getEmail();
+			 String qq = account.getQQ();
+			 String weiChat = account.getWeiChat();
+			 String weiBo = account.getWeiBo();
+			 String workNum = account.getWorkNum();
+			 
+			
+			 String iconUrl = temp.getIconUrl();
+			 NickIcon nickIcon = new NickIcon();
+			 nickIcon.setIconUrl(iconUrl);
+			 nickIcon.setBirthday(birthday);
+			 nickIcon.setEmail(email);
+			 nickIcon.setHome(home);
+			 nickIcon.setMobilephone(mobilephone);
+			 nickIcon.setQq(qq);
+			 nickIcon.setNickName(nickname);
+			 nickIcon.setUserId(userId);
+			 nickIcon.setWeiBo(weiBo);
+			 nickIcon.setWeiChat(weiChat);
+			 nickIcon.setWorkNum(workNum);
+			 nickIcon.setAge(age);
+			 nickIcon.setSex(sex);
+			 response.setCode("206");
+			 response.setMessage("返回用户昵称和图像");
+			 response.setNickIcon(nickIcon);
+		
+		
+		 return JSON.toJSONString(response);
+	}
 }

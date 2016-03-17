@@ -11,7 +11,17 @@ import com.hengyun.domain.casehistory.Diagnosis.DangerLevel;
 */
 public class MedicalNotice extends Notice implements Serializable{
 
+	private int noticeType;											//通知类型
 	private DangerLevel dangerLevel;									//危险等级
+
+
+	public int getNoticeType() {
+		return noticeType;
+	}
+
+	public void setNoticeType(int noticeType) {
+		this.noticeType = noticeType;
+	}
 
 	public DangerLevel getDangerLevel() {
 		return dangerLevel;

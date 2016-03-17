@@ -12,6 +12,7 @@ import com.hengyun.service.BaseService;
 public interface DiagnosisService extends BaseService<Diagnosis,Integer>{
 
 	/*
+	 * 
 	 *  自动计算危险等级
 	 * 
 	 * */
@@ -27,4 +28,6 @@ public interface DiagnosisService extends BaseService<Diagnosis,Integer>{
 	 *  查询诊断结果
 	 * */
 	public Diagnosis query(int diagnosisId);
+	
+	
 }

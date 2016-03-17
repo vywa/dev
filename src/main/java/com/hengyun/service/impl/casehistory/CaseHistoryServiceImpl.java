@@ -49,6 +49,29 @@ public class CaseHistoryServiceImpl extends BaseServiceImpl<CaseHistory,Integer>
 		}
 		return null;
 	}
+	
+	/*
+	 *  根据病历查找病人
+	 * */
+	@Override
+	public int getPatientId(int caseHistoryId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("caseHistoryId").is(caseHistoryId));
+		CaseHistory caseHistory = caseHistoryDao.queryOne(query);
+		int patientId = caseHistory.getPatientId();
+		return patientId;
+	}
+
+
+
+	@Override
+	public int getDoctorId(int caseHistoryId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("caseHistoryId").is(caseHistoryId));
+		CaseHistory caseHistory = caseHistoryDao.queryOne(query);
+		int doctorId = caseHistory.getDocterId();
+		return doctorId;
+	}
 
 
 	

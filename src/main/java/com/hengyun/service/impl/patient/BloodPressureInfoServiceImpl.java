@@ -16,8 +16,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.patient.BloodPressureInfoDao;
+import com.hengyun.domain.notice.MedicalNotice;
+import com.hengyun.domain.notice.Notice.noticeType;
 import com.hengyun.domain.patient.BloodPressureInfo;
+import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodPressureInfoService;
 
 
@@ -28,6 +32,11 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Resource
 	private BloodPressureInfoDao bloodPressureInfoDao;
 	
+	@Resource
+	private RosterService rosterService;
+	
+	@Resource
+	private MedicalNoticeService medicalNoticeService;
 	
 	public BloodPressureInfoDao getBloodPressureInfoDao() {
 		return bloodPressureInfoDao;
@@ -38,7 +47,29 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		this.bloodPressureInfoDao = bloodPressureInfoDao;
 	}
 
+	/*
+	 *  添加血压数据
+	 * */
+	@Override
+	public void addInfo(BloodPressureInfo bloodPressureInfo,int userId) {
+		// TODO Auto-generated method stub
+		bloodPressureInfoDao.save(bloodPressureInfo);
+		if(needAlarm(bloodPressureInfo)){
+			int doctorId = rosterService.getDoctor(String.valueOf(userId));
+			MedicalNotice medicalNotice = new MedicalNotice();
+			medicalNotice.setNoticeFromId(doctorId);
+			medicalNotice.setNoticeToId(userId);
+			medicalNotice.setNoticeType(1);
+			medicalNotice.setType(noticeType.medical_notice);
+			medicalNotice.setSendTime(new Date());
+			medicalNotice.setContent("病人高压危险");
+			medicalNoticeService.save(medicalNotice);
+		}
+	}
 
+	/*
+	 *  
+	 * */
 	public List<BloodPressureInfo> getInfoById(int userId) {
 		// TODO Auto-generated method stub
 		  Query query = new Query();
@@ -121,7 +152,52 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Override
 	public boolean needAlarm(BloodPressureInfo bloodPressureInfo) {
 		// TODO Auto-generated method stub
-		return false;
+		boolean alarm = false;
+		int highBP = bloodPressureInfo.getHighBP();
+		int lowBP = bloodPressureInfo.getLowBP();
+		if(highBP>180){
+			alarm = true;
+		} else if(lowBP>120){
+			alarm = true;
+		} 
+		return alarm;
 	}
+
+
+	/*
+	 *  获取用户血压等级
+	 * */
+	@Override
+	public int getLevel(int userId) {
+		// TODO Auto-generated method stub
+		int level = 0;
+		//获取最近测量的数据的血压数据
+		List<BloodPressureInfo> blist = this.getlatestTime(userId);
+		int highBP = 0;
+		int lowBP = 0;
+		int highTemp=0;
+		int lowTemp=0;
+		for(BloodPressureInfo temp :blist){
+			lowTemp = temp.getLowBP();
+			highTemp=temp.getHighBP();
+			if(highBP<highTemp){
+				highBP=highTemp;
+			} 
+			if(lowBP>lowTemp){
+				lowBP= lowTemp;
+			}
+		}
+		if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
+			level =1;
+		} else if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
+			level = 2;
+		} else if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
+			level=3;
+		}
+		return level;
+	}
+
+
+	
 
 }

@@ -26,7 +26,30 @@ public class RosterServiceImpl implements RosterService{
 	@Resource
 	private InformationService informationService; 
 	
+	/*
+	 *  获取医生
+	 * */
+	@Override
+	public int getDoctor(String username) {
+		// TODO Auto-generated method stub
+		List<Roster> roster = rosterDao.getRoster(username);
+		List<Integer> idList = new ArrayList<Integer>();
+		for(Roster temp : roster){
+			String name = temp.getJid();
+			
+			int index = name.indexOf("@");
+			String idstr = name.substring(0, index);
+			if(idstr.startsWith("1000")){
+				return Integer.valueOf(idstr);	
+			}
+			
+		}
+		return 0;
+	}
 	
+	/*
+	 *  获取好友
+	 * */
 	@Override
 	public List<Integer> getFriendList(String username) {
 		// TODO Auto-generated method stub
@@ -37,7 +60,7 @@ public class RosterServiceImpl implements RosterService{
 			
 			int index = name.indexOf("@");
 			String idstr = name.substring(0, index);
-			System.out.println(idstr);
+			
 			idList.add(Integer.valueOf(idstr));
 		}
 		return idList;
@@ -60,5 +83,7 @@ public class RosterServiceImpl implements RosterService{
 		return idList;
 		
 	}
+
+	
 
 }

@@ -23,8 +23,6 @@ public class Diagnosis implements Serializable{
 	
 	private Date recordDate;										//记录时间
 	
-	
-	
 
 	public int getDiagnosisId() {
 		return diagnosisId;
