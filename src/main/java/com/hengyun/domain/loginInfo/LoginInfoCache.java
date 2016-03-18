@@ -14,8 +14,10 @@ public class LoginInfoCache implements Serializable{
 	private String tocken;							//会话标识
 
 	private int userId;												//用户ID
-	private String username;							//用户名称
+	private String username;									//用户名称
 	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生，病人，游客）
+	
+	
 	public String getTocken() {
 		return tocken;
 	}

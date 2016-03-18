@@ -20,7 +20,7 @@ public class ExceptionAdvisor implements ThrowsAdvice
 	public void afterThrowing(Method method, Object[] args, Object target,
 			Exception ex) throws Throwable
 	{
-		// 在后台中输出错误异常异常信息，通过log4j输出。
+		
 		Logger log = Logger.getLogger(target.getClass());
 		log.info("**************************************************************");
 		log.info("Error happened in class: " + target.getClass().getName());

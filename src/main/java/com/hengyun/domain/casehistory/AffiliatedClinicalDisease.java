@@ -9,8 +9,8 @@ import java.io.Serializable;
 */
 public class AffiliatedClinicalDisease implements Serializable{
 
-	private int caseHistoryId;													//病历号
-	private int affiliatedClinicalDiseaseId;								//id
+//	private int caseHistoryId;													//病历号
+//	private int affiliatedClinicalDiseaseId;								//id
    private boolean 	cerebralVascularDisease;					//脑血管病
    private boolean cardiovascularDisease;						//心血管病
    private boolean kidneyDisease;										//肾脏疾病
@@ -19,12 +19,7 @@ public class AffiliatedClinicalDisease implements Serializable{
    private boolean diabetesMelliitus;									//糖尿病
    
    
-public int getCaseHistoryId() {
-	return caseHistoryId;
-}
-public void setCaseHistoryId(int caseHistoryId) {
-	this.caseHistoryId = caseHistoryId;
-}
+
 public boolean isCerebralVascularDisease() {
 	return cerebralVascularDisease;
 }
@@ -61,13 +56,7 @@ public boolean isDiabetesMelliitus() {
 public void setDiabetesMelliitus(boolean diabetesMelliitus) {
 	this.diabetesMelliitus = diabetesMelliitus;
 }
-public int getAffiliatedClinicalDiseaseId() {
-	return affiliatedClinicalDiseaseId;
-}
-public void setAffiliatedClinicalDiseaseId(int affiliatedClinicalDiseaseId) {
-	this.affiliatedClinicalDiseaseId = affiliatedClinicalDiseaseId;
-}
-   
+
    
    
 }

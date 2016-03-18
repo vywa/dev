@@ -9,8 +9,8 @@ import java.io.Serializable;
 */
 public class TargetOrganDamage implements Serializable{
 
-	private int caseHistoryId;							//病历号
-	private int targetOrganDamageId;			//id
+//	private int caseHistoryId;							//病历号
+//	private int targetOrganDamageId;			//id
 	private boolean	 leftVentricularHypertrophy;					 //左心室肥厚；
 	private boolean	 neckArteries;					//颈动脉内膜厚
 	private boolean	 ankleArteries;					//踝动脉脉搏波速度
@@ -19,19 +19,7 @@ public class TargetOrganDamage implements Serializable{
 	private boolean	 urineProtein;					//微量蛋白尿
 	
 	
-	
-	public int getTargetOrganDamageId() {
-		return targetOrganDamageId;
-	}
-	public void setTargetOrganDamageId(int targetOrganDamageId) {
-		this.targetOrganDamageId = targetOrganDamageId;
-	}
-	public int getCaseHistoryId() {
-		return caseHistoryId;
-	}
-	public void setCaseHistoryId(int caseHistoryId) {
-		this.caseHistoryId = caseHistoryId;
-	}
+
 	public boolean isLeftVentricularHypertrophy() {
 		return leftVentricularHypertrophy;
 	}

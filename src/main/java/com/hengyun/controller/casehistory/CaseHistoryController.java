@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.casehistory.CaseHistory;
-import com.hengyun.domain.casehistory.CaseHistoryResponse;
+import com.hengyun.domain.casehistory.response.CaseHistoryResponse;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.CaseHistoryService;
 
@@ -68,7 +68,7 @@ public class CaseHistoryController {
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
 		response.setMessage("查询病历成功");
-		response.setList(caseHistoryList);
+		response.setCaseHistoryList(caseHistoryList);
     	  return JSON.toJSONString(response);  
            
 	}
@@ -87,7 +87,7 @@ public class CaseHistoryController {
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		response.setCode("211");
 		response.setMessage("显示病历成功");
-    	response.setList(caseHistoryList);
+    	response.setCaseHistoryList(caseHistoryList);
            
     	
         return  JSON.toJSONString(response);  
@@ -110,7 +110,7 @@ public class CaseHistoryController {
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
 		response.setMessage("查询病人病历成功");
-		response.setList(caseHistoryList);
+		response.setCaseHistoryList(caseHistoryList);
     	return  JSON.toJSONString(response);  
        
 	}
@@ -132,7 +132,7 @@ public class CaseHistoryController {
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
 		response.setMessage("更新病人病历成功");
-		response.setList(caseHistoryList);
+		response.setCaseHistoryList(caseHistoryList);
     	return  JSON.toJSONString(response);  
        
 	}
@@ -154,7 +154,7 @@ public class CaseHistoryController {
 		caseHistoryList = caseHistoryService.queryList(query);
 		response.setCode("211");
 		response.setMessage("设置病人病历成功");
-		response.setList(caseHistoryList);
+		response.setCaseHistoryList(caseHistoryList);
     	return  JSON.toJSONString(response);  
        
 	}

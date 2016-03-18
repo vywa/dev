@@ -2,11 +2,15 @@ package com.hengyun.domain.hospital;
 
 import java.io.Serializable;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 //医生信息
 public class Docter implements Serializable{
 
 	
+	@NotEmpty(message="{workNum.not.empty}")
 	private String workNum;
+	@NotEmpty
 	private String name;
 	private String level;						//医生职称
 	private int hospitalId;				//所属医院id

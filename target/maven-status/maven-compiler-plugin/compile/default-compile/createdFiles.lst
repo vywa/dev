@@ -70,6 +70,7 @@ com/hengyun/dao/casehistory/RiskFactorDao.class
 com/hengyun/dao/administrator/AdministratorDao.class
 com/hengyun/domain/forum/Integral.class
 com/hengyun/domain/casehistory/HospitalizedRecordPreface.class
+com/hengyun/domain/casehistory/response/DiagnosisResponse.class
 com/hengyun/controller/casehistory/AffiliatedClinicalDiseaseController.class
 com/hengyun/dao/BaseMongodbDao.class
 com/hengyun/domain/loginInfo/RegisterResult.class
@@ -141,6 +142,7 @@ com/hengyun/controller/casehistory/ReTreateInfoController.class
 com/hengyun/domain/im/ChatLog.class
 com/hengyun/controller/friendcircle/FriendCircleController.class
 com/hengyun/domain/doctor/FollowPatient.class
+com/hengyun/domain/casehistory/response/CaseHistoryResponse.class
 com/hengyun/service/administrator/RolesService.class
 com/hengyun/service/impl/message/EmailServiceImpl.class
 com/hengyun/dao/RedisDataSource.class
@@ -180,6 +182,7 @@ com/hengyun/util/regex/Validator.class
 com/hengyun/dao/administrator/PermissionDao.class
 com/hengyun/domain/casehistory/BloodSugger.class
 com/hengyun/domain/casehistory/MarriageHistory.class
+com/hengyun/domain/casehistory/CaseHistoryConstant.class
 com/hengyun/domain/friendcircle/RosterResponse.class
 com/hengyun/controller/administrator/AdministratorController.class
 com/hengyun/domain/casehistory/HabitInfo.class
@@ -321,6 +324,7 @@ com/hengyun/domain/forum/PostComment.class
 com/hengyun/controller/information/InfomationController.class
 com/hengyun/service/impl/shiro/MCSessionDao.class
 com/hengyun/domain/loginInfo/LoginResult.class
+com/hengyun/controller/casehistory/DiagnosisController$1.class
 com/hengyun/domain/casehistory/Diagnosis$DangerLevel.class
 com/hengyun/service/message/SmsProducerService.class
 com/hengyun/util/interceptor/LoginInterceptor.class
@@ -422,7 +426,6 @@ com/hengyun/controller/casehistory/HabitInfoController.class
 com/hengyun/controller/logininfo/LoginInfoController.class
 com/hengyun/service/impl/message/SmsReceiveQueueListener.class
 com/hengyun/domain/common/IndexCollection.class
-com/hengyun/domain/casehistory/CaseHistoryResponse.class
 com/hengyun/service/impl/monitor/kafkaMongodb/LogUtil.class
 com/hengyun/service/administrator/PermissionService.class
 com/hengyun/service/administrator/ResourcesService.class

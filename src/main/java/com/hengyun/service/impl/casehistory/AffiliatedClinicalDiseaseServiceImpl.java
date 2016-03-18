@@ -32,7 +32,7 @@ public class AffiliatedClinicalDiseaseServiceImpl extends BaseServiceImpl<Affili
 	public boolean add(AffiliatedClinicalDisease affiliatedClinicalDisease) {
 		// TODO Auto-generated method stub
 		int id = indexCollectionDao.updateIndex("affiliatedClinicalDiseaseId");
-		affiliatedClinicalDisease.setAffiliatedClinicalDiseaseId(id);
+	
 		affiliatedClinicalDiseaseDao.save(affiliatedClinicalDisease);
 		return true;
 	}
@@ -43,7 +43,7 @@ public class AffiliatedClinicalDiseaseServiceImpl extends BaseServiceImpl<Affili
 	@Override
 	public boolean update(AffiliatedClinicalDisease affiliatedClinicalDisease) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("affiliatedClinicalDiseaseId").is(affiliatedClinicalDisease.getAffiliatedClinicalDiseaseId()));
+		Query query = Query.query(Criteria.where("affiliatedClinicalDiseaseId").exists(false));
 		Update update = Update.update("cerebralVascularDisease", affiliatedClinicalDisease.isCerebralVascularDisease()).
 				addToSet("cardiovascularDisease", affiliatedClinicalDisease.isCardiovascularDisease()).
 				addToSet("kidneyDisease", affiliatedClinicalDisease.isKidneyDisease()).

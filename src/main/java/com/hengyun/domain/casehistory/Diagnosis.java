@@ -12,9 +12,9 @@ import java.util.List;
  * */
 public class Diagnosis implements Serializable{
 
-	private int caseHistoryId;									//病历id
+	//private int caseHistoryId;									//病历id
 	
-	private int diagnosisId;										//诊断id
+	//private int diagnosisId;										//诊断id
 	
 	private List<String> cotent= new ArrayList<String>();									//诊断内容
 	
@@ -24,12 +24,7 @@ public class Diagnosis implements Serializable{
 	private Date recordDate;										//记录时间
 	
 
-	public int getDiagnosisId() {
-		return diagnosisId;
-	}
-	public void setDiagnosisId(int diagnosisId) {
-		this.diagnosisId = diagnosisId;
-	}
+
 	public Date getRecordDate() {
 		return recordDate;
 	}
@@ -42,12 +37,7 @@ public class Diagnosis implements Serializable{
 	public void setDangerLevel(DangerLevel dangerLevel) {
 		this.dangerLevel = dangerLevel;
 	}
-	public int getCaseHistoryId() {
-		return caseHistoryId;
-	}
-	public void setCaseHistoryId(int caseHistoryId) {
-		this.caseHistoryId = caseHistoryId;
-	}
+	
 	public List<String> getCotent() {
 		return cotent;
 	}

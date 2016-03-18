@@ -9,9 +9,9 @@ import java.io.Serializable;
 */
 public class RiskFactor implements Serializable{
 
-	private int caseHistoryId;									//病历号
+	//private int caseHistoryId;									//病历号
 	
-	private int riskFactorId;										//id
+	//private int riskFactorId;										//id
 	private int hightBloodPressure;						//高血压几级
 	private int age;														//年龄
 	private boolean cigerate;									//吸烟
@@ -26,18 +26,8 @@ public class RiskFactor implements Serializable{
 	private boolean physicalActivity;					//体力活动
 	
 	
-	public int getRiskFactorId() {
-		return riskFactorId;
-	}
-	public void setRiskFactorId(int riskFactorId) {
-		this.riskFactorId = riskFactorId;
-	}
-	public int getCaseHistoryId() {
-		return caseHistoryId;
-	}
-	public void setCaseHistoryId(int caseHistoryId) {
-		this.caseHistoryId = caseHistoryId;
-	}
+
+	
 	public int getHightBloodPressure() {
 		return hightBloodPressure;
 	}

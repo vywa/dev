@@ -1,6 +1,8 @@
 package com.hengyun.service.impl.information;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -75,10 +77,20 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 		// TODO Auto-generated method stub
 	
 			Query query = Query.query(Criteria.where("userId").is(userId));
-		
+			String birthday = information.getBirthday();
+				String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+				Date date2=new Date();
+				try {
+					date2 = simpleDateFormat.parse(digital);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				int	age = new Date().getYear()-date2.getYear();
 			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).
 					set("weight", information.getWeight()).set("sex",information.getSex()).
-					set("birthday", information.getBirthday()).
+					set("birthday", information.getBirthday()).set("age",age).
 					set("trueName", information.getTrueName()).
 					set("recordTime",String.valueOf(new Date().getTime()));
 			informationDao.updateFirst(query, update);

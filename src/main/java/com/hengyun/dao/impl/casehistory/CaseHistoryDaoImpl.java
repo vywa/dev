@@ -33,7 +33,7 @@ public class CaseHistoryDaoImpl extends BaseMongodbDaoImpl<CaseHistory,Integer> 
 	        IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 			 id = index.getCaseHistoryID();
 		//	 caseHistory.setId(id);
-			 caseHistory.setDocterId(id);
+			 caseHistory.setCaseHistoryId(id);
 	
 		
 		this.mongoTemplate.save(caseHistory);

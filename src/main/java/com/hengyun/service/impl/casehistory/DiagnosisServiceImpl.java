@@ -58,10 +58,9 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 		RiskFactor riskFactor = caseHistory.getRiskFactor();
 		TargetOrganDamage tod = caseHistory.getTargetOrganDamage();
 		AffiliatedClinicalDisease acd = caseHistory.getAffiliatedClinicalDisease();
-		int patientId = caseHistoryService.getPatientId(caseHistoryId);
-		
-		int bloodLevel = bloodPressureInfoService.getLevel(patientId);
-		riskFactor.setHightBloodPressure(bloodLevel);		
+
+		int bloodLevel = riskFactor.getHightBloodPressure();
+
 		int riskCount = riskFactorService.DagerCount(riskFactor);
 		boolean damage = targetOrganDamangeService.hasDamage(tod);
 		boolean diabetesMelliitus = affiliatedClinicalDiseaseService.hasDiabetesMelliitus(acd);
@@ -114,7 +113,7 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 	public boolean storeDanger(Diagnosis diagnosis) {
 		// TODO Auto-generated method stub
 		int id = indexCollectionDao.updateIndex("diagnosisId");
-		diagnosis.setDiagnosisId(id);
+	
 		diagnosisDao.save(diagnosis);
 		return true;
 	}

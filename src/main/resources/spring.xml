@@ -20,7 +20,7 @@ http://www.springframework.org/schema/cache
 	<import resource="classpath:springMongodb.xml"/> 
 	<import resource="classpath:redis.xml"/>
 	<import resource="classpath:javamail.xml"/>
- 	<!-- <import resource="classpath:springInterceptor.xml"/> -->
+ 	<import resource="classpath:springInterceptor.xml"/>
 	 <import resource="classpath:springJms.xml"/> 
 	<!-- <import resource="classpath:springShiro.xml"/> --> 
 	<!-- <import resource="classpath:shiro.xml"/> -->
@@ -161,6 +161,7 @@ http://www.springframework.org/schema/cache
  -->
 <bean id="doctorDao" class="com.hengyun.dao.impl.doctor.DoctorDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="doctorService" class="com.hengyun.service.impl.doctor.DoctorServiceImpl" parent="BaseServiceImpl"/>
+
 
 
 <!-- redis配置 -->

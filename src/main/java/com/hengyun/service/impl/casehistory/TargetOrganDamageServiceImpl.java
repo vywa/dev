@@ -32,7 +32,7 @@ public class TargetOrganDamageServiceImpl extends BaseServiceImpl<TargetOrganDam
 	public boolean add(TargetOrganDamage tod) {
 		// TODO Auto-generated method stub
 		int id = indexCollectionDao.updateIndex("targetOrganDamageId");
-		tod.setTargetOrganDamageId(id);
+		
 		targetOrganDamageDao.save(tod);
 		return true;
 	}
@@ -43,7 +43,7 @@ public class TargetOrganDamageServiceImpl extends BaseServiceImpl<TargetOrganDam
 	@Override
 	public boolean update(TargetOrganDamage tod) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("targetOrganDamageId").is(tod.getTargetOrganDamageId()));
+		Query query = Query.query(Criteria.where("targetOrganDamageId").exists(false));
 		Update update = Update.update("leftVentricularHypertrophy", tod.isLeftVentricularHypertrophy()).
 				addToSet("neckArteries", tod.isNeckArteries()).addToSet("ankleArteries", tod.isAnkleArteries()).
 				addToSet("limbArteries", tod.isLimbArteries()).addToSet("kidneyBall", tod.isKidneyBall()).addToSet("urineProtein", tod.isUrineProtein());

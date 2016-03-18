@@ -63,7 +63,8 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 			medicalNotice.setType(noticeType.medical_notice);
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人高压危险");
-			medicalNoticeService.save(medicalNotice);
+			medicalNoticeService.addNotice(medicalNotice);
+			
 		}
 	}
 

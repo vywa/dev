@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
@@ -58,20 +59,26 @@ public class RosterController {
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			
 			List<Information> infos = new ArrayList<Information>();
-			
+			String birthday = null;
+			int age = 0;
+			Date date2 = null; 
 			for(Integer temp :userList){
 				Information information = informationService.query(temp);
-				String birthday = information.getBirthday();
+				try {
+				 birthday = information.getBirthday();
 				String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-				Date date2 = null; 
-				try {
+				
+				
 					date2 = simpleDateFormat.parse(digital);
-				} catch (ParseException e) {
+					age = new Date().getYear()-date2.getYear();
+				} catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					age = 40;
+				}  catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-				int age = new Date().getYear()-date2.getYear();
 				information.setAge(age);
 				infos.add(information);
 			}
@@ -102,16 +109,29 @@ public class RosterController {
 			for(Integer temp :userList){
 				Information information = informationService.query(temp);
 				UserAccount userAccount = userAccountService.queryById(temp);
+				
+				String regex="([\u4e00-\u9fa5]+)";
+				Matcher matcher = Pattern.compile(regex).matcher(searchName);
+				
 				Pattern pattern = Pattern.compile("[0-9]*");
 				boolean mobile= pattern.matcher(searchName).matches(); 
-				if(mobile){
+				if(matcher.find()){
+					trueName = information.getTrueName();
+					 if(trueName==null){
+						 continue;
+					 }
+				}else if(mobile){
 					
 					 trueName = userAccount.getMobilephone();	
 					 if(trueName==null){
 						 continue;
 					 }
-				} else{
-					trueName = information.getTrueName();
+				}  else {
+					trueName= information.getTrueName();
+					if(trueName==null){
+						continue;
+					}
+				
 				}
 				if(trueName.startsWith(searchName)){
 				String birthday;

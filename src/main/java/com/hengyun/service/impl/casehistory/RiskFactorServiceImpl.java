@@ -33,7 +33,7 @@ public class RiskFactorServiceImpl extends BaseServiceImpl<RiskFactor,Integer> i
 	public boolean addFactor(RiskFactor riskFactor) {
 		// TODO Auto-generated method stub
 		int riskFactorId = indexCollectionDao.updateIndex("riskFactorId");
-		riskFactor.setRiskFactorId(riskFactorId);
+
 		riskFactorDao.save(riskFactor);
 		return true;
 	}
@@ -44,7 +44,7 @@ public class RiskFactorServiceImpl extends BaseServiceImpl<RiskFactor,Integer> i
 	@Override
 	public boolean updateFactor(RiskFactor riskFactor) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("riskFactorId").is(riskFactor.getRiskFactorId()));
+		Query query = Query.query(Criteria.where("riskFactorId").exists(false));
 		Update update = Update.update("hightBloodPressure", riskFactor.getHightBloodPressure()).
 				addToSet("cigerate", riskFactor.isCigerate()).addToSet("suggerEndure", riskFactor.isSuggerEndure()).
 				addToSet("bloodFatException", riskFactor.isBloodFatException()).

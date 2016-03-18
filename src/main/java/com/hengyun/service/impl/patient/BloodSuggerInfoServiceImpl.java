@@ -52,7 +52,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 			medicalNotice.setType(noticeType.medical_notice);
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人血糖危险");
-			medicalNoticeService.save(medicalNotice);
+			medicalNoticeService.addNotice(medicalNotice);
 		}
 	}
 	

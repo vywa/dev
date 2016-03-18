@@ -126,8 +126,21 @@
 	</bean>
 	
 
+    <mvc:annotation-driven validator="validator" conversion-service="conversion-service" />
+    
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass"  value="org.hibernate.validator.HibernateValidator"/>
+      
+        <property name="validationMessageSource" ref="validatemessageSource"/>
+    </bean>
+    <bean id="conversion-service" class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+    <bean id="validatemessageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <property name="basename" value="classpath:validatemessages"/>  
+        <property name="fileEncodings" value="utf-8"/>  
+        <property name="cacheSeconds" value="120"/>  
+    </bean>
 	
-  <!-- Jackson转换器 --> 
+  <!--  
     <bean id="jacksonHttpMessageConverter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
         <property name="messageConverters">  
             <list>  
@@ -143,7 +156,22 @@
             </list>  
         </property>  
     </bean>  
+-->
 
+  <!--启动Spring MVC的注解功能,设置编码方式，防止乱码-->  
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
+      <property name="messageConverters">     
+         <list>     
+             <bean class = "org.springframework.http.converter.StringHttpMessageConverter">     
+                <property name = "supportedMediaTypes">  
+                      <list>  
+                          <value>text/html;charset=UTF-8</value>     
+                     </list>     
+                </property>     
+             </bean>     
+         </list>     
+      </property>   
+    </bean>  
  
     <!-- fastjson转换器 -->  
     <bean id="fastJsonHttpMessageConverter"  class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter"/>  
