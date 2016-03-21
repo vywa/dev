@@ -26,6 +26,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.information.DoctorInfo;
+import com.hengyun.domain.information.DoctorInfoResponse;
 import com.hengyun.domain.information.InfoResponse;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.information.NickIcon;
@@ -334,6 +336,52 @@ public class InfomationController {
 			 response.setCode("206");
 			 response.setMessage("返回用户昵称和图像");
 			 response.setNickIcon(nickIcon);
+		
+		
+		 return JSON.toJSONString(response);
+	}
+	
+	/*
+	 * 获取用户信息
+	 * 
+	 * */
+	@RequestMapping(value="/doctorInfo",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String doctorInfo(HttpServletRequest request,@RequestParam String data){
+		DoctorInfoResponse response = new DoctorInfoResponse();
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId");
+			
+			Query query =Query.query(Criteria.where("userId").is(userId));
+			 Information temp =informationService.queryOne(query);
+			 String nickname = temp.getTrueName();
+			 String sex = temp.getSex();
+			 int age = temp.getAge();
+			 String birthday  = temp.getBirthday();
+		
+			 UserAccount account = userAccountService.queryById(userId);
+			 String mobilephone = account.getMobilephone();
+			 String email = account.getEmail();
+			 String workNum = account.getWorkNum();
+			 
+			
+			 String iconUrl = temp.getIconUrl();
+			 DoctorInfo doctorInfo = new DoctorInfo();
+			 doctorInfo.setIconUrl(iconUrl);
+			 doctorInfo.setBirthday(birthday);
+			 doctorInfo.setEmail(email);
+			
+			 doctorInfo.setMobilephone(mobilephone);
+		
+			 doctorInfo.setTrueName(nickname);
+			 doctorInfo.setUserId(userId);
+			
+			 doctorInfo.setWorkNum(workNum);
+			 doctorInfo.setAge(age);
+			 doctorInfo.setSex(sex);
+			 response.setCode("206");
+			 response.setMessage("返回用户昵称和图像");
+			 response.setDoctorInfo(doctorInfo);
 		
 		
 		 return JSON.toJSONString(response);

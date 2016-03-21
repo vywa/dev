@@ -1,5 +1,6 @@
 package com.hengyun.controller.notice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,8 +15,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.information.Information;
+import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.domain.notice.MedicalNotice;
+import com.hengyun.domain.notice.MedicalNoticeDetail;
 import com.hengyun.domain.notice.MedicalNoticeResponse;
+import com.hengyun.service.information.InformationService;
+import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.service.notice.MedicalNoticeService;
 
 /**
@@ -31,6 +37,12 @@ public class MedicalNoticeController {
 	@Resource
 	private MedicalNoticeService medicalNoticeService;
 	
+	@Resource
+	private InformationService informationService;
+	
+	@Resource
+	private UserAccountService userAccountService;
+	
 	/*
 	 * 
 	 * 查询医生所有病人通知
@@ -38,14 +50,45 @@ public class MedicalNoticeController {
 	 * */
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String query(HttpServletRequest request,@RequestParam String data){
+	public String query(HttpServletRequest request){
 		
 		int userId = (int)request.getAttribute("userId");
 		List<MedicalNotice> notices = medicalNoticeService.queryNotice(userId);
+		Information info =null;
+		UserAccount account=null;
+		List<MedicalNoticeDetail> mlist = new ArrayList<MedicalNoticeDetail>();
+		
+		for(MedicalNotice temp: notices){
+			MedicalNoticeDetail medical =new MedicalNoticeDetail();
+			int patientId = temp.getNoticeToId();
+			info=informationService.query(patientId);
+			account= userAccountService.queryById(patientId);
+			medical.setUserId(account.getId());
+			medical.setAddress(info.getAddress());
+			medical.setAge(info.getAge());
+			medical.setBirthday(info.getBirthday());
+			medical.setContent(temp.getContent());
+			medical.setHeight(info.getHeight());
+			medical.setDangerLevel(temp.getDangerLevel());
+			medical.setMobilephone(account.getMobilephone());
+			medical.setNoticeFromId(temp.getNoticeFromId());
+			medical.setNoticeId(temp.getNoticeId());
+			medical.setNoticeToId(temp.getNoticeToId());
+			medical.setNoticeType(temp.getNoticeType());
+			medical.setSex(info.getSex());
+			medical.setTrueName(info.getTrueName());
+			medical.setWeight(info.getWeight());
+			medical.setAddress(info.getAddress());
+			medical.setSendTime(temp.getSendTime());
+			medical.setQQ(info.getQQ());
+			medical.setEmail(info.getEmail());
+			medical.setIconUrl(info.getIconUrl());
+			mlist.add(medical);
+		}
 		MedicalNoticeResponse response = new MedicalNoticeResponse();
 		response.setCode("206");
 		response.setMessage("查询医疗通知成功");
-		response.setMedicalNoticeList(notices);
+		response.setMedicalNoticeDetailList(mlist);
 		return JSON.toJSONString(response);
 
 	}

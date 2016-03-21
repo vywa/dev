@@ -16,6 +16,7 @@ import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.PostComment;
 import com.hengyun.service.forum.ForumPostService;
 import com.hengyun.service.forum.PostCommentService;
+import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
 /*
@@ -33,6 +34,9 @@ public class PostCommentController {
 	@Resource 
 	private PostCommentService postCommentService;
 	
+	
+	
+
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addComment(@RequestParam String data,HttpServletRequest request){

@@ -33,7 +33,7 @@ public class SubjectDaoImpl extends BaseMongodbDaoImpl<Subject,Integer> implemen
 
 		IndexCollection index =  this.mongoTemplate.findAndModify(query, update, IndexCollection.class);
 		int sid = index.getPostID();
-		System.out.println(sid);
+	
 		post.setSubjectId(sid);
 		this.mongoTemplate.save(post);
 

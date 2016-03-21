@@ -25,6 +25,7 @@ public class Information implements Serializable{
 	private int age;									//用户年龄
 	
 	
+	private String resume;						//简介
 	
 	private String height;							//身高
 	private String weight;							//体重
@@ -42,6 +43,12 @@ public class Information implements Serializable{
 	
 	
 	
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
 	public int getAge() {
 		return age;
 	}

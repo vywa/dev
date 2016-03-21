@@ -11,6 +11,7 @@ public class Subject implements Serializable {
 	
 	private String content;						//帖子内容
 	private List<String> imgUrls;			//图片地址
+	private int authorId;							//作者id
 	private String author;						//作者
 	private String title;								//标题
 	private int replyNum;						//回复数
@@ -19,7 +20,7 @@ public class Subject implements Serializable {
 	private boolean isCollection;		//是否被我收藏过
 	private String fileUrl;							//附件url
 	private int likeCount;						//被多少人赞过
-	private String publishTime;				//发帖时间
+	private long publishTime;				//发帖时间
 	private int subjectType;					//帖子类型
 	private String locInfo;							//具体的定位信息
 	private String videoUrl;						//视频地址
@@ -31,6 +32,12 @@ public class Subject implements Serializable {
 	
 	
 	
+	public int getAuthorId() {
+		return authorId;
+	}
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}
 	public double getLng() {
 		return lng;
 	}
@@ -109,10 +116,11 @@ public class Subject implements Serializable {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
-	public String getPublishTime() {
+
+	public long getPublishTime() {
 		return publishTime;
 	}
-	public void setPublishTime(String publishTime) {
+	public void setPublishTime(long publishTime) {
 		this.publishTime = publishTime;
 	}
 	public int getSubjectType() {

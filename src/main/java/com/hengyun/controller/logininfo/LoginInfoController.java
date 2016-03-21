@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
@@ -44,6 +47,7 @@ public class LoginInfoController {
 	
 	@Resource
 	private InformationService informationService;
+	
 	
 	/*
 	 *  用户名账号登陆
@@ -89,9 +93,66 @@ public class LoginInfoController {
 		}
 	
 			int userId = loginResult.getUserId();
-			 if(userId>0){
 			
+			 if(userId>0){
+				 String userIdStr = String.valueOf(userId);
+				 //医生端
+				 if(userIdStr.startsWith("10")){
+						Query query =Query.query(Criteria.where("userId").is(userId));
+						try{
+						 Information temp =informationService.queryOne(query);
+							account = userAccountService.queryById(userId);
+							 long dbRecordTime = Long.valueOf(temp.getRecordTime());
+							 if(dbRecordTime>Long.valueOf(recordTime)){
+								 String nickname = temp.getTrueName();
+								 String sex = temp.getSex();
+								 String resume = temp.getResume();
+								 int age = temp.getAge();
+								 String birthday  = temp.getBirthday();
+							
+								 UserAccount account2 = userAccountService.queryById(userId);
+								 String mobilephone = account2.getMobilephone();
+								 String email = account2.getEmail();
+								 String workNum = account2.getWorkNum();
+								 
+								
+								 String iconUrl = temp.getIconUrl();
+								 DoctorInfo doctorInfo = new DoctorInfo();
+								 doctorInfo.setIconUrl(iconUrl);
+								 doctorInfo.setBirthday(birthday);
+								 doctorInfo.setEmail(email);
+								
+								 doctorInfo.setMobilephone(mobilephone);
+							
+								 doctorInfo.setTrueName(nickname);
+								 doctorInfo.setUserId(userId);
+								doctorInfo.setResume(resume);
+								 doctorInfo.setWorkNum(workNum);
+								 doctorInfo.setAge(age);
+								 doctorInfo.setSex(sex);
+								 loginResult.setDoctorInfo(doctorInfo);
+								 loginResult.setCode("206");
+								 loginResult.setUsername(account.getUsername());
+								 
+							 } else {
+								 loginResult.setCode("207");
+								 loginResult.setUsername(account.getUsername());
+								 loginResult.setInfo(null);
+							 }
+							 } catch (NullPointerException ex) {
+									// TODO Auto-generated catch block
+									Information info = new Information();
+									info.setUserId(userId);
+									info.setRecordTime(String.valueOf(new Date().getTime()));
+									informationService.add(info, userId);
+									loginResult.setCode("206");
+									 loginResult.setInfo(info);
+									 loginResult.setUsername(account.getUsername());
+								}
+	
+				 } else if(userIdStr.startsWith("20")){
 				 Information information=null;
+				
 				try {
 					information = informationService.query(userId);
 				
@@ -117,13 +178,15 @@ public class LoginInfoController {
 					 loginResult.setInfo(info);
 					 loginResult.setUsername(account.getUsername());
 				}
-				
+				 }
 		}
 				return JSON.toJSONString(loginResult);
 		
 				 
 		
 	}
+	
+
 
 	/*
 	 * 通过存储tocken登陆

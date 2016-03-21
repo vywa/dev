@@ -178,6 +178,26 @@ public class DiagnosisController {
 	
 	 /*
 	  * 
+	  * 病人亲属查询用户自己的诊断信息
+	  * 
+	  * */
+	@RequestMapping(value="/friendQuery",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String friendQuery(HttpServletRequest request){
+		int userId =(int) request.getAttribute("userId");
+		Query query = new Query();
+		query.addCriteria(Criteria.where("userId").is(userId));
+		
+		List<CaseHistory> caseList = caseHistoryService.queryList(query);
+		CaseHistoryResponse response = new CaseHistoryResponse();
+		response.setCode("206");
+		response.setMessage("查询诊断结果成功");
+		response.setCaseHistoryList(caseList);
+		 return JSON.toJSONString(response);
+	}
+	
+	 /*
+	  * 
 	  * 查询某个用户诊断信息
 	  * 
 	  * */
@@ -228,6 +248,7 @@ public class DiagnosisController {
 				mn.setNoticeToId(patient);
 				mn.setSendTime(new Date());
 				mn.setType(noticeType.medical_notice);
+				//诊断通知
 				mn.setNoticeType(1);
 				medicalNoticeService.addNotice(mn);
 				break;

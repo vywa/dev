@@ -14,9 +14,14 @@ public interface SubjectService  extends BaseService<Subject,Integer> {
 	//查询前后十条帖子
 	public List<Subject> showList( int userId,int subjectId,int subjectType ,int freshenType) ;
 	
-	public List<Subject> show(String tocken);
+	public List<Subject> show(int userId);
 	
 	public List<Subject> showAll();
+	
+	/*
+	 *  查询所有好友的帖子
+	 * */
+	public List<Subject> friendSubject(int userId,int freshenType);
 	
 	
 }

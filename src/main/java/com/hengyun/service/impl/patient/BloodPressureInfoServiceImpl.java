@@ -59,7 +59,8 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 			MedicalNotice medicalNotice = new MedicalNotice();
 			medicalNotice.setNoticeFromId(doctorId);
 			medicalNotice.setNoticeToId(userId);
-			medicalNotice.setNoticeType(1);
+			//高压危险
+			medicalNotice.setNoticeType(2);
 			medicalNotice.setType(noticeType.medical_notice);
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人高压危险");
@@ -188,14 +189,27 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 				lowBP= lowTemp;
 			}
 		}
-		if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
-			level =1;
-		} else if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
-			level = 2;
-		} else if(lowBP>80&&lowBP<120||highBP>120&&highBP<180){
-			level=3;
+		int temp =0;
+		//评估低压
+		if(lowBP>=90&&lowBP<100){
+			temp =1;
+		} else if(lowBP>=100&&lowBP<110){
+			temp = 2;
+		} else if(lowBP>=110){
+			temp=3;
+		} 
+		//评估高压
+		 if(highBP>=140&&highBP<160){
+			if(temp<=1)
+			temp=1;
+		}else if(highBP>=160&&highBP<180){
+			if(temp<=2)
+			temp = 2;
+		} else if(highBP>=180){
+			if(temp<=3)
+			temp=3;
 		}
-		return level;
+		return temp;
 	}
 
 

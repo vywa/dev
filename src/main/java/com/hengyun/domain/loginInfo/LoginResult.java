@@ -1,6 +1,7 @@
 package com.hengyun.domain.loginInfo;
 
 import com.hengyun.domain.common.BaseResponseCode;
+import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
 
 /*
@@ -14,13 +15,21 @@ public class LoginResult extends BaseResponseCode{
 	
 	private String username;				//用户名
 	private Information info;				//用户基本资料
-	
+	private DoctorInfo doctorInfo;			//医生账号信息
 	//private UserAccount account;		//账号信息
 	private String type ;							//类型
 	private String loginName;				//登陆名
 	
 	private boolean changePassword;	//医生需要修改密码
 	
+	
+	public DoctorInfo getDoctorInfo() {
+		return doctorInfo;
+	}
+
+	public void setDoctorInfo(DoctorInfo doctorInfo) {
+		this.doctorInfo = doctorInfo;
+	}
 
 	public boolean isChangePassword() {
 		return changePassword;

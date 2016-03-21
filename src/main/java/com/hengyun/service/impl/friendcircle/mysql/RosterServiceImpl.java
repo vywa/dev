@@ -84,6 +84,26 @@ public class RosterServiceImpl implements RosterService{
 		
 	}
 
+	/*
+	 *  查询某两个人是否是好友
+	 * */
+	@Override
+	public boolean makeFriend(String person1, String person2) {
+		// TODO Auto-generated method stub
+		List<Roster> roster = rosterDao.getRoster(person1);
+		
+		for(Roster temp : roster){
+			String name = temp.getJid();
+			int index = name.indexOf("@");
+			String idstr = name.substring(0, index);
+			if(idstr.equals(person2)){
+				return true;
+			}
+			
+		}
+		return false;
+	}
+
 	
 
 }

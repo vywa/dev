@@ -17,6 +17,7 @@ import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.forum.SubjectService;
+import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
@@ -41,7 +42,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	@Resource
 	private UserAccountService userAccountService;
 
-
+	@Resource
+	private RosterService rosterService;
 
 	//更新资料
 	public int update(Subject forumPost,String tocken) {
@@ -68,12 +70,13 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			forumPost.setAuthorPhotoImgUrl(info.getIconUrl());
 		
 			forumPost.setLikeCount(0);
-			forumPost.setPublishTime(String.valueOf(new Date().getTime()));
+			forumPost.setPublishTime(new Date().getTime());
+			
 			String imageUrl = info.getIconUrl();
 			forumPost.setAuthorPhotoImgUrl(imageUrl);
-		SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
-			String dateTime = dateFm.format(new java.util.Date());
-			forumPost.setPublishTime(dateTime);
+			//	SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
+		//	String dateTime = dateFm.format(new java.util.Date());
+		//forumPost.setPublishTime(dateTime);
 			
 			String forumName = null;
 			UserAccount account = userAccountService.queryById(userId);
@@ -128,11 +131,13 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	
 	}
 
-	
-	public List<Subject> show(String author ) {
+	/*
+	 *  查询某个用户的所有帖子
+	 * */
+	public List<Subject> show(int authorId ) {
 		// TODO Auto-generated method stub
 	
-			Query query = Query.query(Criteria.where("author").is(author));
+			Query query = Query.query(Criteria.where("authorId").is(authorId));
 			List<Subject> forumPost = subjectDao.queryList(query);
 			return forumPost;
 	
@@ -153,6 +158,35 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		Query query = Query.query(Criteria.where("subjectId").is(subjectId));
 		Subject subject = subjectDao.queryOne(query);
 		subjectDao.delete(subject);
+	}
+
+	/*
+	 *  显示所有好友的帖子
+	 * 
+	 * */
+	@Override
+	public List<Subject> friendSubject(int userId,int freshenType) {
+		// TODO Auto-generated method stub
+		List<Integer> friendIdList = rosterService.getFriendList(String.valueOf(userId));
+		List<Subject> forumPost=null;
+		Query query = new Query();
+		Criteria criteria =Criteria.where("authorId").in(friendIdList);
+		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			Query query2 = new Query();
+			
+			  query2.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			  
+		if(freshenType== -1){
+			//forumPost=subjectDao.queryList(query);
+			forumPost = subjectDao.getPage(query, 0, 10);
+		}
+		else if(freshenType==1){
+			//forumPost=subjectDao.queryList(query);
+			 forumPost = subjectDao.getPage(query2, 0, 10);
+		}
+		return forumPost;
+
+	
 	}
 
 }

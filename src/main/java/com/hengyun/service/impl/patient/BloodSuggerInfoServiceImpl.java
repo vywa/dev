@@ -47,7 +47,8 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 			int doctorId = rosterService.getDoctor(String.valueOf(userId));
 			MedicalNotice medicalNotice = new MedicalNotice();
 			medicalNotice.setNoticeFromId(doctorId);
-			medicalNotice.setNoticeType(1);
+			//血糖危险
+			medicalNotice.setNoticeType(3);
 			medicalNotice.setNoticeToId(userId);
 			medicalNotice.setType(noticeType.medical_notice);
 			medicalNotice.setSendTime(new Date());

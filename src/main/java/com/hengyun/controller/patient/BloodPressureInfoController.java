@@ -58,7 +58,7 @@ public class BloodPressureInfoController {
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId);
 			
 		
-		response.setCode("211");
+		response.setCode("211");//112
 		response.setBloodPressureInfo(bloodList);
 		
 		return  JSONObject.toJSONString(response);
@@ -85,10 +85,34 @@ public class BloodPressureInfoController {
 	/*
 	 * 
 	 * 	医生查询某个用户的血压记录
+	 * 
 	 * */
 	@RequestMapping(value="/doctorQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
+		
+		JSONObject jsonObject =JSON.parseObject(data);
+		PressureResponse response = new PressureResponse();
+		int userId2 = jsonObject.getIntValue("userId");
+		long startTime = jsonObject.getLongValue("startTime");
+		long endTime =jsonObject.getLongValue("endTime");
+		
+		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId2);
+		response.setCode("211");
+		response.setBloodPressureInfo(bloodList);
+		
+		return  JSONObject.toJSONString(response);
+		
+	}
+	
+	/*
+	 * 
+	 * 	病人亲属查询某个用户的血压记录
+	 * 
+	 * */
+	@RequestMapping(value="/friendQuery",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String friendQuery(@RequestParam String data,HttpServletRequest request){
 		
 		JSONObject jsonObject =JSON.parseObject(data);
 		PressureResponse response = new PressureResponse();
@@ -150,7 +174,7 @@ public class BloodPressureInfoController {
 		//保存数据
 		bloodPressureInfoService.addInfo(blood, userId);
 		
-		response.setCode("0");
+		response.setCode("0");//-1
 		response.setMessage("record success");
 	
 	

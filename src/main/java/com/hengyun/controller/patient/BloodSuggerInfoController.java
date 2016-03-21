@@ -55,7 +55,7 @@ public class BloodSuggerInfoController {
 
 		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, userId);
 	
-		sugger.setCode("211");
+		sugger.setCode("211");//-112
 		sugger.setBloodSuggerInfo(bloodList);
 	
 		return  JSONObject.toJSONString(sugger);
@@ -84,6 +84,28 @@ public class BloodSuggerInfoController {
 		return  JSONObject.toJSONString(sugger);
 	}
 	
+	/*
+	 * 
+	 * 病人亲属查询用户特定时间段血糖数据
+	 * */
+	@RequestMapping("/friendQuery")
+	@ResponseBody
+	public String friendQuery(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+	
+		int user = jsonObject.getIntValue("userId");
+		SuggerResponse sugger = new SuggerResponse();
+		
+		long startTime = jsonObject.getLongValue("startTime");
+		long endTime =jsonObject.getLongValue("endTime");
+		
+		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, user);
+	
+		sugger.setCode("211");
+		sugger.setBloodSuggerInfo(bloodList);
+		
+		return  JSONObject.toJSONString(sugger);
+	}
 	
 	
 	/*
@@ -161,8 +183,8 @@ public class BloodSuggerInfoController {
 		sugger.setMeasureType(measureType);
 		
 		//保存数据
-		bloodSuggerInfoService.save(sugger);
-		response.setCode("0");
+		bloodSuggerInfoService.addInfo(sugger, userId);
+		response.setCode("0");//-1
 		response.setMessage("record success");
 		
 	

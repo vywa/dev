@@ -12,14 +12,16 @@ import com.hengyun.domain.common.ResponseCode;
 */
 public class MedicalNoticeResponse extends ResponseCode implements Serializable{
 
-	private List<MedicalNotice> medicalNoticeList;							//医疗通知
+	private List<MedicalNoticeDetail> medicalNoticeDetailList;							//医疗通知
 
-	public List<MedicalNotice> getMedicalNoticeList() {
-		return medicalNoticeList;
+	public List<MedicalNoticeDetail> getMedicalNoticeDetailList() {
+		return medicalNoticeDetailList;
 	}
 
-	public void setMedicalNoticeList(List<MedicalNotice> medicalNoticeList) {
-		this.medicalNoticeList = medicalNoticeList;
+	public void setMedicalNoticeDetailList(List<MedicalNoticeDetail> medicalNoticeDetailList) {
+		this.medicalNoticeDetailList = medicalNoticeDetailList;
 	}
+
+	
 
 }

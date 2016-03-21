@@ -1,6 +1,5 @@
 package com.hengyun.controller.forum;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,10 +18,11 @@ import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.PostListResponseCode;
 import com.hengyun.domain.forum.Subject;
-import com.hengyun.domain.information.Information;
 import com.hengyun.service.forum.SubjectService;
+import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.annotation.SecurityControl;
 
 /*
  *  帖子管理
@@ -36,6 +36,9 @@ public class SubjectController {
     private InformationService informationService;
 	@Resource
 	private SubjectService subjectService;
+	
+	@Resource
+	private RosterService rosterService;
 	
 	//发送帖子
 	@RequestMapping(value="/add",produces = "text/html;charset=UTF-8")
@@ -72,6 +75,7 @@ public class SubjectController {
 	}
 	
 	//设置帖子
+	
 	@RequestMapping("/set")
 	@ResponseBody
 	public String setPost(@RequestParam String data,HttpServletRequest request){
@@ -79,6 +83,9 @@ public class SubjectController {
 		return null;
 	}
 	
+	/*
+	 *  显示所有帖子
+	 * */
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showPost(HttpServletRequest request){
@@ -88,15 +95,34 @@ public class SubjectController {
 		return JSON.toJSONString(postList);
 	}
 	
+	/*
+	 *  显示所有好友的帖子
+	 * */
+	@RequestMapping("/friendSubject")
+	@ResponseBody
+	public String friendSubject(HttpServletRequest request){
 	
-	//查看某个帖子的回复列表
+		List<Subject> postList = subjectService.showAll();
+
+		return JSON.toJSONString(postList);
+	}
+	
+	
+	//查看某个好友的所有帖子
+	
 	@RequestMapping(value="/subjectDetail")
 	@ResponseBody
 	public String queryPost(@RequestParam String data,HttpServletRequest request){
-		String tocken = request.getParameter("tocken");
+		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
-	
-		List<Subject> postList = subjectService.show(tocken);
+		int authorId = jsonObject.getIntValue("authorId");
+		List<Subject> postList=null;
+		if(rosterService.makeFriend(String.valueOf(userId), String.valueOf(authorId))){
+			postList = subjectService.show(authorId);	
+		} else {
+			return JSON.toJSONString("不是朋友，不成查看");
+		}
+		
 
 		return JSON.toJSONString(postList);
 	}
@@ -126,7 +152,8 @@ public class SubjectController {
 	}
 	
 	
-	//某个id对应的帖子
+	//删除id对应的帖子
+	
 	@RequestMapping(value="/delete",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String idPost(@RequestParam String data,HttpServletRequest request){

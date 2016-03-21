@@ -52,6 +52,7 @@ com/hengyun/domain/patient/BloodPressureInfo.class
 com/hengyun/controller/casehistory/CaseHistoryController.class
 com/hengyun/domain/forum/Subject.class
 com/hengyun/dao/impl/patient/HabitInfoDaoImpl.class
+com/hengyun/util/annotation/SecurityControl.class
 com/hengyun/service/impl/casehistory/RecipeServiceImpl.class
 com/hengyun/domain/patient/HealthTarget.class
 com/hengyun/service/casehistory/TargetOrganDamageService.class
@@ -105,7 +106,6 @@ com/hengyun/domain/casehistory/TreateWait.class
 com/hengyun/service/information/GeneralPersonService.class
 com/hengyun/dao/logininfo/UserAccountDao.class
 com/hengyun/controller/patient/BloodSuggerInfoController.class
-com/hengyun/util/annotation/Allowed.class
 com/hengyun/domain/administrator/UserRoleResult.class
 com/hengyun/dao/impl/forum/SubjectDaoImpl.class
 com/hengyun/domain/notice/Notice$noticeType.class
@@ -116,6 +116,7 @@ com/hengyun/domain/common/BaseResponseCode.class
 com/hengyun/dao/impl/casehistory/AffiliatedClinicalDiseaseDaoImpl.class
 com/hengyun/service/forum/SecondCommentService.class
 com/hengyun/domain/administrator/RolesResult.class
+com/hengyun/util/interceptor/SecurityControlInterceptor.class
 com/hengyun/dao/impl/forum/PostCommentDaoImpl.class
 com/hengyun/dao/impl/notice/FriendCircleNoticeDao.class
 com/hengyun/service/shiro/SimpleCacheManager.class
@@ -168,7 +169,6 @@ com/hengyun/domain/casehistory/Diagnosis.class
 com/hengyun/service/forum/ReplySubjectService.class
 com/hengyun/domain/administrator/Roles.class
 com/hengyun/controller/administrator/UserRoleController.class
-com/hengyun/util/interceptor/AllowedInterceptor.class
 com/hengyun/service/administrator/AdministratorService.class
 com/hengyun/dao/casehistory/DiagnosisDao.class
 com/hengyun/dao/patient/HabitInfoDao.class
@@ -193,6 +193,7 @@ com/hengyun/service/impl/monitor/logbackFlume/FlumeAppender.class
 com/hengyun/service/impl/administrator/UserRoleServiceImpl.class
 com/hengyun/service/impl/patient/HabitInfoServiceImpl.class
 com/hengyun/service/impl/friendcircle/mysql/RosterServiceImpl.class
+com/hengyun/domain/information/DoctorInfoResponse.class
 com/hengyun/service/impl/shiro/SimpleFilterChainDefinitionService.class
 com/hengyun/dao/hospital/HospitalDao.class
 com/hengyun/controller/forum/ForumController.class
@@ -246,6 +247,7 @@ com/hengyun/util/sms/GetReplyResult.class
 com/hengyun/domain/notice/Notice.class
 com/hengyun/dao/forum/ReplySubjectDao.class
 com/hengyun/util/sms/QueryResult.class
+com/hengyun/domain/notice/MedicalNoticeDetail.class
 com/hengyun/util/exception/BusinessTimeoutException.class
 com/hengyun/domain/casehistory/DoctorAdvice.class
 com/hengyun/domain/information/NickIcon.class
@@ -302,6 +304,7 @@ com/hengyun/dao/impl/administrator/AdministratorDaoImpl.class
 com/hengyun/domain/casehistory/DynamicBloodPressureMonitor.class
 com/hengyun/domain/notice/MedicalNotice.class
 com/hengyun/domain/information/Icon.class
+com/hengyun/util/security/SecurityControlHolder.class
 com/hengyun/domain/hospital/Office.class
 com/hengyun/service/impl/patient/PatientServiceImpl.class
 com/hengyun/dao/impl/patient/BloodSuggerInfoDaoImpl.class
@@ -395,6 +398,7 @@ com/hengyun/dao/impl/hospital/DocterDaoImpl.class
 com/hengyun/dao/forum/ForumPostDao.class
 com/hengyun/service/impl/monitor/kafkaMongodb/StringUtils.class
 com/hengyun/domain/patient/HealthTargetResponse.class
+com/hengyun/domain/information/DoctorInfo.class
 com/hengyun/domain/casehistory/Symptom.class
 com/hengyun/service/impl/hospital/HospitalServiceImpl.class
 com/hengyun/service/casehistory/ReTreateInfoService.class
@@ -408,6 +412,7 @@ com/hengyun/controller/casehistory/ChiefComplaintController.class
 com/hengyun/service/patient/BloodSuggerInfoService.class
 com/hengyun/dao/forum/ForumAuthorityDao.class
 com/hengyun/service/impl/administrator/AdministratorServiceImpl.class
+com/hengyun/util/security/SecurityControlException.class
 com/hengyun/service/impl/forum/ForumPostServiceImpl.class
 com/hengyun/controller/casehistory/TreateWaitController.class
 com/hengyun/controller/hospital/DocterController.class

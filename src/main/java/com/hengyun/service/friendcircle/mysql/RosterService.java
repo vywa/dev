@@ -14,4 +14,7 @@ public interface RosterService {
 	public List<Integer> getFriendList(String username);
 	
 	public List<Integer> searchFriendList(String username,String searchName);
+	
+	//查询两个人是否是好友
+	public boolean makeFriend(String person1,String person2);
 }
