@@ -40,7 +40,10 @@ public class SubjectController {
 	@Resource
 	private RosterService rosterService;
 	
-	//发送帖子
+	/*
+	 *  发送帖子
+	 * 
+	 * */
 	@RequestMapping(value="/add",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String addPost(@RequestParam String data,HttpServletRequest request){
@@ -49,7 +52,9 @@ public class SubjectController {
 		Subject post = JSON.toJavaObject(jsonObject, Subject.class);
 		
 		int userId =(int) request.getAttribute("userId");
-		subjectService.post(post, userId);
+		//发表帖子
+		int result = subjectService.post(post, userId);
+		
 		response.setResponseCode(0);
 		response.setDescription("发帖成功");
 
@@ -98,21 +103,27 @@ public class SubjectController {
 	/*
 	 *  显示所有好友的帖子
 	 * */
-	@RequestMapping("/friendSubject")
+	@RequestMapping("/friendsSubject")
 	@ResponseBody
-	public String friendSubject(HttpServletRequest request){
-	
-		List<Subject> postList = subjectService.showAll();
+	public String friendsSubject(@RequestParam String data,HttpServletRequest request){
+		PostListResponseCode response = new PostListResponseCode();
+		int userId = (int)request.getAttribute("userId");
+		JSONObject jsonObject =JSON.parseObject(data);
+		int freshenType = jsonObject.getIntValue("freshenType");
+		List<Subject> postList = subjectService.friendSubject(userId, freshenType);
 
-		return JSON.toJSONString(postList);
+		response.setSubjectList(postList);
+		response.setResponseCode(0);
+		response.setDescription("获取列表成功");
+		return JSON.toJSONString(response);
 	}
 	
 	
 	//查看某个好友的所有帖子
 	
-	@RequestMapping(value="/subjectDetail")
+	@RequestMapping(value="/friendSubject")
 	@ResponseBody
-	public String queryPost(@RequestParam String data,HttpServletRequest request){
+	public String friendSubject(@RequestParam String data,HttpServletRequest request){
 		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
 		int authorId = jsonObject.getIntValue("authorId");
@@ -152,7 +163,10 @@ public class SubjectController {
 	}
 	
 	
-	//删除id对应的帖子
+	/*
+	 * 删除id对应的帖子
+	 * 
+	 * */
 	
 	@RequestMapping(value="/delete",produces = "text/html;charset=UTF-8")
 	@ResponseBody

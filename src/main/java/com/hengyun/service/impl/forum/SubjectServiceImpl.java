@@ -59,7 +59,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	
 	}
 
-	//发送帖子
+	/*
+	 * 	发送帖子
+	 * */
 	public int  post(Subject forumPost,int userId) {
 		// TODO Auto-generated method stub
 		
@@ -74,9 +76,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			
 			String imageUrl = info.getIconUrl();
 			forumPost.setAuthorPhotoImgUrl(imageUrl);
-			//	SimpleDateFormat dateFm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //格式化当前系统日期
-		//	String dateTime = dateFm.format(new java.util.Date());
-		//forumPost.setPublishTime(dateTime);
+		
 			
 			String forumName = null;
 			UserAccount account = userAccountService.queryById(userId);
@@ -104,6 +104,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			forumPost.setAuthor(forumName);
 		
 			int postId = subjectDao.post(forumPost);
+			
 			return postId;
 		
 	}
@@ -151,7 +152,10 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		
 	}
 
-	//删帖
+	/*
+	 * 删除某个帖子
+	 * 
+	 * */
 	@Override
 	public void delete(int subjectId) {
 		// TODO Auto-generated method stub
@@ -165,7 +169,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	 * 
 	 * */
 	@Override
-	public List<Subject> friendSubject(int userId,int freshenType) {
+	public List<Subject> friendsSubject(int userId,int freshenType) {
 		// TODO Auto-generated method stub
 		List<Integer> friendIdList = rosterService.getFriendList(String.valueOf(userId));
 		List<Subject> forumPost=null;
@@ -187,6 +191,48 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		return forumPost;
 
 	
+	}
+
+	/*
+	 *  显示某个好友的帖子列表
+	 * 
+	 * */
+	@Override
+	public List<Subject> friendSubject(int friendId,int freshenType) {
+		// TODO Auto-generated method stub
+	
+		List<Subject> forumPost=null;
+		Query query = new Query();
+		Criteria criteria =Criteria.where("authorId").is(friendId);
+		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			Query query2 = new Query();
+			
+			  query2.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			  
+		if(freshenType== -1){
+			//forumPost=subjectDao.queryList(query);
+			forumPost = subjectDao.getPage(query, 0, 10);
+		}
+		else if(freshenType==1){
+			//forumPost=subjectDao.queryList(query);
+			 forumPost = subjectDao.getPage(query2, 0, 10);
+		}
+		return forumPost;
+
+	
+	}
+	
+	/*
+	 *  显示某个帖子详细信息
+	 * 
+	 * */
+	@Override
+	public Subject subjectDetail(int subjectId) {
+		// TODO Auto-generated method stub
+		Query query =Query.query(Criteria.where("subjectId").is(subjectId));
+		Subject subjectDetail = subjectDao.queryOne(query);
+
+		return subjectDetail;
 	}
 
 }
