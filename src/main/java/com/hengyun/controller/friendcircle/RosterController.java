@@ -175,90 +175,33 @@ public class RosterController {
 			int userId = (int)request.getAttribute("userId");
 			JSONObject jsonObject = JSON.parseObject(data);
 			String searchName = jsonObject.getString("key");
-	
+			List<Integer> idList = rosterService.searchFriendList(String.valueOf(userId), searchName);
+			
+			
 			List<Information> infos=new ArrayList<Information>();
-			String trueName  = null;
+			String birthday = null;
+			int age = 0;
+			for(int i=0;i<idList.size();i++){
+				Information information = informationService.query(idList.get(i));
+				try {
+					birthday = information.getBirthday();
+					String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+					Date date2 = null; 
+					date2 = simpleDateFormat.parse(digital);
+					 age= new Date().getYear()-date2.getYear();
+				} catch (NullPointerException e1) {
+					// TODO Auto-generated catch block
+					age=30;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				information.setAge(age);
+				infos.add(information);
+			}
+			
 		
-				String regex="([\u4e00-\u9fa5]+)";
-				Matcher matcher = Pattern.compile(regex).matcher(searchName);
-				
-				Pattern pattern = Pattern.compile("[0-9]*");
-				String birthday;
-				int age=45;
-				
-				boolean mobile= pattern.matcher(searchName).matches(); 
-				if(mobile){
-					Query query = new Query();
-					Pattern pattern1 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
-					query =query.addCriteria(Criteria.where("mobilephone").regex(pattern1));
-					List<UserAccount> ulist = userAccountService.queryList(query);
-					for(int i=0;i<ulist.size();i++){
-						Information information = informationService.query(ulist.get(i).getId());
-						try {
-							birthday = information.getBirthday();
-							String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
-							SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-							Date date2 = null; 
-							date2 = simpleDateFormat.parse(digital);
-							 age= new Date().getYear()-date2.getYear();
-						} catch (NullPointerException e1) {
-							// TODO Auto-generated catch block
-							age=30;
-						} catch (ParseException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} 
-						information.setAge(age);
-						infos.add(information);
-					}
-				}
-				else if(matcher.find()){
-					Query query = new Query();
-					Pattern pattern2 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
-					query =query.addCriteria(Criteria.where("trueName").regex(pattern2));
-					 List<Information> tempList = informationService.queryList(query);
-					 for(Information temp : tempList){
-						 try {
-								birthday = temp.getBirthday();
-								String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
-								SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-								Date date2 = null; 
-								date2 = simpleDateFormat.parse(digital);
-								 age= new Date().getYear()-date2.getYear();
-							} catch (NullPointerException e1) {
-								// TODO Auto-generated catch block
-								age=30;
-							} catch (ParseException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} 
-						 temp.setAge(age);
-						 infos.add(temp);
-					 } 
-				} else {
-					Query query = new Query();
-					Pattern pattern2 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
-					query =query.addCriteria(Criteria.where("trueName").regex(pattern2));
-					 List<Information> tempList = informationService.queryList(query);
-					 for(Information temp : tempList){
-						 try {
-								birthday = temp.getBirthday();
-								String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
-								SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-								Date date2 = null; 
-								date2 = simpleDateFormat.parse(digital);
-								 age= new Date().getYear()-date2.getYear();
-							} catch (NullPointerException e1) {
-								// TODO Auto-generated catch block
-								age=30;
-							} catch (ParseException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} 
-						 temp.setAge(age);
-						 infos.add(temp);
-					 }
-				}
 
 			response.setCode("206");
 			response.setMessage("查询成功");

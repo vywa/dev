@@ -22,6 +22,7 @@ http://www.springframework.org/schema/cache
 	<import resource="classpath:javamail.xml"/>
  	<import resource="classpath:springInterceptor.xml"/>
 	 <import resource="classpath:springJms.xml"/> 
+	 <!-- import resource="classpath:springQuartz.xml"/> -->
 	<!-- <import resource="classpath:springShiro.xml"/> --> 
 	<!-- <import resource="classpath:shiro.xml"/> -->
  	 <import resource="classpath:springMybatis.xml"/>

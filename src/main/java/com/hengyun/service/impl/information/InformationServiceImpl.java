@@ -78,14 +78,19 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 	
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			String birthday = information.getBirthday();
-				String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-				Date date2=new Date();
+		
+			Date date2=null;
 				try {
+					String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+					date2=new Date();
 					date2 = simpleDateFormat.parse(digital);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					 date2=new Date();
 				}
 				int	age = new Date().getYear()-date2.getYear();
 			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).

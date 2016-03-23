@@ -74,12 +74,17 @@ xmlns:context="http://www.springframework.org/schema/context"
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
     	<property name="typeAliasesPackage" value="com.hengyun.domain.loginInfo"/>
         <property name="dataSource" ref="dataSource" />  
-        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/logininfo/mysql/mapper/*Mapper.xml" />  
+        <property name="mapperLocations"  >
+        <list>
+        <value>  classpath:com/hengyun/dao/impl/logininfo/mysql/mapper/*Mapper.xml</value>
+       <value>classpath:com/hengyun/dao/impl/notice/mysql/mapper/*Mapper.xml"</value>
+        </list>
+        </property>  
     </bean>  
 
   <!-- dao扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.hengyun.dao.logininfo.mysql" />  
+        <property name="basePackage" value="com.hengyun.dao.logininfo.mysql,com.hengyun.dao.notice.mysql" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>  
   
@@ -103,6 +108,17 @@ xmlns:context="http://www.springframework.org/schema/context"
         </tx:attributes>  
     </tx:advice>  
     
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice>
+	<aop:config proxy-target-class="true">
+		<aop:pointcut id="transactionPointcut"
+			expression="execution(* com.hengyun.service.notice.*.*(..))" />
+		<aop:advisor pointcut-ref="transactionPointcut"
+			advice-ref="transactionAdvice" />
+	</aop:config>
     
     <!-- aop代理设置 -->
     <!-- 

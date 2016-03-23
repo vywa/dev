@@ -110,6 +110,7 @@ public class MedicalNoticeController {
 		String username = jsonObject.getString("key");
 		int userId =(int)request.getAttribute("userId");
 		List<Integer> rosterList =rosterService.searchFriendList(String.valueOf(userId), username);
+		
 		System.out.println(rosterList);
 	
 		List<MedicalNotice> notices = medicalNoticeService.query(userId, rosterList);

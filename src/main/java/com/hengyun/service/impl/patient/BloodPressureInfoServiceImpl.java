@@ -15,12 +15,14 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
+import com.alibaba.fastjson.JSON;
 import com.hengyun.dao.patient.BloodPressureInfoDao;
 import com.hengyun.domain.notice.MedicalNotice;
 import com.hengyun.domain.notice.Notice.noticeType;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.impl.notice.util.HttpClientUtil;
 import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodPressureInfoService;
 
@@ -65,7 +67,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人高压危险");
 			medicalNoticeService.addNotice(medicalNotice);
-			
+		
 		}
 	}
 

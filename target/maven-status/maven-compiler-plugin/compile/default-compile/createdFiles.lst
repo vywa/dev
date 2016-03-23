@@ -5,6 +5,7 @@ com/hengyun/controller/casehistory/TargetOrganDamageController.class
 com/hengyun/domain/forum/ForumGeneralInfo.class
 com/hengyun/service/logininfo/mysql/LoginService.class
 com/hengyun/util/sms/GetKeFuResult.class
+com/hengyun/service/impl/notice/JobTaskService.class
 com/hengyun/dao/casehistory/DoctorAdviceDao.class
 com/hengyun/service/impl/casehistory/RiskFactorServiceImpl.class
 com/hengyun/domain/casehistory/RiskFactor.class
@@ -16,6 +17,7 @@ com/hengyun/dao/impl/BaseMongodbDaoImpl.class
 com/hengyun/util/randomcode/CreateCode.class
 com/hengyun/domain/monitor/Trace.class
 com/hengyun/dao/forum/PostCommentDao.class
+com/hengyun/service/impl/notice/QuartzJobFactory.class
 com/hengyun/domain/casehistory/CurrentMedicine.class
 com/hengyun/dao/casehistory/TreateWaitDao.class
 com/hengyun/service/forum/ForumAuthorityService.class
@@ -51,6 +53,7 @@ com/hengyun/service/BaseService.class
 com/hengyun/domain/patient/BloodPressureInfo.class
 com/hengyun/controller/casehistory/CaseHistoryController.class
 com/hengyun/domain/forum/Subject.class
+com/hengyun/controller/notice/JobTaskController.class
 com/hengyun/dao/impl/patient/HabitInfoDaoImpl.class
 com/hengyun/util/annotation/SecurityControl.class
 com/hengyun/service/impl/casehistory/RecipeServiceImpl.class
@@ -118,7 +121,6 @@ com/hengyun/service/forum/SecondCommentService.class
 com/hengyun/domain/administrator/RolesResult.class
 com/hengyun/util/interceptor/SecurityControlInterceptor.class
 com/hengyun/dao/impl/forum/PostCommentDaoImpl.class
-com/hengyun/dao/impl/notice/FriendCircleNoticeDao.class
 com/hengyun/service/shiro/SimpleCacheManager.class
 com/hengyun/service/impl/util/SmsUtilServiceImpl.class
 com/hengyun/util/shiro/CodeFormAuthenticationFilter.class
@@ -163,6 +165,7 @@ com/hengyun/service/impl/information/GeneralPersonServiceImpl.class
 com/hengyun/service/impl/logininfo/RegisterCacheServiceImpl.class
 com/hengyun/domain/loginInfo/PasswordResult.class
 com/hengyun/util/date/DateUtil.class
+com/hengyun/dao/notice/mysql/JobTaskDao.class
 com/hengyun/domain/forum/ForumPlate.class
 com/hengyun/domain/casehistory/LibrarotySheet.class
 com/hengyun/domain/casehistory/Diagnosis.class
@@ -181,6 +184,8 @@ com/hengyun/service/logininfo/mysql/AccountService.class
 com/hengyun/util/regex/Validator.class
 com/hengyun/dao/administrator/PermissionDao.class
 com/hengyun/domain/casehistory/BloodSugger.class
+com/hengyun/service/impl/notice/GreetService.class
+com/hengyun/service/impl/notice/SpringUtils.class
 com/hengyun/domain/casehistory/MarriageHistory.class
 com/hengyun/domain/casehistory/CaseHistoryConstant.class
 com/hengyun/domain/friendcircle/RosterResponse.class
@@ -217,6 +222,7 @@ com/hengyun/dao/forum/MultiMediaDao.class
 com/hengyun/service/forum/PostCommentService.class
 com/hengyun/dao/friendcircle/mysql/RosterDao.class
 com/hengyun/controller/administrator/PermissionController.class
+com/hengyun/domain/notice/RetObj.class
 com/hengyun/controller/casehistory/FamilyHistoryController.class
 com/hengyun/util/annotation/Cache.class
 com/hengyun/util/system/Architecture.class
@@ -243,6 +249,7 @@ com/hengyun/util/sms/SubmitResult.class
 com/hengyun/service/impl/shiro/RolesAuthorizationFilter.class
 com/hengyun/service/impl/shiro/MemcachedClient.class
 com/hengyun/controller/casehistory/BloodPressureController.class
+com/hengyun/dao/notice/FriendCircleNoticeDao.class
 com/hengyun/util/sms/GetReplyResult.class
 com/hengyun/domain/notice/Notice.class
 com/hengyun/dao/forum/ReplySubjectDao.class
@@ -302,6 +309,7 @@ com/hengyun/util/system/XMLProperties.class
 com/hengyun/util/sms/SmsLocator.class
 com/hengyun/dao/impl/administrator/AdministratorDaoImpl.class
 com/hengyun/domain/casehistory/DynamicBloodPressureMonitor.class
+com/hengyun/dao/impl/notice/ScheduleJobDaoImpl.class
 com/hengyun/domain/notice/MedicalNotice.class
 com/hengyun/domain/information/Icon.class
 com/hengyun/util/security/SecurityControlHolder.class
@@ -311,6 +319,7 @@ com/hengyun/dao/impl/patient/BloodSuggerInfoDaoImpl.class
 com/hengyun/domain/loginInfo/constant/LoginModel.class
 com/hengyun/dao/administrator/ResourcesDao.class
 com/hengyun/controller/casehistory/PhysicalExaminationController.class
+com/hengyun/domain/notice/ScheduleJob.class
 com/hengyun/domain/patient/PressureResponse.class
 com/hengyun/util/shiro/CustomRolesAuthorizationFileter.class
 com/hengyun/service/impl/monitor/JsonFormatter.class
@@ -370,6 +379,7 @@ com/hengyun/domain/forum/ForumPost.class
 com/hengyun/controller/doctor/DoctorController.class
 com/hengyun/util/sms/VersionInfoResult.class
 com/hengyun/domain/forum/ForumLoginInfo.class
+com/hengyun/dao/notice/ScheduleJobDao.class
 com/hengyun/dao/logininfo/mysql/AccountDao.class
 com/hengyun/service/message/EmailProducerService.class
 com/hengyun/util/encrypt/MD5Util.class
@@ -411,6 +421,7 @@ com/hengyun/util/multiThread/Properties.class
 com/hengyun/controller/casehistory/ChiefComplaintController.class
 com/hengyun/service/patient/BloodSuggerInfoService.class
 com/hengyun/dao/forum/ForumAuthorityDao.class
+com/hengyun/service/impl/notice/util/HttpClientUtil.class
 com/hengyun/service/impl/administrator/AdministratorServiceImpl.class
 com/hengyun/util/security/SecurityControlException.class
 com/hengyun/service/impl/forum/ForumPostServiceImpl.class
@@ -467,7 +478,9 @@ com/hengyun/service/casehistory/AffiliatedClinicalDiseaseService.class
 com/hengyun/service/logininfo/LoginInfoCacheService.class
 com/hengyun/util/system/HengyunProperties.class
 com/hengyun/util/sms/Sms.class
+com/hengyun/service/impl/notice/TaskUtil.class
 com/hengyun/dao/patient/BloodSuggerInfoDao.class
+com/hengyun/service/impl/notice/QuartzJobFactoryDisallowConcurrentExecution.class
 com/hengyun/dao/impl/RedisDataSourceImpl.class
 com/hengyun/domain/monitor/Metric.class
 com/hengyun/domain/patient/SuggerResponse.class

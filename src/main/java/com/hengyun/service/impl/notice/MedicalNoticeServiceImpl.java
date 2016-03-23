@@ -13,11 +13,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.alibaba.fastjson.JSON;
 import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.notice.MedicalNoticeDao;
 import com.hengyun.domain.notice.MedicalNotice;
 import com.hengyun.service.casehistory.DiagnosisService;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.impl.notice.util.HttpClientUtil;
 import com.hengyun.service.notice.MedicalNoticeService;
 
 /**
@@ -49,6 +51,15 @@ public class MedicalNoticeServiceImpl extends BaseServiceImpl<MedicalNotice, Int
 		medicalNotice.setSendTime(new Date());
 		medicalNotice.setStatus(0);
 		medicalNoticeDao.save(medicalNotice);
+		//推送消息个医生
+		String data=JSON.toJSON(medicalNotice).toString();
+		try {
+			HttpClientUtil.doGet(data);
+			log.info("发送了");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		log.info("添加一条医疗通知");
 		
 	}
