@@ -30,7 +30,7 @@ public class Information implements Serializable{
 	private String height;							//身高
 	private String weight;							//体重
 	
-	
+	private String disease;						//患病（高血压，高血糖，高血脂）
 
 	/*
 	 *  联系方式
@@ -43,6 +43,13 @@ public class Information implements Serializable{
 	
 	
 	
+	
+	public String getDisease() {
+		return disease;
+	}
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
 	public String getResume() {
 		return resume;
 	}

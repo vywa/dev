@@ -23,6 +23,8 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.friendcircle.RosterResponse;
 import com.hengyun.domain.information.Information;
+import com.hengyun.domain.information.NickIcon;
+import com.hengyun.domain.information.NickIconResponse;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
@@ -44,9 +46,9 @@ public class RosterController {
 	private LoginInfoService loginInfoService;
 	@Resource
 	private InformationService informationService;
-
 	@Resource
 	private UserAccountService userAccountService;
+	
 	
 	// 获取好友列表
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
@@ -60,18 +62,18 @@ public class RosterController {
 			// 查找是否已经在好友列表中
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			
-			List<Information> infos = new ArrayList<Information>();
+			List<NickIcon> infos = new ArrayList<NickIcon>();
 			String birthday = null;
 			int age = 0;
 			Date date2 = null; 
 			for(Integer temp :userList){
 				Information information = informationService.query(temp);
+				UserAccount userAccount = userAccountService.queryById(temp);
 				try {
 				 birthday = information.getBirthday();
 				String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
 				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
-				
-				
+	
 					date2 = simpleDateFormat.parse(digital);
 					age = new Date().getYear()-date2.getYear();
 				} catch (NullPointerException e) {
@@ -81,8 +83,23 @@ public class RosterController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-				information.setAge(age);
-				infos.add(information);
+				 NickIcon nickIcon = new NickIcon();
+				 nickIcon.setIconUrl(information.getIconUrl());
+				 nickIcon.setBirthday(information.getBirthday());
+				 nickIcon.setEmail(userAccount.getEmail());
+				 nickIcon.setHome(information.getHometown());
+				 nickIcon.setMobilephone(userAccount.getMobilephone());
+				 nickIcon.setQq(userAccount.getQQ());
+				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setDisease(information.getDisease());
+				 nickIcon.setUserId(userAccount.getId());
+				 nickIcon.setWeiBo(userAccount.getWeiBo());
+				 nickIcon.setWeiChat(userAccount.getWeiChat());
+				 nickIcon.setWorkNum(userAccount.getWorkNum());
+				 nickIcon.setAge(age);
+				 nickIcon.setSex(information.getSex());
+				infos.add(nickIcon);
+				
 			}
 			response.setCode("206");
 			response.setMessage("查询成功");
@@ -106,7 +123,7 @@ public class RosterController {
 			// 查找是否已经在好友列表中
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			
-			List<Information> infos = new ArrayList<Information>();
+			List<NickIcon> infos = new ArrayList<NickIcon>();
 			String trueName  = null;
 			for(Integer temp :userList){
 				Information information = informationService.query(temp);
@@ -153,8 +170,23 @@ public class RosterController {
 					e.printStackTrace();
 				} 
 				
-				information.setAge(age);
-				infos.add(information);
+				 NickIcon nickIcon = new NickIcon();
+				 nickIcon.setIconUrl(information.getIconUrl());
+				 nickIcon.setBirthday(information.getBirthday());
+				 nickIcon.setEmail(userAccount.getEmail());
+				 nickIcon.setHome(information.getHometown());
+				 nickIcon.setMobilephone(userAccount.getMobilephone());
+				 nickIcon.setQq(userAccount.getQQ());
+				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setDisease(information.getDisease());
+				 nickIcon.setUserId(userAccount.getId());
+				 nickIcon.setWeiBo(userAccount.getWeiBo());
+				 nickIcon.setWeiChat(userAccount.getWeiChat());
+				 nickIcon.setWorkNum(userAccount.getWorkNum());
+				 nickIcon.setAge(age);
+				 nickIcon.setSex(information.getSex());
+				infos.add(nickIcon);
+			
 				}
 			}
 			response.setCode("206");
@@ -178,11 +210,12 @@ public class RosterController {
 			List<Integer> idList = rosterService.searchFriendList(String.valueOf(userId), searchName);
 			
 			
-			List<Information> infos=new ArrayList<Information>();
+			List<NickIcon> infos=new ArrayList<NickIcon>();
 			String birthday = null;
 			int age = 0;
 			for(int i=0;i<idList.size();i++){
 				Information information = informationService.query(idList.get(i));
+				UserAccount account = userAccountService.getUserAccountById(idList.get(i));
 				try {
 					birthday = information.getBirthday();
 					String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
@@ -197,8 +230,23 @@ public class RosterController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-				information.setAge(age);
-				infos.add(information);
+				 NickIcon nickIcon = new NickIcon();
+				 nickIcon.setIconUrl(information.getIconUrl());
+				 nickIcon.setBirthday(information.getBirthday());
+				 nickIcon.setEmail(account.getEmail());
+				 nickIcon.setHome(information.getHometown());
+				 nickIcon.setMobilephone(account.getMobilephone());
+				 nickIcon.setQq(account.getQQ());
+				 nickIcon.setDisease(information.getDisease());
+				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setUserId(account.getId());
+				 nickIcon.setWeiBo(account.getWeiBo());
+				 nickIcon.setWeiChat(account.getWeiChat());
+				 nickIcon.setWorkNum(account.getWorkNum());
+				 nickIcon.setAge(age);
+				 nickIcon.setSex(information.getSex());
+				infos.add(nickIcon);
+			
 			}
 			
 		
@@ -217,13 +265,13 @@ public class RosterController {
 			@ResponseBody
 			public String docterRequest( HttpServletRequest request,@RequestParam String data) {
 
-					RosterResponse response = new RosterResponse();			
+				RosterResponse response = new RosterResponse();
 					JSONObject jsonObject = JSON.parseObject(data);
 					JSONArray array = JSONArray.parseArray(jsonObject.getString("list"));
 
-					List<Information> infos = new ArrayList<Information>();
+					List<NickIcon> infos = new ArrayList<NickIcon>();
 					for(int i=0;i<array.size();i++){
-		
+						UserAccount account = userAccountService.getUserAccountById(Integer.valueOf(array.getIntValue(i)));
 						Information information = informationService.query(Integer.valueOf(array.getIntValue(i)));
 						String birthday;
 						SimpleDateFormat simpleDateFormat=null;
@@ -243,8 +291,23 @@ public class RosterController {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} 
-						information.setAge(age);
-						infos.add(information);
+						
+						 NickIcon nickIcon = new NickIcon();
+						 nickIcon.setIconUrl(information.getIconUrl());
+						 nickIcon.setBirthday(information.getBirthday());
+						 nickIcon.setEmail(account.getEmail());
+						 nickIcon.setHome(information.getHometown());
+						 nickIcon.setMobilephone(account.getMobilephone());
+						 nickIcon.setQq(account.getQQ());
+						 nickIcon.setNickName(information.getTrueName());
+						 nickIcon.setDisease(information.getDisease());
+						 nickIcon.setUserId(account.getId());
+						 nickIcon.setWeiBo(account.getWeiBo());
+						 nickIcon.setWeiChat(account.getWeiChat());
+						 nickIcon.setWorkNum(account.getWorkNum());
+						 nickIcon.setAge(age);
+						 nickIcon.setSex(information.getSex());
+						infos.add(nickIcon);
 					}
 					response.setCode("206");
 					response.setMessage("查询成功");

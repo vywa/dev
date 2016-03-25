@@ -44,9 +44,9 @@ public class BloodSuggerInfoController {
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
-	
 		
+		JSONObject jsonObject =JSON.parseObject(data);
+			
 		SuggerResponse sugger = new SuggerResponse();
 		int userId =(int)request.getAttribute("userId");
 	

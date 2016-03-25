@@ -1,7 +1,7 @@
 package com.hengyun.domain.forum;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -29,9 +29,15 @@ public class Subject implements Serializable {
 	private double lng;							//定位的经度
 	private double lat;							//定位的纬度
 	
+	private List<Integer> available = new ArrayList<Integer>();				//可以看的朋友列表
+
 	
-	
-	
+	public List<Integer> getAvailable() {
+		return available;
+	}
+	public void setAvailable(List<Integer> available) {
+		this.available = available;
+	}
 	public int getAuthorId() {
 		return authorId;
 	}

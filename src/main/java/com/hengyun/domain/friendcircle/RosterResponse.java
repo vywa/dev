@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.information.Information;
+import com.hengyun.domain.information.NickIcon;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -13,14 +13,14 @@ import com.hengyun.domain.information.Information;
 */
 public class RosterResponse extends ResponseCode{
 
-	private List<Information> infos = new ArrayList<Information>();
+	private List<NickIcon> infos = new ArrayList<NickIcon>();
 
-	public List<Information> getInfos() {
+	public List<NickIcon> getInfos() {
 		return infos;
 	}
 	
 
-	public void setInfos(List<Information> infos) {
+	public void setInfos(List<NickIcon> infos) {
 		this.infos = infos;
 	}
 

@@ -108,6 +108,9 @@ http://www.springframework.org/schema/cache
 <bean id="treateWaitDao" class="com.hengyun.dao.impl.casehistory.TreateWaitDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="treateWaitService" class="com.hengyun.service.impl.casehistory.TreateWaitServiceImpl" parent="BaseServiceImpl"/>
 
+<!-- 监控模块 -->
+<bean id="exceptionInfoDao" class="com.hengyun.dao.impl.monitor.ExceptionInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="exceptionInfoService" class="com.hengyun.service.impl.monitor.ExceptionInfoServiceImpl" parent="BaseServiceImpl"/>
 
 
 <!-- 论坛模块 -->
@@ -132,6 +135,9 @@ http://www.springframework.org/schema/cache
 
 <bean id="multiMediaDao" class="com.hengyun.dao.impl.forum.MultiMediaDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="multiMediaService" class="com.hengyun.service.impl.forum.MultiMediaServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="subjectAvailableListDao" class="com.hengyun.dao.impl.forum.SubjectAvailableListDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="subjectAvailableListService" class="com.hengyun.service.impl.forum.SubjectAvailableListServiceImpl" parent="BaseServiceImpl"/>
 
 <!-- 病人健康数据 -->
 

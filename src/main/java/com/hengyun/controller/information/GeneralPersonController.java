@@ -38,8 +38,7 @@ public class GeneralPersonController {
 	@Resource
 	private GeneralPersonService generalPersonService;
 	
-	  
-	   
+	
 	//添加用户信息
 	@RequestMapping("/add")
 	@ResponseBody
@@ -50,8 +49,8 @@ public class GeneralPersonController {
 		ResponseCode response = new ResponseCode();
 	
 		generalPersonService.save(generalPerson);
-			 response.setCode("206");
-			 response.setMessage("edit success");
+		response.setCode("206");
+		response.setMessage("edit success");
 		
 		 return JSON.toJSONString(response);
 	}
@@ -63,7 +62,9 @@ public class GeneralPersonController {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").exists(true));
 		List<GeneralPerson> generalPerson = generalPersonService.queryList(query);
+		
 		 return JSON.toJSONString(generalPerson);
+		 
 	}
 	
 

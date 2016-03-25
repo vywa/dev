@@ -7,6 +7,7 @@ public class NickIcon {
 	private int userId;							//用户id
 	private String mobilephone;		//手机
 	private String email;						//邮箱
+	private String disease;					//患病
 	private String qq;							//qq号
 	private String weiChat;					//微信
 	private String weiBo;						//微博
@@ -18,6 +19,12 @@ public class NickIcon {
 	
 	
 	
+	public String getDisease() {
+		return disease;
+	}
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
 	public String getSex() {
 		return sex;
 	}

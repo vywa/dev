@@ -1,6 +1,5 @@
 package com.hengyun.service.impl.forum;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,7 @@ import com.hengyun.dao.forum.SubjectDao;
 import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.UserAccount;
+import com.hengyun.service.forum.SubjectAvailableListService;
 import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
@@ -38,6 +38,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	
 	private LoginInfoService loginInfoService;
 	
+	@Resource
+	private SubjectAvailableListService subjectAvailableListService;
 	
 	@Resource
 	private UserAccountService userAccountService;
@@ -66,6 +68,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		// TODO Auto-generated method stub
 		
 			Information info = new Information();
+			List<Integer> available =subjectAvailableListService.queryAvailable(userId);
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			info = informationService.queryOne(query);
 			
@@ -73,6 +76,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		
 			forumPost.setLikeCount(0);
 			forumPost.setPublishTime(new Date().getTime());
+			forumPost.setAvailable(available);
 			
 			String imageUrl = info.getIconUrl();
 			forumPost.setAuthorPhotoImgUrl(imageUrl);
@@ -135,7 +139,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	/*
 	 *  查询某个用户的所有帖子
 	 * */
-	public List<Subject> show(int authorId ) {
+	public List<Subject> show(int authorId ,int watcher) {
 		// TODO Auto-generated method stub
 	
 			Query query = Query.query(Criteria.where("authorId").is(authorId));
@@ -171,6 +175,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	@Override
 	public List<Subject> friendsSubject(int userId,int freshenType) {
 		// TODO Auto-generated method stub
+		//获取关注的好友列表
+		List<Integer> subscribeList = subjectAvailableListService.querySubscribe(userId);
+		
 		List<Integer> friendIdList = rosterService.getFriendList(String.valueOf(userId));
 		List<Subject> forumPost=null;
 		Query query = new Query();
@@ -198,12 +205,14 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	 * 
 	 * */
 	@Override
-	public List<Subject> friendSubject(int friendId,int freshenType) {
-		// TODO Auto-generated method stub
+	public List<Subject> friendSubject(int userId,int friendId,int freshenType) {
+		// TODO Auto-generated method stub	/*
 	
+
 		List<Subject> forumPost=null;
 		Query query = new Query();
 		Criteria criteria =Criteria.where("authorId").is(friendId);
+		
 		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
 			Query query2 = new Query();
 			
@@ -233,6 +242,17 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		Subject subjectDetail = subjectDao.queryOne(query);
 
 		return subjectDetail;
+	}
+
+	/*
+	 *  用户查询自己所有帖子
+	 * */
+	@Override
+	public List<Subject> querySelf(int userId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("authorId").is(userId));
+		List<Subject> forumPost = subjectDao.queryList(query);
+		return forumPost;
 	}
 
 }

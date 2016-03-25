@@ -12,8 +12,7 @@
 			jdbcType="VARCHAR" />
 		<result column="description" property="description" jdbcType="VARCHAR" />
 		<result column="bean_class" property="beanClass" jdbcType="VARCHAR" />
-		<result column="is_concurrent" property="isConcurrent"
-			jdbcType="VARCHAR" />
+		<result column="is_concurrent" property="isConcurrent" jdbcType="VARCHAR" />
 		<result column="spring_id" property="springId" jdbcType="VARCHAR" />
 		<result column="method_name" property="methodName" jdbcType="VARCHAR" />
 	</resultMap>

@@ -96,7 +96,7 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).
 					set("weight", information.getWeight()).set("sex",information.getSex()).
 					set("birthday", information.getBirthday()).set("age",age).
-					set("trueName", information.getTrueName()).
+					set("trueName", information.getTrueName()).set("resume", information.getResume()).
 					set("recordTime",String.valueOf(new Date().getTime()));
 			informationDao.updateFirst(query, update);
 			log.info("用户 "+userId+" 资料修改成功");

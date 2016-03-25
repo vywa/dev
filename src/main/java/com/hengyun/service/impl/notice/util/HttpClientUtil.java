@@ -16,15 +16,16 @@ import org.apache.commons.httpclient.methods.GetMethod;
 public class HttpClientUtil {
 
 	public static void main(String[] args){
-		String hehe = "{\"noticeId\":29}";
+		String hehe = "noticeId=123&noticeToId=123&noticeFromeId=321";
+		String ni = "?bob=bob";
 		try {
-			HttpClientUtil.doGet(hehe);
+			HttpClientUtil.doGet(ni);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-private static String url = "http://192.168.31.114:9090/plugins/httpService?JSESSIONID=6q2rbqz55ldanjvp5e9vncwn";
+private static String url = "http://192.168.31.114:9090/plugins/httpService/httpservice?";
 	
 	/*
 	 *  生成请求字符串
@@ -36,12 +37,10 @@ private static String url = "http://192.168.31.114:9090/plugins/httpService?JSES
 		
 		    httpClient.getHttpConnectionManager().getParams().setConnectionTimeout(5000);
 		    String data2 = data.toString();
-		    String param = "data=";
-		   HttpMethod getMethod = getMethod(url, param);
-		   // GetMethod getMethod = new GetMethod(url);
-		 //   System.out.println(param);
-		 //   GetMethod getMethod = new GetMethod(url+data);
-		    System.out.println(getMethod.getPath()+"参数"+getMethod.getQueryString());
+		   
+	//	   HttpMethod getMethod = getMethod(url, data2);
+		    GetMethod getMethod = new GetMethod(url+data2); 
+		    System.out.println(getMethod.getPath()+getMethod.getQueryString());
 		    int statusCode=0;
 		  
 		    try {
@@ -71,7 +70,7 @@ private static String url = "http://192.168.31.114:9090/plugins/httpService?JSES
 		  }
 
 	 private static HttpMethod getMethod(String url,String param) throws IOException{  
-	        GetMethod get = new GetMethod(url+"&"+param); 
+	        GetMethod get = new GetMethod(url+"?"+param); 
 	        
 	        get.releaseConnection();  
 	        return get;  

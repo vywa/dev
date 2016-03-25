@@ -39,7 +39,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
         Query query = new Query();
         Criteria criteria = Criteria.where("_id").is(id);
         query.addCriteria(criteria);
-       
+     
         return this.mongoTemplate.findOne(query, this.getEntityClass());
     }
  

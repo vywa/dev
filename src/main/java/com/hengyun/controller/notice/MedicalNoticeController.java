@@ -81,6 +81,7 @@ public class MedicalNoticeController {
 			medical.setNoticeToId(temp.getNoticeToId());
 			medical.setNoticeType(temp.getNoticeType());
 			medical.setSex(info.getSex());
+			medical.setDisease(info.getDisease());
 			medical.setTrueName(info.getTrueName());
 			medical.setWeight(info.getWeight());
 			medical.setAddress(info.getAddress());
@@ -136,6 +137,7 @@ public class MedicalNoticeController {
 			medical.setNoticeToId(temp.getNoticeToId());
 			medical.setNoticeType(temp.getNoticeType());
 			medical.setSex(info.getSex());
+			medical.setDisease(info.getDisease());
 			medical.setTrueName(info.getTrueName());
 			medical.setWeight(info.getWeight());
 			medical.setAddress(info.getAddress());
@@ -190,6 +192,7 @@ public class MedicalNoticeController {
 			medical.setNoticeFromId(temp.getNoticeFromId());
 			medical.setNoticeId(temp.getNoticeId());
 			medical.setNoticeToId(temp.getNoticeToId());
+			medical.setDisease(info.getDisease());
 			medical.setNoticeType(temp.getNoticeType());
 			medical.setSex(info.getSex());
 			medical.setTrueName(info.getTrueName());

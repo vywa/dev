@@ -43,9 +43,20 @@ public class IndexCollection implements Serializable{
 	 * */
 	private int noticeId;									//通知id
 	
+	/*
+	 *  监控
+	 * */
+	private int exceptionId;							//异常id
 	
 	
 	
+	
+	public int getExceptionId() {
+		return exceptionId;
+	}
+	public void setExceptionId(int exceptionId) {
+		this.exceptionId = exceptionId;
+	}
 	public int getNoticeId() {
 		return noticeId;
 	}

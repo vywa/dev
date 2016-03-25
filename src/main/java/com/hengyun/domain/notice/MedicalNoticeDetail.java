@@ -22,9 +22,15 @@ public class MedicalNoticeDetail extends MedicalNotice implements Serializable{
 	private String email;							//邮箱
 	private String iconUrl;							//用户图像地址
 	
+	private String disease;						//疾病
+
 	
-	
-	
+	public String getDisease() {
+		return disease;
+	}
+	public void setDisease(String disease) {
+		this.disease = disease;
+	}
 	public int getUserId() {
 		return userId;
 	}

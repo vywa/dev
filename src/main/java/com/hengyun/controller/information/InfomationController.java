@@ -205,6 +205,7 @@ public class InfomationController {
 	}
 	
 	/*
+	 * 
 	 * 更新用户信息
 	 * 
 	 * */
@@ -257,6 +258,7 @@ public class InfomationController {
 			Query query =Query.query(Criteria.where("userId").is(userId));
 			 Information temp =informationService.queryOne(query);
 			 String nickname = temp.getTrueName();
+			 String disease = temp.getDisease();
 			 UserAccount account = userAccountService.queryById(userId);
 			 String mobilephone = account.getMobilephone();
 			 String email = account.getEmail();
@@ -282,6 +284,7 @@ public class InfomationController {
 			 String iconUrl = temp.getIconUrl();
 			 NickIcon nickIcon = new NickIcon();
 			 nickIcon.setNickName(nickname);
+			 nickIcon.setDisease(disease);
 			 nickIcon.setIconUrl(iconUrl);
 			 response.setCode("206");
 			 response.setMessage("返回用户昵称和图像");
@@ -309,6 +312,7 @@ public class InfomationController {
 			 int age = temp.getAge();
 			 String birthday  = temp.getBirthday();
 			String home = temp.getHometown();
+			String disease = temp.getDisease();
 			 UserAccount account = userAccountService.queryById(userId);
 			 String mobilephone = account.getMobilephone();
 			 String email = account.getEmail();
@@ -327,6 +331,7 @@ public class InfomationController {
 			 nickIcon.setMobilephone(mobilephone);
 			 nickIcon.setQq(qq);
 			 nickIcon.setNickName(nickname);
+			 nickIcon.setDisease(disease);
 			 nickIcon.setUserId(userId);
 			 nickIcon.setWeiBo(weiBo);
 			 nickIcon.setWeiChat(weiChat);
@@ -386,4 +391,7 @@ public class InfomationController {
 		
 		 return JSON.toJSONString(response);
 	}
+	
+	
+
 }

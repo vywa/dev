@@ -56,7 +56,13 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人血糖危险");
 			medicalNoticeService.addNotice(medicalNotice);
-	
+			String data=JSON.toJSON(medicalNotice).toString();
+			try {
+				HttpClientUtil.doGet(data);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

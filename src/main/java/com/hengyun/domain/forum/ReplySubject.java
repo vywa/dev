@@ -1,6 +1,7 @@
 package com.hengyun.domain.forum;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -38,6 +39,19 @@ public class ReplySubject implements Serializable{
 	
 	
 	
+	private List<Integer> available = new ArrayList<Integer>();				//谁可以看
+
+	
+	
+	
+	public List<Integer> getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(List<Integer> available) {
+		this.available = available;
+	}
+
 	public int getReplyId() {
 		return replyId;
 	}

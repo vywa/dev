@@ -9,13 +9,12 @@ import java.io.Serializable;
 public class Friend implements Serializable{
 
 	private int 		friendId;					//朋友ID
+
 	private String friendName;				//朋友名称
 	
-	private String loginStatus;							//登陆状态
+	private String loginStatus;				//登陆状态
 	
-	private String relation;							//关系医生，病人，好友
-	
-
+	private String relation;						//关系医生，病人，好友,家人
 	
 	private String privilege;							//权限，聊天，看动态
 
