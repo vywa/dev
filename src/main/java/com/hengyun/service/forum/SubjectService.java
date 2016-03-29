@@ -20,7 +20,6 @@ public interface SubjectService  extends BaseService<Subject,Integer> {
 	//查询前后十条帖子
 	public List<Subject> showList( int userId,int subjectId,int subjectType ,int freshenType) ;
 	
-	public List<Subject> show(int userId,int watcher);
 	
 	/*
 	 *  查询自己帖子
@@ -32,12 +31,12 @@ public interface SubjectService  extends BaseService<Subject,Integer> {
 	/*
 	 *  查询所有好友的帖子
 	 * */
-	public List<Subject> friendsSubject(int userId,int freshenType);
+	public List<Subject> friendsSubject(int userId,int subjectId,int freshenType);
 	
 	/*
 	 *  查询某个好友的帖子
 	 * */
-	public List<Subject> friendSubject(int userId,int friendId,int freshenType) ;
+	public List<Subject> friendSubject(int userId,int friendId,int subjectId,int freshenType) ;
 	
 	/*
 	 *  查看某个帖子详情

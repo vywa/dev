@@ -19,6 +19,7 @@ public class NickIcon {
 	
 	
 	
+
 	public String getDisease() {
 		return disease;
 	}

@@ -2,7 +2,7 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
     <mapper namespace="com.hengyun.dao.friendcircle.mysql.RosterDao">  
       
-        <resultMap type="Roster" id="roster">  
+        <resultMap type="com.hengyun.domain.friendcircle.Roster" id="roster">  
             <id property="rosterID" column="rosterID"/>  
             <result property="username" column="username"/>  
             <result property="jid" column="jid"/>  
@@ -14,7 +14,7 @@
         </resultMap>  
           
         <!-- 查询好友，根据rosterId -->  
-        <select id="getRoster" parameterType="String" resultType="Roster" resultMap="roster">  
+        <select id="getRoster" parameterType="String" resultType="com.hengyun.domain.friendcircle.Roster" resultMap="roster">  
             
                 SELECT * from ofRoster UA
                     WHERE UA.username = #{username}  

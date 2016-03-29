@@ -109,8 +109,9 @@ public class SubjectController {
 		PostListResponseCode response = new PostListResponseCode();
 		int userId = (int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
+		int subjectId = jsonObject.getIntValue("subjectId");
 		int freshenType = jsonObject.getIntValue("freshenType");
-		List<Subject> postList = subjectService.friendsSubject(userId, freshenType);
+		List<Subject> postList = subjectService.friendsSubject(userId, subjectId, freshenType);
 
 		response.setSubjectList(postList);
 		response.setResponseCode(0);
@@ -126,15 +127,14 @@ public class SubjectController {
 	public String friendSubject(@RequestParam String data,HttpServletRequest request){
 		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
+		int subjectId = jsonObject.getIntValue("subjectId");
+		int freshenType = jsonObject.getIntValue("freshenType");
+		
 		int authorId = jsonObject.getIntValue("authorId");
 		List<Subject> postList=null;
-		if(rosterService.makeFriend(String.valueOf(userId), String.valueOf(authorId))){
-			postList = subjectService.show(userId, authorId);
-		} else {
-			return JSON.toJSONString("不是朋友，不成查看");
-		}
 		
-
+		postList = subjectService.friendSubject(userId,authorId, subjectId, freshenType);
+	
 		return JSON.toJSONString(postList);
 	}
 	

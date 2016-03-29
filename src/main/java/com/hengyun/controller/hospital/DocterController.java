@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.doctor.Doctor;
 import com.hengyun.domain.hospital.Docter;
-import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.hospital.DocterService;
 
 /*
@@ -52,19 +52,26 @@ public class DocterController {
 	}
 	
 	
+	/*
+	 * 
+	 *  	查询医院对应的医生
+	 * 
+	 * */
 	@RequestMapping(value="/queryDoctor",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showHospitalDocter(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);
 		int hospitalId = jsonObject.getIntValue("hospitalId");
-		List<UserAccount> docterList ;
+		List<Docter> docterList ;
 		docterList = docterService.queryByHospital(hospitalId);
     	 String jsonString= JSON.toJSONString(docterList);  
         return jsonString;  
 	}
 	
 	/*
-	 *  查询某个医院的医生
+	 * 
+	 *  	查询某个医院的医生
+	 *  
 	 * */
 	@RequestMapping("/show")
 	@ResponseBody

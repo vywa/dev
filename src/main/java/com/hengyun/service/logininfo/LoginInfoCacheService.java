@@ -21,9 +21,5 @@ public interface LoginInfoCacheService {
 	//查询用户id
 	public int getUserId(String tocken);
 	
-	//查询用户权限
-	public String getUserCatagory(String tocken);
-	
-	//查询是否在缓存
-	public boolean loginByTocken(String tocken) ;
+	public boolean loginByTocken(String tocken);
 }

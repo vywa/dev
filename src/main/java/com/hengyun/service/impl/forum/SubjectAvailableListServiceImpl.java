@@ -82,10 +82,18 @@ public class SubjectAvailableListServiceImpl extends BaseServiceImpl<SubjectAvai
 	@Override
 	public List<Integer> queryAvailable(int userId) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("userId").is(userId));
+		Query query = Query.query(Criteria.where("authorId").is(userId));
 		
 		SubjectAvailableList subjectAvailableList = subjectAvailableListDao.queryOne(query);
-		
+		if(subjectAvailableList==null){
+			init(userId);
+			 subjectAvailableList = subjectAvailableListDao.queryOne(query);
+		}
+		if(subjectAvailableList==null){
+			return null;
+		}
+			
+	
 		return subjectAvailableList.getAvailable();
 	}
 

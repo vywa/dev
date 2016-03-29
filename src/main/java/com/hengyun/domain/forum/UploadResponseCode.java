@@ -2,12 +2,12 @@ package com.hengyun.domain.forum;
 
 import java.io.Serializable;
 
-import com.hengyun.domain.common.BaseResponseCode;
+import com.hengyun.domain.common.ResponseCode;
 
 /*
  *  返回码基类，由标志码和描述信息组成
  * */
-public  class UploadResponseCode extends BaseResponseCode implements Serializable{
+public  class UploadResponseCode  extends ResponseCode implements Serializable{
 	private int responseCode;								//返回码
 	private String description;								//描述
 	private String fileUrl;											//文件存储地址

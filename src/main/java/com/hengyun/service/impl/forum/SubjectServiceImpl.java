@@ -1,5 +1,6 @@
 package com.hengyun.service.impl.forum;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,7 +48,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	@Resource
 	private RosterService rosterService;
 
-	//更新资料
+	/*
+	 * 更新资料
+	 * */
 	public int update(Subject forumPost,String tocken) {
 		// TODO Auto-generated method stub
 		int userId = loginInfoService.isOnline(tocken);
@@ -62,26 +65,23 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	/*
+	 * 	
 	 * 	发送帖子
+	 * 
 	 * */
 	public int  post(Subject forumPost,int userId) {
 		// TODO Auto-generated method stub
-		
 			Information info = new Information();
-			List<Integer> available =subjectAvailableListService.queryAvailable(userId);
+	
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			info = informationService.queryOne(query);
-			
 			forumPost.setAuthorPhotoImgUrl(info.getIconUrl());
-		
 			forumPost.setLikeCount(0);
 			forumPost.setPublishTime(new Date().getTime());
-			forumPost.setAvailable(available);
-			
+			forumPost.setAuthorId(userId);
 			String imageUrl = info.getIconUrl();
 			forumPost.setAuthorPhotoImgUrl(imageUrl);
 		
-			
 			String forumName = null;
 			UserAccount account = userAccountService.queryById(userId);
 			String trueName = account.getUsername();
@@ -106,30 +106,79 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			} 
 			//设置用户昵称
 			forumPost.setAuthor(forumName);
-		
-			int postId = subjectDao.post(forumPost);
-			
+			int postId = subjectDao.post(forumPost);		
 			return postId;
 		
 	}
 
+	/*
+	 * 	
+	 * 	发送朋友圈
+	 * 
+	 * */
+	public int  send(Subject forumPost,int userId) {
+		// TODO Auto-generated method stub
+			Information info = new Information();
+			List<Integer> available =subjectAvailableListService.queryAvailable(userId);
+			Query query = Query.query(Criteria.where("authorId").is(userId));
+			info = informationService.queryOne(query);
+			forumPost.setAuthorPhotoImgUrl(info.getIconUrl());
+			forumPost.setLikeCount(0);
+			forumPost.setPublishTime(new Date().getTime());
+			//设置可见列表
+			forumPost.setAvailable(available);	
+			String imageUrl = info.getIconUrl();
+			forumPost.setAuthorPhotoImgUrl(imageUrl);
+		
+			String forumName = null;
+			UserAccount account = userAccountService.queryById(userId);
+			String trueName = account.getUsername();
+			String mobilephone =account.getMobilephone();
+			String email =account.getEmail();
+			String qq = account.getQQ();
+			String weiChat = account.getWeiChat();
+			String weiBo = account.getWeiBo();
+		
+			if(trueName!=null){
+				forumName=trueName;
+			} else if(mobilephone!=null){
+				forumName=mobilephone;
+			} else if(email!=null){
+				forumName = email;
+			} else if(qq!=null){
+				forumName = qq;
+			} else if(weiChat!=null){
+				forumName = weiChat;
+			} else if(weiBo !=null){
+				forumName = weiBo;
+			} 
+			//设置用户昵称
+			forumPost.setAuthor(forumName);
+			int postId = subjectDao.post(forumPost);		
+			return postId;
+		
+	}
 
+	
 	public List<Subject> showList( int userId,int subjectId,int subjectType ,int freshenType) {
 		// TODO Auto-generated method stub
-		List<Subject> forumPost=null;
+			List<Subject> forumPost=null;
+		
+			//按照帖子id升序排列
 			Query query = new Query();
 			Criteria criteria =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").gt(subjectId));
 			  query.addCriteria(criteria).with(new Sort(Direction.ASC, "subjectId"));
+			  //按照帖子id降序排列
 				Query query2 = new Query();
 				Criteria criteria2 =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").lt(subjectId));
-				  query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
+				 query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
 				  
 			if(freshenType== -1){
-				//forumPost=subjectDao.queryList(query);
+			
 				forumPost = subjectDao.getPage(query, 0, 10);
 			}
 			else if(freshenType==1){
-				//forumPost=subjectDao.queryList(query);
+				
 				 forumPost = subjectDao.getPage(query2, 0, 10);
 			}
 			return forumPost;
@@ -137,17 +186,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	/*
-	 *  查询某个用户的所有帖子
+	 *  显示所有贴子
 	 * */
-	public List<Subject> show(int authorId ,int watcher) {
-		// TODO Auto-generated method stub
-	
-			Query query = Query.query(Criteria.where("authorId").is(authorId));
-			List<Subject> forumPost = subjectDao.queryList(query);
-			return forumPost;
-	
-	}
-
 	public List<Subject> showAll() {
 		// TODO Auto-generated method stub
 		Query query = new Query();
@@ -157,7 +197,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	/*
-	 * 删除某个帖子
+	 * 
+	 * 	删除某个帖子
 	 * 
 	 * */
 	@Override
@@ -169,31 +210,44 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	/*
+	 * 
 	 *  显示所有好友的帖子
 	 * 
 	 * */
 	@Override
-	public List<Subject> friendsSubject(int userId,int freshenType) {
+	public List<Subject> friendsSubject(int userId,int subjectId,int freshenType) {
 		// TODO Auto-generated method stub
 		//获取关注的好友列表
 		List<Integer> subscribeList = subjectAvailableListService.querySubscribe(userId);
+
+		List<Subject> forumPost= new ArrayList<Subject>();
 		
-		List<Integer> friendIdList = rosterService.getFriendList(String.valueOf(userId));
-		List<Subject> forumPost=null;
 		Query query = new Query();
-		Criteria criteria =Criteria.where("authorId").in(friendIdList);
-		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+		//帖子作者在关注列表中
+		Criteria criteria =Criteria.where("authorId").in(subscribeList).andOperator(Criteria.where("subjectId").gt(subjectId));
+		
+		  query.addCriteria(criteria).with(new Sort(Direction.ASC, "subjectId"));
 			Query query2 = new Query();
-			
-			  query2.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			Criteria criteria2 =Criteria.where("authorId").in(subscribeList).andOperator(Criteria.where("subjectId").lt(subjectId));
+			  query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
 			  
 		if(freshenType== -1){
-			//forumPost=subjectDao.queryList(query);
-			forumPost = subjectDao.getPage(query, 0, 10);
+		
+			List<Subject> temps = subjectDao.getPage(query, 0, 10);
+			for(Subject temp : temps){
+				if(temp.getAvailable().contains(userId)){
+					forumPost.add(temp);
+				}
+			}
 		}
 		else if(freshenType==1){
-			//forumPost=subjectDao.queryList(query);
-			 forumPost = subjectDao.getPage(query2, 0, 10);
+			
+			 List<Subject> temps = subjectDao.getPage(query2, 0, 10);
+			 for(Subject temp : temps){
+					if(temp.getAvailable().contains(userId)){
+						forumPost.add(temp);
+					}
+				}
 		}
 		return forumPost;
 
@@ -205,26 +259,34 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	 * 
 	 * */
 	@Override
-	public List<Subject> friendSubject(int userId,int friendId,int freshenType) {
+	public List<Subject> friendSubject(int userId,int friendId,int subjectId,int freshenType) {
 		// TODO Auto-generated method stub	/*
 	
 
-		List<Subject> forumPost=null;
+		List<Subject> forumPost= new ArrayList<Subject>();
 		Query query = new Query();
-		Criteria criteria =Criteria.where("authorId").is(friendId);
+		Criteria criteria =Criteria.where("authorId").is(friendId).andOperator(Criteria.where("subjectId").gt(subjectId));
 		
-		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+		  query.addCriteria(criteria).with(new Sort(Direction.ASC, "subjectId"));
 			Query query2 = new Query();
-			
-			  query2.addCriteria(criteria).with(new Sort(Direction.DESC, "publishTime"));
+			Criteria criteria2 =Criteria.where("authorId").is(friendId).andOperator(Criteria.where("subjectId").lt(subjectId));
+			  query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
 			  
 		if(freshenType== -1){
-			//forumPost=subjectDao.queryList(query);
-			forumPost = subjectDao.getPage(query, 0, 10);
+			List<Subject> temps = subjectDao.getPage(query, 0, 10);
+			for(Subject temp : temps){
+				if(temp.getAvailable().contains(userId)){
+					forumPost.add(temp);
+				}
+			}
 		}
-		else if(freshenType==1){
-			//forumPost=subjectDao.queryList(query);
-			 forumPost = subjectDao.getPage(query2, 0, 10);
+		else if(freshenType==1){	
+				List<Subject> temps = subjectDao.getPage(query2, 0, 10);
+				for(Subject temp : temps){
+					if(temp.getAvailable().contains(userId)){
+						forumPost.add(temp);
+					}
+				}
 		}
 		return forumPost;
 

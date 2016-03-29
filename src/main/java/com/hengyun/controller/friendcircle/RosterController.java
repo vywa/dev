@@ -57,8 +57,7 @@ public class RosterController {
 
 			RosterResponse response = new RosterResponse();
 			int userId = (int)request.getAttribute("userId");
-			
-			
+
 			// 查找是否已经在好友列表中
 			List<Integer> userList = rosterService.getFriendList(String.valueOf(userId));
 			

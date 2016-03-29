@@ -40,33 +40,30 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Resource
 	private MedicalNoticeService medicalNoticeService;
 	
-	public BloodPressureInfoDao getBloodPressureInfoDao() {
-		return bloodPressureInfoDao;
-	}
-
-
-	public void setBloodPressureInfoDao(BloodPressureInfoDao bloodPressureInfoDao) {
-		this.bloodPressureInfoDao = bloodPressureInfoDao;
-	}
-
 	/*
-	 *  添加血压数据
+	 * 
+	 *  	添加血压数据
+	 *  
 	 * */
 	@Override
-	public void addInfo(BloodPressureInfo bloodPressureInfo,int userId) {
+	public void addInfo(BloodPressureInfo bloodPressureInfo) {
 		// TODO Auto-generated method stub
+		//添加血压记录
 		bloodPressureInfoDao.save(bloodPressureInfo);
+		
 		if(needAlarm(bloodPressureInfo)){
-			int doctorId = rosterService.getDoctor(String.valueOf(userId));
+			int doctorId = rosterService.getDoctor(String.valueOf(bloodPressureInfo.getUserId()));
 			MedicalNotice medicalNotice = new MedicalNotice();
 			medicalNotice.setNoticeFromId(doctorId);
-			medicalNotice.setNoticeToId(userId);
+			medicalNotice.setNoticeToId(bloodPressureInfo.getUserId());
 			//高压危险
 			medicalNotice.setNoticeType(2);
 			medicalNotice.setType(noticeType.medical_notice);
 			medicalNotice.setSendTime(new Date());
 			medicalNotice.setContent("病人高压危险");
 			medicalNoticeService.addNotice(medicalNotice);
+			
+			//向医生推送病人危险信息
 			String data=JSON.toJSON(medicalNotice).toString();
 			try {
 				HttpClientUtil.doGet(data);

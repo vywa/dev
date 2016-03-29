@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.information.Information;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
 import com.hengyun.domain.patient.PressureResponse;
@@ -26,7 +27,8 @@ import com.hengyun.service.patient.BloodPressureInfoService;
 
 /*
  * 
- *  血压操作
+ *  	血压操作
+ *  
  * */
 @Controller
 @RequestMapping("bloodPressure")
@@ -42,7 +44,7 @@ public class BloodPressureInfoController {
 	
 	/*
 	 * 
-	 * 查询某个指定时间段的测量数据
+	 * 	查询某个指定时间段的测量数据
 	 * 
 	 * */
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
@@ -130,7 +132,8 @@ public class BloodPressureInfoController {
 	
 	/*
 	 * 
-	 * 	查询所有用户的血压记录
+	 * 	查询所有用户的血压记录 （管理员）
+	 * 
 	 * */
 	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -148,7 +151,8 @@ public class BloodPressureInfoController {
 	
 	/*
 	 * 
-	 *  上传用户的血压数据
+	 *  	上传用户的血压数据
+	 *  
 	 * */
 	@RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -156,9 +160,10 @@ public class BloodPressureInfoController {
 		
 		JSONObject jsonObject =JSON.parseObject(data);
 		HealthInfoResponse response = new HealthInfoResponse();
-		
+		BloodPressureInfo blood = JSON.toJavaObject(jsonObject, BloodPressureInfo.class);
 		int userId = (int)request.getAttribute("userId");
-		
+		blood.setUserId(userId);
+		/*
 		long date = jsonObject.getLongValue("measureTime");
 		int highBP = jsonObject.getIntValue("highBP");
 		int lowBP = jsonObject.getIntValue("lowBP");
@@ -170,12 +175,12 @@ public class BloodPressureInfoController {
 		blood.setHighBP(highBP);
 		blood.setHeartRate(heartRate);
 		blood.setLowBP(lowBP);
-
+	*/
 		//保存数据
-		bloodPressureInfoService.addInfo(blood, userId);
+		bloodPressureInfoService.addInfo(blood);
 		
 		response.setCode("0");//-1
-		response.setMessage("record success");
+		response.setMessage("血压上传成功");
 	
 	
 		return JSON.toJSONString(response);

@@ -34,7 +34,8 @@ public class HospitalController {
 	private HospitalService hospitalService;
 	
 	/*
-	 *  添加医院信息
+	 * 
+	 * 	 添加医院信息
 	 * 
 	 * */
 	@RequestMapping("/add")
@@ -42,7 +43,7 @@ public class HospitalController {
 	public String addHospital(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);
 		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
-		hospitalService.save(hospital);
+		hospitalService.addHospital(hospital);
 		
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
@@ -51,7 +52,8 @@ public class HospitalController {
 	}
 	
 	/*
-	 *  更新医院信息
+	 * 
+	 *  	更新医院信息
 	 * 
 	 * */
 	@RequestMapping("/update")
@@ -80,6 +82,11 @@ public class HospitalController {
 		return null;
 	}
 	
+	/*
+	 * 
+	 *  查询所有医院
+	 * 
+	 * */
 	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryHospital(HttpServletRequest request){
@@ -92,7 +99,8 @@ public class HospitalController {
 	}
 	
 	/*
-	 *  查询医院信息
+	 * 
+	 *  	查询医院信息
 	 * 
 	 * */
 	@RequestMapping("/query")
@@ -110,6 +118,11 @@ public class HospitalController {
 		return null;
 	}
 	
+	/*
+	 * 
+	 *  删除医院
+	 * 
+	 * */
 	@RequestMapping("/delete")
 	@ResponseBody
 	public String deleteHospital(@RequestParam String data,HttpServletRequest request){

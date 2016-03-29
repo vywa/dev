@@ -16,11 +16,11 @@ import com.hengyun.domain.location.Location;
  * */
 public class Hospital implements Serializable{
 
-	@Range(min=5,max=20)
+	
 	private int id;																//医院ID
-	@NotEmpty(message="{hospital.not.empty}")
+	
 	private String hospitalName;									//医院名称
-	@NotEmpty(message="{address.not.empty}")
+	private String shortName;										//医院简称
 	private String address;												//医院地址
 	private String level;														//级别
 	private List<Integer> OfficeList;							//医院科室列表
@@ -33,6 +33,12 @@ public class Hospital implements Serializable{
 	
 	
 
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 	public List<Integer> getOfficeList() {
 		return OfficeList;
 	}

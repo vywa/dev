@@ -13,7 +13,7 @@ public class DoctorInfo implements Serializable{
 	private String workNum;					//工号
 	private String trueName;					//姓名
 	private String sex;								//性别
-	
+	private String shortName;				//医院简称
 	private String birthday;						//生日
 	private String iconUrl;							//用户图像地址
 	
@@ -30,6 +30,16 @@ public class DoctorInfo implements Serializable{
 	private String mobilephone;			//手机号
 	
 	private String recordTime;							//记录时间
+
+	
+	
+	public String getShortName() {
+		return shortName;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 
 	public int getUserId() {
 		return userId;

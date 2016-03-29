@@ -63,6 +63,9 @@ http://www.springframework.org/schema/cache
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="informationService" class="com.hengyun.service.impl.information.InformationServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="collectionDao" class="com.hengyun.dao.impl.information.CollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="collectionService" class="com.hengyun.service.impl.information.CollectionServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="generalPersonDao" class="com.hengyun.dao.impl.information.GeneralPersonDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="generalPersonService" class="com.hengyun.service.impl.information.GeneralPersonServiceImpl" parent="BaseServiceImpl"/>
 

@@ -60,7 +60,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 	    <bean id="openfireSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
     	<property name="typeAliasesPackage" value="com.hengyun.domain.friendcircle"/>
         <property name="dataSource" ref="openfire" />  
-        <property name="mapperLocations" value="classpath:com/hengyun/dao/impl/friendcircle/mysql/mapper/*Mapper.xml" />  
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml" />  
     </bean>  
 
   <!-- dao扫描 -->
@@ -72,19 +72,15 @@ xmlns:context="http://www.springframework.org/schema/context"
 	
  	<!-- myBatis文件 -->  
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
-    	<property name="typeAliasesPackage" value="com.hengyun.domain.loginInfo"/>
+    	<!-- <property name="typeAliasesPackage" value="com.hengyun.domain.loginInfo,com.hengyun.domain.friendcircle"/> -->
         <property name="dataSource" ref="dataSource" />  
-        <property name="mapperLocations"  >
-        <list>
-        <value>  classpath:com/hengyun/dao/impl/logininfo/mysql/mapper/*Mapper.xml</value>
-       <value>classpath:com/hengyun/dao/impl/notice/mysql/mapper/*Mapper.xml"</value>
-        </list>
+        <property name="mapperLocations"  value=" classpath:mapper/*Mapper.xml" >
         </property>  
     </bean>  
 
   <!-- dao扫描 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="com.hengyun.dao.logininfo.mysql,com.hengyun.dao.notice.mysql" />  
+        <property name="basePackage" value="com.hengyun.dao.logininfo.mysql,com.hengyun.dao.friendcircle.mysql" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>  
   

@@ -2,8 +2,6 @@ package com.hengyun.domain.loginInfo;
 
 import java.io.Serializable;
 
-import com.hengyun.domain.loginInfo.constant.UserCatagory;
-
 /*
  *  用户登陆信息缓存
  *  根据sessionToken进行标示
@@ -14,8 +12,11 @@ public class LoginInfoCache implements Serializable{
 	private String tocken;							//会话标识
 
 	private int userId;												//用户ID
-	private String username;									//用户名称
-	private UserCatagory userCatagory; 								//用户类型（系统管理员=1,用户管理员，医生，病人，游客）
+	private long lastLoginTime;							//上次登陆时间
+	private String ip;													//上次登陆ip
+	
+	
+	
 	
 	
 	public String getTocken() {
@@ -32,17 +33,17 @@ public class LoginInfoCache implements Serializable{
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUsername() {
-		return username;
+	public long getLastLoginTime() {
+		return lastLoginTime;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLastLoginTime(long lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
 	}
-	public UserCatagory getUserCatagory() {
-		return userCatagory;
+	public String getIp() {
+		return ip;
 	}
-	public void setUserCatagory(UserCatagory userCatagory) {
-		this.userCatagory = userCatagory;
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 	

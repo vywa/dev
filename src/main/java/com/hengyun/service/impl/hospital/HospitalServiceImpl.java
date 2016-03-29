@@ -13,7 +13,9 @@ import com.hengyun.service.hospital.HospitalService;
 import com.hengyun.service.impl.BaseServiceImpl;
 
 /*
- *  　个人信息管理
+ * 
+ *  　医院信息管理业务类
+ *  
  * */
 
 public class HospitalServiceImpl extends BaseServiceImpl<Hospital,Integer> implements HospitalService{
@@ -26,6 +28,15 @@ public class HospitalServiceImpl extends BaseServiceImpl<Hospital,Integer> imple
 		Query query = Query.query(Criteria.where("id").exists(true));
 		return hospitalDao.queryList(query);
 		
+	}
+
+	@Override
+	public void addHospital(Hospital hospital) {
+		// TODO Auto-generated method stub
+		String hospitalName = hospital.getHospitalName();
+		String temp = hospitalName.substring(10);
+		hospital.setShortName(temp);
+		hospitalDao.save(hospital);
 	}
 	
 	

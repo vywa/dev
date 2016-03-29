@@ -9,4 +9,6 @@ import com.hengyun.service.BaseService;
 public interface HospitalService  extends BaseService<Hospital,Integer> {
 
 	public List<Hospital> queryAll();
+	
+	public void addHospital(Hospital hospital);
 }

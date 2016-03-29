@@ -8,14 +8,55 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Docter implements Serializable{
 
 	
-	@NotEmpty(message="{workNum.not.empty}")
 	private String workNum;
-	@NotEmpty
 	private String name;
 	private String level;						//医生职称
 	private int hospitalId;				//所属医院id
-
+	private String shortName;		//简称
+	private String image;					//图像
+	private String resume;				//简历
+	private String sex;						//性别
+	private int age;							//年龄
+	private int userId;						//医生id
 	
+	
+	
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
 	public int getHospitalId() {
 		return hospitalId;
 	}

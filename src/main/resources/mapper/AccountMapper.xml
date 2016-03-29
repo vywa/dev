@@ -2,7 +2,7 @@
     <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
     <mapper namespace="com.hengyun.dao.logininfo.mysql.AccountDao">  
       
-        <resultMap type="UserAccount" id="userAccount">  
+        <resultMap type="com.hengyun.domain.loginInfo.UserAccount" id="userAccount">  
             <id property="id" column="id"/>  
             <result property="catagory" column="catagory"/>  
             <result property="username" column="username"/>  
@@ -17,20 +17,20 @@
         </resultMap>  
           
         <!-- 查询账号，根据id -->  
-        <select id="queryById" parameterType="int" resultType="UserAccount" resultMap="userAccount">  
+        <select id="queryById" parameterType="int" resultType="com.hengyun.domain.loginInfo.UserAccount" resultMap="userAccount">  
             
                 SELECT * from useraccount UA
                     WHERE UA.ID = #{id}  
        
         </select>  
         
-        <select id="showAll"  resultType="UserAccount" resultMap="userAccount">  
+        <select id="showAll"  resultType="com.hengyun.domain.loginInfo.UserAccount" resultMap="userAccount">  
           
                 SELECT * from useraccount
         </select>  
           
         <!-- 多条件查询账号列表 -->  
-        <select id="query"  parameterType="UserAccount" resultMap="userAccount">  
+        <select id="query"  parameterType="com.hengyun.domain.loginInfo.UserAccount" resultMap="userAccount">  
          
                 SELECT * from useraccount 
                  <where>
@@ -56,7 +56,7 @@
         </select> 
         
           <!-- 根据其他条件查询账号 -->  
-        <select id="queryOne"  parameterType="UserAccount" resultMap="userAccount">  
+        <select id="queryOne"  parameterType="com.hengyun.domain.loginInfo.UserAccount" resultMap="userAccount">  
          
                 SELECT * from useraccount 
                    <where>
@@ -82,7 +82,7 @@
         </select>  
          
         <!-- 添加账号 -->
-        <insert id="insert" parameterType="UserAccount">
+        <insert id="insert" parameterType="com.hengyun.domain.loginInfo.UserAccount">
         		insert into useraccount (catagory,username,mobilephone,email,password,
         		status,workNum,QQ,weiChat,weiBo) 
         		values (#{catagory},#{username},#{mobilephone},#{email},#{password},
@@ -90,7 +90,7 @@
         </insert>
           
           <!-- 更新账号 -->
-          <update id="update" parameterType="UserAccount">
+          <update id="update" parameterType="com.hengyun.domain.loginInfo.UserAccount">
           update useraccount 
           <trim prefix="set" suffixOverrides=",">
           	<if test="catagory !=null  ">
@@ -129,7 +129,7 @@
           </update>
           
           <!-- 删除账号 -->
-          <delete id="delete" parameterType="UserAccount">
+          <delete id="delete" parameterType="com.hengyun.domain.loginInfo.UserAccount">
           	delete from useraccount 
           		<where>
           			<choose>

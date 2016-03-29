@@ -24,7 +24,9 @@ import com.hengyun.service.logininfo.LoginInfoService;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /*
- * 多媒体信息上传下载
+ * 
+ * 	多媒体信息上传下载
+ * 
  * */
 @Controller
 @RequestMapping("multiMedia")
@@ -35,6 +37,11 @@ public class MultiMediaController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
+	/*
+	 * 
+	 *  多媒体信息上传
+	 * 
+	 * */
     @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
     @ResponseBody
     public String upload(@RequestParam MultipartFile media,HttpServletRequest request) throws IOException  
@@ -67,18 +74,18 @@ public class MultiMediaController {
     }
           
 
+    /*
+     * 
+     *  查询多媒体文件
+     * 
+     * */
     @RequestMapping("/download")
     @ResponseBody
     public String download(HttpServletRequest request ,Model model, HttpServletResponse response) throws IOException{
-    //	String tocken = request.getParameter("tocken");
     	ResponseCode responseCode = new ResponseCode();
-    //	int userId = loginInfoService.isOnline(tocken);
-    
-     	//response.setContentType(arg0);
-    //	response.setContentType("image/jpeg"); // 设置返回内容格式
+   
     	String filename = request.getParameter("url");
-    	System.out.println(filename);
-    
+  
     	GridFSDBFile gridFSDBFile = multiMediaService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();
     	OutputStream os = response.getOutputStream();  //创建输出流

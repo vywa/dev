@@ -3,6 +3,8 @@ package com.hengyun.controller.information;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +28,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.hospital.Docter;
+import com.hengyun.domain.hospital.Hospital;
 import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.DoctorInfoResponse;
 import com.hengyun.domain.information.InfoResponse;
@@ -34,9 +38,12 @@ import com.hengyun.domain.information.NickIcon;
 import com.hengyun.domain.information.NickIconResponse;
 import com.hengyun.domain.information.UploadImageResponse;
 import com.hengyun.domain.loginInfo.UserAccount;
+import com.hengyun.service.hospital.DocterService;
+import com.hengyun.service.hospital.HospitalService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /*
@@ -57,18 +64,23 @@ public class InfomationController {
 	@Resource
 	private IconDao	IconDao;
 	
+	@Resource
+	private DocterService docterService;
 
+	@Resource
+	private HospitalService hospitalService;
 		/*
 		 * 加载用户图像
 		 * 
 		 * */
 	    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
 	    @ResponseBody
-	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  
-	    {  
+	    public String upload(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  {
+	   
 	    	
 	    	UploadImageResponse response = new UploadImageResponse();
-	    	String baseUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=";
+	    	String ip = NetworkUtil.getPhysicalHostIP();
+	    	String baseUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=";
 	    	
 	    	int userId = (int)request.getAttribute("userId");
 	    	
@@ -360,24 +372,52 @@ public class InfomationController {
 			Query query =Query.query(Criteria.where("userId").is(userId));
 			 Information temp =informationService.queryOne(query);
 			 String nickname = temp.getTrueName();
+			 String resume = temp.getResume();
 			 String sex = temp.getSex();
-			 int age = temp.getAge();
-			 String birthday  = temp.getBirthday();
+			 Date date2 = null;
+			 int age = -1;
+			 String birthday = null;
+			 try {
+				
+					birthday = temp.getBirthday();
+					String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+					date2=new Date();
+					date2 = simpleDateFormat.parse(digital);
+					age = new Date().getYear()-date2.getYear();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
+					log.info("该用户没有设置生日，年龄未知");
+				}catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					log.info("该用户没有设置生日，年龄未知");
+				}
+			 
+			
 		
 			 UserAccount account = userAccountService.queryById(userId);
+			 
 			 String mobilephone = account.getMobilephone();
 			 String email = account.getEmail();
 			 String workNum = account.getWorkNum();
 			 
-			
+				Query query2 = Query.query(Criteria.where("workNum").is(workNum));
+				 Docter docter = docterService.queryOne(query2);
+				 
+				 int hospitalId=docter.getHospitalId();
+				 
+				 Query quey3 = Query.query(Criteria.where("id").is(hospitalId));
+				 Hospital hospital = hospitalService.queryOne(quey3);
+				
 			 String iconUrl = temp.getIconUrl();
 			 DoctorInfo doctorInfo = new DoctorInfo();
 			 doctorInfo.setIconUrl(iconUrl);
 			 doctorInfo.setBirthday(birthday);
 			 doctorInfo.setEmail(email);
-			
+			 doctorInfo.setResume(resume);
 			 doctorInfo.setMobilephone(mobilephone);
-		
+			 doctorInfo.setShortName(hospital.getShortName());
 			 doctorInfo.setTrueName(nickname);
 			 doctorInfo.setUserId(userId);
 			

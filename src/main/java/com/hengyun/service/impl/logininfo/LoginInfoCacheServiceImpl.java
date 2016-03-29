@@ -27,42 +27,42 @@ public class LoginInfoCacheServiceImpl implements LoginInfoCacheService{
 		// TODO Auto-generated method stub
 		Map<String,String> map = new HashMap();
 		map.put("userId", String.valueOf(loginInfoCache.getUserId()));
-		map.put("username", loginInfoCache.getUsername());
-		//map.put("UserCatagory", loginInfoCache.getUserCatagory().toString());
+		map.put("lastLoginTime", String.valueOf(loginInfoCache.getLastLoginTime()));
+		map.put("ip", String.valueOf(loginInfoCache.getIp()));
 		redisClientTemplate.hmset(loginInfoCache.getTocken(), map);
 	}
 
+	/*
+	 *  销毁缓存
+	 * */
 	public void destroyCache(String tocken) {
 		// TODO Auto-generated method stub
 		redisClientTemplate.expire(tocken, 0);
 	}
 
+	/*
+	 *  该tocken对应用户是否在线
+	 * */
 	public boolean valideSession(String tocken) {
 		// TODO Auto-generated method stub
 		return redisClientTemplate.exists( tocken);
 	}
 
+	/*
+	 *  根据用户tocken获取用户id
+	 * */
 	public int getUserId(String tocken) {
 		// TODO Auto-generated method stub
 		String idStr =redisClientTemplate.hget( tocken, "userId");
 		return Integer.valueOf(idStr);
 	}
 
-	
-	
-	public String getUserCatagory(String tocken) {
-		// TODO Auto-generated method stub
-		String catagory = redisClientTemplate.hget(tocken, "UserCatagory");
-		return catagory;
-	}
-
+	@Override
 	public boolean loginByTocken(String tocken) {
 		// TODO Auto-generated method stub
-		if(this.redisClientTemplate.exists(tocken)){
-			return true;
-		} 
-		return false;
+		return true;
 	}
+	
 	
 	
 }
