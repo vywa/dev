@@ -494,6 +494,13 @@
         </dependency>  
 	
 		<dependency>
+		<groupId>org.jsoup</groupId>
+		<artifactId>jsoup</artifactId>
+		<version>1.8.3</version>
+		</dependency>
+		
+	
+		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>
 			<version>1.4</version>

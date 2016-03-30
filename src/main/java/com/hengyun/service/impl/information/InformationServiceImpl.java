@@ -18,6 +18,7 @@ import com.hengyun.domain.information.Information;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /*
@@ -38,7 +39,7 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 		// TODO Auto-generated method stub
 	
 			generalInfo.setUserId(userId);
-			 String fileUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
+			 String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/info/download?iconUrl=1454079235481temp.jpg";
 			generalInfo.setIconUrl(fileUrl);
 			generalInfo.setRecordTime(String.valueOf(new Date().getTime()));
 			informationDao.save(generalInfo);

@@ -58,6 +58,9 @@ http://www.springframework.org/schema/cache
 <!-- 通知信息 -->
 <bean id="medicalNoticeDao" class="com.hengyun.dao.impl.notice.MedicalNoticeDaoImpl" parent="BaseMongodbDaoImpl"/>
 <bean id="medicalNoticeService" class="com.hengyun.service.impl.notice.MedicalNoticeServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="dailyNewsDao" class="com.hengyun.dao.impl.notice.DailyNewsDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="dailyNewsService" class="com.hengyun.service.impl.notice.DailyNewsServiceImpl" parent="BaseServiceImpl"/>
 <!-- 个人信息 -->
 
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
@@ -159,6 +162,12 @@ http://www.springframework.org/schema/cache
 <!-- 朋友圈 -->
 <bean id="friendCircleDao" class="com.hengyun.dao.impl.friendcircle.FriendCircleDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="friendCircleService" class="com.hengyun.service.impl.friendcircle.FriendCircleServiceImpl" parent="BaseServiceImpl"/>
+
+<!-- 系统 -->
+<bean id="appPackageDao" class="com.hengyun.dao.impl.system.AppPackageDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="appPackageService" class="com.hengyun.service.impl.system.AppPackageServiceImpl" parent="BaseServiceImpl"/>
+
+
 
 
 <!-- 
