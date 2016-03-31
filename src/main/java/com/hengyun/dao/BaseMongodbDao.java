@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.mongodb.BasicDBObject;
+
 public interface BaseMongodbDao<T extends Serializable, PK extends Serializable> {
 	
 	//插入一条数据
@@ -34,5 +36,10 @@ public interface BaseMongodbDao<T extends Serializable, PK extends Serializable>
 	    //修改，如果满足条件对象不存在则添加
 	    public void updateInser(Query query, Update update);
 	    
-	      
+	    //查询特定字段
+	    public T queryField(BasicDBObject condition,BasicDBObject keys);
+	  
+	    //查询特定字段多条记录
+	    public List<T> queryFieldList(BasicDBObject condition,BasicDBObject keys);
+
 }

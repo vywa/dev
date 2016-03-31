@@ -3,6 +3,8 @@ package com.hengyun.dao.impl.information;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import com.hengyun.dao.information.InformationDao;
 import com.hengyun.domain.information.Information;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFS;
 import com.mongodb.gridfs.GridFSDBFile;
@@ -110,5 +113,27 @@ public class InformationDaoImpl extends BaseMongodbDaoImpl<Information,Integer> 
         return gridFSDBFile;  
     }  
     
+    /*
+	 * 
+	 *  查询指定字段
+	 * 
+	 * */
+	@Override
+	public List<Information> queryField(Information info) {
+		// TODO Auto-generated method stub
+
+	List<Information> infoList = new ArrayList<Information>();	
+	BasicDBObject keys = new BasicDBObject();
+	keys.put("_id", 1);
+	keys.put("name", 1);
+	keys.put("age", 1);
+
+	DBCursor cursor = mongoTemplate.getCollection("information").find(new BasicDBObject(), keys);
+	while(cursor.hasNext()){
+		Information dbObject = (Information)cursor.next();
+		infoList.add(dbObject);
+	}
+		return null;
+	}
     
 }

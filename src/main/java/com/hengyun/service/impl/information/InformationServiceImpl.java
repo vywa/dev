@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -104,5 +105,7 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 			return userId;
 	
 	}
+
+	
 
 }

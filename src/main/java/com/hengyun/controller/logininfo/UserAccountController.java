@@ -97,8 +97,8 @@ public class UserAccountController {
 				registerCacheService.loadRegisterCache(mobilephone);
 			}
 	//		if(registerCacheService.getTryCount(mobilephone)<6){
-				int codeNum = (int)(Math.random()*1000000);
-					codeNum = codeNum>100000?codeNum:codeNum+100000;
+				int codeNum = (int)(Math.random()*10000);
+					codeNum = codeNum>1000?codeNum:codeNum+1000;
 				
 					registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 					registerCacheService.addTryCount(mobilephone);
@@ -134,12 +134,16 @@ public class UserAccountController {
 				registerCacheService.loadRegisterCache(email);
 			}
 		//	if(registerCacheService.getTryCount(email)<6){
-			int codeNum = (int)(Math.random()*1000000);
-			codeNum = codeNum>100000?codeNum:codeNum+100000;
+		
+		//	registerCacheService.addTryCount(email);
+			
+			int codeNum = (int)(Math.random()*10000);
+			codeNum = codeNum>1000?codeNum:codeNum+1000;
 			registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
 			registerCacheService.addTryCount(email);
-			String subject = "天衡会员确认邮件";
-			String content = "您本次验证码是"+codeNum+"如果非本人操作，请忽略。";
+			String subject = "天衡会员注册邮件";
+			String content = "欢迎注册天衡医疗会员，您本次注册时使用的验证码是"+codeNum+"如果非本人操作，请忽略。";
+			
 			String to = email;
 			simpleMail.sendMail( subject,  content,  to);
 			return 2;
@@ -159,8 +163,8 @@ public class UserAccountController {
 			JSONObject jsonObject =JSON.parseObject(data);
 			
 			String mobilephone = jsonObject.getString("mobilephone");
-			int codeNum = (int)(Math.random()*1000000);
-			codeNum = codeNum>100000?codeNum:codeNum+100000;
+			int codeNum = (int)(Math.random()*10000);
+			codeNum = codeNum>1000?codeNum:codeNum+1000;
 			registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 			registerCacheService.addTryCount(mobilephone);
 			
@@ -423,8 +427,8 @@ public class UserAccountController {
 				registerCacheService.loadRegisterCache(mobilephone);
 			}
 			
-			int codeNum = (int)(Math.random()*1000000);
-				codeNum = codeNum>100000?codeNum:codeNum+100000;
+			int codeNum = (int)(Math.random()*10000);
+				codeNum = codeNum>1000?codeNum:codeNum+1000;
 				registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 			
 				
@@ -467,12 +471,12 @@ public class UserAccountController {
 			registResult.setMessage("user not exist");
 		} else {
 		
-			int codeNum = (int)(Math.random()*1000000);
-				codeNum = codeNum>100000?codeNum:codeNum+100000;
+			int codeNum = (int)(Math.random()*10000);
+				codeNum = codeNum>1000?codeNum:codeNum+1000;
 				registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
 			//	registerCacheService.addTryCount(email);
 				String subject = "天衡会员邮件找回密码";
-				String content = "您本次验证码是"+codeNum+"如果非本人操作，请忽略。";
+				String content = "欢迎注册天衡医疗会员，您本次注册时使用的验证码是"+codeNum+"如果非本人操作，请忽略。";
 				String to = email;
 				simpleMail.sendMail( subject,  content,  to);
 
@@ -629,8 +633,8 @@ public class UserAccountController {
     		    		response.setMessage("修改邮箱已经使用，请使用为使用邮箱 ");
     		    		return JSON.toJSONString(response);
     			  } else {
-    					int codeNum = (int)(Math.random()*1000000);
-    					codeNum = codeNum>100000?codeNum:codeNum+100000;
+    					int codeNum = (int)(Math.random()*10000);
+    					codeNum = codeNum>1000?codeNum:codeNum+1000;
     					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
     				
     					String subject = "天衡会员确认邮件";
@@ -648,8 +652,8 @@ public class UserAccountController {
   		    		response.setMessage("手机号已经使用，请使用为使用手机号");
   		    		return JSON.toJSONString(response);
 				} else {
-					int codeNum = (int) (Math.random() * 1000000);
-					codeNum = codeNum > 100000 ? codeNum : codeNum + 100000;
+					int codeNum = (int) (Math.random() * 10000);
+					codeNum = codeNum > 1000 ? codeNum : codeNum + 1000;
 					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
 
 					SubmitResult result;

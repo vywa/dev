@@ -2,6 +2,7 @@ package com.hengyun.dao.information;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.List;
 
 import com.hengyun.dao.BaseMongodbDao;
 import com.hengyun.domain.information.Information;
@@ -24,4 +25,5 @@ public interface InformationDao extends BaseMongodbDao<Information,Integer>{
 	    // 取出文件
 	    public GridFSDBFile retrieveFileOne(String filename); 
 	  
+	    public List< Information> queryField(Information info);
 }

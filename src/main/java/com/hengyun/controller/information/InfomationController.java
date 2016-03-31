@@ -227,7 +227,7 @@ public class InfomationController {
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		Information info = JSON.toJavaObject(jsonObject, Information.class);
-		
+		String ip = NetworkUtil.getPhysicalHostIP();
 		int userId =(int)request.getAttribute("userId");
 	
 			 long recordTime = new Date().getTime();
@@ -243,7 +243,7 @@ public class InfomationController {
 				 informationService.update(info, userId);
 			} catch (NullPointerException ex) {
 				//加载默认图片
-				  String fileUrl = "http://192.168.31.114/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
+				  String fileUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
 				 info.setIconUrl(fileUrl);
 				 info.setRecordTime(String.valueOf(new Date().getTime()));
 				 informationService.add(info, userId);

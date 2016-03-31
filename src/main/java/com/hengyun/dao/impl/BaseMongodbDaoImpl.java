@@ -1,6 +1,7 @@
 package com.hengyun.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.hengyun.dao.BaseMongodbDao;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 
 
 public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Serializable> implements BaseMongodbDao<T , PK >{
@@ -76,6 +80,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     public void delete(T t){
       
         this.mongoTemplate.remove(t);
+       
     }
     
   //删除操作
@@ -98,11 +103,6 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     }
     
   
-    /*
-     *修改操作 
-     * */
-    
-    
     //修改满足条件的一条记录
     public void updateFirst(Query query,Update update){
    
@@ -119,6 +119,25 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     public void updateInser(Query query, Update update){
       
         this.mongoTemplate.upsert(query, update, this.getEntityClass());
+    }
+    
+  //查询特定字段
+    @SuppressWarnings("unchecked")
+	public T queryField(BasicDBObject condition,BasicDBObject keys){
+    	DBObject object = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).findOne(condition, keys);
+    	return (T)object;
+    }
+  
+    //查询特定字段多条记录
+    @SuppressWarnings("unchecked")
+	public List<T>  queryFieldList(BasicDBObject condition,BasicDBObject keys){
+    	List<T> list = new ArrayList<T>();
+    	DBCursor cur = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).find(condition, keys);
+    	while(cur.hasNext()){
+    		
+    		list.add((T)cur.next());
+    	}
+    	return list;
     }
     
     //钩子方法，由子类实现返回反射对象的类型
