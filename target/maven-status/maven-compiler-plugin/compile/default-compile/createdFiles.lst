@@ -1,9 +1,7 @@
 com/hengyun/service/impl/friendcircle/JPushServiceImpl.class
 com/hengyun/controller/logininfo/IndexCollectionController.class
-com/hengyun/controller/logininfo/mysql/LoginController.class
 com/hengyun/controller/casehistory/TargetOrganDamageController.class
 com/hengyun/domain/forum/ForumGeneralInfo.class
-com/hengyun/service/logininfo/mysql/LoginService.class
 com/hengyun/util/sms/GetKeFuResult.class
 com/hengyun/service/impl/notice/JobTaskService.class
 com/hengyun/dao/casehistory/DoctorAdviceDao.class
@@ -30,12 +28,10 @@ com/hengyun/dao/impl/forum/ForumAuthorityDaoImpl.class
 com/hengyun/domain/monitor/Transaction.class
 com/hengyun/service/impl/message/SmsServiceImpl.class
 com/hengyun/domain/common/ResponseCode.class
-com/hengyun/service/impl/logininfo/mysql/LoginServiceImpl.class
 com/hengyun/service/logininfo/UserAccountService.class
 com/hengyun/service/impl/logininfo/LoginInfoServiceImpl.class
 com/hengyun/domain/doctor/TransferPatient.class
 com/hengyun/domain/information/InfoResponse.class
-com/hengyun/controller/logininfo/mysql/AccountController.class
 com/hengyun/service/impl/forum/SubjectServiceImpl.class
 com/hengyun/service/impl/logininfo/UserAccountServiceImpl.class
 com/hengyun/controller/system/AppPackageController.class
@@ -103,7 +99,6 @@ com/hengyun/util/shiro/IncorrectCodeException.class
 com/hengyun/util/sms/sender/SmsSender.class
 com/hengyun/dao/information/InformationDao.class
 com/hengyun/service/impl/monitor/KafkaAppender.class
-com/hengyun/service/impl/logininfo/mysql/AccountServiceImpl.class
 com/hengyun/domain/casehistory/DeathDangerousNotice.class
 com/hengyun/dao/system/AppPackageDao.class
 com/hengyun/service/impl/message/ProducerEmailServiceImpl.class
@@ -196,7 +191,6 @@ com/hengyun/service/impl/monitor/MessageFormatter.class
 com/hengyun/service/impl/casehistory/DoctorAdviceServiceImpl.class
 com/hengyun/service/casehistory/DiagnosisService.class
 com/hengyun/controller/casehistory/MentalStateController.class
-com/hengyun/service/logininfo/mysql/AccountService.class
 com/hengyun/util/regex/Validator.class
 com/hengyun/dao/administrator/PermissionDao.class
 com/hengyun/dao/impl/notice/DailyNewsDaoImpl.class
@@ -411,7 +405,6 @@ com/hengyun/controller/doctor/DoctorController.class
 com/hengyun/util/sms/VersionInfoResult.class
 com/hengyun/domain/forum/ForumLoginInfo.class
 com/hengyun/dao/notice/ScheduleJobDao.class
-com/hengyun/dao/logininfo/mysql/AccountDao.class
 com/hengyun/service/message/EmailProducerService.class
 com/hengyun/util/encrypt/MD5Util.class
 com/hengyun/service/impl/forum/SecondCommentServiceImpl.class

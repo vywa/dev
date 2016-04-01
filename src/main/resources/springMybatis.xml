@@ -15,7 +15,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 
 	<!-- 引入属性文件 -->
 	<context:property-placeholder location="classpath:mysql.properties" ignore-unresolvable="true"/>
-	  <!-- healthcloud数据源 -->  
+	  <!-- healthcloud数据源 
     <bean name="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
         <property name="url" value="${healthcloud.url}" />  
         <property name="username" value="${healthcloud.username}" />  
@@ -34,8 +34,8 @@ xmlns:context="http://www.springframework.org/schema/context"
         <property name="removeAbandonedTimeout" value="1800" />  
         <property name="logAbandoned" value="true" />  
         <property name="filters" value="mergeStat" />  
-    </bean>  
-
+    </bean> 
+ -->  
 	  <!-- openfire数据源 -->  
     <bean name="openfire" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">  
         <property name="url" value="${openfire.url}" />  
@@ -71,27 +71,29 @@ xmlns:context="http://www.springframework.org/schema/context"
   
 	
  	<!-- myBatis文件 -->  
+ 	<!-- 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
-    	<!-- <property name="typeAliasesPackage" value="com.hengyun.domain.loginInfo,com.hengyun.domain.friendcircle"/> -->
+    	
         <property name="dataSource" ref="dataSource" />  
         <property name="mapperLocations"  value=" classpath:mapper/*Mapper.xml" >
         </property>  
     </bean>  
-
+ -->
   <!-- dao扫描 -->
+  <!-- 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
         <property name="basePackage" value="com.hengyun.dao.logininfo.mysql,com.hengyun.dao.friendcircle.mysql" />  
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
     </bean>  
-  
+   -->
     
     
-    <!-- 配置事务管理器 -->  
+    <!-- 配置事务管理器
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
         <property name="dataSource" ref="dataSource" />  
     </bean>  
   
-    <!-- 拦截器方式配置事务 -->  
+ 
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">  
         <tx:attributes>  
             <tx:method name="add*" propagation="REQUIRED" />  
@@ -115,7 +117,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 		<aop:advisor pointcut-ref="transactionPointcut"
 			advice-ref="transactionAdvice" />
 	</aop:config>
-    
+     -->  
     <!-- aop代理设置 -->
     <!-- 
     <aop:config>  

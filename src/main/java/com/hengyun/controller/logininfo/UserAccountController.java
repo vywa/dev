@@ -29,7 +29,7 @@ import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
-import com.hengyun.service.logininfo.mysql.AccountService;
+
 import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
 import com.hengyun.util.mail.SimpleMail;
@@ -50,8 +50,7 @@ public class UserAccountController {
 	@Resource
 	private UserAccountService userAccountService;
 	
-	@Resource 
-	private AccountService accountService;
+	
 	
 	@Resource
 	private RegisterCacheService registerCacheService;

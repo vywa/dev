@@ -1,11 +1,13 @@
 package com.hengyun.domain.loginInfo;
 
+import java.io.Serializable;
+
 /*
  *  注册缓存
  *  以手机号码和邮箱为标示
  * 
  * */
-public class RegisterCache {
+public class RegisterCache implements Serializable{
 
 	private String sign;										//用户手机号或邮箱
 

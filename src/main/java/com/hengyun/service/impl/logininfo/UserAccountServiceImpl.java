@@ -131,6 +131,9 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 			
 			try{
 			 userAccount = userAccountDao.queryOne(query);
+			 if(userAccount == null){
+				 return -1;
+			 }
 				return userAccount.getId();
 			} catch(NullPointerException ex){
 				log.info(sign+" 账号不存在");

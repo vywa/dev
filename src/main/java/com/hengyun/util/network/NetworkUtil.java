@@ -33,7 +33,7 @@ public class NetworkUtil {
 	                Enumeration nii = ni.getInetAddresses();  
 	                while (nii.hasMoreElements()) {  
 	                    ip = (InetAddress) nii.nextElement();             
-	                       res = ip.getHostName();
+	                       res = ip.getHostAddress();
 	                    }  
 	                }  
 	            

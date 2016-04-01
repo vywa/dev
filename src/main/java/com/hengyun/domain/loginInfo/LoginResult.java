@@ -1,5 +1,7 @@
 package com.hengyun.domain.loginInfo;
 
+import java.io.Serializable;
+
 import com.hengyun.domain.common.BaseResponseCode;
 import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
@@ -7,7 +9,7 @@ import com.hengyun.domain.information.Information;
 /*
  *  注册返回码
  * */
-public class LoginResult extends BaseResponseCode{
+public class LoginResult extends BaseResponseCode implements Serializable{
 
 	private int userCode;					//用户代号		2,3
 
@@ -16,7 +18,7 @@ public class LoginResult extends BaseResponseCode{
 	private String username;				//用户名
 	private Information info;				//用户基本资料
 	private DoctorInfo doctorInfo;			//医生账号信息
-	//private UserAccount account;		//账号信息
+	
 	private String type ;							//类型
 	private String loginName;				//登陆名
 	
