@@ -136,8 +136,6 @@ public class BloodSuggerInfoController {
 		
 		List<BloodSuggerInfo> bloodList = null;
 		int userId = (int)request.getAttribute("userId");
-		
-	
 			try{
 				bloodList = bloodSuggerInfoService.getlatestTime(userId);
 				if(bloodList!=null){
@@ -149,13 +147,10 @@ public class BloodSuggerInfoController {
 				response.setCode("211");
 				response.setBloodSuggerInfo(null);
 			}
-		
-		
+			
 		return  JSONObject.toJSONString(response);
 	}
-	
-	
-	
+
 	
 	/*
 	 *  上传用户血糖数据

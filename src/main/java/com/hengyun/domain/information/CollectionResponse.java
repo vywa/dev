@@ -12,15 +12,18 @@ import com.hengyun.domain.common.ResponseCode;
 */
 public class CollectionResponse extends ResponseCode{
 
-	private List<Collection> collectionList = new ArrayList<Collection>();
+	private Collection collection ;						//收藏			
 
-	public List<Collection> getCollectionList() {
-		return collectionList;
+
+	public Collection getCollection() {
+		return collection;
 	}
 
-	public void setCollectionList(List<Collection> collectionList) {
-		this.collectionList = collectionList;
+	public void setCollection(Collection collection) {
+		this.collection = collection;
 	}
+
+
 	
 	
 }

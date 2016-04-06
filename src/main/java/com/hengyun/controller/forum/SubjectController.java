@@ -63,6 +63,35 @@ public class SubjectController {
 	}
 	
 	
+	/*
+	 * 
+	 *  帖子点赞
+	 * 
+	 * */
+	@RequestMapping(value="/like",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String like(@RequestParam String data,HttpServletRequest request){
+		ForumResponseCode response = new ForumResponseCode();
+		JSONObject jsonObject =JSON.parseObject(data);
+		int subjectId = jsonObject.getIntValue("subjectId");
+	//	Subject post = JSON.toJavaObject(jsonObject, Subject.class);
+		
+		int userId =(int) request.getAttribute("userId");
+		//发表帖子
+		int result = subjectService.like(userId, subjectId);
+		if(result==-1){
+			response.setResponseCode(-1);
+			response.setDescription("你已经点过赞了，不能重复");
+		}else {
+		
+		response.setResponseCode(0);
+		response.setDescription("点赞成功");
+		}
+
+		return JSON.toJSONString(response);
+	}
+	
+	
 	//更新帖子
 	@RequestMapping("/update")
 	@ResponseBody
@@ -155,7 +184,8 @@ public class SubjectController {
 		
 		//加载某人，某类，之前后包含关键字的帖子列表
 		List<Subject> postList =subjectService.showList(userId, subjectId, subjectType, freshenType);
-		
+		//帖子数添加数目
+		subjectService.addViewCount();
 		response.setSubjectList(postList);
 		response.setResponseCode(0);
 		response.setDescription("获取列表成功");
@@ -182,7 +212,69 @@ public class SubjectController {
 		return JSON.toJSONString(response);
 	}
 	
+	/*
+	 * 加精帖子
+	 * 
+	 * */
+	
+	@RequestMapping(value="/perfect",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String perfect(@RequestParam String data,HttpServletRequest request){
+	
+		JSONObject jsonObject =JSON.parseObject(data);
+		PostListResponseCode response = new PostListResponseCode();
+		int subjectId = jsonObject.getIntValue("subjectId");
+
+		subjectService.perfect(subjectId);
+		response.setResponseCode(0);
+		response.setDescription("加精成功");
+		return JSON.toJSONString(response);
+	}
 	
 	
+	/*
+	 * 查询精华帖子列表
+	 * 
+	 * */
 	
+	@RequestMapping(value="/perfectList",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String perfectList(@RequestParam String data,HttpServletRequest request){
+	
+		JSONObject jsonObject =JSON.parseObject(data);
+		PostListResponseCode response = new PostListResponseCode();
+	
+		int subjectId = jsonObject.getIntValue("subjectId");
+		int freshenType = jsonObject.getIntValue("freshenType");
+
+		List<Subject> subjectList = subjectService.perfectList(subjectId, freshenType);
+		response.setResponseCode(0);
+		response.setDescription("查询精华帖子成功");
+		response.setSubjectList(subjectList);
+		return JSON.toJSONString(response);
+	}
+	
+	
+	/*
+	 * 查询我的帖子列表
+	 * 
+	 * */
+	
+	@RequestMapping(value="/selfSubject",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String selfSubject(@RequestParam String data,HttpServletRequest request){
+	
+		JSONObject jsonObject =JSON.parseObject(data);
+		PostListResponseCode response = new PostListResponseCode();
+		int subjectId = jsonObject.getIntValue("subjectId");
+		int freshenType = jsonObject.getIntValue("freshenType");
+		int userId =(int) request.getAttribute("userId");
+		List<Subject> subjectList = subjectService.selfSubject(userId, subjectId, freshenType);
+		response.setResponseCode(0);
+		response.setDescription("查询我的问题成功");
+		response.setSubjectList(subjectList);
+		return JSON.toJSONString(response);
+	}
+	
+
 }

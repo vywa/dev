@@ -67,6 +67,8 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 		boolean affiliated = affiliatedClinicalDiseaseService.hasDisease(acd);
 		DangerLevel danger = null;
 		switch(bloodLevel){
+		case 0:danger = DangerLevel.not_danger;
+			break;
 		case 1:
 			if(riskCount <=0) {
 				danger = DangerLevel.little_danger;

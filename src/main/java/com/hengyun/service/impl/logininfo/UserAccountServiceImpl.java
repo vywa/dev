@@ -260,6 +260,32 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		return 1;
 	}
 
+	//更改用户对应的信息
+	public int unbind(String type, String sign,int userId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("id").is(userId));
+		Update update =null;
+		if(type.equals("QQ")){
+		
+			 update= Update.update("QQ", sign);
+			
+		}else if(type.equals("weiChat")){
+			 update= Update.update("weiChat", sign);
+		
+		} else if(type.equals("weiBo")){
+			 update= Update.update("weiBo", sign);
+			
+		}else if (type.equals("mobilephone")) {
+			 update= Update.update("mobilephone", sign);
+		} else if (type.equals("email")) {
+			 update= Update.update("email", sign);
+		}else if (type.equals("username")) {
+			 update= Update.update("username", sign);
+		}
+		userAccountDao.updateFirst(query, update);
+		log.info("更改用户 "+userId+" 的用户信息成功");
+		return 1;
+	}
 
 
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
@@ -26,6 +27,7 @@ import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
+import com.hengyun.service.casehistory.CaseHistoryService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
@@ -48,6 +50,8 @@ public class LoginInfoController {
 	@Resource
 	private InformationService informationService;
 	
+	@Resource
+	private CaseHistoryService caseHistoryService;
 	
 	/*
 	 *  用户名账号登陆
@@ -133,7 +137,8 @@ public class LoginInfoController {
 								 loginResult.setDoctorInfo(doctorInfo);
 								 loginResult.setCode("206");
 								 loginResult.setUsername(account.getUsername());
-								 
+							
+									 
 							 } else {
 								 loginResult.setCode("207");
 								 loginResult.setUsername(account.getUsername());
@@ -145,6 +150,7 @@ public class LoginInfoController {
 									info.setUserId(userId);
 									info.setRecordTime(String.valueOf(new Date().getTime()));
 									informationService.add(info, userId);
+									
 									loginResult.setCode("206");
 									 loginResult.setInfo(info);
 									 loginResult.setUsername(account.getUsername());
@@ -158,6 +164,12 @@ public class LoginInfoController {
 				
 					account = userAccountService.queryById(userId);
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
+					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
+					 if(caseHistoryId<0) {
+						 loginResult.setQuestionaire(false);
+					 } else {
+						 loginResult.setQuestionaire(true);
+					 }
 					 if(dbRecordTime>Long.valueOf(recordTime)){
 						 loginResult.setInfo(information);
 						 loginResult.setCode("206");

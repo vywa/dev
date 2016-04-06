@@ -28,6 +28,7 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		map.put("status","unregistered");
 		
 		redisClientTemplate.hmset(sign,map);
+		redisClientTemplate.expire(sign, 24*3600);
 	}
 
 	public void destroyRegisterCache(String sign) {
@@ -49,13 +50,23 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 
 	public String getConfirmCode(String sign) {
 		// TODO Auto-generated method stub
-		return redisClientTemplate.hget(sign, "confirmCode");
-		
+		String code = null;
+		try {
+			String key =  redisClientTemplate.hget(sign, "confirmCode");
+			code = redisClientTemplate.get(key);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			code = null;
+		}
+		return code;
 	}
 
 	public void setConfirmCode(String sign,String confirmCode) {
 		// TODO Auto-generated method stub
-		redisClientTemplate.hset(sign, "confirmCode", confirmCode);
+		String key = sign+confirmCode;
+		redisClientTemplate.set(key, confirmCode);
+		redisClientTemplate.expire(key, 3*60);
+		redisClientTemplate.hset(sign, "confirmCode",key);
 	}
 
 	public String getStatus(String sign) {

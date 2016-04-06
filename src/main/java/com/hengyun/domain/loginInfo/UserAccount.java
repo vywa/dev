@@ -7,11 +7,6 @@ import java.io.Serializable;
  * */
 public class UserAccount implements Serializable{
 
-
-	/**
-	 * 
-	 */
-
 	private int id;																			//用户ID
 	private String 							catagory; 								//用户类型（系统管理员=1,用户管理员，医生2，病人3，游客）
 	private String 							username;							//用户名

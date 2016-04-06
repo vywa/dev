@@ -29,7 +29,6 @@ import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
-
 import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
 import com.hengyun.util.mail.SimpleMail;
@@ -191,6 +190,20 @@ public class UserAccountController {
 		
 		String mobilephone = jsonObject.getString("mobilephone");
 		RegisterResult registResult = new RegisterResult();
+		int count =0;
+		try {
+			count = registerCacheService.getTryCount(mobilephone);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			registerCacheService.loadRegisterCache(mobilephone);
+		}
+		if(count>5){
+			registResult.setCode("106");
+			registResult.setMessage("发送次数过多");
+			return JSON.toJSONString(registResult);
+		} else {
+			registerCacheService.addTryCount(mobilephone);
+		}
 		//查询改手机号是否注册
 		int responseCode = sms(mobilephone);
 		if(responseCode==-2){
@@ -247,7 +260,7 @@ public class UserAccountController {
 			registResult.setCode("205");
 			registResult.setMessage(String.valueOf(id));
 			
-		} else {
+		} else {	
 			
 			registResult.setCode("107");
 			registResult.setMessage("test code error");
@@ -263,7 +276,7 @@ public class UserAccountController {
 	 * 邮箱发送验证码
 	 * 
 	 * */
-	@RequestMapping("/mailSend")
+	@RequestMapping(value="/mailSend",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String mailSend(@RequestParam String data){
 		
@@ -272,6 +285,20 @@ public class UserAccountController {
 		String email = jsonObject.getString("email");
 		RegisterResult registResult = new RegisterResult();
 		//查询改邮箱是否注册
+		int count =0;
+		try {
+			count = registerCacheService.getTryCount(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			registerCacheService.loadRegisterCache(email);
+		}
+		if(count>5){
+			registResult.setCode("106");
+			registResult.setMessage("发送次数过多");
+			return JSON.toJSONString(registResult);
+		} else {
+			registerCacheService.addTryCount(email);
+		}
 		int responseCode =email( email);
 		if(responseCode == -2){
 			log.debug("邮箱"+email+"已经注册");
@@ -422,8 +449,19 @@ public class UserAccountController {
 			registResult.setCode("103");
 			registResult.setMessage("用户未注册,不能修改密码");
 		} else {
-			if(!registerCacheService.existBySign(mobilephone)){
+			int count =0;
+			try {
+				count = registerCacheService.getTryCount(mobilephone);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				registerCacheService.loadRegisterCache(mobilephone);
+			}
+			if(count>5){
+				registResult.setCode("106");
+				registResult.setMessage("发送次数过多");
+				return JSON.toJSONString(registResult);
+			} else {
+				registerCacheService.addTryCount(mobilephone);
 			}
 			
 			int codeNum = (int)(Math.random()*10000);
@@ -469,7 +507,21 @@ public class UserAccountController {
 			registResult.setCode("103");
 			registResult.setMessage("user not exist");
 		} else {
-		
+			int count =0;
+			try {
+				count = registerCacheService.getTryCount(email);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				registerCacheService.loadRegisterCache(email);
+			}
+			if(count>5){
+				registResult.setCode("106");
+				registResult.setMessage("发送次数过多");
+				return JSON.toJSONString(registResult);
+			} else {
+				registerCacheService.addTryCount(email);
+			}
+			
 			int codeNum = (int)(Math.random()*10000);
 				codeNum = codeNum>1000?codeNum:codeNum+1000;
 				registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
@@ -607,6 +659,105 @@ public class UserAccountController {
     }
     
     /*
+     *  用户修改信息确认
+     *  
+     * */
+    @ResponseBody  
+    @RequestMapping(value="/selfSend",produces = "text/html;charset=UTF-8") 
+    public  String  selfSend(@RequestParam String data,HttpServletRequest request){
+    	
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	
+    	String type = jsonObject.getString("type");
+		String username = jsonObject.getString("username");
+
+    	ResponseCode response = new ResponseCode();
+  
+    	int userId = (int)request.getAttribute("userId");
+    	//用户在线
+		int count =0;
+		try {
+			count = registerCacheService.getTryCount(username);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			registerCacheService.loadRegisterCache(username);
+		}
+		if(count>5){
+			response.setCode("106");
+			response.setMessage("发送次数过多");
+			return JSON.toJSONString(response);
+		} else {
+			registerCacheService.addTryCount(username);
+		}
+    		if(type.equals("email")){						//修改邮箱
+    					int codeNum = (int)(Math.random()*10000);
+    					codeNum = codeNum>1000?codeNum:codeNum+1000;
+    					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
+    				
+    					String subject = "天衡会员确认邮件";
+    					String content = "您本次验证码是"+codeNum+"如果非本人操作，请忽略。";
+    					String to = username;
+    					simpleMail.sendMail( subject,  content,  to);
+    					response.setCode("205");
+    		    		response.setMessage("验证码发送成功 ");
+    			
+    			
+    		} else if(type.equals("mobilephone")){			//修改手机号
+    			
+    			
+					int codeNum = (int) (Math.random() * 10000);
+					codeNum = codeNum > 1000 ? codeNum : codeNum + 1000;
+					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
+
+					SubmitResult result;
+					SmsSender sms = new SmsSender(username, codeNum);
+					result = sms.send();
+					if (result != null) {
+						if (result.getCode() == 2) {
+							log.info("发送给手机 " + username + "的短信发送成功");
+						}
+					}
+					response.setCode("205");
+		    		response.setMessage("验证码发送成功 ");
+				
+    		}
+
+		return JSON.toJSONString(response);
+       
+    }
+    
+    /*
+     *  解绑信息
+     *  
+     * */
+    @ResponseBody  
+    @RequestMapping(value="/unbind",produces = "text/html;charset=UTF-8") 
+    public  String  unbind(@RequestParam String data,HttpServletRequest request){
+    	int userId = (int)request.getAttribute("userId");
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+
+    	ResponseCode response = new ResponseCode();
+    	String type = jsonObject.getString("type");
+		String username = jsonObject.getString("username");
+    	String  confirmCode = jsonObject.getString("code");
+  	  if(!registerCacheService.getConfirmCode(username).equals(confirmCode)){
+			response.setCode("107");
+			response.setMessage("验证码错误");
+			
+		}else {
+			int status = userAccountService.change(type, null, userId);
+			response.setCode("205");
+			response.setMessage("解绑成功");
+		}
+	
+	
+		return JSON.toJSONString(response);
+       
+    }
+    
+    
+    
+    /*
      *  验证更改绑定合法
      *  
      * */
@@ -619,12 +770,26 @@ public class UserAccountController {
     	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 	
-    	String tocken = request.getParameter("tocken");
+    	//String tocken = request.getParameter("tocken");
     	ResponseCode response = new ResponseCode();
-    	int userId = loginInfoService.isOnline(tocken);
+    	//int userId = loginInfoService.isOnline(tocken);
+    	int userId = (int)request.getAttribute("userId");
     	int  user = 0;
     	//用户在线
-    	if(userId>0){
+    	int count =0;
+		try {
+			count = registerCacheService.getTryCount(username);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			registerCacheService.loadRegisterCache(username);
+		}
+		if(count>5){
+			response.setCode("106");
+			response.setMessage("发送次数过多");
+			return JSON.toJSONString(response);
+		} else {
+			registerCacheService.addTryCount(username);
+		}
     		if(type.equals("email")){						//修改邮箱
     			  user = userAccountService.existUser(username,"email");
     			  if(user>0){
@@ -632,6 +797,7 @@ public class UserAccountController {
     		    		response.setMessage("修改邮箱已经使用，请使用为使用邮箱 ");
     		    		return JSON.toJSONString(response);
     			  } else {
+    				
     					int codeNum = (int)(Math.random()*10000);
     					codeNum = codeNum>1000?codeNum:codeNum+1000;
     					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
@@ -651,6 +817,7 @@ public class UserAccountController {
   		    		response.setMessage("手机号已经使用，请使用为使用手机号");
   		    		return JSON.toJSONString(response);
 				} else {
+					
 					int codeNum = (int) (Math.random() * 10000);
 					codeNum = codeNum > 1000 ? codeNum : codeNum + 1000;
 					registerCacheService.setConfirmCode(username, String.valueOf(codeNum));
@@ -667,10 +834,7 @@ public class UserAccountController {
 		    		response.setMessage("验证码发送成功 ");
 				}
     		}
-    	} else {
-    		response.setCode("116");
-    		response.setMessage("用户没有登陆，不能修改绑定信息 ");
-    	}
+    	
 	
 	
 		return JSON.toJSONString(response);
@@ -719,16 +883,16 @@ public class UserAccountController {
 		String username = jsonObject.getString("username");
 		String confirmCode = jsonObject.getString("code");
 		
-    	String tocken = request.getParameter("tocken");
+    //	String tocken = request.getParameter("tocken");
     	ResponseCode response = new ResponseCode();
+    	int userId = (int)request.getAttribute("userId");
     	
-    	int userId = loginInfoService.isOnline(tocken);
-    	if(userId>0){
-
+    	//int userId = loginInfoService.isOnline(tocken);
+    	
 			if(type.equals("email")){			//更改邮箱
 				if(userAccountService.existUser(username,"email")>0){
 					  response.setCode("103");
-	  		    		response.setMessage("邮箱已经使用，请使用为使用邮箱");
+	  		    	response.setMessage("邮箱已经使用，请使用为使用邮箱");
 					return JSON.toJSONString(response);
 				}
 		
@@ -747,7 +911,7 @@ public class UserAccountController {
 				if(!registerCacheService.getConfirmCode(username).equals(confirmCode)){		
 					
 					response.setCode("107");
-					response.setMessage("test code error");
+					response.setMessage("验证码错误");
 					return JSON.toJSONString(response);
 				}
 				}
@@ -762,11 +926,8 @@ public class UserAccountController {
 			
     		int status = userAccountService.change(type, username, userId);
     		response.setCode("206");
-    		response.setMessage("edit success ");
-    	} else {
-    		response.setCode("116");
-    		response.setMessage("unlogin ");
-    	}
+    		response.setMessage("更新成功 ");
+    	
 	
 		return JSON.toJSONString(response);
        

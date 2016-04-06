@@ -1,5 +1,6 @@
 package com.hengyun.controller.patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hengyun.domain.information.Information;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
 import com.hengyun.domain.patient.PressureResponse;
@@ -76,8 +76,9 @@ public class BloodPressureInfoController {
 	
 		PressureResponse response = new PressureResponse();
 		int userId = (int)request.getAttribute("userId");
-		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getlatestTime(userId);
-
+		BloodPressureInfo bpi =  bloodPressureInfoService.getlatestRecord(userId);
+		List<BloodPressureInfo> bloodList =new ArrayList<BloodPressureInfo>();
+		bloodList.add(bpi);
 		response.setCode("211");
 		response.setBloodPressureInfo(bloodList);
 		

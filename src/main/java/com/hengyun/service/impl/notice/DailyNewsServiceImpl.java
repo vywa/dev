@@ -1,9 +1,14 @@
 package com.hengyun.service.impl.notice;
 
+import java.util.Date;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.notice.DailyNewsDao;
@@ -31,6 +36,7 @@ public class DailyNewsServiceImpl extends BaseServiceImpl<DailyNews, Integer> im
 		// TODO Auto-generated method stub
 		int id = indexCollectionDao.updateIndex("newsId");
 		dn.setId(id);
+		dn.setPublishTime(new Date());
 		dailyNewsDao.save(dn);
 	}
 
@@ -39,6 +45,19 @@ public class DailyNewsServiceImpl extends BaseServiceImpl<DailyNews, Integer> im
 		// TODO Auto-generated method stub
 		DailyNews dn = dailyNewsDao.queryById(id);
 		return dn;
+	}
+
+	/*
+	 * 
+	 *  查询资讯列表
+	 * 
+	 * */
+	@Override
+	public List<DailyNews> queryList() {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("id").exists(true));
+		List<DailyNews> list = dailyNewsDao.queryList(query);
+		return list;
 	}
 
 }

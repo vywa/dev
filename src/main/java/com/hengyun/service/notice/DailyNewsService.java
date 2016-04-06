@@ -1,5 +1,7 @@
 package com.hengyun.service.notice;
 
+import java.util.List;
+
 import com.hengyun.domain.notice.DailyNews;
 import com.hengyun.service.BaseService;
 
@@ -23,4 +25,11 @@ public interface DailyNewsService extends BaseService<DailyNews,Integer>{
 	 * 
 	 * */
 	public DailyNews query(int id);
+	
+	/*
+	 * 
+	 *  查询资讯列表
+	 * 
+	 * */
+	public List<DailyNews> queryList();
 }

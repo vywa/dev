@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.forum.PostListResponseCode;
+import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.notice.DailyNews;
 import com.hengyun.domain.notice.DailyNewsResponse;
 import com.hengyun.service.notice.DailyNewsService;
@@ -34,8 +36,14 @@ public class DailyNewsController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addNotice(@RequestParam String data,HttpServletRequest request){
-		
-		return null;
+		JSONObject jsonObject =JSON.parseObject(data);
+		DailyNews dailyNews = JSON.toJavaObject(jsonObject, DailyNews.class);
+		dailyNewsService.add(dailyNews);
+		DailyNewsResponse response = new DailyNewsResponse();
+		response.setCode("206");
+		response.setMessage("添加咨询成功");
+
+		return JSON.toJSONString(response);
 	}
 	
 	/*
@@ -60,4 +68,23 @@ public class DailyNewsController {
 	}
 	
 
+		/*
+		 * 
+		 *  加载咨讯列表
+		 * 
+		 * */
+		@RequestMapping(value="/queryList",produces = "text/html;charset=UTF-8")
+		@ResponseBody
+		public String queryList(HttpServletRequest request){
+			List<DailyNews> list = dailyNewsService.queryList();
+			DailyNewsResponse response = new DailyNewsResponse();
+			response.setCode("206");
+			response.setMessage("查询成功");
+			response.setDaily(list);
+			return  JSON.toJSONString(response);
+		
+		
+		}
+		
+	
 }

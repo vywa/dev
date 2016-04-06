@@ -68,7 +68,7 @@
                               <value>/account/smsReceive</value>
                                 <value>/account/smsSend</value>
                                  <value>/account/findPassword</value>
-                                 <value>/account/findPassword</value>
+                              
                                    <value>/multiMedia/download</value>
                     </list>
                 </property>
@@ -107,7 +107,7 @@
 		                              <value>/account/smsReceive</value>
 		                                <value>/account/smsSend</value>
 		                                 <value>/account/findPassword</value>
-		                                 <value>/account/findPassword</value>
+		                               
 		                               <value>/multiMedia/download</value>
 		                    </list>
 		                </property>

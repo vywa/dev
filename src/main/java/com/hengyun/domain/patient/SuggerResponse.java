@@ -10,8 +10,6 @@ public class SuggerResponse implements Serializable{
 	private String code;
 	
 	
-	
-	
 	public List<BloodSuggerInfo> getBloodSuggerInfo() {
 		return bloodSuggerInfo;
 	}

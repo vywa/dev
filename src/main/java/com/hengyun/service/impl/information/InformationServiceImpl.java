@@ -94,7 +94,9 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 					// TODO Auto-generated catch block
 					 date2=new Date();
 				}
-				int	age = new Date().getYear()-date2.getYear();
+				
+			int	age = new Date().getYear()-date2.getYear();
+			
 			Update update = Update.update("address",information.getAddress()).set("height", information.getHeight()).
 					set("weight", information.getWeight()).set("sex",information.getSex()).
 					set("birthday", information.getBirthday()).set("age",age).

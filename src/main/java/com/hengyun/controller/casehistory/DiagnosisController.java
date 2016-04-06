@@ -29,10 +29,11 @@ import com.hengyun.domain.casehistory.Diagnosis.DangerLevel;
 import com.hengyun.domain.casehistory.RiskFactor;
 import com.hengyun.domain.casehistory.TargetOrganDamage;
 import com.hengyun.domain.casehistory.response.CaseHistoryResponse;
-import com.hengyun.domain.casehistory.response.DiagnosisResponse;
+import com.hengyun.domain.casehistory.response.CaseHistoryResponseCode;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.notice.MedicalNotice;
 import com.hengyun.domain.notice.Notice.noticeType;
+import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.service.casehistory.AffiliatedClinicalDiseaseService;
 import com.hengyun.service.casehistory.CaseHistoryService;
 import com.hengyun.service.casehistory.DiagnosisService;
@@ -142,6 +143,7 @@ public class DiagnosisController {
 		CaseHistory caseHistory = new CaseHistory();
 		caseHistory.setPatientId(userId);
 		caseHistory.setDocterId(doctorId);
+		caseHistory.setDiagnosisTime(new Date());
 		//生成病历
 		int caseId = caseHistoryService.addCaseHistory(caseHistory);
 		Query query = Query.query(Criteria.where("caseHistoryId").is(caseId));
@@ -224,9 +226,25 @@ public class DiagnosisController {
 	  * */
 	@RequestMapping(value="/result",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String result(HttpServletRequest request,@RequestParam String data){
-		JSONObject jsonObject = JSON.parseObject(data);
-		int caseHistoryId = jsonObject.getIntValue("caseHistoryId");
+	public String result(HttpServletRequest request){
+	
+		int patientId =(int) request.getAttribute("userId");
+		CaseHistoryResponseCode response = new CaseHistoryResponseCode();
+		//获取病人最近时间的病历
+		int caseHistoryId = caseHistoryService.getPatientLatest(patientId);
+		log.info("用户最近一次的病历号为 "+caseHistoryId);
+		if(caseHistoryId<0){
+			//查询用户是否有上传血压
+			List<BloodPressureInfo> list = bloodPressureInfoService.getlatestTime(patientId);
+			if(list == null){
+				response.setCode("111");
+				response.setMessage("用户没有录入血糖和血压");
+				return  JSON.toJSONString(response);
+			}
+			response.setCode("112");
+			response.setMessage("用户没有录入健康因素");
+			return  JSON.toJSONString(response);
+		}
 		Query query = new Query();
 		query.addCriteria(Criteria.where("caseHistoryId").is(caseHistoryId));
 		CaseHistory caseHistory = caseHistoryService.query(caseHistoryId);
@@ -234,11 +252,13 @@ public class DiagnosisController {
 		int doctor = caseHistory.getDocterId();
 		String diagContent="未知" ;
 		DangerLevel dangerLevel = diagnosisService.assess(caseHistoryId);
+		log.info("用户最近一次的病历号为 "+dangerLevel);
+		
 		switch(dangerLevel){
+		case not_danger: diagContent="正常";break;
 		case little_danger: diagContent="低危";break;
 		case moderate_danger: diagContent="中危";
 		case more_danger: diagContent="高危";
-		
 		case most_danger: diagContent="极高危";
 		//向医生发送危险通知
 				MedicalNotice mn = new MedicalNotice();
@@ -263,12 +283,14 @@ public class DiagnosisController {
 		Update update = Update.update("diagnosis", diagnosis);
 		caseHistoryService.updateFirst(query, update);
 		log.info("添加一条病历");
-	
-	
-		DiagnosisResponse response = new DiagnosisResponse();
+		
+		//查询病历
+		CaseHistory caseHistory2 = caseHistoryService.query(caseHistoryId);
+		
+		
 		response.setCode("206");
 		response.setMessage("查询诊断结果成功");
-		response.setDiagnosis(diagnosis);
+		response.setCaseHistory(caseHistory2);
 		 return JSON.toJSONString(response);
 	}
 	

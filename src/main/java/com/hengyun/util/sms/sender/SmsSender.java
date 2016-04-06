@@ -22,7 +22,7 @@ public class SmsSender {
 
 	
 	private final String account = "cf_171274409";
-	private final String password="123456";
+	private final String password="Hy_bob_2016";
 	private String mobile;
 	private int num;
 	private String content;

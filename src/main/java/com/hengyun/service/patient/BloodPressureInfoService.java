@@ -42,6 +42,13 @@ public interface BloodPressureInfoService extends BaseService<BloodPressureInfo,
 	
 	/*
 	 * 
+	 * 	获取最近一条数据
+	 * 
+	 * */
+	public BloodPressureInfo getlatestRecord(int userId) ;
+	
+	/*
+	 * 
 	 *  	查询用户最近某个时间单位(天，日，月)的血压记录
 	 *  
 	 * */

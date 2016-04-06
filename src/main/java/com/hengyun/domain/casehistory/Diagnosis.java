@@ -46,6 +46,7 @@ public class Diagnosis implements Serializable{
 	}
 	
 	public enum DangerLevel {
+		not_danger,
 		little_danger,
 		moderate_danger,
 		more_danger,

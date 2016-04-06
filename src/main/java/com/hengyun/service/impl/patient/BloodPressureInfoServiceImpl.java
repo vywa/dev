@@ -217,6 +217,20 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		return temp;
 	}
 
+	/*
+	 *  获得最近一条数据
+	 * */
+	@Override
+	public BloodPressureInfo getlatestRecord(int userId) {
+		// TODO Auto-generated method stub
+		Query query = new Query();
+		Criteria criteria = Criteria.where("userId").is(userId);
+		 
+        query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
+		return info;
+	}
+
 
 	
 

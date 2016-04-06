@@ -14,14 +14,17 @@ public class Subject implements Serializable {
 	private int authorId;							//作者id
 	private String author;						//作者
 	private String title;								//标题
+			
 	private int replyNum;						//回复数
+	private int viewCount;						//浏览数
 	private int subjectId;						//帖子
-	private boolean isLiked;					//是否被我赞过
-	private boolean isCollection;		//是否被我收藏过
+	private boolean liked;					//是否被我赞过
+	private boolean collection;		//是否被我收藏过
 	private String fileUrl;							//附件url
 	private int likeCount;						//被多少人赞过
+	private List<Integer> likePersons = new ArrayList<Integer>();	//点赞人id
 	private long publishTime;				//发帖时间
-	private int subjectType;					//帖子类型
+	private int subjectType;					//帖子类型	(删除-1，精华１，我的问题２，收藏３)
 	private String locInfo;							//具体的定位信息
 	private String videoUrl;						//视频地址
 	private String soundUrl;					//声音地址
@@ -29,6 +32,33 @@ public class Subject implements Serializable {
 	private double lng;							//定位的经度
 	private double lat;							//定位的纬度
 	
+	
+	
+
+	public boolean isLiked() {
+		return liked;
+	}
+	public void setLiked(boolean liked) {
+		this.liked = liked;
+	}
+	public boolean isCollection() {
+		return collection;
+	}
+	public void setCollection(boolean collection) {
+		this.collection = collection;
+	}
+	public List<Integer> getLikePersons() {
+		return likePersons;
+	}
+	public void setLikePersons(List<Integer> likePersons) {
+		this.likePersons = likePersons;
+	}
+	public int getViewCount() {
+		return viewCount;
+	}
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 	private List<Integer> available = new ArrayList<Integer>();				//可以看的朋友列表
 
 	
@@ -98,18 +128,7 @@ public class Subject implements Serializable {
 	public void setReplyNum(int replyNum) {
 		this.replyNum = replyNum;
 	}
-	public boolean isLiked() {
-		return isLiked;
-	}
-	public void setLiked(boolean isLiked) {
-		this.isLiked = isLiked;
-	}
-	public boolean isCollection() {
-		return isCollection;
-	}
-	public void setCollection(boolean isCollection) {
-		this.isCollection = isCollection;
-	}
+
 	public String getFileUrl() {
 		return fileUrl;
 	}

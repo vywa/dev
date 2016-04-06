@@ -10,7 +10,6 @@ public class PressureResponse implements Serializable{
 	private String code;
 	
 	
-
 	public List<BloodPressureInfo> getBloodPressureInfo() {
 		return bloodPressureInfo;
 	}

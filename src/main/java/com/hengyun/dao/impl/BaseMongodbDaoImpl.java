@@ -10,8 +10,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.alibaba.fastjson.JSON;
 import com.hengyun.dao.BaseMongodbDao;
 import com.mongodb.BasicDBObject;
+import com.mongodb.Bytes;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
@@ -125,6 +127,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     @SuppressWarnings("unchecked")
 	public T queryField(BasicDBObject condition,BasicDBObject keys){
     	DBObject object = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).findOne(condition, keys);
+    	
     	return (T)object;
     }
   
@@ -132,7 +135,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     @SuppressWarnings("unchecked")
 	public List<T>  queryFieldList(BasicDBObject condition,BasicDBObject keys){
     	List<T> list = new ArrayList<T>();
-    	DBCursor cur = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).find(condition, keys);
+    	DBCursor cur = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).find(condition, keys).addOption(Bytes.QUERYOPTION_NOTIMEOUT);
     	while(cur.hasNext()){
     		
     		list.add((T)cur.next());

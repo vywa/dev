@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -30,6 +32,7 @@ import com.hengyun.service.logininfo.UserAccountService;
 
 public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> implements SubjectService{
 
+	private static final Logger log = LoggerFactory.getLogger(SubjectServiceImpl.class);
 	@Resource
 	private SubjectDao subjectDao;
 	
@@ -163,14 +166,14 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	public List<Subject> showList( int userId,int subjectId,int subjectType ,int freshenType) {
 		// TODO Auto-generated method stub
 			List<Subject> forumPost=null;
-		
+
 			//按照帖子id升序排列
 			Query query = new Query();
-			Criteria criteria =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").gt(subjectId));
+			Criteria criteria =Criteria.where("subjectType").exists(true).andOperator(Criteria.where("subjectId").gt(subjectId));
 			  query.addCriteria(criteria).with(new Sort(Direction.ASC, "subjectId"));
 			  //按照帖子id降序排列
 				Query query2 = new Query();
-				Criteria criteria2 =Criteria.where("subjectType").is(subjectType).andOperator(Criteria.where("subjectId").lt(subjectId));
+				Criteria criteria2 =Criteria.where("subjectType").exists(true).andOperator(Criteria.where("subjectId").lt(subjectId));
 				 query2.addCriteria(criteria2).with(new Sort(Direction.DESC, "subjectId"));
 				  
 			if(freshenType== -1){
@@ -255,6 +258,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 
 	/*
+	 * 
 	 *  显示某个好友的帖子列表
 	 * 
 	 * */
@@ -294,6 +298,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 	}
 	
 	/*
+	 * 
 	 *  显示某个帖子详细信息
 	 * 
 	 * */
@@ -314,6 +319,117 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("authorId").is(userId));
 		List<Subject> forumPost = subjectDao.queryList(query);
+		return forumPost;
+	}
+	
+	/*
+	 *  查询次数
+	 * */
+	
+	public void addViewCount() {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("subjectId").exists(true));
+		//List<Subject> forumPost = subjectDao.queryList(query);
+		Update update = new Update();
+		update.inc("viewCount", 1);
+		subjectDao.updateMulti(query, update);
+
+	}
+
+	/*
+	 *  点赞次数
+	 * */
+	@Override
+	public int like(int userId, int subjectId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("subjectId").is(subjectId));
+		Subject subject = subjectDao.queryOne(query);
+		List<Integer> list = subject.getLikePersons();
+		int likeCount= subject.getLikeCount();
+		log.info(" 帖子id "+subjectId+"作者id "+userId+"点赞次数 "+likeCount+"帖子作者 "+subject.getAuthorId());
+		if(list==null){
+			list = new ArrayList<Integer>();
+			list.add(userId);
+			
+			if(userId==subject.getAuthorId()){
+				Update  update = Update.update("likePersons", list).set("Liked", true).inc("likeCount", 1);
+				subjectDao.updateFirst(query, update);
+			} else {
+				Update update = Update.update("likePersons", list).inc("likeCount", 1);
+				subjectDao.updateFirst(query, update);
+			}
+			
+			return 1;
+		} 
+		
+		if(list.contains(userId)){
+			if(userId==subject.getAuthorId()){
+				if(!subject.isLiked()){
+					Update update = Update.update("liked", true);
+					subjectDao.updateFirst(query, update);
+				}
+			}
+			
+			return -1;
+		} else {
+			list.add(userId);
+			Update update = Update.update("likePersons", list).inc("likeCount",1).set("liked", true);
+			subjectDao.updateFirst(query, update);
+			return 1;
+		}
+	}
+
+	/*
+	 *  加精华帖子
+	 * */
+	@Override
+	public int perfect(int subjectId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("subjectId").is(subjectId));
+		Update update = Update.update("subjectType", 1);
+		subjectDao.updateFirst(query, update);
+		return 0;
+	}
+
+	/*
+	 *  查询精华帖子列表
+	 * */
+	@Override
+	public List<Subject>  perfectList(int subjectId,int freshenType){
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("subjectType").is(1).andOperator(Criteria.where("subjectId").gt(subjectId))).with(new Sort(Direction.ASC, "subjectId"));
+		Query query2 = Query.query(Criteria.where("subjectType").is(1).andOperator(Criteria.where("subjectId").lt(subjectId))).with(new Sort(Direction.DESC, "subjectId"));
+		List<Subject> forumPost = null;
+			  
+		if(freshenType== -1){
+		
+			forumPost = subjectDao.getPage(query, 0, 10);
+		}
+		else if(freshenType==1){
+			
+			 forumPost = subjectDao.getPage(query2, 0, 10);
+		}
+		return forumPost;
+	}
+
+	/*
+	 *  查询我的帖子列表
+	 * */
+	@Override
+	public List<Subject>  selfSubject(int userId,int subjectId,int freshenType){
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("authorId").is(userId).andOperator(Criteria.where("subjectId").gt(subjectId))).with(new Sort(Direction.ASC, "subjectId"));
+		Query query2 = Query.query(Criteria.where("authorId").is(userId).andOperator(Criteria.where("subjectId").lt(subjectId))).with(new Sort(Direction.DESC, "subjectId"));
+		List<Subject> forumPost = null;
+			  
+		if(freshenType== -1){
+		
+			forumPost = subjectDao.getPage(query, 0, 10);
+		}
+		else if(freshenType==1){
+			
+			 forumPost = subjectDao.getPage(query2, 0, 10);
+		}
 		return forumPost;
 	}
 

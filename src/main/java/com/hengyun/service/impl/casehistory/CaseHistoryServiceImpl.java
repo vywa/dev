@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -74,7 +76,25 @@ public class CaseHistoryServiceImpl extends BaseServiceImpl<CaseHistory,Integer>
 	}
 
 
-	
-	
+
+	/*
+	 * 
+	 *  获取病人最后一次病历
+	 * 
+	 * */
+	@Override
+	public int  getPatientLatest(int patientId) {
+		// TODO Auto-generated method stub
+		Query  query = new Query();
+	     Criteria criteria = Criteria.where("patientId").is(patientId);
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+	      CaseHistory caseHistory = caseHistoryDao.queryOne(query);
+	      if(caseHistory!=null){
+	    	  return caseHistory.getCaseHistoryId();
+	      } else {
+	    	  return -1;
+	      }
+		
+	}
 
 }

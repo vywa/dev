@@ -43,4 +43,28 @@ public interface SubjectService  extends BaseService<Subject,Integer> {
 	 * */
 	public Subject subjectDetail(int subjectId) ;
 	
+	/*
+	 *  添加浏览数
+	 * */
+	public void addViewCount() ;
+	
+	/*
+	 *  点赞次数
+	 * */
+	public int like(int userId,int subjectId);
+	
+	/*
+	 *  加精
+	 * */
+	public int perfect(int subjectId);
+	
+	/*
+	 *  查询精华帖子
+	 * */
+	public List<Subject>  perfectList(int subjectId,int freshenType);
+	
+	/*
+	 *  查询我的帖子
+	 * */
+	public List<Subject>  selfSubject(int userId,int subjectId,int freshenType);
 }

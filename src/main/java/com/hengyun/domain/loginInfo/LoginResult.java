@@ -24,7 +24,18 @@ public class LoginResult extends BaseResponseCode implements Serializable{
 	
 	private boolean changePassword;	//医生需要修改密码
 	
+	private boolean questionaire;			//是否评估过
 	
+	
+	
+	public boolean isQuestionaire() {
+		return questionaire;
+	}
+
+	public void setQuestionaire(boolean questionaire) {
+		this.questionaire = questionaire;
+	}
+
 	public DoctorInfo getDoctorInfo() {
 		return doctorInfo;
 	}

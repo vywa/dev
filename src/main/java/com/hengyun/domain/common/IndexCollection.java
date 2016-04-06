@@ -9,7 +9,7 @@ public class IndexCollection implements Serializable{
 
 	private int docterID;									//初始值100000000
 	private int patientID;								//初始值200000000
-
+	
 	private int reTreateInfoID;						//回访表
 	private int adminID;									//管理员０
 	
@@ -53,6 +53,7 @@ public class IndexCollection implements Serializable{
 	 * */
 	private int collectionId;							//收藏id
 	private int newsId;									//资讯id
+	
 	
 	
 	

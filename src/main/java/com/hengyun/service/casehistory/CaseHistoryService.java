@@ -19,6 +19,7 @@ public interface CaseHistoryService  extends BaseService<CaseHistory,Integer> {
 	//根据病历查找医生id
 	public int getDoctorId(int caseHistoryId);
 	
-	
+	//获取病人最近一次病历id
+	public int getPatientLatest(int patientId);
 	
 }

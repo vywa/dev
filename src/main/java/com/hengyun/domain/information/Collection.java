@@ -1,7 +1,7 @@
 package com.hengyun.domain.information;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -10,53 +10,38 @@ import java.util.Date;
 */
 public class Collection implements Serializable{
 
-	private int id;									//收藏id
-	private int userId;							//用户id
+	private int 										userId;					//用户id
 	
-
-	private String url;						//资源url
-	
-	
-	private Date collectionTime;		//收藏时间
-
-
-	public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
+	private List<DailyNewsCollection> 						subjectList;			//帖子收藏
+	private List<DailyNewsCollection> 						dailyNewsList;		//每日资讯
+	private List<DailyNewsCollection> 						imCollection;			//及时通信内容
 	public int getUserId() {
 		return userId;
 	}
-
-
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-
-
-	public String getUrl() {
-		return url;
+	public List<DailyNewsCollection> getSubjectList() {
+		return subjectList;
 	}
-
-
-	public void setUrl(String url) {
-		this.url = url;
+	public void setSubjectList(List<DailyNewsCollection> subjectList) {
+		this.subjectList = subjectList;
 	}
-
-
-	public Date getCollectionTime() {
-		return collectionTime;
+	public List<DailyNewsCollection> getDailyNewsList() {
+		return dailyNewsList;
 	}
-
-
-	public void setCollectionTime(Date collectionTime) {
-		this.collectionTime = collectionTime;
+	public void setDailyNewsList(List<DailyNewsCollection> dailyNewsList) {
+		this.dailyNewsList = dailyNewsList;
 	}
+	public List<DailyNewsCollection> getImCollection() {
+		return imCollection;
+	}
+	public void setImCollection(List<DailyNewsCollection> imCollection) {
+		this.imCollection = imCollection;
+	}
+	
+	
+
+	
 
 }

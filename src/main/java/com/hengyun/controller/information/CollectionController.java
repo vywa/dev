@@ -17,6 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.Collection;
 import com.hengyun.domain.information.CollectionResponse;
+import com.hengyun.domain.information.DailyNewsCollection;
 import com.hengyun.service.information.CollectionService;
 
 /**
@@ -35,19 +36,57 @@ public class CollectionController {
 	private CollectionService collectionService;
 	
 	/*
-	 *  收藏
+	 *  收藏帖子
 	 * */
-	@RequestMapping("add")
+	@RequestMapping("subject")
 	@ResponseBody
-	public String add(@RequestParam String data,HttpServletRequest request){
+	public String subject(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		Collection collection = JSON.toJavaObject(jsonObject, Collection.class);
+		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
-		collection.setUserId(userId);
-		collectionService.addCollection(collection);
+		
+		collectionService.addCollection(collection, userId, 0);
 		response.setCode("206");
-		response.setMessage("收藏成功");
+		response.setMessage("收藏帖子成功");
+
+		return JSON.toJSONString(response);
+		
+	}
+	
+	/*
+	 *  收藏资讯
+	 * */
+	@RequestMapping("dailyNews")
+	@ResponseBody
+	public String dailyNews(@RequestParam String data,HttpServletRequest request){
+		ResponseCode response = new ResponseCode();
+		JSONObject jsonObject =JSON.parseObject(data);
+		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
+		int userId = (int)request.getAttribute("userId");
+		
+		collectionService.addCollection(collection, userId,1);
+		response.setCode("206");
+		response.setMessage("收藏资讯成功");
+
+		return JSON.toJSONString(response);
+		
+	}
+	
+	/*
+	 *  收藏及时通信内容
+	 * */
+	@RequestMapping("im")
+	@ResponseBody
+	public String im(@RequestParam String data,HttpServletRequest request){
+		ResponseCode response = new ResponseCode();
+		JSONObject jsonObject =JSON.parseObject(data);
+		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
+		int userId = (int)request.getAttribute("userId");
+	
+		collectionService.addCollection(collection, userId, 2);
+		response.setCode("206");
+		response.setMessage("收藏及时通信内容成功");
 
 		return JSON.toJSONString(response);
 		
@@ -62,31 +101,70 @@ public class CollectionController {
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
-		List<Collection> list = collectionService.show(userId);
+		Collection list = collectionService.show(userId);
 		response.setCode("206");
 		response.setMessage("查询成功");
-		response.setCollectionList(list);
+		response.setCollection(list);
 
 		return JSON.toJSONString(response);
 		
 	}
 	
 	/*
-	 *  删除收藏列表
+	 *  删除帖子列表
 	 * */
-	@RequestMapping("delete")
+	@RequestMapping("dsubject")
 	@ResponseBody
-	public String delete(@RequestParam String data,HttpServletRequest request){
+	public String dsubject(@RequestParam String data,HttpServletRequest request){
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
 		int id = jsonObject.getIntValue("id");
-		collectionService.delete(id);
+		collectionService.delete(userId, userId, 0);
 		response.setCode("206");
-		response.setMessage("删除成功");
+		response.setMessage("删除帖子成功");
 
 		return JSON.toJSONString(response);
 		
 	}
+	
+	/*
+	 *  删除资讯列表
+	 * */
+	@RequestMapping("ddailyNews")
+	@ResponseBody
+	public String ddailyNews(@RequestParam String data,HttpServletRequest request){
+	
+		CollectionResponse response = new CollectionResponse();
+		int userId =(int)request.getAttribute("userId");
+		JSONObject jsonObject =JSON.parseObject(data);
+		int id = jsonObject.getIntValue("id");
+		collectionService.delete(userId, id, 1);
+		response.setCode("206");
+		response.setMessage("删除资讯成功");
+
+		return JSON.toJSONString(response);
+		
+	}
+	
+	/*
+	 *  删除及时通信列表
+	 * */
+	@RequestMapping("dim")
+	@ResponseBody
+	public String dim(@RequestParam String data,HttpServletRequest request){
+	
+		CollectionResponse response = new CollectionResponse();
+		int userId =(int)request.getAttribute("userId");
+		JSONObject jsonObject =JSON.parseObject(data);
+		int id = jsonObject.getIntValue("id");
+		collectionService.delete(userId, id, 2);
+		response.setCode("206");
+		response.setMessage("删除及时通信成功");
+
+		return JSON.toJSONString(response);
+		
+	}
+	
 }

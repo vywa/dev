@@ -1,6 +1,7 @@
 package com.hengyun.domain.notice;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,17 +14,16 @@ public class DailyNews implements Serializable{
 	private int id;																		//咨讯id
 	private String imageUrl;													//图片url
 	private String content;														//内容快照
-	private String url;																//内容url
-	private List<String> imagesUrl;										//图片url
+	private Date publishTime;
+
 	
 	
-	
-	public List<String> getImagesUrl() {
-		return imagesUrl;
+	public Date getPublishTime() {
+		return publishTime;
 	}
 
-	public void setImagesUrl(List<String> imagesUrl) {
-		this.imagesUrl = imagesUrl;
+	public void setPublishTime(Date publishTime) {
+		this.publishTime = publishTime;
 	}
 
 	public int getId() {
@@ -50,13 +50,7 @@ public class DailyNews implements Serializable{
 		this.content = content;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	
 	
 	
 }
