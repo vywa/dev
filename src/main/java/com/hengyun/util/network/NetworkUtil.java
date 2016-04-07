@@ -30,6 +30,7 @@ public class NetworkUtil {
 	                if (ni.isLoopback() ) {
 	                    continue;
 	                }
+	             
 	                Enumeration nii = ni.getInetAddresses();  
 	                while (nii.hasMoreElements()) {  
 	                    ip = (InetAddress) nii.nextElement();             

@@ -29,6 +29,4 @@ public class TreateWaitServiceImpl extends BaseServiceImpl<TreateWait,Integer> i
 	}
 
 
-	
-
 }

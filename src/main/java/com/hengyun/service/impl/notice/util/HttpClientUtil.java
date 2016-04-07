@@ -25,7 +25,7 @@ public class HttpClientUtil {
 			e.printStackTrace();
 		}
 	}
-private static String url = "http://192.168.31.114:9090/plugins/httpService/httpservice?";
+private static String url = "http://192.168.31.114:9090/plugins/httpService/httpservice?data=";
 	
 	/*
 	 *  生成请求字符串

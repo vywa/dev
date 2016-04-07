@@ -12,12 +12,21 @@ import java.util.List;
 public class DailyNews implements Serializable{
 
 	private int id;																		//咨讯id
+	private String title;																//标题
 	private String imageUrl;													//图片url
 	private String content;														//内容快照
 	private Date publishTime;
 
 	
 	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public Date getPublishTime() {
 		return publishTime;
 	}

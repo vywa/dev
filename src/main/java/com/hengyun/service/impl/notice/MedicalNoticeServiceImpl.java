@@ -51,7 +51,7 @@ public class MedicalNoticeServiceImpl extends BaseServiceImpl<MedicalNotice, Int
 		medicalNotice.setSendTime(new Date());
 		medicalNotice.setStatus(0);
 		medicalNoticeDao.save(medicalNotice);
-		//推送消息个医生
+		//推送消息给医生
 		String data=JSON.toJSON(medicalNotice).toString();
 		try {
 			HttpClientUtil.doGet(data);

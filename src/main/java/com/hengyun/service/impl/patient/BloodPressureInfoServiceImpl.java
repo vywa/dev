@@ -65,12 +65,14 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 			
 			//向医生推送病人危险信息
 			String data=JSON.toJSON(medicalNotice).toString();
+			/*
 			try {
 				HttpClientUtil.doGet(data);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+			
 				e.printStackTrace();
 			}
+			*/
 		}
 	}
 

@@ -55,7 +55,7 @@ public class AppPackageController {
 	    	AppPackage app = new AppPackage();
     	    String originalfilename = apk.getOriginalFilename();
     	  
-    	    String filename = new Date().getTime()+originalfilename;
+    	    String filename =originalfilename;
     	
 	    	
 	      if(apk.isEmpty()){
@@ -64,7 +64,7 @@ public class AppPackageController {
 	    	  }else{
 	    		
 	    		  appPackageService.save(apk.getInputStream(),filename);
-	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/appPackage/download?url="+filename;
+	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+filename;
 	    		    app.setAppName(originalfilename);
 	        	    app.setPublishTime(new Date());
 	        	    app.setUrl(fileUrl);
@@ -93,6 +93,8 @@ public class AppPackageController {
    
     	String filename = request.getParameter("url");
   
+    	 response.addHeader("Content-Disposition", "attachment;filename="+filename);  
+       
     	GridFSDBFile gridFSDBFile = appPackageService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();
     	OutputStream os = response.getOutputStream();  //创建输出流

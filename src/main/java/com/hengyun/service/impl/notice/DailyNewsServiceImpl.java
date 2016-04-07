@@ -14,12 +14,13 @@ import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.notice.DailyNewsDao;
 import com.hengyun.domain.notice.DailyNews;
 import com.hengyun.service.impl.BaseServiceImpl;
+import com.hengyun.service.information.InformationService;
 import com.hengyun.service.notice.DailyNewsService;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
 * @version 创建时间：2016年3月30日 下午2:28:19
-* 类说明
+* 资讯业务类
 */
 public class DailyNewsServiceImpl extends BaseServiceImpl<DailyNews, Integer> implements DailyNewsService{
 
@@ -31,15 +32,24 @@ public class DailyNewsServiceImpl extends BaseServiceImpl<DailyNews, Integer> im
 	@Resource
 	private IndexCollectionDao indexCollectionDao;
 	
+	@Resource
+	private InformationService informationService;
+	/*
+	 *  添加资讯类
+	 * */
 	@Override
 	public void add(DailyNews dn) {
 		// TODO Auto-generated method stub
 		int id = indexCollectionDao.updateIndex("newsId");
 		dn.setId(id);
 		dn.setPublishTime(new Date());
+		
 		dailyNewsDao.save(dn);
 	}
 
+	/*
+	 *  查询某条资讯详情
+	 * */
 	@Override
 	public DailyNews query(int id) {
 		// TODO Auto-generated method stub

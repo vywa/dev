@@ -12,13 +12,14 @@
 <body>
 
 <div id="add">
-<form action="../account/add" id="form1" method="get">  
+<form action="../dnews/add" id="form1" method="get">  
 
 
 
-<p>主			题：<input type="text" name="theme" id="theme"/></p>    
-<p>帖子标题：<input type="text" name="title" id="title"/></p>    
-<p>帖子内容：<textarea rows="20" cols="30">请在这里编辑内容</textarea>
+<p>标　　题：<input type="text" name="title" id="title"/></p>    
+<p>图			片：<input type="file" name="imageUrl"  id="imageUrl" size="8000000"/></p>  
+
+<p>内			容：<textarea rows="20" cols="30">请在这里编辑内容</textarea>
 
 
 <p><input type="button" id="send" value="提交" onclick="add();"/></p>  
