@@ -58,8 +58,9 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 		RiskFactor riskFactor = caseHistory.getRiskFactor();
 		TargetOrganDamage tod = caseHistory.getTargetOrganDamage();
 		AffiliatedClinicalDisease acd = caseHistory.getAffiliatedClinicalDisease();
-
-		int bloodLevel = riskFactor.getHightBloodPressure();
+		int userId = caseHistory.getPatientId();
+		//int bloodLevel = riskFactor.getHightBloodPressure();
+		int bloodLevel = bloodPressureInfoService.getLevel(userId);
 
 		int riskCount = riskFactorService.DagerCount(riskFactor);
 		boolean damage = targetOrganDamangeService.hasDamage(tod);
@@ -103,6 +104,8 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 			}
 			break;
 			default:
+				danger=DangerLevel.unknown;
+				break;
 		}
 		
 		return danger;

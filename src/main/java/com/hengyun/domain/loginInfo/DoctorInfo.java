@@ -29,8 +29,32 @@ public class DoctorInfo implements Serializable{
 	private int 								age;										//用户年龄
 	private String 							resume;								//简介
 	
+	//医院
+	private String 							shortName;						//医院简称
+	private String							hospitalName;					//医院名称
 	
 	private String 							recordTime;						//记录时间
+
+	
+	
+	public String getShortName() {
+		return shortName;
+	}
+
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+
+	public String getHospitalName() {
+		return hospitalName;
+	}
+
+
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
 
 
 	public int getDoctorId() {

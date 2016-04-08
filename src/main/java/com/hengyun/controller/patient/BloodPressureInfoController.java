@@ -21,9 +21,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.HealthTarget;
 import com.hengyun.domain.patient.PressureResponse;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodPressureInfoService;
+import com.hengyun.service.patient.HealthTargetService;
 
 /*
  * 
@@ -42,6 +44,8 @@ public class BloodPressureInfoController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
+	@Resource
+	private HealthTargetService healthTargetService;
 	/*
 	 * 
 	 * 	查询某个指定时间段的测量数据
@@ -77,9 +81,11 @@ public class BloodPressureInfoController {
 		PressureResponse response = new PressureResponse();
 		int userId = (int)request.getAttribute("userId");
 		BloodPressureInfo bpi =  bloodPressureInfoService.getlatestRecord(userId);
+		
 		List<BloodPressureInfo> bloodList =new ArrayList<BloodPressureInfo>();
 		bloodList.add(bpi);
 		response.setCode("211");
+		
 		response.setBloodPressureInfo(bloodList);
 		
 		return  JSONObject.toJSONString(response);

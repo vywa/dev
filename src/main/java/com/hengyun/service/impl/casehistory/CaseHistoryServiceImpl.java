@@ -87,7 +87,7 @@ public class CaseHistoryServiceImpl extends BaseServiceImpl<CaseHistory,Integer>
 		// TODO Auto-generated method stub
 		Query  query = new Query();
 	     Criteria criteria = Criteria.where("patientId").is(patientId);
-	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "caseHistoryId"));
 	      CaseHistory caseHistory = caseHistoryDao.queryOne(query);
 	      if(caseHistory!=null){
 	    	  return caseHistory.getCaseHistoryId();

@@ -10,98 +10,91 @@ import com.hengyun.domain.common.ResponseCode;
 public class HealthTargetResponse extends ResponseCode{
 
 	private int patientId;												//病人id
-	private int targetHighBloodPressure;					//高血压目标
-	private int targetLowBloodPressure;					//低血压目标
+	private String targetHighBloodPressure;					//高血压目标
+	private String targetLowBloodPressure;					//低血压目标
 	
-	private int zero;													//凌晨降糖目标
-	private int beforeBreakfast;									//早餐前血糖目标
-	private int afterBreakfast;										//早餐后血糖目标
-	private int beforeLunch;											//午餐前血糖目标
-	private int afterLunch;												//午餐后血糖目标
-	private int beforeSupper;										//晚饭前目标
-	private int afterSupper;											//晚饭后目标
-	private int beforeSleep;											//睡前目标
-	private int random;									//随机测量目标
-	
-	
-	public int getZero() {
-		return zero;
-	}
-	public void setZero(int zero) {
-		this.zero = zero;
-	}
-	public int getRandom() {
-		return random;
-	}
-	public void setRandom(int random) {
-		this.random = random;
-	}
+	private String zero;													//凌晨降糖目标
+	private String beforeBreakfast;									//早餐前血糖目标
+	private String afterBreakfast;										//早餐后血糖目标
+	private String beforeLunch;											//午餐前血糖目标
+	private String afterLunch;												//午餐后血糖目标
+	private String beforeSupper;										//晚饭前目标
+	private String afterSupper;											//晚饭后目标
+	private String beforeSleep;											//睡前目标
+	private String random;									//随机测量目标
 	public int getPatientId() {
 		return patientId;
 	}
 	public void setPatientId(int patientId) {
 		this.patientId = patientId;
 	}
-	public int getTargetHighBloodPressure() {
+	public String getTargetHighBloodPressure() {
 		return targetHighBloodPressure;
 	}
-	public void setTargetHighBloodPressure(int targetHighBloodPressure) {
+	public void setTargetHighBloodPressure(String targetHighBloodPressure) {
 		this.targetHighBloodPressure = targetHighBloodPressure;
 	}
-	public int getTargetLowBloodPressure() {
+	public String getTargetLowBloodPressure() {
 		return targetLowBloodPressure;
 	}
-	public void setTargetLowBloodPressure(int targetLowBloodPressure) {
+	public void setTargetLowBloodPressure(String targetLowBloodPressure) {
 		this.targetLowBloodPressure = targetLowBloodPressure;
 	}
-	
-	public int getBeforeBreakfast() {
+	public String getZero() {
+		return zero;
+	}
+	public void setZero(String zero) {
+		this.zero = zero;
+	}
+	public String getBeforeBreakfast() {
 		return beforeBreakfast;
 	}
-	public void setBeforeBreakfast(int beforeBreakfast) {
+	public void setBeforeBreakfast(String beforeBreakfast) {
 		this.beforeBreakfast = beforeBreakfast;
 	}
-	public int getAfterBreakfast() {
+	public String getAfterBreakfast() {
 		return afterBreakfast;
 	}
-	public void setAfterBreakfast(int afterBreakfast) {
+	public void setAfterBreakfast(String afterBreakfast) {
 		this.afterBreakfast = afterBreakfast;
 	}
-	public int getBeforeLunch() {
+	public String getBeforeLunch() {
 		return beforeLunch;
 	}
-	public void setBeforeLunch(int beforeLunch) {
+	public void setBeforeLunch(String beforeLunch) {
 		this.beforeLunch = beforeLunch;
 	}
-	public int getAfterLunch() {
+	public String getAfterLunch() {
 		return afterLunch;
 	}
-	public void setAfterLunch(int afterLunch) {
+	public void setAfterLunch(String afterLunch) {
 		this.afterLunch = afterLunch;
 	}
-	public int getBeforeSupper() {
+	public String getBeforeSupper() {
 		return beforeSupper;
 	}
-	public void setBeforeSupper(int beforeSupper) {
+	public void setBeforeSupper(String beforeSupper) {
 		this.beforeSupper = beforeSupper;
 	}
-	public int getAfterSupper() {
+	public String getAfterSupper() {
 		return afterSupper;
 	}
-	public void setAfterSupper(int afterSupper) {
+	public void setAfterSupper(String afterSupper) {
 		this.afterSupper = afterSupper;
 	}
-	public int getBeforeSleep() {
+	public String getBeforeSleep() {
 		return beforeSleep;
 	}
-	public void setBeforeSleep(int beforeSleep) {
+	public void setBeforeSleep(String beforeSleep) {
 		this.beforeSleep = beforeSleep;
 	}
-	
-	public HealthTargetResponse() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getRandom() {
+		return random;
+	}
+	public void setRandom(String random) {
+		this.random = random;
 	}
 	
+
 	
 }

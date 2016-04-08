@@ -50,7 +50,8 @@ public class Diagnosis implements Serializable{
 		little_danger,
 		moderate_danger,
 		more_danger,
-		most_danger
+		most_danger,
+		unknown
 	}
 	
 }

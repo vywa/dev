@@ -16,6 +16,8 @@ public class BloodPressureInfo implements Serializable{
 	private int lowBP;								//d低压数据
 	private int heartRate;								//测量心率
 	
+	
+
 
 	public int getUserId() {
 		return userId;

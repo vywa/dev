@@ -30,13 +30,24 @@ public class NetworkUtil {
 	                if (ni.isLoopback() ) {
 	                    continue;
 	                }
+	                if(ni.getName().equals("eth0")){
+	                	  Enumeration nii = ni.getInetAddresses();  
+	  	                while (nii.hasMoreElements()) {  
+	  	                    ip = (InetAddress) nii.nextElement();             
+	  	                       res = ip.getHostAddress();
+	  	                    }  
+	  	                }  
 	             
-	                Enumeration nii = ni.getInetAddresses();  
+	             
+	            if(ni.getName().equals("eth1")){
+              	  Enumeration nii = ni.getInetAddresses();  
 	                while (nii.hasMoreElements()) {  
 	                    ip = (InetAddress) nii.nextElement();             
 	                       res = ip.getHostAddress();
 	                    }  
+	                break;
 	                }  
+              }
 	            
 	        } catch (SocketException e) {  
 	            e.printStackTrace();  

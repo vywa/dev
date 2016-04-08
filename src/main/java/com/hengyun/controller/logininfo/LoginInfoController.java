@@ -265,6 +265,12 @@ public class LoginInfoController {
 				information = informationService.query(userId);
 				account = userAccountService.queryById(userId);
 				 long dbRecordTime = Long.valueOf(information.getRecordTime());
+				 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
+				 if(caseHistoryId<0) {
+					 loginResult.setQuestionaire(false);
+				 } else {
+					 loginResult.setQuestionaire(true);
+				 }
 				 if(dbRecordTime>Long.valueOf(recordTime)){
 					 loginResult.setInfo(information);
 					 loginResult.setCode("203");

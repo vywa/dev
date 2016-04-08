@@ -7,7 +7,10 @@ import java.util.List;
 public class PressureResponse implements Serializable{
 
 	private List<BloodPressureInfo>  bloodPressureInfo= new ArrayList<BloodPressureInfo>();
+	
 	private String code;
+	
+	
 	
 	
 	public List<BloodPressureInfo> getBloodPressureInfo() {

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.logininfo.PatientInfoDao;
 import com.hengyun.domain.loginInfo.PatientInfo;
 
@@ -21,6 +22,9 @@ public class PatientInfoDaoImpl  implements PatientInfoDao{
 	@Resource
 	 private MongoTemplate mongoTemplate;
 
+	@Resource
+	private IndexCollectionDao indexCollectionDao;
+	
 	@Override
 	public void addPatient(PatientInfo patientInfo) {
 		// TODO Auto-generated method stub

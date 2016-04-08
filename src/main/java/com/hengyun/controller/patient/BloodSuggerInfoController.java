@@ -18,9 +18,11 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.HealthTarget;
 import com.hengyun.domain.patient.SuggerResponse;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
+import com.hengyun.service.patient.HealthTargetService;
 
 /*
  * 
@@ -37,6 +39,8 @@ public class BloodSuggerInfoController {
 	@Resource
 	private LoginInfoService loginInfoService;
 	
+	@Resource
+	private HealthTargetService healthTargetService;
 	/*
 	 * 
 	 * 查询用户特定时间段血糖数据
@@ -136,10 +140,19 @@ public class BloodSuggerInfoController {
 		
 		List<BloodSuggerInfo> bloodList = null;
 		int userId = (int)request.getAttribute("userId");
+		HealthTarget healthTarget=null;
+		try {
+			 healthTarget = healthTargetService.getHealthTarget(userId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			healthTarget = null;
+		}
+		
 			try{
 				bloodList = bloodSuggerInfoService.getlatestTime(userId);
 				if(bloodList!=null){
 					response.setCode("211");
+					response.setHealthTarget(healthTarget);
 					response.setBloodSuggerInfo(bloodList);
 				}
 			} catch(Exception ex){

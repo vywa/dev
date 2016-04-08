@@ -11,11 +11,15 @@ import com.hengyun.domain.loginInfo.PatientInfo;
 */
 public interface PatientInfoDao {
 
+	//添加病人信息
 	public void addPatient(PatientInfo patientInfo) ;
 	
+	//更新病人信息
 	public boolean updatePatient(PatientInfo patientInfo);
 	
+	//查询病人信息
 	public PatientInfo queryOne(PatientInfo patientInfo);
 	
+	//查询病人列表
 	public List<PatientInfo> query(PatientInfo patientInfo);
 }

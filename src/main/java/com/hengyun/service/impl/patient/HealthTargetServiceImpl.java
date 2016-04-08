@@ -34,7 +34,8 @@ public class HealthTargetServiceImpl extends BaseServiceImpl<HealthTarget,Intege
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("patientId").is(healthTarget.getPatientId()));
 		Update update = Update.update("targetHighBloodPressure", healthTarget.getTargetHighBloodPressure()).
-				addToSet("targetLowBloodPressure", healthTarget.getTargetLowBloodPressure());
+				set("targetLowBloodPressure", healthTarget.getTargetLowBloodPressure());
+				
 		healthTargetDao.updateInser(query, update);
 		return true;
 	}
@@ -49,13 +50,31 @@ public class HealthTargetServiceImpl extends BaseServiceImpl<HealthTarget,Intege
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("patientId").is(healthTarget.getPatientId()));
 		Update update = Update.update("zero", healthTarget.getZero()).
-				addToSet("beforeBreakfast", healthTarget.getBeforeBreakfast()).addToSet("afterBreakfast", healthTarget.getAfterBreakfast()).
-				addToSet("beforeLunch",healthTarget.getBeforeLunch()).addToSet("afterLunch", healthTarget.getAfterLunch()).
-				addToSet("beforeSupper", healthTarget.getBeforeSupper()).addToSet("afterSupper", healthTarget.getAfterSupper()).
-				addToSet("beforeSleep", healthTarget.getBeforeSleep()).addToSet("random", healthTarget.getRandom());
+				set("beforeBreakfast", healthTarget.getBeforeBreakfast()).set("afterBreakfast", healthTarget.getAfterBreakfast()).
+				set("beforeLunch",healthTarget.getBeforeLunch()).set("afterLunch", healthTarget.getAfterLunch()).
+				set("beforeSupper", healthTarget.getBeforeSupper()).set("afterSupper", healthTarget.getAfterSupper()).
+				set("beforeSleep", healthTarget.getBeforeSleep()).set("random", healthTarget.getRandom());
 		healthTargetDao.updateInser(query, update);
 		return true;
 	}
+	
+	/*
+	 * 
+	 *  查询降压目标
+	 * 
+	 * */
+	@Override
+	public HealthTarget getHealthTarget(int patientId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("patientId").is(patientId));
+		HealthTarget healthTarget = healthTargetDao.queryOne(query);
+		if(healthTarget == null){
+			return null;
+		}
+
+		return healthTarget;
+	}
+	
 
 	/*
 	 * 

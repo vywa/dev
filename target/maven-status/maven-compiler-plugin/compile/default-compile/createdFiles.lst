@@ -94,9 +94,11 @@ com/hengyun/controller/logininfo/UserAccountController.class
 com/hengyun/service/impl/hospital/OfficeServiceImpl.class
 com/hengyun/domain/forum/RepeatReply.class
 com/hengyun/dao/casehistory/CaseHistoryDao.class
+com/hengyun/util/exception/SecurityException.class
 com/hengyun/domain/casehistory/BloodPressure.class
 com/hengyun/domain/forum/ForumResponseCode.class
 com/hengyun/util/exception/ExceptionAdvisor.class
+com/hengyun/service/exception/BaseBusinessException.class
 com/hengyun/util/sms/GetNumResult.class
 com/hengyun/util/shiro/IncorrectCodeException.class
 com/hengyun/util/sms/sender/SmsSender.class
@@ -258,6 +260,7 @@ com/hengyun/domain/casehistory/OfficeSpecialInfo.class
 com/hengyun/controller/patient/HealthTargetController.class
 com/hengyun/controller/forum/ForumPostController.class
 com/hengyun/dao/impl/information/DailyNewsCollectionDaoImpl.class
+com/hengyun/util/exception/ConfirmationException.class
 com/hengyun/domain/monitor/SystemMessageHistory$MessageTyep.class
 com/hengyun/controller/information/GeneralPersonController.class
 com/hengyun/domain/casehistory/PastDiseaseHistory.class
@@ -313,6 +316,7 @@ com/hengyun/service/information/InformationService.class
 com/hengyun/domain/forum/ReplySubject.class
 com/hengyun/service/casehistory/CaseHistoryService.class
 com/hengyun/domain/casehistory/ReTreateInfo.class
+com/hengyun/dao/exception/BaseDBException.class
 com/hengyun/domain/hospital/Hospital.class
 com/hengyun/domain/casehistory/AllergyHistory.class
 com/hengyun/dao/impl/logininfo/PatientInfoDaoImpl.class

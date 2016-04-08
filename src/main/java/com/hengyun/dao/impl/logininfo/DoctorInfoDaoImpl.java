@@ -26,6 +26,7 @@ public class DoctorInfoDaoImpl  implements DoctorInfoDao{
 
 	@Resource
 	private IndexCollectionDao indexCollectionDao;
+	
 	/*
 	 *  添加医生信息
 	 * 
@@ -48,7 +49,7 @@ public class DoctorInfoDaoImpl  implements DoctorInfoDao{
 	public boolean updateDoctor(DoctorInfo doctorInfo) {
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("doctorId").is(doctorInfo.getDoctorId()));
-	
+		
 		return false;
 	}
 

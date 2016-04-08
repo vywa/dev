@@ -179,23 +179,19 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Override
 	public int getLevel(int userId) {
 		// TODO Auto-generated method stub
-		int level = 0;
 		//获取最近测量的数据的血压数据
-		List<BloodPressureInfo> blist = this.getlatestTime(userId);
+		BloodPressureInfo blist = this.getlatestRecord(userId);
 		int highBP = 0;
 		int lowBP = 0;
-		int highTemp=0;
-		int lowTemp=0;
-		for(BloodPressureInfo temp :blist){
-			lowTemp = temp.getLowBP();
-			highTemp=temp.getHighBP();
-			if(highBP<highTemp){
-				highBP=highTemp;
-			} 
-			if(lowBP>lowTemp){
-				lowBP= lowTemp;
-			}
+		
+		if(blist==null){
+			return -1;
 		}
+		
+			lowBP = blist.getLowBP();
+			highBP=blist.getHighBP();
+			
+		
 		int temp =0;
 		//评估低压
 		if(lowBP>=90&&lowBP<100){

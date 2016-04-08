@@ -146,6 +146,7 @@ public class DiagnosisController {
 		caseHistory.setDiagnosisTime(new Date());
 		//生成病历
 		int caseId = caseHistoryService.addCaseHistory(caseHistory);
+		
 		Query query = Query.query(Criteria.where("caseHistoryId").is(caseId));
 		Update update = Update.update("riskFactor", riskFactor).
 				set("targetOrganDamage", targetOrganDamage).set("affiliatedClinicalDisease", affiliatedClinicalDisease);
@@ -180,7 +181,7 @@ public class DiagnosisController {
 	
 	 /*
 	  * 
-	  * 病人亲属查询用户自己的诊断信息
+	  * 	病人亲属查询用户自己的诊断信息
 	  * 
 	  * */
 	@RequestMapping(value="/friendQuery",produces = "text/html;charset=UTF-8")
@@ -235,7 +236,7 @@ public class DiagnosisController {
 		log.info("用户最近一次的病历号为 "+caseHistoryId);
 		if(caseHistoryId<0){
 			//查询用户是否有上传血压
-			List<BloodPressureInfo> list = bloodPressureInfoService.getlatestTime(patientId);
+			BloodPressureInfo list = bloodPressureInfoService.getlatestRecord(patientId);
 			if(list == null){
 				response.setCode("111");
 				response.setMessage("用户没有录入血糖和血压");
@@ -245,21 +246,30 @@ public class DiagnosisController {
 			response.setMessage("用户没有录入健康因素");
 			return  JSON.toJSONString(response);
 		}
-		Query query = new Query();
-		query.addCriteria(Criteria.where("caseHistoryId").is(caseHistoryId));
+		
+		
 		CaseHistory caseHistory = caseHistoryService.query(caseHistoryId);
 		int patient = caseHistory.getPatientId();
 		int doctor = caseHistory.getDocterId();
+		RiskFactor riskFactor = caseHistory.getRiskFactor();
 		String diagContent="未知" ;
 		DangerLevel dangerLevel = diagnosisService.assess(caseHistoryId);
-		log.info("用户最近一次的病历号为 "+dangerLevel);
-		
+		int hightBloodPressure =  bloodPressureInfoService.getLevel(patientId);
+		riskFactor.setHightBloodPressure(hightBloodPressure);
 		switch(dangerLevel){
+		case unknown:diagContent="未知";
+
+			response.setCode("111");
+			response.setMessage("用户没有录入血糖和血压");
+			return  JSON.toJSONString(response);
+		
+		
 		case not_danger: diagContent="正常";break;
 		case little_danger: diagContent="低危";break;
 		case moderate_danger: diagContent="中危";
 		case more_danger: diagContent="高危";
 		case most_danger: diagContent="极高危";
+		
 		//向医生发送危险通知
 				MedicalNotice mn = new MedicalNotice();
 				mn.setContent("用户诊断结果危险等级为: "+diagContent);
@@ -280,7 +290,8 @@ public class DiagnosisController {
 		content.add("用户诊断结果危险等级为: "+diagContent);
 		diagnosis.setCotent(content);
 		//更新用户病历
-		Update update = Update.update("diagnosis", diagnosis);
+		Query query = Query.query(Criteria.where("caseHistoryId").is(caseHistoryId));
+		Update update = Update.update("diagnosis", diagnosis).set("riskFactor", riskFactor);
 		caseHistoryService.updateFirst(query, update);
 		log.info("添加一条病历");
 		

@@ -80,6 +80,7 @@ public class InfomationController {
 	    	
 	    	UploadImageResponse response = new UploadImageResponse();
 	    	String ip = NetworkUtil.getPhysicalHostIP();
+	    	
 	    	String baseUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=";
 	    	
 	    	int userId = (int)request.getAttribute("userId");
@@ -228,6 +229,7 @@ public class InfomationController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		Information info = JSON.toJavaObject(jsonObject, Information.class);
 		String ip = NetworkUtil.getPhysicalHostIP();
+	
 		int userId =(int)request.getAttribute("userId");
 	
 			 long recordTime = new Date().getTime();

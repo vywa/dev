@@ -93,18 +93,21 @@ public class AppPackageController {
    
     	String filename = request.getParameter("url");
   
-    	 response.addHeader("Content-Disposition", "attachment;filename="+filename);  
+    response.addHeader("Content-Disposition", "attachment;filename="+filename);  
        
     	GridFSDBFile gridFSDBFile = appPackageService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();
     	OutputStream os = response.getOutputStream();  //创建输出流
-		byte[] b = new byte[1024];  
-		while( in.read(b)!= -1){ 
-		os.write(b);     
+    	
+		byte[] b = new byte[1024];
+		int z;
+		while( (z=in.read(b,0,b.length))!= -1){ 
+		os.write(b,0,z);     
 		}
 		in.close(); 
 		os.flush();
 		os.close();
+	
 		responseCode.setCode("208");
 		responseCode.setMessage("download success");
 

@@ -32,6 +32,7 @@ public interface HealthTargetService extends BaseService<HealthTarget,Integer>{
 	 * */
 	public  HealthTargetResponse getBloodPressure(int patientId);
 	
+	public HealthTarget getHealthTarget(int patientId);
 	/*
 	 * 
 	 *  获取病人血糖目标记录
