@@ -17,7 +17,7 @@ import com.hengyun.domain.location.Location;
 public class Hospital implements Serializable{
 
 	
-	private int id;																//医院ID
+	private int id;																//医院ID（4位0001）
 	
 	private String hospitalName;									//医院名称
 	private String shortName;										//医院简称
@@ -27,12 +27,18 @@ public class Hospital implements Serializable{
 	private String telephone;											//医院电话
 	private String email;													//医院邮件
 	private String hospitalIM;										//医院即时通讯号
-	private String weiChatNumber;				//医院公众号
-
+	private String weiChatNumber;								//医院公众号
+	private List<Integer> doctorId;								//医生id
 	private Location	location;										//医院坐标
 	
 	
 
+	public List<Integer> getDoctorId() {
+		return doctorId;
+	}
+	public void setDoctorId(List<Integer> doctorId) {
+		this.doctorId = doctorId;
+	}
 	public String getShortName() {
 		return shortName;
 	}

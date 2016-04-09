@@ -15,10 +15,18 @@ public class DailyNews implements Serializable{
 	private String title;																//标题
 	private String imageUrl;													//图片url
 	private String content;														//内容快照
+	private String url;																//网页源地址
 	private Date publishTime;
 
 	
-	
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public String getTitle() {
 		return title;
 	}

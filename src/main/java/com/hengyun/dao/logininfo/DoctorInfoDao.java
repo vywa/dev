@@ -2,6 +2,7 @@ package com.hengyun.dao.logininfo;
 
 import java.util.List;
 
+import com.hengyun.dao.BaseMongodbDao;
 import com.hengyun.domain.loginInfo.DoctorInfo;
 
 /**
@@ -9,14 +10,8 @@ import com.hengyun.domain.loginInfo.DoctorInfo;
 * @version 创建时间：2016年4月5日 下午2:42:58
 * 医生信息数据访问接口
 */
-public interface DoctorInfoDao{
+public interface DoctorInfoDao extends BaseMongodbDao<DoctorInfo,Integer>{
 
-	public int addDoctor(DoctorInfo doctorInfo) ;
 	
-	public boolean updateDoctor(DoctorInfo doctorInfo);
-	
-	public DoctorInfo queryOne(DoctorInfo doctorInfo);
-	
-	public List<DoctorInfo> query(DoctorInfo doctorInfo);
 	
 }

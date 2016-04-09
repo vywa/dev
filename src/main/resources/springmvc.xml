@@ -50,7 +50,7 @@
                             
                            
                               <value>/info/download</value>
-                              
+                                <value>/info/send</value>
                               <value>/hospital</value>
                               <value>/office</value>
                               <value>/docter</value>
@@ -69,7 +69,7 @@
                                 <value>/account/smsSend</value>
                                  <value>/account/findPassword</value>
                               
-                                   <value>/multiMedia/download</value>
+                                  <value>/multiMedia</value>
                                    <value>/app</value>
                     </list>
                 </property>
@@ -90,7 +90,8 @@
 		                            
 		                            
 		                              <value>/info/download</value>
-		                              
+		                              <value>/info/send</value>
+		                           
 		                              <value>/hospital</value>
 		                              <value>/office</value>
 		                              <value>/docter</value>
@@ -109,7 +110,7 @@
 		                                <value>/account/smsSend</value>
 		                                 <value>/account/findPassword</value>
 		                             
-		                               <value>/multiMedia/download</value>
+		                               <value>/multiMedia</value>
 		                               <value>/app</value>
 		                    </list>
 		                </property>

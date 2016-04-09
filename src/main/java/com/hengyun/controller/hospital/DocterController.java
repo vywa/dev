@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.doctor.Doctor;
+
 import com.hengyun.domain.hospital.Docter;
 import com.hengyun.service.hospital.DocterService;
 

@@ -80,13 +80,12 @@ public class BloodPressureInfoController {
 	
 		PressureResponse response = new PressureResponse();
 		int userId = (int)request.getAttribute("userId");
-		BloodPressureInfo bpi =  bloodPressureInfoService.getlatestRecord(userId);
+		List<BloodPressureInfo> bpi =  bloodPressureInfoService.getlatestTime(userId);
 		
-		List<BloodPressureInfo> bloodList =new ArrayList<BloodPressureInfo>();
-		bloodList.add(bpi);
+		
 		response.setCode("211");
 		
-		response.setBloodPressureInfo(bloodList);
+		response.setBloodPressureInfo(bpi);
 		
 		return  JSONObject.toJSONString(response);
 	}

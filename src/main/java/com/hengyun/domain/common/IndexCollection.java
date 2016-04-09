@@ -54,9 +54,19 @@ public class IndexCollection implements Serializable{
 	private int collectionId;							//收藏id
 	private int newsId;									//资讯id
 	
+	/*
+	 *  版本更新
+	 * */
+	private int updateId;								//更新id
 	
 	
 	
+	public int getUpdateId() {
+		return updateId;
+	}
+	public void setUpdateId(int updateId) {
+		this.updateId = updateId;
+	}
 	public int getNewsId() {
 		return newsId;
 	}

@@ -24,7 +24,9 @@ import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.UploadResponseCode;
 import com.hengyun.domain.system.AppPackage;
 import com.hengyun.domain.system.AppPackageResponse;
+import com.hengyun.domain.system.AppVersionUpdate;
 import com.hengyun.service.system.AppPackageService;
+import com.hengyun.service.system.AppVersionUpdateService;
 import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
@@ -41,6 +43,8 @@ public class AppPackageController {
 	@Resource
 	private AppPackageService appPackageService;
 	
+	@Resource
+	private AppVersionUpdateService appVersionUpdateService;
 	/*
 	 * 
 	 *  app包上传
@@ -65,9 +69,11 @@ public class AppPackageController {
 	    		
 	    		  appPackageService.save(apk.getInputStream(),filename);
 	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+filename;
-	    		    app.setAppName(originalfilename);
-	        	    app.setPublishTime(new Date());
-	        	    app.setUrl(fileUrl);
+	    		  AppVersionUpdate  appVersion= new AppVersionUpdate();
+	    		  appVersion.setApkUrl(fileUrl);
+	    		  appVersionUpdateService.addUpdate(appVersion);
+	    		  
+	    		  
 	        	 //   app.setVersion(version);
 	        	    
 	    		  response.setCode("0");

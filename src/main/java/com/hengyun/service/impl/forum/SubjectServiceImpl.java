@@ -350,30 +350,25 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		if(list==null){
 			list = new ArrayList<Integer>();
 			list.add(userId);
-			
-			if(userId==subject.getAuthorId()){
-				Update  update = Update.update("likePersons", list).set("Liked", true).inc("likeCount", 1);
+				Update  update = Update.update("likePersons", list).inc("likeCount", 1);
 				subjectDao.updateFirst(query, update);
-			} else {
-				Update update = Update.update("likePersons", list).inc("likeCount", 1);
-				subjectDao.updateFirst(query, update);
-			}
-			
+
 			return 1;
 		} 
 		
 		if(list.contains(userId)){
+			/*
 			if(userId==subject.getAuthorId()){
 				if(!subject.isLiked()){
 					Update update = Update.update("liked", true);
 					subjectDao.updateFirst(query, update);
 				}
 			}
-			
+			*/
 			return -1;
 		} else {
 			list.add(userId);
-			Update update = Update.update("likePersons", list).inc("likeCount",1).set("liked", true);
+			Update update = Update.update("likePersons", list).inc("likeCount",1);
 			subjectDao.updateFirst(query, update);
 			return 1;
 		}

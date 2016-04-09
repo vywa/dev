@@ -21,6 +21,7 @@ import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.UploadResponseCode;
 import com.hengyun.service.forum.MultiMediaService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
 /*
@@ -48,7 +49,7 @@ public class MultiMediaController {
     {  
 	    
 	    	UploadResponseCode response = new UploadResponseCode();
-
+	    	String ip = NetworkUtil.getPhysicalHostIP();
     	    String originalfilename = media.getOriginalFilename();
     	  
     	    String filename = new Date().getTime()+originalfilename;
@@ -64,7 +65,7 @@ public class MultiMediaController {
 	    		  response.setCode("0");
 	    		  response.setResponseCode(0);
 	    		  response.setDescription("上传成功");
-	    		  String fileUrl = "http://192.168.31.114/healthcloudserver/multiMedia/download?url="+filename;
+	    		  String fileUrl = "http://"+ip+"/healthcloudserver/multiMedia/download?url="+filename;
 	    		  response.setMessage(fileUrl);
 	    		  response.setFileUrl(fileUrl);
 	    	  }

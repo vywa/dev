@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Docter implements Serializable{
 
 	
-	private String workNum;
+	private String workNum;			//工号（医院id4位+科室id2位＋医生id３位+效验码1）
 	private String name;
 	private String level;						//医生职称
 	private int hospitalId;				//所属医院id

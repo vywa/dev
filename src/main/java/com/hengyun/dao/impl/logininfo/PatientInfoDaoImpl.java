@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.logininfo.PatientInfoDao;
 import com.hengyun.domain.loginInfo.PatientInfo;
@@ -17,38 +18,14 @@ import com.hengyun.domain.loginInfo.PatientInfo;
 * 病人信息数据访问层
 */
 @Repository
-public class PatientInfoDaoImpl  implements PatientInfoDao{
-
-	@Resource
-	 private MongoTemplate mongoTemplate;
-
-	@Resource
-	private IndexCollectionDao indexCollectionDao;
-	
-	@Override
-	public void addPatient(PatientInfo patientInfo) {
-		// TODO Auto-generated method stub
-		
-	}
+public class PatientInfoDaoImpl  extends BaseMongodbDaoImpl<PatientInfo,Integer> implements PatientInfoDao{
 
 	@Override
-	public boolean updatePatient(PatientInfo patientInfo) {
+	protected Class<PatientInfo> getEntityClass() {
 		// TODO Auto-generated method stub
-		return false;
+		return PatientInfo.class;
 	}
 
-	@Override
-	public PatientInfo queryOne(PatientInfo patientInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<PatientInfo> query(PatientInfo patientInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	
 	
 

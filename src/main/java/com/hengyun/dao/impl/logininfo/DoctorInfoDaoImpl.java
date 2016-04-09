@@ -9,9 +9,12 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.hengyun.dao.impl.BaseMongodbDaoImpl;
 import com.hengyun.dao.logininfo.DoctorInfoDao;
 import com.hengyun.dao.logininfo.IndexCollectionDao;
+import com.hengyun.dao.logininfo.LoginInfoDao;
 import com.hengyun.domain.loginInfo.DoctorInfo;
+import com.hengyun.domain.loginInfo.LoginInfo;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -19,51 +22,15 @@ import com.hengyun.domain.loginInfo.DoctorInfo;
 * 医生信息数据访问层
 */
 @Repository
-public class DoctorInfoDaoImpl  implements DoctorInfoDao{
+public class DoctorInfoDaoImpl  extends BaseMongodbDaoImpl<DoctorInfo,Integer> implements DoctorInfoDao{
 
-	@Resource
-	 private MongoTemplate mongoTemplate;
+	@Override
+	protected Class<DoctorInfo> getEntityClass() {
+		// TODO Auto-generated method stub
+		return DoctorInfo.class;
+	}
 
-	@Resource
-	private IndexCollectionDao indexCollectionDao;
 	
-	/*
-	 *  添加医生信息
-	 * 
-	 * */
-	@Override
-	public int addDoctor(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		int doctorId = indexCollectionDao.updateIndex("docterID");
-		doctorInfo.setDoctorId(doctorId);
-		this.mongoTemplate.save(doctorInfo);
-		return doctorId;
-	}
-
-	/*
-	 * 
-	 *  更改医生信息
-	 * 
-	 * */
-	@Override
-	public boolean updateDoctor(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("doctorId").is(doctorInfo.getDoctorId()));
-		
-		return false;
-	}
-
-	@Override
-	public DoctorInfo queryOne(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DoctorInfo> query(DoctorInfo doctorInfo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	
 }

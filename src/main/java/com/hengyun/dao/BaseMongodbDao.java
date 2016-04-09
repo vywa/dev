@@ -35,11 +35,6 @@ public interface BaseMongodbDao<T extends Serializable, PK extends Serializable>
 	    public void updateMulti(Query query, Update update);
 	    //修改，如果满足条件对象不存在则添加
 	    public void updateInser(Query query, Update update);
-	    
-	    //查询特定字段
-	    public T queryField(BasicDBObject condition,BasicDBObject keys);
-	  
-	    //查询特定字段多条记录
-	    public List<T> queryFieldList(BasicDBObject condition,BasicDBObject keys);
+	
 
 }

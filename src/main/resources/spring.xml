@@ -167,6 +167,9 @@ http://www.springframework.org/schema/cache
 <bean id="appPackageDao" class="com.hengyun.dao.impl.system.AppPackageDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="appPackageService" class="com.hengyun.service.impl.system.AppPackageServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="appVersionUpdateDao" class="com.hengyun.dao.impl.system.AppVersionUpdateDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="appVersionUpdateService" class="com.hengyun.service.impl.system.AppVersionUpdateServiceImpl" parent="BaseServiceImpl"/>
+
 
 
 
@@ -178,8 +181,7 @@ http://www.springframework.org/schema/cache
 <bean id="patientDao" class="com.hengyun.dao.impl.mongodb.PatientDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="patientService" class="com.hengyun.service.impl.mongodb.PatientServiceImpl" parent="BaseServiceImpl"/>
  -->
-<bean id="doctorDao" class="com.hengyun.dao.impl.doctor.DoctorDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="doctorService" class="com.hengyun.service.impl.doctor.DoctorServiceImpl" parent="BaseServiceImpl"/>
+
 
 
 

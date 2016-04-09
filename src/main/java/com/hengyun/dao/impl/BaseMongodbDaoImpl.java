@@ -123,25 +123,9 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
         this.mongoTemplate.upsert(query, update, this.getEntityClass());
     }
     
-  //查询特定字段
-    @SuppressWarnings("unchecked")
-	public T queryField(BasicDBObject condition,BasicDBObject keys){
-    	DBObject object = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).findOne(condition, keys);
-    	
-    	return (T)object;
-    }
+
   
-    //查询特定字段多条记录
-    @SuppressWarnings("unchecked")
-	public List<T>  queryFieldList(BasicDBObject condition,BasicDBObject keys){
-    	List<T> list = new ArrayList<T>();
-    	DBCursor cur = this.mongoTemplate.getCollection(this.mongoTemplate.getCollectionName(this.getEntityClass())).find(condition, keys).addOption(Bytes.QUERYOPTION_NOTIMEOUT);
-    	while(cur.hasNext()){
-    		
-    		list.add((T)cur.next());
-    	}
-    	return list;
-    }
+  
     
     //钩子方法，由子类实现返回反射对象的类型
     protected abstract Class<T> getEntityClass();

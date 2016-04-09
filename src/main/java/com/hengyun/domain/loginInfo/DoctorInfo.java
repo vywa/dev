@@ -32,11 +32,22 @@ public class DoctorInfo implements Serializable{
 	//医院
 	private String 							shortName;						//医院简称
 	private String							hospitalName;					//医院名称
+	private int									hospitalId;							//医院id
 	
 	private String 							recordTime;						//记录时间
 
+
 	
-	
+	public int getHospitalId() {
+		return hospitalId;
+	}
+
+
+	public void setHospitalId(int hospitalId) {
+		this.hospitalId = hospitalId;
+	}
+
+
 	public String getShortName() {
 		return shortName;
 	}

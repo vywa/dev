@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.loginInfo.DoctorInfo;
 import com.hengyun.domain.loginInfo.PasswordResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
@@ -354,6 +355,7 @@ public class UserAccountController {
 		
 			return JSON.toJSONString(registResult);
 		}
+	
 	
 
 		/*

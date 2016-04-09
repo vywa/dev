@@ -87,7 +87,7 @@ public class InfomationController {
 	    	
 	    
     	    String originalfilename = image.getOriginalFilename();
-    	    String filename = userId+new Date().getTime()+originalfilename;
+    	    String filename = new Date().getTime()+originalfilename;
 		    	
 		      if(image.isEmpty()){
 		    	  response.setCode("110");
@@ -125,7 +125,27 @@ public class InfomationController {
 		      return JSON.toJSONString(response);
 	      
 	    }
-	          
+	
+		/*
+		 * 加载用户图像
+		 * 
+		 * */
+	    @RequestMapping(value="/send",produces = "text/html;charset=UTF-8")  
+	    @ResponseBody
+	    public String up(@RequestParam MultipartFile image,HttpServletRequest request) throws IOException  {
+	   
+	    	
+	    	UploadImageResponse response = new UploadImageResponse();
+	    	String ip = NetworkUtil.getPhysicalHostIP();	
+	    	String baseUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=";
+    	    String originalfilename = image.getOriginalFilename();
+    	    String filename = originalfilename;
+    		  IconDao.save(image.getInputStream(),filename);
+    		  response.setCode("207");
+    		  response.setMessage("upload image success");
+    		  response.setIconUrl(baseUrl+filename);
+		      return JSON.toJSONString(response);
+	    }
 	
 	    /*
 	     * 下载用户图像
@@ -148,7 +168,7 @@ public class InfomationController {
 	    	 in = gridFSDBFile.getInputStream();
 	    	} catch(Exception ex){
 	    		log.error("图片不存在，获取默认图片");
-	    		GridFSDBFile gridFSDBFile2 = IconDao.getByFileName("200000010temp.jpg");
+	    		GridFSDBFile gridFSDBFile2 = IconDao.getByFileName("index.jpg");
 	    		in = gridFSDBFile2.getInputStream();
 	    	}
 	    	 os = response.getOutputStream();  //创建输出流
@@ -245,7 +265,7 @@ public class InfomationController {
 				 informationService.update(info, userId);
 			} catch (NullPointerException ex) {
 				//加载默认图片
-				  String fileUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=200000010temp.jpg";
+				  String fileUrl = "http://"+ip+"/healthcloudserver/info/download?iconUrl=index.jpg";
 				 info.setIconUrl(fileUrl);
 				 info.setRecordTime(String.valueOf(new Date().getTime()));
 				 informationService.add(info, userId);
