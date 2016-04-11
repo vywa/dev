@@ -28,7 +28,7 @@ public  class RegisterCacheServiceImpl implements RegisterCacheService{
 		map.put("status","unregistered");
 		
 		redisClientTemplate.hmset(sign,map);
-		redisClientTemplate.expire(sign, 24*3600);
+		redisClientTemplate.expire(sign, 3*3600);
 	}
 
 	public void destroyRegisterCache(String sign) {

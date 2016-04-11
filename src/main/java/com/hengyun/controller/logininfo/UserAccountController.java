@@ -84,6 +84,7 @@ public class UserAccountController {
 	/*
 	 * 
 	 *  发送短信
+	 *  
 	 * */
 	public int  sms(String mobilephone){
 		//手机是否注册

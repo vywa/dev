@@ -29,6 +29,7 @@ public class AppVersionUpdateController {
 	private AppVersionUpdateService appVersionUpdateService;
 	
 	
+	
 	@RequestMapping(value="/dinfo",produces = "text/html;charset=UTF-8")  
     @ResponseBody
     public String dinfo(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -52,4 +53,6 @@ public class AppVersionUpdateController {
     	responseCode.setVersion(app);
 		return  JSON.toJSONString(responseCode);
 	}
+	
+	
 }

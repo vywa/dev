@@ -36,7 +36,6 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	
 	@Resource 
 	private UserAccountService userAccountService;
-	
 
 	@Resource
 	private UserAccountDao userAccountDao;
@@ -56,8 +55,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	 * */
 	public LoginResult loginByUsername(LoginInfo loginInfo, String type) {
 		// TODO Auto-generated method stub
-	
-		
+
 		LoginResult loginResult  = userAccountService.validateUserBySign(loginInfo.getLoginUsername(), type,loginInfo.getPassword());
 		if(loginResult!=null){
 			int userId = Integer.valueOf(loginResult.getUserId());

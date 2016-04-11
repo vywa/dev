@@ -71,10 +71,10 @@
                               
                                   <value>/multiMedia</value>
                                    <value>/app</value>
+                                   <value>/version</value>
                     </list>
                 </property>
             </bean>
-           
         </mvc:interceptor>
         
 
@@ -111,16 +111,14 @@
 		                                 <value>/account/findPassword</value>
 		                             
 		                               <value>/multiMedia</value>
-		                               <value>/app</value>
+		                                <value>/app</value>
+ 											<value>/version</value> 
 		                    </list>
 		                </property>
 			</bean>
 			</mvc:interceptor>   
-			
-	
     </mvc:interceptors>
-	
- 
+
 	<!--页面视图层信息 -->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"	value="org.springframework.web.servlet.view.JstlView"/>

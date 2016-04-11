@@ -1,6 +1,7 @@
 package com.hengyun.service.impl.system;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.system.AppVersionUpdateDao;
+import com.hengyun.domain.system.AppPackage;
 import com.hengyun.domain.system.AppVersionUpdate;
 import com.hengyun.service.impl.BaseServiceImpl;
 import com.hengyun.service.system.AppVersionUpdateService;
@@ -50,4 +52,15 @@ public class AppVersionUpdateServiceImpl extends BaseServiceImpl<AppVersionUpdat
 		appVersionUpdateDao.save(appVersionUpdate);
 	}
 
+	/*
+	 *  获取列表
+	 * */
+	@Override
+	public List<AppVersionUpdate> queryList() {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("appName").exists(true));
+		List<AppVersionUpdate> list = appVersionUpdateDao.queryList(query);
+		return list;
+	}
+	
 }

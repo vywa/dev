@@ -3,7 +3,6 @@ package com.hengyun.controller.system;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -25,6 +24,7 @@ import com.hengyun.domain.forum.UploadResponseCode;
 import com.hengyun.domain.system.AppPackage;
 import com.hengyun.domain.system.AppPackageResponse;
 import com.hengyun.domain.system.AppVersionUpdate;
+import com.hengyun.domain.system.AppVersionUpdateResponse;
 import com.hengyun.service.system.AppPackageService;
 import com.hengyun.service.system.AppVersionUpdateService;
 import com.hengyun.util.network.NetworkUtil;
@@ -50,42 +50,120 @@ public class AppPackageController {
 	 *  app包上传
 	 * 
 	 * */
-    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
+    @RequestMapping(value="/dupload",produces = "text/html;charset=UTF-8")  
     @ResponseBody
-    public String upload(@RequestParam MultipartFile apk,HttpServletRequest request) throws IOException  
+    public String dupload(@RequestParam MultipartFile apk,HttpServletRequest request) throws IOException  
     {  
 	    
-	    	UploadResponseCode response = new UploadResponseCode();
-	    	AppPackage app = new AppPackage();
-    	    String originalfilename = apk.getOriginalFilename();
-    	  
-    	    String filename =originalfilename;
-    	
+    	AppVersionUpdateResponse response = new AppVersionUpdateResponse();
+	   
+    	    String filename = apk.getOriginalFilename();
 	    	
 	      if(apk.isEmpty()){
 	    	  response.setCode("110");
-	    	  response.setMessage("upload image failure");
+	    	  response.setMessage("上传医生端app失败");
 	    	  }else{
 	    		
-	    		  appPackageService.save(apk.getInputStream(),filename);
-	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+filename;
-	    		  AppVersionUpdate  appVersion= new AppVersionUpdate();
-	    		  appVersion.setApkUrl(fileUrl);
-	    		  appVersionUpdateService.addUpdate(appVersion);
-	    		  
-	    		  
-	        	 //   app.setVersion(version);
-	        	    
-	    		  response.setCode("0");
-	    		  response.setDescription("上传成功");
-	    		  response.setMessage(fileUrl);
-	    		  response.setFileUrl(fileUrl);
+	    		
+	    		  AppVersionUpdate appVersion;
+				try {
+					appVersion = appVersionUpdateService.getLatest("doctor");
+					float versionCode = Float.valueOf(appVersion.getServerCode());
+					versionCode = (float) (versionCode + 0.1);
+					String newVersion = String.valueOf(versionCode);
+					appVersion.setServerCode(newVersion);
+					String appName = appVersion.getAppName();
+					appName.substring(0, 17);
+					appName="healthclouddoctor"+newVersion+".apk";
+					appVersion.setAppName(appName);
+					  appPackageService.save(apk.getInputStream(),appName);
+		    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+appName;
+		    		  appVersion.setApkUrl(fileUrl);
+		    		  appVersion.setDescription("更新版本");
+		    		  appVersionUpdateService.addUpdate(appVersion);
+				} catch (NullPointerException e) {
+					// TODO Auto-generated catch block
+					String file = "healthclouddoctor0.1.apk";
+					appVersion = new AppVersionUpdate();
+					appVersion.setAppName(file);
+					appVersion.setDescription("添加医生apk");
+					appVersion.setServerCode("1.0");
+					appVersion.setType("doctor");
+					
+					  appPackageService.save(apk.getInputStream(),file);
+		    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+file;
+		    		  appVersion.setApkUrl(fileUrl);
+				
+					 appVersionUpdateService.addUpdate(appVersion);
+				}
+
+		    		  response.setCode("0");
+		    		  response.setMessage("上传医生端app成功");
+
 	    	  }
     	
 	      return JSON.toJSONString(response);
       
     }
-          
+       
+    /*
+     *  上传病人端apk
+     * */
+    @RequestMapping(value="/pupload",produces = "text/html;charset=UTF-8")  
+    @ResponseBody
+    public String pupload(@RequestParam MultipartFile apk,HttpServletRequest request) throws IOException  
+    {  
+	    
+     	AppVersionUpdateResponse response = new AppVersionUpdateResponse();
+ 	   
+	    String filename = apk.getOriginalFilename();
+    	
+      if(apk.isEmpty()){
+    	  response.setCode("110");
+    	  response.setMessage("上传病人端app失败");
+    	  }else{
+    		
+    		
+    		  AppVersionUpdate appVersion;
+			try {
+				appVersion = appVersionUpdateService.getLatest("patient");
+				float versionCode = Float.valueOf(appVersion.getServerCode());
+				versionCode = (float) (versionCode + 0.1);
+				String newVersion = String.valueOf(versionCode);
+				appVersion.setServerCode(newVersion);
+				String appName = appVersion.getAppName();
+				appName.substring(0, 18);
+				appName="healthcloudpatient"+newVersion+".apk";
+				appVersion.setAppName(appName);
+				  appPackageService.save(apk.getInputStream(),appName);
+	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+appName;
+	    		  appVersion.setApkUrl(fileUrl);
+	    		  appVersion.setDescription("更新版本");
+	    		  appVersionUpdateService.addUpdate(appVersion);
+			} catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				String file = "healthcloudpatient0.1.apk";
+				appVersion = new AppVersionUpdate();
+				appVersion.setAppName(file);
+				appVersion.setDescription("添加病人apk");
+				appVersion.setServerCode("1.0");
+				appVersion.setType("patient");
+				
+				  appPackageService.save(apk.getInputStream(),file);
+	    		  String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/app/download?url="+file;
+	    		  appVersion.setApkUrl(fileUrl);
+			
+				 appVersionUpdateService.addUpdate(appVersion);
+			}
+
+	    		  response.setCode("0");
+	    		  response.setMessage("上传病人端app成功");
+
+    	  }
+	
+      return JSON.toJSONString(response);
+      
+    }
 
     /*
      * 
@@ -99,7 +177,7 @@ public class AppPackageController {
    
     	String filename = request.getParameter("url");
   
-    response.addHeader("Content-Disposition", "attachment;filename="+filename);  
+    	response.addHeader("Content-Disposition", "attachment;filename="+filename);  
        
     	GridFSDBFile gridFSDBFile = appPackageService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();

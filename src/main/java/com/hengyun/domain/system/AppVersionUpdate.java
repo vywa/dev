@@ -13,11 +13,13 @@ public class AppVersionUpdate implements Serializable{
 	private int id;													//更新版本id
 	private String appName;								//app名称
 	private String type;										//apk类型
+
 	private String serverCode;							//最新的apk版本
 	private String apkUrl;									//下载apk地址
 	private String description;							//描述信息
 	private Date date;											//更新时间
-	
+		
+
 	
 
 	public Date getDate() {

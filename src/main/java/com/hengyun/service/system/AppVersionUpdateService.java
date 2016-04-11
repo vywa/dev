@@ -1,5 +1,7 @@
 package com.hengyun.service.system;
 
+import java.util.List;
+
 import com.hengyun.domain.system.AppVersionUpdate;
 import com.hengyun.service.BaseService;
 
@@ -19,4 +21,9 @@ public interface AppVersionUpdateService  extends BaseService<AppVersionUpdate,I
 	 *  添加版本
 	 * */
 	public void addUpdate(AppVersionUpdate appVersionUpdate);
+	
+	/*
+	 *  获取列表
+	 * */
+	public List<AppVersionUpdate> queryList();
 }
