@@ -256,6 +256,7 @@ public class DiagnosisController {
 		DangerLevel dangerLevel = diagnosisService.assess(caseHistoryId);
 		int hightBloodPressure =  bloodPressureInfoService.getLevel(patientId);
 		riskFactor.setHightBloodPressure(hightBloodPressure);
+		MedicalNotice mn =null;
 		switch(dangerLevel){
 		case unknown:diagContent="未知";
 
@@ -267,11 +268,35 @@ public class DiagnosisController {
 		case not_danger: diagContent="正常";break;
 		case little_danger: diagContent="低危";break;
 		case moderate_danger: diagContent="中危";
+		//向医生发送危险通知
+		 mn= new MedicalNotice();
+		mn.setContent("用户诊断结果危险等级为: "+diagContent);
+		mn.setDangerLevel(dangerLevel);
+		mn.setNoticeFromId(doctor);
+		mn.setNoticeToId(patient);
+		mn.setSendTime(new Date());
+		mn.setType(noticeType.medical_notice);
+		//诊断通知
+		mn.setNoticeType(1);
+		medicalNoticeService.addNotice(mn);
+		break;
 		case more_danger: diagContent="高危";
+		//向医生发送危险通知
+		 mn = new MedicalNotice();
+		mn.setContent("用户诊断结果危险等级为: "+diagContent);
+		mn.setDangerLevel(dangerLevel);
+		mn.setNoticeFromId(doctor);
+		mn.setNoticeToId(patient);
+		mn.setSendTime(new Date());
+		mn.setType(noticeType.medical_notice);
+		//诊断通知
+		mn.setNoticeType(1);
+		medicalNoticeService.addNotice(mn);
+		break;
 		case most_danger: diagContent="极高危";
 		
 		//向医生发送危险通知
-				MedicalNotice mn = new MedicalNotice();
+				 mn = new MedicalNotice();
 				mn.setContent("用户诊断结果危险等级为: "+diagContent);
 				mn.setDangerLevel(dangerLevel);
 				mn.setNoticeFromId(doctor);

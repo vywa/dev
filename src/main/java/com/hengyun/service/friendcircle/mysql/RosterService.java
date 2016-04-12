@@ -15,6 +15,9 @@ public interface RosterService {
 	
 	public List<Integer> searchFriendList(String username,String searchName);
 	
+	//查询病人
+	public List<Integer> searchPatient(String searchName);
+	
 	//查询两个人是否是好友
 	public boolean makeFriend(String person1,String person2);
 }

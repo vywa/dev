@@ -70,7 +70,7 @@ public class DailyNewsController {
 
 		/*
 		 * 
-		 *  加载咨讯列表
+		 *  病人加载咨讯列表
 		 * 
 		 * */
 		@RequestMapping(value="/queryList",produces = "text/html;charset=UTF-8")
@@ -86,5 +86,21 @@ public class DailyNewsController {
 		
 		}
 		
-	
+		/*
+		 * 
+		 *  医生加载咨讯列表
+		 * 
+		 * */
+		@RequestMapping(value="/newsList",produces = "text/html;charset=UTF-8")
+		@ResponseBody
+		public String newsList(HttpServletRequest request){
+			List<DailyNews> list = dailyNewsService.queryList();
+			DailyNewsResponse response = new DailyNewsResponse();
+			response.setCode("206");
+			response.setMessage("查询成功");
+			response.setDaily(list);
+			return  JSON.toJSONString(response);
+		
+		
+		}
 }

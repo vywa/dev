@@ -23,8 +23,8 @@ public class EmailUtilServiceImpl implements EmailUtilService{
 	@Override
 	public int email(String email) {
 		// TODO Auto-generated method stub
-		int codeNum = (int)(Math.random()*1000000);
-		codeNum = codeNum>100000?codeNum:codeNum+100000;
+		int codeNum = (int)(Math.random()*10000);
+		codeNum = codeNum>1000?codeNum:codeNum+1000;
 		registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
 	//	registerCacheService.addTryCount(email);
 		String subject = "天衡会员确认邮件";

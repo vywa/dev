@@ -1,5 +1,6 @@
 package com.hengyun.service.impl.logininfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -285,6 +286,25 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		userAccountDao.updateFirst(query, update);
 		log.info("更改用户 "+userId+" 的用户信息成功");
 		return 1;
+	}
+
+	/*
+	 *  绑定亲情号
+	 * */
+	@Override
+	public void bindFriend(int userId,int friendId) {
+		// TODO Auto-generated method stub
+		Query query = Query.query(Criteria.where("id").is(userId));
+		UserAccount account = userAccountDao.queryOne(query);
+		List<Integer> friendList = account.getFriendList();
+		if(friendList==null){
+			friendList = new ArrayList<Integer>();
+			friendList.add(friendId);
+		} else {
+			friendList.add(friendId);
+		}
+		Update update = Update.update("friendList", friendList);
+		userAccountDao.updateFirst(query, update);
 	}
 
 

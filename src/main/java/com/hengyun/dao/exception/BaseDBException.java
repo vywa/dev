@@ -9,6 +9,4 @@ import com.hengyun.util.exception.ThealthRuntimeException;
 */
 public class BaseDBException extends ThealthRuntimeException {
 	
-	
-	
 }

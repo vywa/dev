@@ -68,38 +68,38 @@ public class DiagnosisServiceImpl extends BaseServiceImpl<Diagnosis,Integer> imp
 		boolean affiliated = affiliatedClinicalDiseaseService.hasDisease(acd);
 		DangerLevel danger = null;
 		switch(bloodLevel){
-		case 0:danger = DangerLevel.not_danger;
-			break;
+		case 0:
+		
 		case 1:
 			if(riskCount <=0) {
 				danger = DangerLevel.little_danger;
-			} else if(riskCount<=2){
+			}  if(riskCount<=2){
 				danger = DangerLevel.moderate_danger;
-			} else if(riskCount>=3 || damage ||diabetesMelliitus ){
+			}  if(riskCount>=3 || damage ||diabetesMelliitus ){
 				danger = DangerLevel.more_danger;
-			} else if(affiliated){
+			}  if(affiliated){
 				danger = DangerLevel.most_danger;
 			}
 			break;
 		case 2:
 			if(riskCount <=0) {
 				danger = DangerLevel.moderate_danger;
-			} else if(riskCount<=2){
+			}  if(riskCount<=2){
 				danger = DangerLevel.moderate_danger;
-			} else if(riskCount>=3 || damage ||diabetesMelliitus ){
+			}  if(riskCount>=3 || damage ||diabetesMelliitus ){
 				danger = DangerLevel.more_danger;
-			} else if(affiliated){
+			}  if(affiliated){
 				danger = DangerLevel.most_danger;
 			}
 			break;
 		case 3:
 			if(riskCount <=0) {
 				danger = DangerLevel.more_danger;
-			} else if(riskCount<=2){
+			}  if(riskCount<=2){
 				danger = DangerLevel.more_danger;
-			} else if(riskCount>=3 || damage ||diabetesMelliitus ){
+			}  if(riskCount>=3 || damage ||diabetesMelliitus ){
 				danger = DangerLevel.more_danger;
-			} else if(affiliated){
+			}  if(affiliated){
 				danger = DangerLevel.most_danger;
 			}
 			break;

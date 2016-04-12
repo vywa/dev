@@ -33,4 +33,7 @@ public interface UserAccountService  extends BaseService<UserAccount,Integer>{
 		
 		//验证第三方用户是否存在
 		public UserAccount validateThirdUserBySign(String sign, String type) ;
+		
+		//绑定亲情号
+		public void bindFriend(int userId,int friendId);
 }

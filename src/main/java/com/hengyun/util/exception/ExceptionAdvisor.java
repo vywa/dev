@@ -22,17 +22,19 @@ public class ExceptionAdvisor implements ThrowsAdvice
 	{
 		
 		Logger log = Logger.getLogger(target.getClass());
-		log.info("**************************************************************");
-		log.info("Error happened in class: " + target.getClass().getName());
-		log.info("Error happened in method: " + method.getName());
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(" 错误放生在类 :");
+		buffer.append(target.getClass().getName());
+		buffer.append(" 方法为 :");
+		buffer.append( target.getClass().getName());
+		
 			for (int i = 0; i < args.length; i++)
 			{
-				log.info("arg[" + i + "]: " + args[i]);
+				buffer.append(" 参数"+i+"为"+args[i]);
 			}
-		log.info("Exception class: " + ex.getClass().getName());
-		log.info("ex.getMessage():" + ex.getMessage());
-		ex.printStackTrace();
-		log.info("**************************************************************");
+		buffer.append(" 异常信息为: "+ex.getMessage());
+		String detail = buffer.toString();
+		log.info(detail);
 
 		// 在这里判断异常，根据不同的异常返回错误。
 		if (ex.getClass().equals(DataAccessException.class))

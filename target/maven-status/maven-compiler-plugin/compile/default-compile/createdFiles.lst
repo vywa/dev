@@ -66,6 +66,7 @@ com/hengyun/controller/monitor/ExceptionInfoController.class
 com/hengyun/service/casehistory/TargetOrganDamageService.class
 com/hengyun/domain/monitor/Event.class
 com/hengyun/controller/forum/PostCommentController.class
+com/hengyun/util/interceptor/ExceptionInterceptor.class
 com/hengyun/util/sms/sender/StringUtil.class
 com/hengyun/service/impl/patient/BloodPressureInfoServiceImpl.class
 com/hengyun/dao/impl/administrator/ResourcesDaoImpl.class

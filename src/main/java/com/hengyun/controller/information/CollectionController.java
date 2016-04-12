@@ -1,7 +1,5 @@
 package com.hengyun.controller.information;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,6 +41,7 @@ public class CollectionController {
 	public String subject(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
+		
 		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
 		
@@ -121,7 +120,7 @@ public class CollectionController {
 		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
 		int id = jsonObject.getIntValue("id");
-		collectionService.delete(userId, userId, 0);
+		collectionService.delete(userId, id, 0);
 		response.setCode("206");
 		response.setMessage("删除帖子成功");
 

@@ -198,9 +198,9 @@ public class RosterController {
 	/* 
 	 * 	搜索用户信息列表
 	 * */
-	@RequestMapping(value="/searchPatient",produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="/searchPatient2",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String searchPatient( HttpServletRequest request,@RequestParam String data) {
+	public String searchPatient2( HttpServletRequest request,@RequestParam String data) {
 
 			RosterResponse response = new RosterResponse();
 			int userId = (int)request.getAttribute("userId");
@@ -256,6 +256,68 @@ public class RosterController {
 		
 		return JSON.toJSONString(response);
 	}
+	
+	/* 
+	 * 	搜索用户信息列表
+	 * */
+	@RequestMapping(value="/searchPatient",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String searchPatient( HttpServletRequest request,@RequestParam String data) {
+
+			RosterResponse response = new RosterResponse();
+			//int userId = (int)request.getAttribute("userId");
+			JSONObject jsonObject = JSON.parseObject(data);
+			String searchName = jsonObject.getString("key");
+			List<Integer> idList = rosterService.searchPatient(searchName);
+
+			List<NickIcon> infos=new ArrayList<NickIcon>();
+			String birthday = null;
+			int age = 0;
+			for(int i=0;i<idList.size();i++){
+				Information information = informationService.query(idList.get(i));
+				UserAccount account = userAccountService.getUserAccountById(idList.get(i));
+				try {
+					birthday = information.getBirthday();
+					String digital = birthday.replaceAll("年", ".").replaceAll("月", ".").replaceAll("日", "");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd"); 
+					Date date2 = null; 
+					date2 = simpleDateFormat.parse(digital);
+					 age= new Date().getYear()-date2.getYear();
+				} catch (NullPointerException e1) {
+					// TODO Auto-generated catch block
+					age=30;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				 NickIcon nickIcon = new NickIcon();
+				 nickIcon.setIconUrl(information.getIconUrl());
+				 nickIcon.setBirthday(information.getBirthday());
+				 nickIcon.setEmail(account.getEmail());
+				 nickIcon.setHome(information.getHometown());
+				 nickIcon.setMobilephone(account.getMobilephone());
+				 nickIcon.setQq(account.getQQ());
+				 nickIcon.setDisease(information.getDisease());
+				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setUserId(account.getId());
+				 nickIcon.setWeiBo(account.getWeiBo());
+				 nickIcon.setWeiChat(account.getWeiChat());
+				 nickIcon.setWorkNum(account.getWorkNum());
+				 nickIcon.setAge(age);
+				 nickIcon.setSex(information.getSex());
+				infos.add(nickIcon);
+			
+			}
+			
+		
+
+			response.setCode("206");
+			response.setMessage("查询成功");
+			response.setInfos(infos);
+		
+		return JSON.toJSONString(response);
+	}
+	
 		
 		/* 
 		 * 获取指定的用户信息列表

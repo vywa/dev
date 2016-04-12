@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.loginInfo.DoctorInfo;
 import com.hengyun.domain.loginInfo.PasswordResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
@@ -49,9 +48,7 @@ public class UserAccountController {
 	 private static final Logger log = LoggerFactory.getLogger(UserAccountController.class);
 	@Resource
 	private UserAccountService userAccountService;
-	
-	
-	
+
 	@Resource
 	private RegisterCacheService registerCacheService;
 	
@@ -159,9 +156,9 @@ public class UserAccountController {
 	 * */
 		@RequestMapping(value="/bindRelative",produces = "text/html;charset=UTF-8")
 		@ResponseBody
-		public String bindRelative(@RequestParam String data){
+		public String bindRelative(@RequestParam String data,HttpServletRequest request){
 			JSONObject jsonObject =JSON.parseObject(data);
-			
+			ResponseCode responseCode = new ResponseCode();
 			String mobilephone = jsonObject.getString("mobilephone");
 			int codeNum = (int)(Math.random()*10000);
 			codeNum = codeNum>1000?codeNum:codeNum+1000;
@@ -171,8 +168,13 @@ public class UserAccountController {
 			SubmitResult result;
 			SmsSender sms = new SmsSender(mobilephone,codeNum);
 			result =  sms.send();
+			if(result.getCode()!=2){
+				responseCode.setCode("110");
+				responseCode.setMessage("请求发送失败，请重试");
+				return JSON.toJSONString(responseCode);
+			}
 			
-			ResponseCode responseCode = new ResponseCode();
+		
 			responseCode.setCode("206");
 			responseCode.setMessage("请求发送成功");
 			
@@ -180,6 +182,40 @@ public class UserAccountController {
 		
 			
 		}
+		
+		/*
+		 * 
+		 *  绑定亲情号请求
+		 * 
+		 * */
+			@RequestMapping(value="/confirmRelative",produces = "text/html;charset=UTF-8")
+			@ResponseBody
+			public String confirmRelative(@RequestParam String data,HttpServletRequest request){
+				int userId = (int)request.getAttribute("userId");
+				JSONObject jsonObject =JSON.parseObject(data);
+				String confirmCode = jsonObject.getString("code");
+				String mobilephone = jsonObject.getString("mobilephone");
+				ResponseCode responseCode = new ResponseCode();
+				Query query = Query.query(Criteria.where("mobilephone").is(mobilephone));
+				UserAccount account2 = userAccountService.queryOne(query);
+				int friendId = account2.getId();
+				
+				if(registerCacheService.getConfirmCode(mobilephone).equals(confirmCode)){
+					//绑定亲情号
+					userAccountService.bindFriend(userId, friendId);
+				} else {
+					responseCode.setCode("107");
+					responseCode.setMessage("验证码错误");
+				}
+			
+			
+				responseCode.setCode("206");
+				responseCode.setMessage("请求发送成功");
+				
+				return JSON.toJSONString(responseCode);
+			
+				
+			}
 	
 	/*
 	 * 短信发送
@@ -301,6 +337,7 @@ public class UserAccountController {
 		} else {
 			registerCacheService.addTryCount(email);
 		}
+		/*
 		int responseCode =email( email);
 		if(responseCode == -2){
 			log.debug("邮箱"+email+"已经注册");
@@ -313,7 +350,18 @@ public class UserAccountController {
 			registResult.setCode("106");
 			registResult.setMessage("too many times");
 		}
+`*/
+		int codeNum = (int)(Math.random()*10000);
+		codeNum = codeNum>1000?codeNum:codeNum+1000;
+		registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
+	//	registerCacheService.addTryCount(email);
+		String subject = "天衡会员注册邮件";
+		String content = "欢迎注册天衡医疗会员，您本次注册时使用的验证码是"+codeNum+"如果非本人操作，请忽略。";
+		String to = email;
+		simpleMail.sendMail( subject,  content,  to);
 
+		registResult.setCode("205");
+		registResult.setMessage("验证码发送成功");
 		return JSON.toJSONString(registResult);
 	
 	}

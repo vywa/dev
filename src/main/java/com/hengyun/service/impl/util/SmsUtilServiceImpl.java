@@ -21,8 +21,8 @@ public class SmsUtilServiceImpl implements SmsUtilService{
 	@Override
 	public int sms(String mobilephone) {
 	
-		int codeNum = (int)(Math.random()*1000000);
-		codeNum = codeNum>100000?codeNum:codeNum+100000;
+		int codeNum = (int)(Math.random()*10000);
+		codeNum = codeNum>1000?codeNum:codeNum+1000;
 		//存储在缓存内
 		registerCacheService.setConfirmCode(mobilephone, String.valueOf(codeNum));
 		

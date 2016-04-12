@@ -146,6 +146,60 @@ public class RosterServiceImpl implements RosterService{
 		return false;
 	}
 
+	/*
+	 *  查询所有病人列表
+	 * */
+	@Override
+	public List<Integer> searchPatient(String searchName) {
+		// TODO Auto-generated method stub
+		List<Integer> idList = new ArrayList<Integer>();
+		
+		String regex="([\u4e00-\u9fa5]+)";
+		Matcher matcher = Pattern.compile(regex).matcher(searchName);
+		
+		Pattern pattern = Pattern.compile("[0-9]*");
+	
+		boolean mobile= pattern.matcher(searchName).matches(); 
+		if(mobile){
+			Query query = new Query();
+			Pattern pattern1 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
+			query =query.addCriteria(Criteria.where("mobilephone").regex(pattern1)).addCriteria(Criteria.where("catagory").is("patient"));
+			List<UserAccount> ulist = userAccountService.queryList(query);
+			for(UserAccount account:ulist){
+				idList.add(account.getId());
+			}
+		}
+		else if(matcher.find()){
+			Query query = new Query();
+			Pattern pattern2 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
+			query =query.addCriteria(Criteria.where("trueName").regex(pattern2));
+			 List<Information> tempList = informationService.queryList(query);
+			 for(Information temp2 : tempList){
+				 int userId = temp2.getUserId();
+				 Query query2 = Query.query(Criteria.where("userId").is(userId).andOperator(Criteria.where("catagory").is("patient")));
+				 UserAccount userAccount = userAccountService.queryOne(query2);
+				 if(userAccount !=null){
+					 idList.add(temp2.getUserId());
+					 }
+				 }
+		} else {
+			Query query = new Query();
+			Pattern pattern2 = Pattern.compile("^" + searchName + ".*$", Pattern.CASE_INSENSITIVE);
+			query =query.addCriteria(Criteria.where("trueName").regex(pattern2));
+			 List<Information> tempList = informationService.queryList(query);
+			 for(Information temp2 : tempList){
+
+				 int userId = temp2.getUserId();
+				 Query query2 = Query.query(Criteria.where("userId").is(userId).andOperator(Criteria.where("catagory").is("patient")));
+				 UserAccount userAccount = userAccountService.queryOne(query2);
+				 if(userAccount !=null){
+					 idList.add(temp2.getUserId());
+					 }
+				 
+			 }
+	}
+			return idList;
+	}
 	
 
 }

@@ -111,7 +111,7 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 					list.remove(temp);
 				}
 			}
-			Update update = Update.update("subjectList", subjectList);
+			Update update = Update.update("subjectList", list);
 			collectionDao.updateFirst(query, update);
 		
 			break;
@@ -123,7 +123,7 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 					list1.remove(temp);
 				}
 			}
-			Update update2 = Update.update("dailyNewsList", dailyNewsList);
+			Update update2 = Update.update("dailyNewsList", list1);
 			collectionDao.updateFirst(query, update2);
 			break;
 		case 2:
@@ -134,7 +134,7 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 					list2.remove(temp);
 				}
 			}
-			Update update3 = Update.update("imCollection", imCollection);
+			Update update3 = Update.update("imCollection", list2);
 			collectionDao.updateFirst(query, update3);
 			break;
 		default:break;

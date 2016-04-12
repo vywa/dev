@@ -16,14 +16,7 @@ public class ProducerEmailServiceImpl implements EmailProducerService{
 	@Resource
 	 private Destination emailQueue;   
 	
-	public void sendSms(String message){
-		for(int i=0;i<2;i++){
-	//		producerService.sendMessage(destination, "你好，生产者，这是消息: "+(i+1));
-		//	producerService.sendMessage(sessionAwareQueue, " 测试SessionAwareMessageListener");
-		//	smsServiceImpl.sendMessage(adapterQueue, "测试MessageListenerAdapter　"+"实现短信的异步发送");
-		}
-	//	emailServiceImpl.sendEmail(emailQueue, message);
-	}
+	
 
 	@Override
 	public void sendEmail(String message) {
