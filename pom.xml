@@ -225,11 +225,12 @@
 	 -->
 	
 		<!-- 导入fastjson -->
-	<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.1.41</version>
+		<dependency>
+		<groupId>com.alibaba</groupId>
+		<artifactId>fastjson</artifactId>
+		<version>1.2.8</version>
 		</dependency>
+		
 		<!-- 引入jackson -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

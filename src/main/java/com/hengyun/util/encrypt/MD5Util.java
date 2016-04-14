@@ -8,7 +8,8 @@ import java.security.MessageDigest;
  * */
 public class MD5Util {
 
-	 public static String string2MD5(String inStr){  
+	 public static String string2MD5(String inStr){
+		 
 	        MessageDigest md5 = null;  
 	        try{  
 	            md5 = MessageDigest.getInstance("MD5");  

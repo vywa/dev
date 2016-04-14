@@ -10,13 +10,20 @@ import java.util.Date;
 */
 public class DailyNewsCollection implements Serializable{
 
-	private int id;											//收藏id
+	private int collectionId;						//收藏id
+	private int id;											//帖子id
 	private String url;									//链接地址
 	private Date collectionTime;				//收藏时间
 	private int type;										//收藏类型（帖子０，资讯１，及时通信２）
 	
 	
 	
+	public int getCollectionId() {
+		return collectionId;
+	}
+	public void setCollectionId(int collectionId) {
+		this.collectionId = collectionId;
+	}
 	public int getId() {
 		return id;
 	}

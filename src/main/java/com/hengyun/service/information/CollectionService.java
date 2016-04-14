@@ -19,7 +19,7 @@ public interface CollectionService  extends BaseService<Collection,Integer>{
 	 * 
 	 * */
 	
-	public void addCollection(DailyNewsCollection dailyNewsCollection,int userId,int type);
+	public int addCollection(DailyNewsCollection dailyNewsCollection,int userId,int type);
 	
 	/*
 	 * 

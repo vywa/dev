@@ -1,6 +1,7 @@
-package com.hengyun.domain.loginInfo;
+package com.hengyun.domain.account;
 
 import java.io.Serializable;
+import java.util.List;
 
 
 /**
@@ -10,6 +11,7 @@ import java.io.Serializable;
 */
 public class PatientInfo implements Serializable{
 
+	//账号信息
 	private int 								patientId;							//用户ID
 	private String 							username;							//用户名
 	private String 							mobilephone;					//用户手机号
@@ -20,6 +22,8 @@ public class PatientInfo implements Serializable{
 	private String							weiBo;									//weiBo
 	
 	private String							password;							//用户密码
+	private String 							encrptPassword;				//加密密码
+	private int 								status;									//账号状态（0正常，-1删除，１异常，２冻结）
 	
 	//病人信息
 	private String 							trueName;							//姓名
@@ -35,10 +39,39 @@ public class PatientInfo implements Serializable{
 	private String 							height;									//身高
 	private String 							weight;									//体重
 	
+	private List<Integer>				friendList;							//亲情号码
+	
 	//疾病管理
-	private String 							disease;								//患病（高血压，高血糖，高血脂）
+	private String 							disease;								//患病（１１１高血压，高血糖，高血脂）
 
+	
 	private String							recordTime;						//记录时间
+
+	
+	
+	public List<Integer> getFriendList() {
+		return friendList;
+	}
+
+	public void setFriendList(List<Integer> friendList) {
+		this.friendList = friendList;
+	}
+
+	public String getEncrptPassword() {
+		return encrptPassword;
+	}
+
+	public void setEncrptPassword(String encrptPassword) {
+		this.encrptPassword = encrptPassword;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public int getPatientId() {
 		return patientId;

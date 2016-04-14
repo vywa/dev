@@ -1,5 +1,6 @@
 package com.hengyun.service.impl.information;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,8 +13,10 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
+import com.hengyun.dao.forum.SubjectDao;
 import com.hengyun.dao.information.CollectionDao;
 import com.hengyun.dao.logininfo.IndexCollectionDao;
+import com.hengyun.dao.notice.DailyNewsDao;
 import com.hengyun.domain.information.Collection;
 import com.hengyun.domain.information.DailyNewsCollection;
 import com.hengyun.service.impl.BaseServiceImpl;
@@ -34,16 +37,23 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 	@Resource
 	private IndexCollectionDao indexCollectionDao;
 	
+	@Resource
+	private SubjectDao subjectDao;
+	
+	@Resource
+	private DailyNewsDao dailyNewsDao;
+	
 	/*
 	 * 
 	 * 	添加收藏
 	 * 
 	 * */
-	public void addCollection(DailyNewsCollection dailyNewsCollection,int userId,int type){
+	public int addCollection(DailyNewsCollection dailyNewsCollection,int userId,int type){
 		int id = indexCollectionDao.updateIndex("collectionId");
-		dailyNewsCollection.setId(id);
+		dailyNewsCollection.setCollectionId(id); 				//收藏id
 		dailyNewsCollection.setCollectionTime(new Date());
 		dailyNewsCollection.setType(type);
+		
 		Query query = Query.query(Criteria.where("userId").is(userId));
 		Collection collection = collectionDao.queryOne(query);
 		if(collection==null){
@@ -54,18 +64,45 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 		switch(type){
 		case 0:
 			List<DailyNewsCollection> subjectList = collection.getSubjectList();
+			if(subjectList == null){
+				subjectList = new ArrayList<DailyNewsCollection>();
+			}else {
+				for(DailyNewsCollection temp :subjectList){
+					if(temp.getId()==dailyNewsCollection.getId()){
+						return -1;
+					}
+				}
+			}
 			subjectList.add(dailyNewsCollection);
 			Update update = Update.update("subjectList", subjectList);
 			collectionDao.updateFirst(query, update);
 			break;
 		case 1:
 			List<DailyNewsCollection> dailyNewsList = collection.getDailyNewsList();
+			if(dailyNewsList == null){
+				dailyNewsList = new ArrayList<DailyNewsCollection>();
+			}else {
+				for(DailyNewsCollection temp :dailyNewsList){
+					if(temp.getId()==dailyNewsCollection.getId()){
+						return -1;
+					}
+				}
+			}
 			dailyNewsList.add(dailyNewsCollection);
 			Update update2 = Update.update("dailyNewsList", dailyNewsList);
 			collectionDao.updateFirst(query, update2);
 			break;
 		case 2:
 			List<DailyNewsCollection> imCollection = collection.getImCollection();
+			if(imCollection == null){
+				imCollection = new ArrayList<DailyNewsCollection>();
+			}else {
+				for(DailyNewsCollection temp :imCollection){
+					if(temp.getId()==dailyNewsCollection.getId()){
+						return -1;
+					}
+				}
+			}
 			imCollection.add(dailyNewsCollection);
 			Update update3 = Update.update("imCollection", imCollection);
 			collectionDao.updateFirst(query, update3);
@@ -74,6 +111,7 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 			break;
 		
 		}
+		return id;
 	}
 	
 	/*

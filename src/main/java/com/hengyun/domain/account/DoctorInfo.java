@@ -1,4 +1,4 @@
-package com.hengyun.domain.loginInfo;
+package com.hengyun.domain.account;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -18,6 +18,8 @@ public class DoctorInfo implements Serializable{
 	private String 							email;									//用户邮箱
 	private String							workNum;							//工号
 	private String							password;							//用户密码
+	private String							encryptPassword;			//加密密码
+	private int 								status;									//账号状态（0正常，-1删除，１异常，２冻结）
 	
 	//基本信息
 	private String 							trueName;							//姓名
@@ -29,15 +31,38 @@ public class DoctorInfo implements Serializable{
 	private int 								age;										//用户年龄
 	private String 							resume;								//简介
 	
+	
 	//医院
 	private String 							shortName;						//医院简称
 	private String							hospitalName;					//医院名称
 	private int									hospitalId;							//医院id
+
 	
 	private String 							recordTime;						//记录时间
 
 
 	
+	
+	public String getEncryptPassword() {
+		return encryptPassword;
+	}
+
+
+	public void setEncryptPassword(String encryptPassword) {
+		this.encryptPassword = encryptPassword;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+
 	public int getHospitalId() {
 		return hospitalId;
 	}

@@ -16,8 +16,7 @@ public class TockenGenerator {
 			builder.append(tocken).append(username);
 			String password =builder.toString();
 			return MD5Util.string2MD5(password);
-			
-		
+
        }  
 	
 	

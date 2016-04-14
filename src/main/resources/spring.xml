@@ -55,6 +55,16 @@ http://www.springframework.org/schema/cache
 <bean id="userAccountDao" class="com.hengyun.dao.impl.logininfo.UserAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="userAccountService" class="com.hengyun.service.impl.logininfo.UserAccountServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="adminAccountDao" class="com.hengyun.dao.impl.account.AdminAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="adminAccountService" class="com.hengyun.service.impl.account.AdminAccountServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="patientAccountDao" class="com.hengyun.dao.impl.account.PatientAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="patientAccountService" class="com.hengyun.service.impl.account.PatientAccountServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="doctorAccountDao" class="com.hengyun.dao.impl.account.DoctorAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="doctorAccountService" class="com.hengyun.service.impl.account.DoctorAccountServiceImpl" parent="BaseServiceImpl"/>
+
+
 <!-- 通知信息 -->
 <bean id="medicalNoticeDao" class="com.hengyun.dao.impl.notice.MedicalNoticeDaoImpl" parent="BaseMongodbDaoImpl"/>
 <bean id="medicalNoticeService" class="com.hengyun.service.impl.notice.MedicalNoticeServiceImpl" parent="BaseServiceImpl"/>
@@ -65,6 +75,16 @@ http://www.springframework.org/schema/cache
 
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="informationService" class="com.hengyun.service.impl.information.InformationServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="adminInformationDao" class="com.hengyun.dao.impl.information.AdminInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="adminInformationService" class="com.hengyun.service.impl.information.AdminInformationServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="patientInformationDao" class="com.hengyun.dao.impl.information.PatientInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="patientInformationService" class="com.hengyun.service.impl.information.PatientInformationServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="doctorInformationDao" class="com.hengyun.dao.impl.information.DoctorInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="doctorInformationService" class="com.hengyun.service.impl.information.DoctorInformationServiceImpl" parent="BaseServiceImpl"/>
+
 
 <bean id="collectionDao" class="com.hengyun.dao.impl.information.CollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="collectionService" class="com.hengyun.service.impl.information.CollectionServiceImpl" parent="BaseServiceImpl"/>
@@ -113,6 +133,12 @@ http://www.springframework.org/schema/cache
 
 <bean id="treateWaitDao" class="com.hengyun.dao.impl.casehistory.TreateWaitDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="treateWaitService" class="com.hengyun.service.impl.casehistory.TreateWaitServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="dietInfoDao" class="com.hengyun.dao.impl.casehistory.DietInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="dietInfoService"  class="com.hengyun.service.impl.casehistory.DietInfoServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="sportInfoDao" class="com.hengyun.dao.impl.casehistory.SportInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="sportInfoService" class="com.hengyun.service.impl.casehistory.SportInfoServiceImpl" parent="BaseServiceImpl"/>
 
 <!-- 监控模块 -->
 <bean id="exceptionInfoDao" class="com.hengyun.dao.impl.monitor.ExceptionInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  

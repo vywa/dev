@@ -40,7 +40,7 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 		// TODO Auto-generated method stub
 	
 			generalInfo.setUserId(userId);
-			 String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/info/download?iconUrl=1454079235481temp.jpg";
+			 String fileUrl = "http://"+NetworkUtil.getPhysicalHostIP()+"/healthcloudserver/info/download?iconUrl=index.jpg";
 			generalInfo.setIconUrl(fileUrl);
 			generalInfo.setRecordTime(String.valueOf(new Date().getTime()));
 			informationDao.save(generalInfo);

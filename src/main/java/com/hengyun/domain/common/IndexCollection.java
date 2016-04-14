@@ -59,8 +59,26 @@ public class IndexCollection implements Serializable{
 	 * */
 	private int updateId;								//更新id
 	
+	/*
+	 *  运动，饮食
+	 * */
+	private int sportId;									//运动id
+	private int dietId;										//饮食id
 	
 	
+	
+	public int getSportId() {
+		return sportId;
+	}
+	public void setSportId(int sportId) {
+		this.sportId = sportId;
+	}
+	public int getDietId() {
+		return dietId;
+	}
+	public void setDietId(int dietId) {
+		this.dietId = dietId;
+	}
 	public int getUpdateId() {
 		return updateId;
 	}

@@ -121,6 +121,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
     public void updateInser(Query query, Update update){
       
         this.mongoTemplate.upsert(query, update, this.getEntityClass());
+       
     }
     
 

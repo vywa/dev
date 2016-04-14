@@ -32,7 +32,6 @@ public class GeneralPersonServiceImpl extends BaseServiceImpl<GeneralPerson,Inte
 	//添加资料
 	public int add(GeneralPerson generalPerson) {
 		// TODO Auto-generated method stub
-		
 			generalPersonDao.save(generalPerson);
 			return 0;
 		

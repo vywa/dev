@@ -33,10 +33,11 @@ public class CollectionController {
 	@Resource
 	private CollectionService collectionService;
 	
+	
 	/*
 	 *  收藏帖子
 	 * */
-	@RequestMapping("subject")
+	@RequestMapping(value="subject",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String subject(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
@@ -45,9 +46,14 @@ public class CollectionController {
 		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
 		
-		collectionService.addCollection(collection, userId, 0);
+		int result = collectionService.addCollection(collection, userId, 0);
+		if(result<0){
+			response.setCode("110");
+			response.setMessage("你已经收藏，不能重复");
+		} else {
 		response.setCode("206");
 		response.setMessage("收藏帖子成功");
+		}
 
 		return JSON.toJSONString(response);
 		
@@ -56,17 +62,21 @@ public class CollectionController {
 	/*
 	 *  收藏资讯
 	 * */
-	@RequestMapping("dailyNews")
+	@RequestMapping(value="dailyNews",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String dailyNews(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
-		
-		collectionService.addCollection(collection, userId,1);
+		int result = collectionService.addCollection(collection, userId,1);
+		if(result<0){
+			response.setCode("110");
+			response.setMessage("你已经收藏，不能重复");
+		} else {
 		response.setCode("206");
-		response.setMessage("收藏资讯成功");
+		response.setMessage("收藏帖子成功");
+		}
 
 		return JSON.toJSONString(response);
 		
@@ -75,17 +85,21 @@ public class CollectionController {
 	/*
 	 *  收藏及时通信内容
 	 * */
-	@RequestMapping("im")
+	@RequestMapping(value="im",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String im(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
-	
-		collectionService.addCollection(collection, userId, 2);
+		int result = collectionService.addCollection(collection, userId, 2);
+		if(result<0){
+			response.setCode("110");
+			response.setMessage("你已经收藏，不能重复");
+		} else {
 		response.setCode("206");
-		response.setMessage("收藏及时通信内容成功");
+		response.setMessage("收藏帖子成功");
+		}
 
 		return JSON.toJSONString(response);
 		
@@ -94,7 +108,7 @@ public class CollectionController {
 	/*
 	 *  查看用户收藏列表
 	 * */
-	@RequestMapping("list")
+	@RequestMapping(value="list",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String list(HttpServletRequest request){
 	
@@ -112,13 +126,14 @@ public class CollectionController {
 	/*
 	 *  删除帖子列表
 	 * */
-	@RequestMapping("dsubject")
+	@RequestMapping(value="dsubject",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String dsubject(@RequestParam String data,HttpServletRequest request){
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
 		JSONObject jsonObject =JSON.parseObject(data);
+		
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 0);
 		response.setCode("206");
@@ -131,7 +146,7 @@ public class CollectionController {
 	/*
 	 *  删除资讯列表
 	 * */
-	@RequestMapping("ddailyNews")
+	@RequestMapping(value="ddailyNews",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String ddailyNews(@RequestParam String data,HttpServletRequest request){
 	
@@ -150,7 +165,7 @@ public class CollectionController {
 	/*
 	 *  删除及时通信列表
 	 * */
-	@RequestMapping("dim")
+	@RequestMapping(value="dim",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String dim(@RequestParam String data,HttpServletRequest request){
 	
