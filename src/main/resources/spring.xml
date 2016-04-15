@@ -55,8 +55,7 @@ http://www.springframework.org/schema/cache
 <bean id="userAccountDao" class="com.hengyun.dao.impl.logininfo.UserAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="userAccountService" class="com.hengyun.service.impl.logininfo.UserAccountServiceImpl" parent="BaseServiceImpl"/>
 
-<bean id="adminAccountDao" class="com.hengyun.dao.impl.account.AdminAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="adminAccountService" class="com.hengyun.service.impl.account.AdminAccountServiceImpl" parent="BaseServiceImpl"/>
+
 
 <bean id="patientAccountDao" class="com.hengyun.dao.impl.account.PatientAccountDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="patientAccountService" class="com.hengyun.service.impl.account.PatientAccountServiceImpl" parent="BaseServiceImpl"/>
@@ -76,14 +75,6 @@ http://www.springframework.org/schema/cache
 <bean id="informationDao" class="com.hengyun.dao.impl.information.InformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="informationService" class="com.hengyun.service.impl.information.InformationServiceImpl" parent="BaseServiceImpl"/>
 
-<bean id="adminInformationDao" class="com.hengyun.dao.impl.information.AdminInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="adminInformationService" class="com.hengyun.service.impl.information.AdminInformationServiceImpl" parent="BaseServiceImpl"/>
-
-<bean id="patientInformationDao" class="com.hengyun.dao.impl.information.PatientInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="patientInformationService" class="com.hengyun.service.impl.information.PatientInformationServiceImpl" parent="BaseServiceImpl"/>
-
-<bean id="doctorInformationDao" class="com.hengyun.dao.impl.information.DoctorInformationDaoImpl" parent="BaseMongodbDaoImpl"/>  
-<bean id="doctorInformationService" class="com.hengyun.service.impl.information.DoctorInformationServiceImpl" parent="BaseServiceImpl"/>
 
 
 <bean id="collectionDao" class="com.hengyun.dao.impl.information.CollectionDaoImpl" parent="BaseMongodbDaoImpl"/>  
@@ -170,6 +161,11 @@ http://www.springframework.org/schema/cache
 
 <bean id="subjectAvailableListDao" class="com.hengyun.dao.impl.forum.SubjectAvailableListDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="subjectAvailableListService" class="com.hengyun.service.impl.forum.SubjectAvailableListServiceImpl" parent="BaseServiceImpl"/>
+
+<!-- 病人病历 -->
+<bean id="medicalRecordDao" class="com.hengyun.dao.impl.health.MedicalRecordDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="medicalRecordService" class="com.hengyun.service.impl.health.MedicalRecordServiceImpl" parent="BaseServiceImpl"/>
+
 
 <!-- 病人健康数据 -->
 

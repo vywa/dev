@@ -17,7 +17,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
 <!-- Spring 统一异常处理  ExceptionAdvisor配置 -->  
 
  <bean id="exceptionHandler" class="com.hengyun.util.exception.ExceptionAdvisor"></bean>
-   <bean id="serviceSecurityInterceptor" class="com.hengyun.util.interceptor.SecurityControlInterceptor" />
+ 
     <!-- Bean自动代理处理器 配置-->    
 <bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator" >  
    <property name="beanNames">  
@@ -26,29 +26,16 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.
        <value>*Controller</value>       
         <value>*Service</value> 
     </list>  
+    
    </property>  
    <property name="interceptorNames">  
+   
     <list>  
-       <!--   <value>exceptionHandler</value> -->
-       <!--   <value>logInterceptor</value> -->  
-      	<value>serviceSecurityInterceptor</value>
+       <value>exceptionHandler</value>     
     </list>  
    </property>  
 </bean>  
 
-
-<bean class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator" >  
-   <property name="beanNames">  
-    <list>   
-       <value>*Controller</value>       
-    </list>  
-   </property>  
-   <property name="interceptorNames">  
-    <list>  
-      	<value>serviceSecurityInterceptor</value>
-    </list>  
-   </property>  
-</bean>  
 	<!-- 
 	<bean id="springMethodInterceptor" class="com.hengyun.util.interceptor.AllowedInterceptor" ></bean>
 	    <aop:config>

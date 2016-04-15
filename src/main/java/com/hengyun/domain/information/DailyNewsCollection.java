@@ -15,8 +15,7 @@ public class DailyNewsCollection implements Serializable{
 	private String url;									//链接地址
 	private Date collectionTime;				//收藏时间
 	private int type;										//收藏类型（帖子０，资讯１，及时通信２）
-	
-	
+		
 	
 	public int getCollectionId() {
 		return collectionId;

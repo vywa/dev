@@ -10,6 +10,6 @@ import com.hengyun.domain.account.PatientInfo;
 */
 public interface PatientAccountDao extends BaseMongodbDao<PatientInfo,Integer>{
 
-
+	
 	
 }

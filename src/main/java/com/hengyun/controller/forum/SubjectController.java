@@ -1,5 +1,6 @@
 package com.hengyun.controller.forum;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,7 +23,6 @@ import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
-import com.hengyun.util.annotation.SecurityControl;
 
 /*
  *  帖子管理
@@ -276,5 +276,25 @@ public class SubjectController {
 		return JSON.toJSONString(response);
 	}
 	
+	/*
+	 * 查询我的帖子列表
+	 * 
+	 * */
+	
+	@RequestMapping(value="/detail",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String detail(HttpServletRequest request){
+
+		int subjectId =Integer.valueOf(request.getParameter("id"));
+		PostListResponseCode response = new PostListResponseCode();
+		Subject subject = subjectService.subjectDetail(subjectId);
+		response.setResponseCode(0);
+		response.setDescription("查询我的问题成功");
+		List<Subject> subjectList = new ArrayList<Subject>();
+		subjectList.add(subject);
+		response.setSubjectList(subjectList);
+		
+		return JSON.toJSONString(response);
+	}
 
 }

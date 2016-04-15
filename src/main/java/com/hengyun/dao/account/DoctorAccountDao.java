@@ -11,6 +11,4 @@ import com.hengyun.domain.account.DoctorInfo;
 public interface DoctorAccountDao extends BaseMongodbDao<DoctorInfo,Integer>{
 	
 	
-	
-	
 }

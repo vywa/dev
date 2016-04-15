@@ -6,6 +6,33 @@ package com.hengyun.util.exception;
 */
 public class ThealthRuntimeException extends RuntimeException{
 
+	private int code;
+	
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+
+	public ThealthRuntimeException(int code) {
+		super();
+		this.code = code;
+	}
+	
+	public ThealthRuntimeException(int code,String msg) {
+		super(msg);
+		this.code = code;
+	}
+	
+	public ThealthRuntimeException(int code,String msg,Throwable cause) {
+		super(msg,cause);
+		this.code = code;
+	}
+	
+
 	public ThealthRuntimeException(){
 		super();
 	}

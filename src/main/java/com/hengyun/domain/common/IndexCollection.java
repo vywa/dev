@@ -65,8 +65,18 @@ public class IndexCollection implements Serializable{
 	private int sportId;									//运动id
 	private int dietId;										//饮食id
 	
+	/*
+	 *  病历记录
+	 * */
+	private int medicalRecordId;					//病历记录id
+
 	
-	
+	public int getMedicalRecordId() {
+		return medicalRecordId;
+	}
+	public void setMedicalRecordId(int medicalRecordId) {
+		this.medicalRecordId = medicalRecordId;
+	}
 	public int getSportId() {
 		return sportId;
 	}

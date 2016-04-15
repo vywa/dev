@@ -9,12 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.aop.ThrowsAdvice;
 import org.springframework.dao.DataAccessException;
 
-/**
- * 由Spring AOP调用 输出异常信息，把程序异常抛向业务异常
- * 
- * @author bob
- *
- */
+
 public class ExceptionAdvisor implements ThrowsAdvice
 {
 	public void afterThrowing(Method method, Object[] args, Object target,
@@ -37,6 +32,7 @@ public class ExceptionAdvisor implements ThrowsAdvice
 		log.info(detail);
 
 		// 在这里判断异常，根据不同的异常返回错误。
+		/*
 		if (ex.getClass().equals(DataAccessException.class))
 		{
 			ex.printStackTrace();
@@ -91,5 +87,6 @@ public class ExceptionAdvisor implements ThrowsAdvice
 			ex.printStackTrace();
 			throw new BusinessException("程序内部错误，操作失败！" + ex.getMessage());
 		}
+		*/
 	}
 }

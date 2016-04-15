@@ -1,19 +1,23 @@
 package com.hengyun.util.exception;
 
 
-/**
- * 自定义业务异常处理类    友好提示
- * @author bob
- *
- */
+/*
+ *  业务异常类
+ * 
+ * */
 public class BusinessException extends RuntimeException
 {
 	
 	private static final long serialVersionUID = -4641659455971522864L;
+	private int code;
+	
 
-	public BusinessException(String frdMessage)
-	{
-		super(createFriendlyErrMsg(frdMessage));
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public BusinessException(Throwable throwable)
@@ -21,24 +25,21 @@ public class BusinessException extends RuntimeException
 		super(throwable);
 	}
 
-	public BusinessException(Throwable throwable, String frdMessage)
+	
+	public BusinessException(String message,Throwable throwable)
 	{
+		super(message,throwable);
+	}
+
+	public BusinessException(int code,Throwable throwable) {
 		super(throwable);
+		this.code = code;
+	}
+	
+	public BusinessException(int code,String message,Throwable throwable) {
+		super(message,throwable);
+		this.code = code;
 	}
 
-	private static String createFriendlyErrMsg(String msgBody)
-	{
-		String prefixStr = "抱歉，";
-		String suffixStr = " 请稍后再试或与管理员联系！";
-
-		StringBuffer friendlyErrMsg = new StringBuffer("");
-
-		friendlyErrMsg.append(prefixStr);
-
-		friendlyErrMsg.append(msgBody);
-
-		friendlyErrMsg.append(suffixStr);
-
-		return friendlyErrMsg.toString();
-	}
+	
 }

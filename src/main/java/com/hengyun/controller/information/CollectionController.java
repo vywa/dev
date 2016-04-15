@@ -1,5 +1,8 @@
 package com.hengyun.controller.information;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,7 +19,12 @@ import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.Collection;
 import com.hengyun.domain.information.CollectionResponse;
 import com.hengyun.domain.information.DailyNewsCollection;
+import com.hengyun.domain.notice.DailyNews;
+import com.hengyun.domain.notice.DailyNewsResponse;
+import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.information.CollectionService;
+import com.hengyun.service.notice.DailyNewsService;
+import com.hengyun.util.network.NetworkUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -32,18 +40,26 @@ public class CollectionController {
 	
 	@Resource
 	private CollectionService collectionService;
-	
-	
+	@Resource
+	private SubjectService subjectService;
+	@Resource
+	private DailyNewsService dailyNewsService;
+
 	/*
 	 *  收藏帖子
 	 * */
 	@RequestMapping(value="subject",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String subject(@RequestParam String data,HttpServletRequest request){
+	
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		
-		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
+		int subjectId = jsonObject.getIntValue("id");
+		String ip = NetworkUtil.getPhysicalHostIP();
+    	String url = "http://"+ip+"/healthcloudserver/subject/details?id="+subjectId;   	
+		DailyNewsCollection collection = new DailyNewsCollection();
+		collection.setId(subjectId);
+		collection.setUrl(url);
 		int userId = (int)request.getAttribute("userId");
 		
 		int result = collectionService.addCollection(collection, userId, 0);
@@ -65,10 +81,19 @@ public class CollectionController {
 	@RequestMapping(value="dailyNews",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String dailyNews(@RequestParam String data,HttpServletRequest request){
+
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
+		int subjectId = jsonObject.getIntValue("id");
+		DailyNews dailyNews = dailyNewsService.queryById(subjectId);
+		String url = dailyNews.getUrl();
+		
 		int userId = (int)request.getAttribute("userId");
+		DailyNewsCollection collection = new DailyNewsCollection();
+		collection.setId(subjectId);
+		String ip = NetworkUtil.getPhysicalHostIP();
+    	//String url = "http://"+ip+"/healthcloudserver/dnews/load?id="+subjectId;   	
+    	collection.setUrl(url);
 		int result = collectionService.addCollection(collection, userId,1);
 		if(result<0){
 			response.setCode("110");
@@ -106,22 +131,32 @@ public class CollectionController {
 	}
 	
 	/*
-	 *  查看用户收藏列表
+	 *  查看用户资讯收藏列表
 	 * */
 	@RequestMapping(value="list",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String list(HttpServletRequest request){
 	
-		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
 		Collection list = collectionService.show(userId);
+		List<DailyNewsCollection> dailyList = list.getDailyNewsList();
+		DailyNewsResponse response = new DailyNewsResponse();
+		List<DailyNews> dlist = new ArrayList<DailyNews>();
+		
+		for(DailyNewsCollection temp:dailyList){
+			DailyNews daily = dailyNewsService.queryById(temp.getId());
+			dlist.add(daily);
+			
+		}
+		
 		response.setCode("206");
 		response.setMessage("查询成功");
-		response.setCollection(list);
+		response.setDaily(dlist);
 
 		return JSON.toJSONString(response);
 		
 	}
+
 	
 	/*
 	 *  删除帖子列表
