@@ -9,6 +9,7 @@ public class NickIcon {
 	private String email;						//邮箱
 	private String disease;					//患病
 	private String qq;							//qq号
+	private String trueName;				//用户真实名称
 	private String weiChat;					//微信
 	private String weiBo;						//微博
 	private String workNum;			   //工号
@@ -20,6 +21,12 @@ public class NickIcon {
 	
 	
 
+	public String getTrueName() {
+		return trueName;
+	}
+	public void setTrueName(String trueName) {
+		this.trueName = trueName;
+	}
 	public String getDisease() {
 		return disease;
 	}

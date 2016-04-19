@@ -62,6 +62,23 @@ public class DietInfoController {
 	}
 	
 	/*
+	 *  医生查询病人饮食习惯
+	 * */
+	@RequestMapping(value="/dquery",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String dquery(@RequestParam String data,HttpServletRequest request){
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId");
+	
+		List<DietInfo> list = dietInfoService.getDietList(userId);
+		DietInfoResponse response = new DietInfoResponse();
+		response.setDietInfoList(list);
+		response.setCode("206");
+		response.setMessage("查询饮食成功");
+		return JSON.toJSONString(response);
+	}
+	
+	/*
 	 *  更新饮食习惯
 	 * */
 	@RequestMapping(value="/delete",produces = "text/html;charset=UTF-8")

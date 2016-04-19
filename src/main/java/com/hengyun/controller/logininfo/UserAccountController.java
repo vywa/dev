@@ -77,7 +77,6 @@ public class UserAccountController {
 	private LoginInfoService loginInfoService;
 	
 
-	
 	/*
 	 * 
 	 *  发送短信
@@ -117,6 +116,7 @@ public class UserAccountController {
 	}
 	
 	/*
+	 * 
 	 *  发送邮件
 	 * 
 	 * */

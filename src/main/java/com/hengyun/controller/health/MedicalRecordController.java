@@ -48,7 +48,9 @@ public class MedicalRecordController {
 	}
 	
 	/*
-	 *  医生查询病历情况
+	 * 
+	 *   医生查询病历情况
+	 *  
 	 * */
 	@RequestMapping(value="/dquery",produces = "text/html;charset=UTF-8")
 	@ResponseBody

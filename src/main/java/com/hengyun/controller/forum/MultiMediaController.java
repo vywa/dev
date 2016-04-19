@@ -1,5 +1,8 @@
 package com.hengyun.controller.forum;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -53,14 +56,15 @@ public class MultiMediaController {
     	    String originalfilename = media.getOriginalFilename();
     	  
     	    String filename = new Date().getTime()+originalfilename;
-    	    System.out.println(filename);
+    	    
 	    	
 	      if(media.isEmpty()){
 	    	  response.setCode("110");
 	    	  response.setMessage("upload image failure");
 	    	  }else{
-
-	    		  multiMediaService.save(media.getInputStream(),filename);
+	    		
+	    		 multiMediaService.save(media.getInputStream(),filename);
+	    		  
 	    		  
 	    		  response.setCode("0");
 	    		  response.setResponseCode(0);
@@ -86,17 +90,33 @@ public class MultiMediaController {
     	ResponseCode responseCode = new ResponseCode();
    
     	String filename = request.getParameter("url");
-  
+    	response.setContentType("video/mpeg4");
+    	response.addHeader("Content-Disposition", "attachment;filename="+filename);  
     	GridFSDBFile gridFSDBFile = multiMediaService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();
+    	File file = new File(filename);
+    	FileOutputStream fout = new FileOutputStream(file);
+    	byte[] a = new byte[1024];
+    	int d;
+    	while( (d=in.read(a,0,a.length))!= -1){ 
+    		fout.write(a,0,d);     
+    		}
+    	in.close();
+    	fout.flush();
+		fout.close();
+		
+    	FileInputStream fin = new FileInputStream(file);
     	OutputStream os = response.getOutputStream();  //创建输出流
-		byte[] b = new byte[1024];  
-		while( in.read(b)!= -1){ 
-		os.write(b);     
+    	byte[] b = new byte[1024];
+		int z;
+		while( (z=fin.read(b,0,b.length))!= -1){ 
+		os.write(b,0,z);     
 		}
-		in.close(); 
+		fin.close(); 
 		os.flush();
 		os.close();
+    	
+	
 		responseCode.setCode("208");
 		responseCode.setMessage("download success");
 

@@ -161,7 +161,7 @@ public class InfomationController {
 
 	    	response.setContentType("image/jpeg"); // 设置返回内容格式
 	    	String filename = request.getParameter("iconUrl");
-	    
+	    	response.addHeader("Content-Disposition", "attachment;filename="+filename);  
 	    	String icon = filename;
 	    	GridFSDBFile gridFSDBFile = IconDao.getByFileName(icon);
 	    	try{
@@ -172,13 +172,14 @@ public class InfomationController {
 	    		in = gridFSDBFile2.getInputStream();
 	    	}
 	    	 os = response.getOutputStream();  //创建输出流
-    		byte[] b = new byte[1024];  
-    		while( in.read(b)!= -1){ 
-    		os.write(b);     
-    		}
-    		in.close(); 
-    		os.flush();
-    		os.close();
+	    		byte[] b = new byte[1024];
+	    		int z;
+	    		while( (z=in.read(b,0,b.length))!= -1){ 
+	    		os.write(b,0,z);     
+	    		}
+	    		in.close(); 
+	    		os.flush();
+	    		os.close();
     		responseCode.setCode("208");
     		responseCode.setMessage("download success");
 	    	

@@ -60,7 +60,25 @@ public class SportInfoController {
 		SportInfoResponse response = new SportInfoResponse();
 		response.setSportList(list);
 		response.setCode("206");
-		response.setMessage("查询健康习惯成功");
+		response.setMessage("查询运动记录成功");
+		return JSON.toJSONString(response);
+	}
+	
+	/*
+	 *  医生查询病人运动情况
+	 * */
+	@RequestMapping(value="/dquery",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String dquerySport(@RequestParam String data,HttpServletRequest request){
+		
+		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = jsonObject.getIntValue("userId"); 
+		
+		List<SportInfo> list = sportInfoService.getSportList(userId);
+		SportInfoResponse response = new SportInfoResponse();
+		response.setSportList(list);
+		response.setCode("206");
+		response.setMessage("查询运动记录成功");
 		return JSON.toJSONString(response);
 	}
 	

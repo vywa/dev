@@ -77,7 +77,7 @@ public class RosterController {
 					age = new Date().getYear()-date2.getYear();
 				} catch (NullPointerException e) {
 					// TODO Auto-generated catch block
-					age = 40;
+					age = 0;
 				}  catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -90,6 +90,7 @@ public class RosterController {
 				 nickIcon.setMobilephone(userAccount.getMobilephone());
 				 nickIcon.setQq(userAccount.getQQ());
 				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setTrueName(information.getTrueName());
 				 nickIcon.setDisease(information.getDisease());
 				 nickIcon.setUserId(userAccount.getId());
 				 nickIcon.setWeiBo(userAccount.getWeiBo());
@@ -163,7 +164,7 @@ public class RosterController {
 					 age= new Date().getYear()-date2.getYear();
 				} catch (NullPointerException e1) {
 					// TODO Auto-generated catch block
-					age=30;
+					age=0;
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -177,6 +178,7 @@ public class RosterController {
 				 nickIcon.setMobilephone(userAccount.getMobilephone());
 				 nickIcon.setQq(userAccount.getQQ());
 				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setTrueName(information.getTrueName());
 				 nickIcon.setDisease(information.getDisease());
 				 nickIcon.setUserId(userAccount.getId());
 				 nickIcon.setWeiBo(userAccount.getWeiBo());
@@ -224,7 +226,7 @@ public class RosterController {
 					 age= new Date().getYear()-date2.getYear();
 				} catch (NullPointerException e1) {
 					// TODO Auto-generated catch block
-					age=30;
+					age=0;
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -238,6 +240,7 @@ public class RosterController {
 				 nickIcon.setQq(account.getQQ());
 				 nickIcon.setDisease(information.getDisease());
 				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setTrueName(information.getTrueName());
 				 nickIcon.setUserId(account.getId());
 				 nickIcon.setWeiBo(account.getWeiBo());
 				 nickIcon.setWeiChat(account.getWeiChat());
@@ -285,7 +288,7 @@ public class RosterController {
 					 age= new Date().getYear()-date2.getYear();
 				} catch (NullPointerException e1) {
 					// TODO Auto-generated catch block
-					age=30;
+					age=0;
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -299,6 +302,7 @@ public class RosterController {
 				 nickIcon.setQq(account.getQQ());
 				 nickIcon.setDisease(information.getDisease());
 				 nickIcon.setNickName(information.getTrueName());
+				 nickIcon.setTrueName(information.getTrueName());
 				 nickIcon.setUserId(account.getId());
 				 nickIcon.setWeiBo(account.getWeiBo());
 				 nickIcon.setWeiChat(account.getWeiChat());
@@ -347,7 +351,7 @@ public class RosterController {
 							age = new Date().getYear()-date2.getYear();
 						} catch (NullPointerException e1) {
 							// TODO Auto-generated catch block
-							age=45;
+							age=0;
 						}catch (ParseException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -361,6 +365,7 @@ public class RosterController {
 						 nickIcon.setMobilephone(account.getMobilephone());
 						 nickIcon.setQq(account.getQQ());
 						 nickIcon.setNickName(information.getTrueName());
+						 nickIcon.setTrueName(information.getTrueName());
 						 nickIcon.setDisease(information.getDisease());
 						 nickIcon.setUserId(account.getId());
 						 nickIcon.setWeiBo(account.getWeiBo());
