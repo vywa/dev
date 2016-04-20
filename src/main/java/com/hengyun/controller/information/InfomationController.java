@@ -456,5 +456,25 @@ public class InfomationController {
 	}
 	
 	
-
+	/*
+	 * 添加病人
+	 * 
+	 * */
+	@RequestMapping(value="/disease",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String disease(HttpServletRequest request,@RequestParam String data){
+		ResponseCode response = new ResponseCode();
+		JSONObject jsonObject =JSON.parseObject(data);
+		
+		int userId = jsonObject.getIntValue("userId");
+		String disease = jsonObject.getString("disease");
+		
+		Query query =Query.query(Criteria.where("userId").is(userId));
+		 long recordTime = Long.valueOf(new Date().getTime());
+		Update update = Update.update("disease", disease).set("recordTime", String.valueOf(recordTime))	;
+		informationService.updateFirst(query, update);
+		response.setCode("206");
+		response.setMessage("添加疾病信息成功");
+		 return JSON.toJSONString(response);
+	}
 }

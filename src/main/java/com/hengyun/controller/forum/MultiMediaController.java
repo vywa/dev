@@ -7,11 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +63,43 @@ public class MultiMediaController {
 	    	
 	      if(media.isEmpty()){
 	    	  response.setCode("110");
+	    	  response.setMessage("上传文件失败");
+	    	  }else{
+	    		
+	    		  String videoPath = "/home/bob/multimedia/download/";
+	    		  FileUtils.writeByteArrayToFile(new File(videoPath,filename), media.getBytes());
+
+	    		  response.setCode("0");
+	    		  response.setResponseCode(0);
+	    		  response.setDescription("上传成功");
+	    		  String fileUrl = "http://"+ip+"/download/"+filename;
+	    		  response.setMessage(fileUrl);
+	    		  response.setFileUrl(fileUrl);
+	    	  }
+    	
+	      return JSON.toJSONString(response);
+      
+    }
+          
+	/*
+	 * 
+	 *  多媒体信息上传
+	 * 
+	 * 
+    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
+    @ResponseBody
+    public String upload(@RequestParam MultipartFile media,HttpServletRequest request) throws IOException  
+    {  
+	    
+	    	UploadResponseCode response = new UploadResponseCode();
+	    	String ip = NetworkUtil.getPhysicalHostIP();
+    	    String originalfilename = media.getOriginalFilename();
+    	  
+    	    String filename = new Date().getTime()+originalfilename;
+    	    
+	    	
+	      if(media.isEmpty()){
+	    	  response.setCode("110");
 	    	  response.setMessage("upload image failure");
 	    	  }else{
 	    		
@@ -76,9 +116,8 @@ public class MultiMediaController {
     	
 	      return JSON.toJSONString(response);
       
-    }
-          
-
+    }*/
+    
     /*
      * 
      *  查询多媒体文件

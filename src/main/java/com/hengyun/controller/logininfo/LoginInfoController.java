@@ -239,6 +239,7 @@ public class LoginInfoController {
 		String recordTime = jsonObject.getString("recordTime");
 		String username = jsonObject.getString("openId");
 		String type= jsonObject.getString("type");
+	
 		String userLoginIp = request.getRemoteAddr();
 		
 		Date date= null;

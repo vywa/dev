@@ -63,6 +63,8 @@ public class ReplySubjectController {
 			info = informationService.queryOne(query);
 			String forumName = null;
 			UserAccount account = userAccountService.queryById(userId);
+			Information information = informationService.query(userId);
+			String name = information.getTrueName();
 			String trueName = account.getUsername();
 			String mobilephone =account.getMobilephone();
 			String email =account.getEmail();
@@ -72,6 +74,8 @@ public class ReplySubjectController {
 		
 			if(trueName!=null){
 				forumName=trueName;
+			} else if(name!=null){
+				forumName=name;
 			} else if(mobilephone!=null){
 				forumName=mobilephone;
 			} else if(email!=null){

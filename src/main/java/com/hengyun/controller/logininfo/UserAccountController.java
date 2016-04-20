@@ -207,8 +207,7 @@ public class UserAccountController {
 					responseCode.setCode("107");
 					responseCode.setMessage("验证码错误");
 				}
-			
-			
+
 				responseCode.setCode("206");
 				responseCode.setMessage("请求发送成功");
 				
@@ -267,7 +266,8 @@ public class UserAccountController {
 	}
 
     /*
-     * 短信接收注册
+     * 
+     *  短信接收注册
      * 
      * */
 	@RequestMapping("/smsReceive")
@@ -933,13 +933,11 @@ public class UserAccountController {
     	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 		String confirmCode = jsonObject.getString("code");
-		
-    //	String tocken = request.getParameter("tocken");
+
     	ResponseCode response = new ResponseCode();
     	int userId = (int)request.getAttribute("userId");
     	
-    	//int userId = loginInfoService.isOnline(tocken);
-    	
+    
 			if(type.equals("email")){			//更改邮箱
 				if(userAccountService.existUser(username,"email")>0){
 					  response.setCode("103");

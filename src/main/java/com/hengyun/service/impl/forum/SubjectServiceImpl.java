@@ -87,6 +87,8 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		
 			String forumName = null;
 			UserAccount account = userAccountService.queryById(userId);
+			Information information = informationService.query(userId);
+			String name = information.getTrueName();
 			String trueName = account.getUsername();
 			String mobilephone =account.getMobilephone();
 			String email =account.getEmail();
@@ -96,7 +98,9 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 		
 			if(trueName!=null){
 				forumName=trueName;
-			} else if(mobilephone!=null){
+			} else if(name!=null){
+				forumName=name;
+			}  else if(mobilephone!=null){
 				forumName=mobilephone;
 			} else if(email!=null){
 				forumName = email;
