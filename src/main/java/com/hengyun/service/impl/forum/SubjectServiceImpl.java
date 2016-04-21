@@ -161,6 +161,7 @@ public class SubjectServiceImpl extends BaseServiceImpl<Subject,Integer> impleme
 			} 
 			//设置用户昵称
 			forumPost.setAuthor(forumName);
+			
 			int postId = subjectDao.post(forumPost);		
 			return postId;
 		

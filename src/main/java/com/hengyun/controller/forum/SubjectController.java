@@ -296,5 +296,26 @@ public class SubjectController {
 		
 		return JSON.toJSONString(response);
 	}
+	
+	/*
+	 * 查询我的帖子列表
+	 * 
+	 * */
+	
+	@RequestMapping(value="/details",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String details(HttpServletRequest request){
+
+		int subjectId =Integer.valueOf(request.getParameter("id"));
+		PostListResponseCode response = new PostListResponseCode();
+		Subject subject = subjectService.subjectDetail(subjectId);
+		response.setResponseCode(0);
+		response.setDescription("查询我的问题成功");
+		List<Subject> subjectList = new ArrayList<Subject>();
+		subjectList.add(subject);
+		response.setSubjectList(subjectList);
+		
+		return JSON.toJSONString(response);
+	}
 
 }

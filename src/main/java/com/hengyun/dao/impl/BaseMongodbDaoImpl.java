@@ -36,8 +36,7 @@ public abstract class BaseMongodbDaoImpl<T extends Serializable, PK extends Seri
      */
     public void save(T t){
         this.mongoTemplate.save(t);
-     
-       
+
     }    
     
     //根据Id从库中查询数据

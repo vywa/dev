@@ -1,39 +1,65 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>衡云后台管理首页</title>
-<!-- 
-  <script language="javascript" type="text/javascript" src="<%=request.getContextPath() %>/js/jquery.js"></script>
-    <script language="javascript" type="text/javascript" src="../js/login.js"></script>
-	 <link rel="stylesheet"  type="text/css"  href="<%=request.getContextPath() %>/css/home.css"/>
+<meta charset="UTF-8">
+<title>天衡医疗管理平台</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/easyui/themes/icon.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/easyui/locale/easyui-lang-zh_CN.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/resources/style/main.css">
+<script type="text/javascript">
+var treeData = <%=request.getAttribute("treeJson") %>;
+
+$(function(){
+	$('#help_tree').tree({
+		checkbox: false,
+		animate:true,
+		lines:true,
+		data: treeData,
+		onClick:function(node) {
+			if (node.attributes && node.attributes.menuUrl) {
+				$('#show_win').panel('refresh','<%=request.getContextPath() %>' + node.attributes.menuUrl);
+				$('body').layout('panel', 'center').panel('setTitle', node.text);
+			} 
+		},
+		formatter: function(node) {
+			return node.text + "-";
+		}
+	});
+	$('#show_win').panel({
+				fit:true,
+				border:false,
+				noheader:false
+	});
+});
+</script>
 </head>
-<body>
-<body>
-<div id="content">
-<div id="adaptor">
-<div id="left">
-<div id="lcontent" >
-<div>衡云后台管理系统</div>
-</div>
+<body class="easyui-layout">
+
+<div data-options="region:'north'" style="height:50px;overflow:hidden;">
+  <h1>天衡医疗管理平台</h1>
+  <div id="login_user_info">欢迎你：${currentUser.name}. <a href="<%=request.getContextPath() %>/reglog/logout">退出</a></div>
 </div>
 
-<div id="right">
-<div id="rcontent">
-<form id="form1" action="../reglog/username">
-<div>用户名:<input name="username" id="username"></div>
-<div>密　码:<input type="password" id="password"></div>
-<div>类    别:<input name="catagory" id="catagory"></div>
-<div>验证码:<img src="" /></div>
-<div><input type="button" value="登陆" onclick=login(); ></div>
-</form>
+
+<div data-options="region:'west',split:true,title:'导航窗口',iconCls:'icon-help'" style="width:248px;padding:5px; text-align:left;">
+	<ul id="help_tree" class="easyui-tree"></ul>
 </div>
+<div data-options="region:'center'" title="主窗口" style=" padding:10px; text-align:left;">
+  <div id="show_win"></div>
 </div>
-</div>
-</div>
- -->
+
+<script>
+setInterval(function() {
+	var url = '<%=request.getContextPath() %>/reglog/checkSession';
+	$.get(url, function(result) {
+		if (! result.successful) {
+			window.location.href="<%=request.getContextPath() %>";
+		}
+	}, 'json');
+}, 60000);
+</script>
 </body>
 </html>

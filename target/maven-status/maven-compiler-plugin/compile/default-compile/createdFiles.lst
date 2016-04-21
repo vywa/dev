@@ -41,6 +41,7 @@ com/hengyun/service/impl/casehistory/CaseHistoryServiceImpl.class
 com/hengyun/domain/system/AppPackageResponse.class
 com/hengyun/domain/system/Version.class
 com/hengyun/dao/impl/logininfo/UserAccountDaoImpl.class
+com/hengyun/controller/casehistory/FollowupController.class
 com/hengyun/service/patient/BloodPressureInfoService.class
 com/hengyun/dao/impl/casehistory/CaseHistoryDaoImpl.class
 com/hengyun/service/patient/PatientService.class
@@ -201,6 +202,7 @@ com/hengyun/util/date/DateUtil.class
 com/hengyun/dao/notice/mysql/JobTaskDao.class
 com/hengyun/domain/forum/ForumPlate.class
 com/hengyun/domain/casehistory/LibrarotySheet.class
+com/hengyun/service/impl/casehistory/FollowupServiceImpl.class
 com/hengyun/domain/casehistory/Diagnosis.class
 com/hengyun/dao/impl/account/DoctorAccountDaoImpl.class
 com/hengyun/service/forum/ReplySubjectService.class
@@ -214,6 +216,7 @@ com/hengyun/service/impl/monitor/MessageFormatter.class
 com/hengyun/service/impl/casehistory/DoctorAdviceServiceImpl.class
 com/hengyun/service/casehistory/DiagnosisService.class
 com/hengyun/domain/account/AdminInfo.class
+com/hengyun/dao/casehistory/FollowupDao.class
 com/hengyun/controller/casehistory/MentalStateController.class
 com/hengyun/util/regex/Validator.class
 com/hengyun/dao/administrator/PermissionDao.class
@@ -237,6 +240,7 @@ com/hengyun/service/impl/patient/HabitInfoServiceImpl.class
 com/hengyun/service/impl/friendcircle/mysql/RosterServiceImpl.class
 com/hengyun/domain/information/DoctorInfoResponse.class
 com/hengyun/service/impl/shiro/SimpleFilterChainDefinitionService.class
+com/hengyun/domain/casehistory/Followup.class
 com/hengyun/service/monitor/ExceptionInfoService.class
 com/hengyun/dao/hospital/HospitalDao.class
 com/hengyun/controller/notice/DailyNewsController.class
@@ -311,6 +315,7 @@ com/hengyun/util/exception/BusinessTimeoutException.class
 com/hengyun/domain/casehistory/DoctorAdvice.class
 com/hengyun/domain/information/NickIcon.class
 com/hengyun/service/friendcircle/mysql/RosterService.class
+com/hengyun/dao/impl/casehistory/FollowupDaoImpl.class
 com/hengyun/domain/casehistory/BloodTransfusionConsent.class
 com/hengyun/domain/monitor/GroupOperationHistory.class
 com/hengyun/dao/impl/casehistory/ReTreateInfoDaoImpl.class
@@ -372,6 +377,7 @@ com/hengyun/dao/impl/notice/ScheduleJobDaoImpl.class
 com/hengyun/domain/notice/MedicalNotice.class
 com/hengyun/domain/information/Icon.class
 com/hengyun/util/security/SecurityControlHolder.class
+com/hengyun/domain/casehistory/response/FollowupResponse.class
 com/hengyun/dao/impl/monitor/ExceptionInfoDaoImpl.class
 com/hengyun/domain/hospital/Office.class
 com/hengyun/service/impl/patient/PatientServiceImpl.class
@@ -413,6 +419,7 @@ com/hengyun/domain/casehistory/MachineExamination.class
 com/hengyun/domain/casehistory/PatientInfo$CostPay.class
 com/hengyun/controller/forum/ReplySubjectController.class
 com/hengyun/dao/impl/casehistory/TargetOrganDamageDaoImpl.class
+com/hengyun/service/casehistory/FollowupService.class
 com/hengyun/service/impl/message/SmsListener.class
 com/hengyun/dao/casehistory/ReTreateInfoDao.class
 com/hengyun/util/date/TimeUtil.class

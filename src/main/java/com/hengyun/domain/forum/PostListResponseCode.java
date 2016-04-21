@@ -12,6 +12,8 @@ public  class PostListResponseCode extends BaseResponseCode implements Serializa
 	private int responseCode;								//返回码
 	private String description;								//描述
 	private List<Subject> subjectList;					//文件存储地址
+	
+	
 	public int getResponseCode() {
 		return responseCode;
 	}

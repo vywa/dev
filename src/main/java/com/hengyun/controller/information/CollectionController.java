@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.forum.PostListResponseCode;
+import com.hengyun.domain.forum.Subject;
 import com.hengyun.domain.information.Collection;
 import com.hengyun.domain.information.CollectionResponse;
 import com.hengyun.domain.information.DailyNewsCollection;
@@ -84,15 +88,14 @@ public class CollectionController {
 
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		int subjectId = jsonObject.getIntValue("id");
-		DailyNews dailyNews = dailyNewsService.queryById(subjectId);
+		int newsId = jsonObject.getIntValue("id");
+		DailyNews dailyNews = dailyNewsService.queryById(newsId);
 		String url = dailyNews.getUrl();
 		
 		int userId = (int)request.getAttribute("userId");
 		DailyNewsCollection collection = new DailyNewsCollection();
-		collection.setId(subjectId);
-		String ip = NetworkUtil.getPhysicalHostIP();
-    	//String url = "http://"+ip+"/healthcloudserver/dnews/load?id="+subjectId;   	
+		collection.setId(newsId);
+    	
     	collection.setUrl(url);
 		int result = collectionService.addCollection(collection, userId,1);
 		if(result<0){
@@ -125,17 +128,15 @@ public class CollectionController {
 		response.setCode("206");
 		response.setMessage("收藏帖子成功");
 		}
-
 		return JSON.toJSONString(response);
-		
 	}
 	
 	/*
 	 *  查看用户资讯收藏列表
 	 * */
-	@RequestMapping(value="list",produces = "text/html;charset=UTF-8")
+	@RequestMapping(value="viewNews",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String list(HttpServletRequest request){
+	public String viewNews(HttpServletRequest request){
 	
 		int userId =(int)request.getAttribute("userId");
 		Collection list = collectionService.show(userId);
@@ -146,7 +147,6 @@ public class CollectionController {
 		for(DailyNewsCollection temp:dailyList){
 			DailyNews daily = dailyNewsService.queryById(temp.getId());
 			dlist.add(daily);
-			
 		}
 		
 		response.setCode("206");
@@ -157,6 +157,39 @@ public class CollectionController {
 		
 	}
 
+	
+	/*
+	 *  查看用户帖子收藏列表
+	 * */
+	@RequestMapping(value="viewSubject",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String viewSubject(HttpServletRequest request){
+	
+		int userId =(int)request.getAttribute("userId");
+		Collection list = collectionService.show(userId);
+		List<DailyNewsCollection> dailyList = list.getSubjectList();
+		
+		
+		PostListResponseCode response = new PostListResponseCode();
+		List<Subject> dlist = new ArrayList<Subject>();
+		
+		for(DailyNewsCollection temp:dailyList){
+			Query query = Query.query(Criteria.where("subjectId").is(temp.getId()));
+			Subject daily = subjectService.queryOne(query);
+			dlist.add(daily);
+			
+		}
+		
+		response.setCode("206");
+		response.setMessage("查询帖子收藏成功");
+		response.setSubjectList(dlist);
+		response.setResponseCode(0);
+		response.setDescription("获取列表成功");
+
+		return JSON.toJSONString(response);
+		
+	}
+	
 	
 	/*
 	 *  删除帖子列表
@@ -172,7 +205,7 @@ public class CollectionController {
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 0);
 		response.setCode("206");
-		response.setMessage("删除帖子成功");
+		response.setMessage("取消收藏帖子成功");
 
 		return JSON.toJSONString(response);
 		
@@ -191,11 +224,12 @@ public class CollectionController {
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 1);
 		response.setCode("206");
-		response.setMessage("删除资讯成功");
+		response.setMessage("取消收藏资讯成功");
 
 		return JSON.toJSONString(response);
 		
 	}
+	
 	
 	/*
 	 *  删除及时通信列表

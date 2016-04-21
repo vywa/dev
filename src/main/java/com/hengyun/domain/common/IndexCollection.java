@@ -53,6 +53,7 @@ public class IndexCollection implements Serializable{
 	 * */
 	private int collectionId;							//收藏id
 	private int newsId;									//资讯id
+	private int subjectId;									//资讯id
 	
 	/*
 	 *  版本更新
@@ -69,8 +70,22 @@ public class IndexCollection implements Serializable{
 	 *  病历记录
 	 * */
 	private int medicalRecordId;					//病历记录id
+	private int followupId;								//随访id
 
 	
+	
+	public int getSubjectId() {
+		return subjectId;
+	}
+	public void setSubjectId(int subjectId) {
+		this.subjectId = subjectId;
+	}
+	public int getFollowupId() {
+		return followupId;
+	}
+	public void setFollowupId(int followupId) {
+		this.followupId = followupId;
+	}
 	public int getMedicalRecordId() {
 		return medicalRecordId;
 	}

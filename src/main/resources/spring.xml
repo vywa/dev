@@ -131,6 +131,10 @@ http://www.springframework.org/schema/cache
 <bean id="sportInfoDao" class="com.hengyun.dao.impl.casehistory.SportInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="sportInfoService" class="com.hengyun.service.impl.casehistory.SportInfoServiceImpl" parent="BaseServiceImpl"/>
 
+<bean id="followupDao" class="com.hengyun.dao.impl.casehistory.FollowupDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="followService" class="com.hengyun.service.impl.casehistory.FollowupServiceImpl" parent="BaseServiceImpl"/>
+
+
 <!-- 监控模块 -->
 <bean id="exceptionInfoDao" class="com.hengyun.dao.impl.monitor.ExceptionInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="exceptionInfoService" class="com.hengyun.service.impl.monitor.ExceptionInfoServiceImpl" parent="BaseServiceImpl"/>

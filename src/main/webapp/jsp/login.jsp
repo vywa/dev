@@ -4,21 +4,30 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Information</title>
-  <script language="javascript" type="text/javascript" src="../js/jquery.js"></script>
-   <script language="javascript" type="text/javascript" src="../js/login.js"></script>
-<script type="text/javascript" src="js/jquery.cookie.js"></script> 
-
+<title>请登录</title>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/easyui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/easyui/themes/icon.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-<form action="../reglog/username" id="form1" method="get">  
-
-<p>用户名：<input type="text" name="username" id="username"/></p>  
-<p>密码：<input type="text" name="password" id="password"/></p>    
-<p>类型：<input type="text" name="type" id="type"/></p>    
-<p><input type="button" id="send" value="提交" onclick="login();"/></p>  
-</form>  
-
-<ul id="list">  </ul>  
-</body>
+<div class="easyui-layout" style="width:400px;height:200px;">
+		<div region="west" split="true" title="Navigator" style="width:150px;">
+			<p style="padding:5px;margin:0;">Select language:</p>
+			<ul>
+				<li><a href="javascript:void(0)" onclick="showcontent('java')">Java</a></li>
+				<li><a href="javascript:void(0)" onclick="showcontent('cshape')">C#</a></li>
+				<li><a href="javascript:void(0)" onclick="showcontent('vb')">VB</a></li>
+				<li><a href="javascript:void(0)" onclick="showcontent('erlang')">Erlang</a></li>
+			</ul>
+		</div>
+		<div id="content" region="center" title="Language" style="padding:5px;">
+		</div>
+	</div>
+	<script type="text/javascript">
+	function showcontent(language){
+		$('#content').html('Introduction to ' + language + ' language');
+	}
+	</script>
+	
+	</body>
 </html>
