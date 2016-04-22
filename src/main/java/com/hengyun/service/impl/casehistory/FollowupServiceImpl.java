@@ -6,6 +6,8 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
@@ -48,7 +50,7 @@ public class FollowupServiceImpl extends BaseServiceImpl<Followup,Integer> imple
 	@Override
 	public Followup queryPatient(int patientId) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("patientId").is(patientId));
+		Query query = Query.query(Criteria.where("patientId").is(patientId)).with(new Sort(Direction.DESC, "followupId"));
 		Followup followup = followupDao.queryOne(query);
 		return followup;
 	}

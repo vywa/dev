@@ -18,6 +18,4 @@ public class HospitalDaoImpl extends BaseMongodbDaoImpl<Hospital,Integer> implem
 		return Hospital.class;
 	}
 
-
-
 }

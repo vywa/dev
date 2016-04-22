@@ -29,6 +29,7 @@ com/hengyun/dao/impl/forum/ForumAuthorityDaoImpl.class
 com/hengyun/domain/monitor/Transaction.class
 com/hengyun/dao/account/PatientAccountDao.class
 com/hengyun/service/impl/message/SmsServiceImpl.class
+com/hengyun/domain/casehistory/response/RecipeResponse.class
 com/hengyun/domain/common/ResponseCode.class
 com/hengyun/service/logininfo/UserAccountService.class
 com/hengyun/service/impl/logininfo/LoginInfoServiceImpl.class
@@ -103,6 +104,7 @@ com/hengyun/util/exception/SecurityException.class
 com/hengyun/domain/casehistory/BloodPressure.class
 com/hengyun/domain/forum/ForumResponseCode.class
 com/hengyun/util/exception/ExceptionAdvisor.class
+com/hengyun/controller/casehistory/RecipeController.class
 com/hengyun/service/exception/BaseBusinessException.class
 com/hengyun/util/sms/GetNumResult.class
 com/hengyun/util/shiro/IncorrectCodeException.class

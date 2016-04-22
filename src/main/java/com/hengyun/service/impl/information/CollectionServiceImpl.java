@@ -43,6 +43,7 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 	@Resource
 	private DailyNewsDao dailyNewsDao;
 	
+	
 	/*
 	 * 
 	 * 	添加收藏

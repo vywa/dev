@@ -44,6 +44,7 @@ public class LoginInfoController {
 
 	@Resource
 	private UserAccountService userAccountService;
+	
 	@Resource
 	private LoginInfoCacheService loginInfoCacheService;
 	
@@ -92,7 +93,7 @@ public class LoginInfoController {
 			// TODO Auto-generated catch block
 			loginResult = new LoginResult();
 			loginResult.setCode("104");
-			loginResult.setMessage("login failure");
+			loginResult.setMessage("登陆失败");
 			return JSON.toJSONString(loginResult);
 		}
 	
@@ -204,7 +205,7 @@ public class LoginInfoController {
 	 * 通过存储tocken登陆
 	 * 
 	 */
-	@RequestMapping("/auto")
+	@RequestMapping(value="/auto",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String loginByTocken(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -231,7 +232,7 @@ public class LoginInfoController {
 	 * 通过第三方登陆
 	 * 
 	 */
-	@RequestMapping("/thirdPart")
+	@RequestMapping(value="/thirdPart",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String loginByThirdPart(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
@@ -301,7 +302,7 @@ public class LoginInfoController {
 	 * 退出登陆
 	 * 
 	 */
-	@RequestMapping("/logout")
+	@RequestMapping(value="/logout",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String logout(HttpServletRequest request) {
 		
@@ -321,7 +322,7 @@ public class LoginInfoController {
 	/*
 	 *  显示所有账号
 	 * */
-	@RequestMapping("/show")
+	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show() {
 		

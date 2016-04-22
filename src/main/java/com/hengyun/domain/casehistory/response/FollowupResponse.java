@@ -1,6 +1,7 @@
 package com.hengyun.domain.casehistory.response;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.hengyun.domain.casehistory.Followup;
 import com.hengyun.domain.common.ResponseCode;
@@ -12,15 +13,16 @@ import com.hengyun.domain.common.ResponseCode;
 */
 public class FollowupResponse extends ResponseCode implements Serializable{
 
-	private Followup followup;
+	private List<Followup> followupList;
 
-	public Followup getFollowup() {
-		return followup;
+	public List<Followup> getFollowupList() {
+		return followupList;
 	}
 
-	public void setFollowup(Followup followup) {
-		this.followup = followup;
+	public void setFollowupList(List<Followup> followupList) {
+		this.followupList = followupList;
 	}
+
 	
 	
 }

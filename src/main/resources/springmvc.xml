@@ -145,23 +145,7 @@
         <property name="cacheSeconds" value="120"/>  
     </bean>
 	
-  <!--  
-    <bean id="jacksonHttpMessageConverter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
-        <property name="messageConverters">  
-            <list>  
-                <ref bean="jsonHttpMessageConverter" />  
-            </list>  
-        </property>  
-    </bean>  
-    
-    <bean id="jsonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
-        <property name="supportedMediaTypes">  
-            <list>  
-                <value>application/json;charset=UTF-8</value>  
-            </list>  
-        </property>  
-    </bean>  
--->
+  
 
   <!--启动Spring MVC的注解功能,设置编码方式，防止乱码-->  
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">  
@@ -192,7 +176,7 @@
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		
 	    <property name="maxUploadSize" value="100485760" /> 
-	   
+	   	<property name="defaultEncoding" value="UTF-8"/>
 	</bean>
 		
 

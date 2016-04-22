@@ -1,6 +1,7 @@
 package com.hengyun.domain.casehistory;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -9,41 +10,59 @@ import java.io.Serializable;
 */
 public class Recipe implements Serializable{
 
-	private int doctorAdviceId;									//医嘱id
+//	private int doctorAdviceId;									//医嘱id
 	
 	private int recipeId;													//处方编号
+	
+	private int doctorId;													//医生id
+	private int patientId;												//病人id
 	private String medicineName;								//药品名称
-	private String usage;													//用法
+	private String method;													//用法
 	private int dosage;													//单次用量
 	private int frequence;												//用药频率
-	private int dayCount;												//使用天数
 	private int totalCount;												//开药总量
+	private Date recipeTime;											//开放时间
 	
 	
+	
+	public int getDoctorId() {
+		return doctorId;
+	}
+	public void setDoctorId(int doctorId) {
+		this.doctorId = doctorId;
+	}
+	public int getPatientId() {
+		return patientId;
+	}
+	public void setPatientId(int patientId) {
+		this.patientId = patientId;
+	}
+	public Date getRecipeTime() {
+		return recipeTime;
+	}
+	public void setRecipeTime(Date recipeTime) {
+		this.recipeTime = recipeTime;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
 	public int getRecipeId() {
 		return recipeId;
 	}
 	public void setRecipeId(int recipeId) {
 		this.recipeId = recipeId;
 	}
-	public int getDoctorAdviceId() {
-		return doctorAdviceId;
-	}
-	public void setDoctorAdviceId(int doctorAdviceId) {
-		this.doctorAdviceId = doctorAdviceId;
-	}
+
 	public String getMedicineName() {
 		return medicineName;
 	}
 	public void setMedicineName(String medicineName) {
 		this.medicineName = medicineName;
 	}
-	public String getUsage() {
-		return usage;
-	}
-	public void setUsage(String usage) {
-		this.usage = usage;
-	}
+	
 	public int getDosage() {
 		return dosage;
 	}
@@ -56,12 +75,7 @@ public class Recipe implements Serializable{
 	public void setFrequence(int frequence) {
 		this.frequence = frequence;
 	}
-	public int getDayCount() {
-		return dayCount;
-	}
-	public void setDayCount(int dayCount) {
-		this.dayCount = dayCount;
-	}
+	
 	public int getTotalCount() {
 		return totalCount;
 	}

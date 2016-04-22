@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -35,6 +37,7 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 		// TODO Auto-generated method stub
 		int recipeId = indexCollectionDao.updateIndex("recipeId");
 		recipe.setRecipeId(recipeId);
+		recipe.setRecipeTime(new Date());
 		recipeDao.save(recipe);
 		return true;
 	}
@@ -56,12 +59,12 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 	}
 
 	/*
-	 *  查询医嘱的处方列表
+	 *  查询病人的处方列表
 	 * */
 	@Override
-	public List<Recipe> getAdviceRecipe(int adviceId) {
+	public List<Recipe> getPatientRecipe(int patientId) {
 		// TODO Auto-generated method stub
-		Query query  = Query.query(Criteria.where("doctorAdviceId").is(adviceId));
+		Query query  = Query.query(Criteria.where("patientId").is(patientId)).with(new Sort(Direction.DESC, "recipeId"));
 		List<Recipe> recipes = recipeDao.queryList(query);
 		if(recipes != null){
 			return recipes;
@@ -90,8 +93,8 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("recipeId").is(recipe.getRecipeId()));
 		Update update = Update.update("dosage", recipe.getDosage()).
-				addToSet("frequence", recipe.getFrequence()).
-				addToSet("dayCount", recipe.getDayCount());
+				addToSet("frequence", recipe.getFrequence());
+			
 		
 		recipeDao.updateFirst(query, update);
 		return true;
@@ -103,11 +106,8 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 	@Override
 	public boolean deadline(Recipe recipe, int day) {
 		// TODO Auto-generated method stub
-		if(recipe.getDayCount()-day>=0){
-			return false;
-		} else {
+		
 			return true;
-		}
 	}
 
 	/*

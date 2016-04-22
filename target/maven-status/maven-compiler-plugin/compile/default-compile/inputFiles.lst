@@ -286,6 +286,7 @@
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/service/forum/SubjectAvailableListService.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/forum/response/SubjectAvailableListResponse.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/sms/sender/SmsSender.java
+/home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/controller/casehistory/RecipeController.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/dao/impl/information/IconDaoImpl.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/AnesthesiaConsent.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/dao/impl/casehistory/ReTreateInfoDaoImpl.java
@@ -316,6 +317,7 @@
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/forum/Vedio.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/exception/ExceptionCode.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/system/Version.java
+/home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/response/RecipeResponse.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/information/CollectionResponse.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/service/impl/monitor/JsonFormatter.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/dao/BaseMongodbDao.java

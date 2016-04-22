@@ -16,12 +16,12 @@ public class Followup implements Serializable{
 	
 	private int highBP;								//高压数据
 	private int lowBP;								//d低压数据
-	private int heartRate;								//测量心率
+	private int heartRate;						//测量心率
 	
-	private double bsValue;			//血糖值
-	private int remainTablet;						//剩余药
-	private float volumn;							//吃药片剂量
-	private String nextFollow;					//下次随访时间
+	private double bsValue;					//血糖值
+	private int remainTablet;					//剩余药
+	private float doses;							//吃药片剂量
+	private String nextFollow;				//下次随访时间
 	
 	
 	
@@ -124,15 +124,14 @@ public class Followup implements Serializable{
 	}
 
 
-
-	public float getVolumn() {
-		return volumn;
+	public float getDoses() {
+		return doses;
 	}
 
 
 
-	public void setVolumn(float volumn) {
-		this.volumn = volumn;
+	public void setDoses(float doses) {
+		this.doses = doses;
 	}
 
 

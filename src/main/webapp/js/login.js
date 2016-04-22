@@ -15,6 +15,22 @@ function login() {
 	});
 }
 
+$.extend({
+cookieHelper: function(name,value,options){
+	if(typeof value !='undefined'){
+		options = options ||{};
+		if(value == null){
+			value='';
+			options.expires=-1;
+		}
+		var expires = '';
+		
+	}
+}	
+	
+})
+
+
 function setCookie(name, value, iDay) 
 {
 	var oDate=new Date();

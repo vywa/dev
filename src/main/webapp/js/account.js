@@ -1,4 +1,30 @@
+//点击分页时调用的函数，page_id为当前的索引
+function pageselectCallback(page_id,jq){
+	bind(page_id);
+}
 
+function bind(pageIndex){
+	var temp="";
+	var total=0;
+	$.ajax({
+		type:"get",
+		url:"../account/show",
+		async:false,
+		dataType:"json",
+		data:"pageIndex="+(pageIndex)+1,
+		beforeSend:function(){$("#divload").show();$("#datas #Pagination").hide()},
+		complete:function(){$("#divload").hide();$("#datas #Pagination").show()},
+		success:function(data){
+			var json = data.rows;
+			total = data.total;
+			$.each(json,function(index,item){
+				temp+="<div id='datas' classdivclass =\""
+			}){
+				
+			}
+		}
+	});
+}
 
 function add() {
 	 var data = $('#form1').serializeObject();   

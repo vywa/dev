@@ -33,6 +33,8 @@ public class IndexCollection implements Serializable{
 	private int affiliatedClinicalDiseaseId;		//伴随临床疾患
 	private int diagnosisId;							//诊断id
 	
+
+	
 	/*
 	 *  资源管理
 	 * */

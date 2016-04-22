@@ -42,9 +42,6 @@ public class BloodPressureInfoController {
 	private BloodPressureInfoService  bloodPressureInfoService;
 	
 	@Resource
-	private LoginInfoService loginInfoService;
-	
-	@Resource
 	private HealthTargetService healthTargetService;
 	/*
 	 * 
@@ -58,7 +55,6 @@ public class BloodPressureInfoController {
 		PressureResponse response = new PressureResponse();
 
 		int userId = (int)request.getAttribute("userId");
-		
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId);

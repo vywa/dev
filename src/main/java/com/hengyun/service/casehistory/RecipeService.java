@@ -21,7 +21,7 @@ public interface RecipeService extends BaseService<Recipe,Integer>{
 	public Recipe queryRecipe(int recipeId);
 	
 	//获取某个医嘱的所有处方
-	public List<Recipe> getAdviceRecipe(int adviceId);
+	public List<Recipe> getPatientRecipe(int patientId);
 	
 	//删除某条处方
 	public boolean deleteRecipe(int recipeId);

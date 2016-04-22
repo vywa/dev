@@ -9,6 +9,7 @@
    <script language="javascript" type="text/javascript" src="<%=request.getContextPath() %>/js/account.js"></script>
 	 <link rel="stylesheet"  type="text/css"  href="<%=request.getContextPath() %>/css/account.css"/>
 </head>
+
 <body>
 <div id="add">
 <form action="../account/add" id="form1" method="get">  

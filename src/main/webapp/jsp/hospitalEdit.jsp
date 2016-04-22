@@ -22,6 +22,8 @@
        $("#email").val(msg.email);
        $("#hospitalIM").val(msg.hospitalIM);
        $("#weiChatNumber").val(msg.weiChatNumber);
+       $("#longitude").val(msg.longitude);
+       $("#latitude").val(msg.latitude);
       }
   });
 
@@ -39,6 +41,8 @@
 <p>邮件：<input type="text" name="email" id="email"/></p>    
 <p>及时通信：<input type="text" name="hospitalIM" id="hospitalIM"/></p>    
 <p>公众号：<input type="text" name="weiChatNumber"  id="weiChatNumber"/></p>  
+<p>经度：<input type="text" name="longitude" id="longitude"/></p>    
+<p>纬度：<input type="text" name="latitude"  id="latitude"/></p>  
 <p><input type="button" id="send" value="提交" onclick="update();"/></p>  
 </form>
 </div>

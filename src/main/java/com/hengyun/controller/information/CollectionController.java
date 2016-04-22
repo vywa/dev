@@ -177,7 +177,6 @@ public class CollectionController {
 			Query query = Query.query(Criteria.where("subjectId").is(temp.getId()));
 			Subject daily = subjectService.queryOne(query);
 			dlist.add(daily);
-			
 		}
 		
 		response.setCode("206");

@@ -29,8 +29,9 @@ public class Hospital implements Serializable{
 	private String hospitalIM;										//医院即时通讯号
 	private String weiChatNumber;								//医院公众号
 	private List<Integer> doctorId;								//医生id
-	private Location	location;										//医院坐标
-	
+	//private Location	location;										//医院坐标
+	private double longitude;										//经度
+	private double latitude;											//纬度
 	
 
 	public List<Integer> getDoctorId() {
@@ -95,12 +96,17 @@ public class Hospital implements Serializable{
 		this.hospitalIM = hospitalIM;
 	}
 	
-	
-	public Location getLocation() {
-		return location;
+	public double getLongitude() {
+		return longitude;
 	}
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 	public String getWeiChatNumber() {
 		return weiChatNumber;

@@ -5,19 +5,16 @@ import java.io.Serializable;
 /*
  *  
  *  血压信息
+ *  
  * */
 
 public class BloodPressureInfo implements Serializable{
 
-	
-	private int userId;								//病人id
+	private int userId;										//病人id
 	private long measureTime;					//测量时间
-	private int highBP;								//高压数据
-	private int lowBP;								//d低压数据
+	private int highBP;										//高压数据
+	private int lowBP;										//d低压数据
 	private int heartRate;								//测量心率
-	
-	
-
 
 	public int getUserId() {
 		return userId;
@@ -51,6 +48,14 @@ public class BloodPressureInfo implements Serializable{
 		this.heartRate = heartRate;
 	}
 	
-
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("病人").append(userId).append("的高压为: ").append(highBP).
+		append(" ,低压为: ").append(lowBP).append(",心率为: ").append(heartRate).append(",测量时间为").append(measureTime);
+		return sb.toString();
+	}
+	
+	
 	
 }

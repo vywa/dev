@@ -17,7 +17,7 @@ public class MedicalRecord implements Serializable{
 	
 	private List<String> imageList;					//病历图片
 	
-	private String recordTime;								//记录时间
+	private String recordTime;							//记录时间
 	private String content;									//病历内容
 	
 	

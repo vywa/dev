@@ -444,7 +444,7 @@ public class UserAccountController {
      *  
      * */
    
-    @RequestMapping("/show") 
+    @RequestMapping(value="/show",produces = "text/html;charset=UTF-8") 
     @ResponseBody  
     public  String   findUserAccount(){
     	List<UserAccount> userAccountList ;
@@ -453,6 +453,23 @@ public class UserAccountController {
     	 String jsonString= JSON.toJSONString(userAccountList);  
            
     	
+        return jsonString;  
+    }
+    
+    /*
+     *  添加账号
+     *  
+     * */
+    @RequestMapping(value="/add",produces = "text/html;charset=UTF-8") 
+    @ResponseBody  
+    public  String  addUserAccount(@RequestParam String data,HttpServletRequest request){
+    	JSONObject jsonObject = JSONObject.parseObject(data);
+		ResponseCode response = new ResponseCode();
+		UserAccount account = JSON.toJavaObject(jsonObject, UserAccount.class);
+    	userAccountService.registerAccount(account);
+    	response.setCode("206");
+    	response.setMessage("添加用户成功");
+    	String jsonString= JSON.toJSONString(account);  
         return jsonString;  
     }
     

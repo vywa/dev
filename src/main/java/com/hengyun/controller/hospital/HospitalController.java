@@ -64,7 +64,8 @@ public class HospitalController {
 		Query query = Query.query(Criteria.where("id").is(hospital.getId()));
 		Update update = Update.update("hospitalName",hospital.getHospitalName()).set("email", hospital.getEmail()).
 				set("hospitalIM", hospital.getHospitalIM()).set("level", hospital.getLevel()).set("telephone", hospital.getTelephone()).
-				set("address", hospital.getAddress()).set("weiChatNumber", hospital.getWeiChatNumber());
+				set("address", hospital.getAddress()).set("weiChatNumber", hospital.getWeiChatNumber()).
+				set("longitude", hospital.getLongitude()).set("latitude", hospital.getLatitude());
 		hospitalService.updateInser(query, update);
 	
 		
