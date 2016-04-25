@@ -19,12 +19,18 @@ public class Recipe implements Serializable{
 	private String medicineName;								//药品名称
 	private String method;													//用法
 	private int dosage;													//单次用量
-	private int frequence;												//用药频率
+	private String frequence;												//用药频率
 	private int totalCount;												//开药总量
 	private Date recipeTime;											//开放时间
 	
 	
 	
+	public String getFrequence() {
+		return frequence;
+	}
+	public void setFrequence(String frequence) {
+		this.frequence = frequence;
+	}
 	public int getDoctorId() {
 		return doctorId;
 	}
@@ -68,12 +74,6 @@ public class Recipe implements Serializable{
 	}
 	public void setDosage(int dosage) {
 		this.dosage = dosage;
-	}
-	public int getFrequence() {
-		return frequence;
-	}
-	public void setFrequence(int frequence) {
-		this.frequence = frequence;
 	}
 	
 	public int getTotalCount() {

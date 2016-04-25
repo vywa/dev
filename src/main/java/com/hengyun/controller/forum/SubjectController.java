@@ -149,7 +149,9 @@ public class SubjectController {
 	}
 	
 	
-	//查看某个好友的所有帖子
+	/*
+	 *  查看某个好友的所有帖子
+	 * */
 	
 	@RequestMapping(value="/friendSubject")
 	@ResponseBody

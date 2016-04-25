@@ -137,21 +137,32 @@ public class CollectionController {
 	@RequestMapping(value="viewNews",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String viewNews(HttpServletRequest request){
-	
+		DailyNewsResponse response = new DailyNewsResponse();
 		int userId =(int)request.getAttribute("userId");
 		Collection list = collectionService.show(userId);
+		if(list==null){
+			response.setCode("206");
+			response.setMessage("查询成功");
+			response.setDaily(null);
+			return JSON.toJSONString(response);
+		}
 		List<DailyNewsCollection> dailyList = list.getDailyNewsList();
-		DailyNewsResponse response = new DailyNewsResponse();
+	
+		if(dailyList==null){
+			response.setDaily(null);
+		} else {
+	
 		List<DailyNews> dlist = new ArrayList<DailyNews>();
 		
 		for(DailyNewsCollection temp:dailyList){
 			DailyNews daily = dailyNewsService.queryById(temp.getId());
 			dlist.add(daily);
 		}
-		
+		response.setDaily(dlist);
+		}
 		response.setCode("206");
 		response.setMessage("查询成功");
-		response.setDaily(dlist);
+	
 
 		return JSON.toJSONString(response);
 		
@@ -164,27 +175,36 @@ public class CollectionController {
 	@RequestMapping(value="viewSubject",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String viewSubject(HttpServletRequest request){
-	
+		PostListResponseCode response = new PostListResponseCode();
 		int userId =(int)request.getAttribute("userId");
 		Collection list = collectionService.show(userId);
+		if(list==null){
+			response.setCode("206");
+			response.setMessage("查询成功");
+			response.setSubjectList(null);
+			return JSON.toJSONString(response);
+		}
 		List<DailyNewsCollection> dailyList = list.getSubjectList();
-		
-		
-		PostListResponseCode response = new PostListResponseCode();
+	
+		if(dailyList==null){
+			response.setSubjectList(null);
+		} else{
 		List<Subject> dlist = new ArrayList<Subject>();
 		
 		for(DailyNewsCollection temp:dailyList){
 			Query query = Query.query(Criteria.where("subjectId").is(temp.getId()));
 			Subject daily = subjectService.queryOne(query);
 			dlist.add(daily);
+			
 		}
-		
+		response.setSubjectList(dlist);
+		}
 		response.setCode("206");
 		response.setMessage("查询帖子收藏成功");
-		response.setSubjectList(dlist);
+		
 		response.setResponseCode(0);
 		response.setDescription("获取列表成功");
-
+		
 		return JSON.toJSONString(response);
 		
 	}

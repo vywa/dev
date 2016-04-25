@@ -15,7 +15,7 @@ public interface LoginInfoService  extends BaseService<LoginInfo,Integer> {
 	//通过tocken登陆
 	public boolean loginByTocken(String tocken,LoginInfo loginInfo);
 	//通过第三方登陆
-	public LoginResult  loginByThirdPart(String tocken,LoginInfo loginInfo);
+	public LoginResult  loginByThirdPart(String type,LoginInfo loginInfo,String nickName);
 	
 	//通过id获得tocken
 	public String getTockenById(int userId);

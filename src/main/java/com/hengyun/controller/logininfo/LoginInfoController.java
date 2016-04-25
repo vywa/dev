@@ -164,6 +164,12 @@ public class LoginInfoController {
 					information = informationService.query(userId);
 				
 					account = userAccountService.queryById(userId);
+					information.setEmail(account.getEmail());
+					information.setMobilephone(account.getMobilephone());
+					information.setQQ(account.getQQ());
+					information.setWeiBo(account.getWeiBo());
+					information.setWeiChat(account.getWeiChat());
+					
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
 					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
 					 if(caseHistoryId<0) {
@@ -238,8 +244,9 @@ public class LoginInfoController {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
 		String recordTime = jsonObject.getString("recordTime");
-		String username = jsonObject.getString("openId");
+		String thirdname = jsonObject.getString("openId");
 		String type= jsonObject.getString("type");
+		String nickName = jsonObject.getString("nickName");
 	
 		String userLoginIp = request.getRemoteAddr();
 		
@@ -258,9 +265,10 @@ public class LoginInfoController {
 		LoginInfo loginInfo = new LoginInfo();
 		//创建账号
 		UserAccount account = new UserAccount();
-		loginInfo.setLoginUsername(username);
+
+		loginInfo.setLoginUsername(thirdname);
 		loginInfo.setUserLoginIp(userLoginIp);
-		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo);
+		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo,nickName);
 		int userId = loginResult.getUserId();
 		 Information information;
 			try {
@@ -285,7 +293,18 @@ public class LoginInfoController {
 			} catch (NullPointerException ex) {
 				// TODO Auto-generated catch block
 				Information info = new Information();
-				
+				switch("type"){
+				case "QQ":
+					info.setQqName(nickName);
+					break;
+				case "weiBo":
+					info.setWeiboName(nickName);
+					break;
+				case "weiChat":
+					info.setWeiChatName(nickName);
+					break;
+				default :break;
+				}
 				info.setUserId(userId);
 				info.setRecordTime(String.valueOf(new Date().getTime()));
 				informationService.add(info, userId);

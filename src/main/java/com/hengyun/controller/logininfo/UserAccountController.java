@@ -217,7 +217,8 @@ public class UserAccountController {
 			}
 	
 	/*
-	 * 短信发送
+	 * 
+	 *  短信发送
 	 * 
 	 * */
 	@RequestMapping(value="/smsSend",produces = "text/html;charset=UTF-8")
@@ -226,6 +227,7 @@ public class UserAccountController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		
 		String mobilephone = jsonObject.getString("mobilephone");
+		
 		RegisterResult registResult = new RegisterResult();
 		int count =0;
 		try {

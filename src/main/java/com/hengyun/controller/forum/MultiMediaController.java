@@ -41,9 +41,7 @@ public class MultiMediaController {
 
 	@Resource
 	private MultiMediaService multiMediaService;
-	@Resource
-	private LoginInfoService loginInfoService;
-	
+
 	/*
 	 * 
 	 *  多媒体信息上传
@@ -65,59 +63,34 @@ public class MultiMediaController {
 	    	  response.setCode("110");
 	    	  response.setMessage("上传文件失败");
 	    	  }else{
-	    		
+	    	//	if(filename.endsWith(".mp4")){
 	    		  String videoPath = "/home/bob/multimedia/download/";
+	    		//  String videoPath = "/home/thealth/multimedia/download/";
 	    		  FileUtils.writeByteArrayToFile(new File(videoPath,filename), media.getBytes());
-
 	    		  response.setCode("0");
 	    		  response.setResponseCode(0);
 	    		  response.setDescription("上传成功");
 	    		  String fileUrl = "http://"+ip+"/download/"+filename;
 	    		  response.setMessage(fileUrl);
 	    		  response.setFileUrl(fileUrl);
+	    		  /*
+	    		} else {
+	    			multiMediaService.save(media.getInputStream(), filename);
+	    			  response.setCode("0");
+		    		  response.setResponseCode(0);
+		    		  response.setDescription("上传成功");
+		    		  String fileUrl = "http://"+ip+"/healthcloudserver/multiMedia/download?url=";
+		    		  response.setMessage(fileUrl);
+		    		  response.setFileUrl(fileUrl);
+	    		}
+	    		  */
 	    	  }
     	
 	      return JSON.toJSONString(response);
       
     }
           
-	/*
-	 * 
-	 *  多媒体信息上传
-	 * 
-	 * 
-    @RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")  
-    @ResponseBody
-    public String upload(@RequestParam MultipartFile media,HttpServletRequest request) throws IOException  
-    {  
-	    
-	    	UploadResponseCode response = new UploadResponseCode();
-	    	String ip = NetworkUtil.getPhysicalHostIP();
-    	    String originalfilename = media.getOriginalFilename();
-    	  
-    	    String filename = new Date().getTime()+originalfilename;
-    	    
-	    	
-	      if(media.isEmpty()){
-	    	  response.setCode("110");
-	    	  response.setMessage("upload image failure");
-	    	  }else{
-	    		
-	    		 multiMediaService.save(media.getInputStream(),filename);
-	    		  
-	    		  
-	    		  response.setCode("0");
-	    		  response.setResponseCode(0);
-	    		  response.setDescription("上传成功");
-	    		  String fileUrl = "http://"+ip+"/healthcloudserver/multiMedia/download?url="+filename;
-	    		  response.setMessage(fileUrl);
-	    		  response.setFileUrl(fileUrl);
-	    	  }
-    	
-	      return JSON.toJSONString(response);
-      
-    }*/
-    
+
     /*
      * 
      *  查询多媒体文件
@@ -129,7 +102,7 @@ public class MultiMediaController {
     	ResponseCode responseCode = new ResponseCode();
    
     	String filename = request.getParameter("url");
-    	response.setContentType("video/mpeg4");
+    
     	response.addHeader("Content-Disposition", "attachment;filename="+filename);  
     	GridFSDBFile gridFSDBFile = multiMediaService.retrieveFileOne(filename);
     	InputStream in = gridFSDBFile.getInputStream();

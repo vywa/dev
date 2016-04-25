@@ -56,8 +56,9 @@ public class RecipeController {
 	@ResponseBody
 	public String query(HttpServletRequest request,@RequestParam(required=false) String data){
 		JSONObject jsonObject =JSON.parseObject(data);
+		int userId = (int)request.getAttribute("userId");
 		int patientId = jsonObject.getIntValue("patientId");
-		List<Recipe> recipeList = recipeService.getPatientRecipe(patientId);
+		List<Recipe> recipeList = recipeService.getPatientRecipe(patientId, userId);
 		RecipeResponse response = new RecipeResponse();
 		response.setRecipeList(recipeList);
 		response.setCode("206");
@@ -65,5 +66,21 @@ public class RecipeController {
 		return JSON.toJSONString(response);
 	}
 	
+	/*
+	 *   查询随访情况
+	 * */
+	@RequestMapping(value="patient/queryList",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String pquery(HttpServletRequest request){
+	//	JSONObject jsonObject =JSON.parseObject(data);
+		int userId = (int)request.getAttribute("userId");
+	//	int patientId = jsonObject.getIntValue("patientId");
+		List<Recipe> recipeList = recipeService.patientSelf(userId);
+		RecipeResponse response = new RecipeResponse();
+		response.setRecipeList(recipeList);
+		response.setCode("206");
+		response.setMessage("查询处方成功");
+		return JSON.toJSONString(response);
+	}
 	
 }

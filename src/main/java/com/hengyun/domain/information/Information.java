@@ -38,12 +38,52 @@ public class Information implements Serializable{
 	private String email;							//邮箱
 	private String QQ;								//QQ
 	private String mobilephone;			//手机号
+	private String weiBo;
+	private String weiChat;
+	
+	private String qqName;
+	private String weiboName;
+	private String weiChatName;
+	
+	
+	
+	
 	
 	private String recordTime;							//记录时间
 	
 	
 	
 	
+	public String getQqName() {
+		return qqName;
+	}
+	public void setQqName(String qqName) {
+		this.qqName = qqName;
+	}
+	public String getWeiboName() {
+		return weiboName;
+	}
+	public void setWeiboName(String weiboName) {
+		this.weiboName = weiboName;
+	}
+	public String getWeiChatName() {
+		return weiChatName;
+	}
+	public void setWeiChatName(String weiChatName) {
+		this.weiChatName = weiChatName;
+	}
+	public String getWeiBo() {
+		return weiBo;
+	}
+	public void setWeiBo(String weiBo) {
+		this.weiBo = weiBo;
+	}
+	public String getWeiChat() {
+		return weiChat;
+	}
+	public void setWeiChat(String weiChat) {
+		this.weiChat = weiChat;
+	}
 	public String getDisease() {
 		return disease;
 	}

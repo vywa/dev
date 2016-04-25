@@ -86,11 +86,10 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				loginInfoDao.save(loginInfo);
 				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
 				
-				loginResult.setChangePassword(isDoctor);
+				
 			
 				loginResult.setMessage(tocken);
-				loginResult.setType(type);
-				loginResult.setLoginName(loginInfo.getLoginUsername());
+			
 				return loginResult;
 		}
 		return null;
@@ -116,7 +115,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	 *  通过第三方登陆
 	 * 
 	 * */
-	public LoginResult  loginByThirdPart(String type,LoginInfo loginInfo) {
+	public LoginResult  loginByThirdPart(String type,LoginInfo loginInfo,String nickName) {
 		// TODO Auto-generated method stub
 		UserAccount userAccount =null;
 		ThirdLoginResult loginResult = new ThirdLoginResult();

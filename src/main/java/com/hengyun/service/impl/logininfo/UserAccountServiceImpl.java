@@ -68,9 +68,9 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 				}
 			userAccountDao.save(userAccount);
 			//添加用户个人信息
-			Information information = new Information();
-			information.setMobilephone(userAccount.getMobilephone());
-			informationService.add(information, userId);
+		//	Information information = new Information();
+		//	information.setMobilephone(userAccount.getMobilephone());
+		//	informationService.add(information, userId);
 			log.info("用户账号注册成功 , "+"身份为: "+userAccount.getCatagory()+" userId为: "+userId);
 			return userId;
 	
@@ -200,7 +200,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		//设置病人标志
 		userAccount.setCatagory("patient");
 		//设置初始密码
-		userAccount.setPassword("hengyun");
+		userAccount.setPassword("123456");
 		return registerAccount(userAccount);
 	
 	}

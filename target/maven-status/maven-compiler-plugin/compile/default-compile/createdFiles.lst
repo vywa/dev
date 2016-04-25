@@ -274,7 +274,6 @@ com/hengyun/controller/casehistory/FamilyHistoryController.class
 com/hengyun/service/system/AppPackageService.class
 com/hengyun/util/annotation/Cache.class
 com/hengyun/domain/account/PatientInfo.class
-com/hengyun/controller/logininfo/PatientAccountController.class
 com/hengyun/util/system/Architecture.class
 com/hengyun/service/forum/MultiMediaService.class
 com/hengyun/service/impl/administrator/ResourcesServiceImpl.class
@@ -524,7 +523,6 @@ com/hengyun/domain/common/IndexCollection.class
 com/hengyun/util/exception/ExceptionCode.class
 com/hengyun/service/impl/monitor/kafkaMongodb/LogUtil.class
 com/hengyun/domain/monitor/ExceptionInfoResponse.class
-com/hengyun/controller/logininfo/DoctorAccountController.class
 com/hengyun/service/administrator/PermissionService.class
 com/hengyun/service/administrator/ResourcesService.class
 com/hengyun/service/account/PatientAccountService.class

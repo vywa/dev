@@ -62,9 +62,10 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 	 *  查询病人的处方列表
 	 * */
 	@Override
-	public List<Recipe> getPatientRecipe(int patientId) {
+	public List<Recipe> getPatientRecipe(int patientId,int doctorId) {
 		// TODO Auto-generated method stub
-		Query query  = Query.query(Criteria.where("patientId").is(patientId)).with(new Sort(Direction.DESC, "recipeId"));
+		Query query  = Query.query(Criteria.where("patientId").
+				is(patientId).andOperator(Criteria.where("doctorId").is(doctorId))).with(new Sort(Direction.DESC, "recipeId"));
 		List<Recipe> recipes = recipeDao.queryList(query);
 		if(recipes != null){
 			return recipes;
@@ -91,12 +92,7 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 	@Override
 	public boolean updateRecipe(Recipe recipe) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("recipeId").is(recipe.getRecipeId()));
-		Update update = Update.update("dosage", recipe.getDosage()).
-				addToSet("frequence", recipe.getFrequence());
-			
 		
-		recipeDao.updateFirst(query, update);
 		return true;
 	}
 
@@ -126,6 +122,19 @@ public class RecipeServiceImpl extends BaseServiceImpl<Recipe,Integer> implement
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Recipe> patientSelf(int patientId) {
+		// TODO Auto-generated method stub
+		Query query  = Query.query(Criteria.where("patientId").
+				is(patientId)).with(new Sort(Direction.DESC, "recipeId"));
+		List<Recipe> recipes = recipeDao.queryList(query);
+		if(recipes != null){
+			return recipes;
+		} else {
+			return null;
+		}
 	}
 
 }
