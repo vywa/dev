@@ -1,7 +1,10 @@
 package com.hengyun.util.mail;
 
+import java.io.File;
+
 import javax.mail.internet.MimeMessage;
 
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,8 +24,10 @@ public class SimpleMail {
 	            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage,true);
 	            messageHelper.setFrom(simpleMailMessage.getFrom()); //设置发件人Email
 	            messageHelper.setSubject(subject); //设置邮件主题
-	            messageHelper.setText(content);   //设置邮件主题内容
+	            messageHelper.setText(content,true);   //设置邮件主题内容
+	       
 	            messageHelper.setTo(to);          //设定收件人Email
+	            FileSystemResource file = new FileSystemResource(new File("/home/bob/db.sql"));
 	          /**
 	             * ClassPathResource：很明显就是类路径资源,我这里的附件是在项目里的,所以需要用ClassPathResource
 	             * 如果是系统文件资源就不能用ClassPathResource,而要用FileSystemResource,例：
@@ -34,7 +39,7 @@ public class SimpleMail {
 	             * addAttachment(String attachmentFilename, InputStreamSource inputStreamSource)
 	             * InputStreamSource是一个接口,ClassPathResource和FileSystemResource都实现了这个接口
 	             */
-	           // messageHelper.addAttachment(file.getFilename(), file); //添加附件
+	            messageHelper.addAttachment(file.getFilename(), file); //添加附件
 	            javaMailSender.send(mimeMessage);    //发送附件邮件
 	            
 	        } catch (Exception e) {System.out.println("异常信息：" + e);}

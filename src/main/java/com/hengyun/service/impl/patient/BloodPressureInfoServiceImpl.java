@@ -16,13 +16,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.patient.BloodPressureInfoDao;
 import com.hengyun.domain.notice.MedicalNotice;
 import com.hengyun.domain.notice.Notice.noticeType;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
-import com.hengyun.service.impl.notice.util.HttpClientUtil;
 import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodPressureInfoService;
 
@@ -40,6 +40,8 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Resource
 	private MedicalNoticeService medicalNoticeService;
 	
+	@Resource
+	private IndexCollectionDao indexCollectionDao;
 	/*
 	 * 
 	 *  	添加血压数据
@@ -49,6 +51,9 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	public void addInfo(BloodPressureInfo bloodPressureInfo) {
 		// TODO Auto-generated method stub
 		//添加血压记录
+		int measureId = indexCollectionDao.updateIndex("measureId");
+		bloodPressureInfo.setId(measureId);
+		bloodPressureInfo.setRecordTime(new Date());
 		bloodPressureInfoDao.save(bloodPressureInfo);
 		
 		if(needAlarm(bloodPressureInfo)){
@@ -92,7 +97,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("userId").is(userId);
 		 
-        query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+        query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
 		if(info ==null){
 			log.info("病人: "+userId+"最近没有血压测量数据");
@@ -115,7 +120,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("measureTime").gt(begin).lte(end).andOperator(Criteria.where("userId").is(userId));
 		 
-        query.addCriteria(criteria).with(new Sort(Direction.ASC, "measureTime"));
+		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 		return bloodPressureInfoDao.queryList(query);
 	}
 
@@ -129,7 +134,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("userId").is(userId);
 		 
-        query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
 		if(info ==null){
 			log.info("病人: "+userId+"最近没有血压测量数据");
@@ -224,7 +229,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("userId").is(userId);
 		 
-        query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
 		return info;
 	}

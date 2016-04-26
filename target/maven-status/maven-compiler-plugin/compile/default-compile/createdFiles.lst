@@ -13,6 +13,7 @@ com/hengyun/service/impl/shiro/SimpleCacheManagerImpl.class
 com/hengyun/domain/information/NickIconResponse.class
 com/hengyun/domain/friendcircle/FriendGroup.class
 com/hengyun/controller/administrator/ResorucesController.class
+com/hengyun/domain/message/Mail.class
 com/hengyun/dao/impl/BaseMongodbDaoImpl.class
 com/hengyun/util/randomcode/CreateCode.class
 com/hengyun/domain/monitor/Trace.class
@@ -211,6 +212,7 @@ com/hengyun/service/forum/ReplySubjectService.class
 com/hengyun/domain/administrator/Roles.class
 com/hengyun/controller/administrator/UserRoleController.class
 com/hengyun/service/administrator/AdministratorService.class
+com/hengyun/service/impl/message/MailMessageConverter.class
 com/hengyun/dao/casehistory/DiagnosisDao.class
 com/hengyun/dao/patient/HabitInfoDao.class
 com/hengyun/util/log/LogInterceptor.class
@@ -237,6 +239,7 @@ com/hengyun/service/impl/casehistory/AffiliatedClinicalDiseaseServiceImpl.class
 com/hengyun/dao/casehistory/TargetOrganDamageDao.class
 com/hengyun/service/impl/monitor/logbackFlume/FlumeAppender.class
 com/hengyun/controller/information/CollectionController.class
+com/hengyun/util/mail/Register.class
 com/hengyun/service/impl/administrator/UserRoleServiceImpl.class
 com/hengyun/service/impl/patient/HabitInfoServiceImpl.class
 com/hengyun/service/impl/friendcircle/mysql/RosterServiceImpl.class

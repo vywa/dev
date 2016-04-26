@@ -16,13 +16,13 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.dao.logininfo.IndexCollectionDao;
 import com.hengyun.dao.patient.BloodSuggerInfoDao;
 import com.hengyun.domain.notice.MedicalNotice;
 import com.hengyun.domain.notice.Notice.noticeType;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.BaseServiceImpl;
-import com.hengyun.service.impl.notice.util.HttpClientUtil;
 import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
 
@@ -38,12 +38,19 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 	
 	@Resource
 	private MedicalNoticeService medicalNoticeService;
+	
+	@Resource
+	private IndexCollectionDao indexCollectionDao;
+	
 	/*
 	 *  添加血糖
 	 * */
 	@Override
 	public void addInfo(BloodSuggerInfo bloodSuggerInfo, int userId) {
 		// TODO Auto-generated method stub
+		int measureId = indexCollectionDao.updateIndex("measureId");
+		bloodSuggerInfo.setId(measureId);
+		bloodSuggerInfo.setRecordTime(new Date());
 		bloodSuggerInfoDao.save(bloodSuggerInfo);
 		if(needAlarm(bloodSuggerInfo)){
 			int doctorId = rosterService.getDoctor(String.valueOf(userId));
@@ -82,8 +89,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query query = new Query();
 		Criteria criteria = Criteria.where("measureTime").gt(startTime).lte(endTime).andOperator(Criteria.where("userId").is(userId));
 	    
-        query.addCriteria(criteria);
-        query.with(new Sort(Direction.ASC, "measureTime"));
+        query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 		return bloodSuggerInfoDao.queryList(query);
 	}
 
@@ -93,7 +99,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query  query = new Query();
 	     Criteria criteria = Criteria.where("userId").is(userId);
 			 
-	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+	     query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
 			if(info == null) {
 				log.info("病人:  "+userId +"最近没有血糖测量数据");
@@ -125,7 +131,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query  query = new Query();
 	     Criteria criteria = Criteria.where("userId").is(userId);
 			 
-	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+	     query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
 			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
 			if(info == null) {
 				log.info("病人:  "+userId +"最近没有血糖测量数据");

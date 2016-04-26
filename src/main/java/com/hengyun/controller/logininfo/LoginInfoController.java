@@ -293,7 +293,7 @@ public class LoginInfoController {
 			} catch (NullPointerException ex) {
 				// TODO Auto-generated catch block
 				Information info = new Information();
-				switch("type"){
+				switch(type){
 				case "QQ":
 					info.setQqName(nickName);
 					break;
@@ -310,10 +310,10 @@ public class LoginInfoController {
 				informationService.add(info, userId);
 				 loginResult.setUsername(account.getUsername());
 				loginResult.setCode("203");
-				 loginResult.setInfo(info);
+				// loginResult.setInfo(info);
 			}
-		
-	
+		Information infor = informationService.query(userId);
+		loginResult.setInfo(infor);
 		return JSON.toJSONString(loginResult);
 	}
 
@@ -336,7 +336,22 @@ public class LoginInfoController {
 		return  JSON.toJSONString(response);
 	}
 	
+	/*
+	 * 退出登陆
+	 * 
+	 */
+	@RequestMapping(value="/mail",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String mail(HttpServletRequest request) {
+		
+		ResponseCode response = new ResponseCode();
+		String email = request.getParameter("email");
 	
+		response.setCode("204");
+		response.setMessage("用户"+email+"注册成功");
+	
+		return  JSON.toJSONString(response);
+	}
 	
 	/*
 	 *  显示所有账号

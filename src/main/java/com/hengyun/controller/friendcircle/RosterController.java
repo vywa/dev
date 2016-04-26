@@ -210,7 +210,6 @@ public class RosterController {
 			String searchName = jsonObject.getString("key");
 			List<Integer> idList = rosterService.searchFriendList(String.valueOf(userId), searchName);
 			
-			
 			List<NickIcon> infos=new ArrayList<NickIcon>();
 			String birthday = null;
 			int age = 0;
@@ -312,9 +311,6 @@ public class RosterController {
 				infos.add(nickIcon);
 			
 			}
-			
-		
-
 			response.setCode("206");
 			response.setMessage("查询成功");
 			response.setInfos(infos);

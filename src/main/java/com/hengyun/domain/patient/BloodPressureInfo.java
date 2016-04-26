@@ -1,6 +1,7 @@
 package com.hengyun.domain.patient;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /*
  *  
@@ -11,11 +12,28 @@ import java.io.Serializable;
 public class BloodPressureInfo implements Serializable{
 
 	private int userId;										//病人id
+	private int id;												//测量id
 	private long measureTime;					//测量时间
 	private int highBP;										//高压数据
 	private int lowBP;										//d低压数据
 	private int heartRate;								//测量心率
 
+	private Date recordTime;							//上传时间
+	
+
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Date getRecordTime() {
+		return recordTime;
+	}
+	public void setRecordTime(Date recordTime) {
+		this.recordTime = recordTime;
+	}
 	public int getUserId() {
 		return userId;
 	}

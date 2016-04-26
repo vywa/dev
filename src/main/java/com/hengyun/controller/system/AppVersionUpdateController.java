@@ -42,6 +42,8 @@ public class AppVersionUpdateController {
 		return  JSON.toJSONString(responseCode);
 	}
 	
+	
+	
 	@RequestMapping(value="/pinfo",produces = "text/html;charset=UTF-8")  
     @ResponseBody
     public String pinfo(HttpServletRequest request, HttpServletResponse response) throws IOException{

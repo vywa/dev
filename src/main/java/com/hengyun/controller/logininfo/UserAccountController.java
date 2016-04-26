@@ -31,6 +31,7 @@ import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
+import com.hengyun.util.mail.Register;
 import com.hengyun.util.mail.SimpleMail;
 import com.hengyun.util.sms.SubmitResult;
 import com.hengyun.util.sms.sender.SmsSender;
@@ -368,6 +369,48 @@ public class UserAccountController {
 	
 	}
 	
+	/*
+	 * 邮箱链接注册
+	 * 
+	 * */
+	@RequestMapping(value="/mail",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String mail(@RequestParam String data){
+		
+		JSONObject jsonObject =JSON.parseObject(data);
+		
+		String email = jsonObject.getString("email");
+		RegisterResult registResult = new RegisterResult();
+		//查询改邮箱是否注册
+		int count =0;
+		try {
+			count = registerCacheService.getTryCount(email);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			registerCacheService.loadRegisterCache(email);
+		}
+		if(count>5){
+			registResult.setCode("106");
+			registResult.setMessage("发送次数过多");
+			return JSON.toJSONString(registResult);
+		} else {
+			registerCacheService.addTryCount(email);
+		}
+	
+		int codeNum = (int)(Math.random()*10000);
+		codeNum = codeNum>1000?codeNum:codeNum+1000;
+		registerCacheService.setConfirmCode(email, String.valueOf(codeNum));
+	//	registerCacheService.addTryCount(email);
+		String subject = "天衡会员注册邮件";
+		String content = Register.register(email, String.valueOf(codeNum));
+		String to = email;
+		simpleMail.sendMail( subject,  content,  to);
+
+		registResult.setCode("205");
+		registResult.setMessage("验证码发送成功");
+		return JSON.toJSONString(registResult);
+	
+	}
 	
 	   /*
 	    * 邮箱接收注册

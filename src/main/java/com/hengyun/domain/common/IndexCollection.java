@@ -65,6 +65,7 @@ public class IndexCollection implements Serializable{
 	/*
 	 *  运动，饮食
 	 * */
+	private int measureId;								//测量id
 	private int sportId;									//运动id
 	private int dietId;										//饮食id
 	
@@ -76,6 +77,12 @@ public class IndexCollection implements Serializable{
 
 	
 	
+	public int getMeasureId() {
+		return measureId;
+	}
+	public void setMeasureId(int measureId) {
+		this.measureId = measureId;
+	}
 	public int getSubjectId() {
 		return subjectId;
 	}

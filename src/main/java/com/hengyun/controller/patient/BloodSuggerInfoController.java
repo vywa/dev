@@ -1,5 +1,6 @@
 package com.hengyun.controller.patient;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -45,7 +46,7 @@ public class BloodSuggerInfoController {
 	 * 
 	 * 查询用户特定时间段血糖数据
 	 * */
-	@RequestMapping("/show")
+	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
 		
@@ -69,7 +70,7 @@ public class BloodSuggerInfoController {
 	 * 
 	 * 医生查询用户特定时间段血糖数据
 	 * */
-	@RequestMapping("/doctorQuery")
+	@RequestMapping(value="/doctorQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -92,7 +93,7 @@ public class BloodSuggerInfoController {
 	 * 
 	 * 病人亲属查询用户特定时间段血糖数据
 	 * */
-	@RequestMapping("/friendQuery")
+	@RequestMapping(value="/friendQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String friendQuery(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject =JSON.parseObject(data);
@@ -116,7 +117,7 @@ public class BloodSuggerInfoController {
 	 *  查询所有用户血糖信息
 	 *  
 	 * */
-	@RequestMapping("/showAll")
+	@RequestMapping(value="/showAll",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBloodSuggerAll(HttpServletRequest request){
 		Query query = Query.query(Criteria.where("userId").exists(true));
@@ -132,7 +133,7 @@ public class BloodSuggerInfoController {
 	 * 
 	 * 查询最近一段时间用户的血糖信息(单位为天，周，月)
 	 * */
-	@RequestMapping("/latestDay")
+	@RequestMapping(value="/latestDay",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String lates(HttpServletRequest request){
 	
@@ -169,7 +170,7 @@ public class BloodSuggerInfoController {
 	 *  上传用户血糖数据
 	 * 
 	 * */
-	@RequestMapping("/upload")
+	@RequestMapping(value="/upload",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		

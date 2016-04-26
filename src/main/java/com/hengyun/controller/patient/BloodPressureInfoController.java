@@ -1,6 +1,7 @@
 package com.hengyun.controller.patient;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -21,9 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
-import com.hengyun.domain.patient.HealthTarget;
 import com.hengyun.domain.patient.PressureResponse;
-import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodPressureInfoService;
 import com.hengyun.service.patient.HealthTargetService;
 
@@ -76,8 +75,10 @@ public class BloodPressureInfoController {
 	
 		PressureResponse response = new PressureResponse();
 		int userId = (int)request.getAttribute("userId");
-		List<BloodPressureInfo> bpi =  bloodPressureInfoService.getlatestTime(userId);
-		
+		BloodPressureInfo lastRecode = bloodPressureInfoService.getlatestRecord(userId);
+		//List<BloodPressureInfo> bpi =  bloodPressureInfoService.getlatestTime(userId);
+		List<BloodPressureInfo> bpi = new ArrayList<BloodPressureInfo>();
+		bpi.add(lastRecode);
 		
 		response.setCode("211");
 		
@@ -165,6 +166,7 @@ public class BloodPressureInfoController {
 		BloodPressureInfo blood = JSON.toJavaObject(jsonObject, BloodPressureInfo.class);
 		int userId = (int)request.getAttribute("userId");
 		blood.setUserId(userId);
+		
 		/*
 		long date = jsonObject.getLongValue("measureTime");
 		int highBP = jsonObject.getIntValue("highBP");
