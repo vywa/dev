@@ -64,8 +64,8 @@ public class MultiMediaController {
 	    	  response.setMessage("上传文件失败");
 	    	  }else{
 	    	//	if(filename.endsWith(".mp4")){
-	    		  String videoPath = "/home/bob/multimedia/download/";
-	    		//  String videoPath = "/home/thealth/multimedia/download/";
+	    		 // String videoPath = "/home/bob/multimedia/download/";
+	    		String videoPath = "/home/thealth/multimedia/download/";
 	    		  FileUtils.writeByteArrayToFile(new File(videoPath,filename), media.getBytes());
 	    		  response.setCode("0");
 	    		  response.setResponseCode(0);

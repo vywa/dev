@@ -883,9 +883,9 @@ public class UserAccountController {
     	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 	
-    	//String tocken = request.getParameter("tocken");
+    
     	ResponseCode response = new ResponseCode();
-    	//int userId = loginInfoService.isOnline(tocken);
+    	
     	int userId = (int)request.getAttribute("userId");
     	int  user = 0;
     	//用户在线
@@ -984,6 +984,7 @@ public class UserAccountController {
     
     
     /*
+     * 
      *  更改手机邮箱绑定信息
      *  
      * */
@@ -1002,7 +1003,7 @@ public class UserAccountController {
     
 			if(type.equals("email")){			//更改邮箱
 				if(userAccountService.existUser(username,"email")>0){
-					  response.setCode("103");
+					 response.setCode("103");
 	  		    	response.setMessage("邮箱已经使用，请使用为使用邮箱");
 					return JSON.toJSONString(response);
 				}
@@ -1034,7 +1035,6 @@ public class UserAccountController {
 				}
 			}
 			//更改用户绑定信息
-			
     		int status = userAccountService.change(type, username, userId);
     		response.setCode("206");
     		response.setMessage("更新成功 ");

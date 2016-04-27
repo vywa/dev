@@ -31,7 +31,7 @@ public class AppVersionUpdateController {
 	
 	
 	@RequestMapping(value="/dinfo",produces = "text/html;charset=UTF-8")  
-    @ResponseBody
+    @ResponseBody  
     public String dinfo(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
     	AppVersionUpdateResponse responseCode = new AppVersionUpdateResponse();
@@ -39,9 +39,9 @@ public class AppVersionUpdateController {
     	responseCode.setCode("206");
     	responseCode.setMessage("获取版本信息成功");
     	responseCode.setVersion(app);
+    	
 		return  JSON.toJSONString(responseCode);
 	}
-	
 	
 	
 	@RequestMapping(value="/pinfo",produces = "text/html;charset=UTF-8")  

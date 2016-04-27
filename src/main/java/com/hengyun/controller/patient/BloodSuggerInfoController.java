@@ -1,6 +1,6 @@
 package com.hengyun.controller.patient;
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -19,10 +19,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.HealthLine;
 import com.hengyun.domain.patient.HealthTarget;
 import com.hengyun.domain.patient.SuggerResponse;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
+import com.hengyun.service.patient.HealthLineService;
 import com.hengyun.service.patient.HealthTargetService;
 
 /*
@@ -42,10 +44,16 @@ public class BloodSuggerInfoController {
 	
 	@Resource
 	private HealthTargetService healthTargetService;
+	
+	@Resource
+	private HealthLineService healthLineService;
+	
 	/*
 	 * 
-	 * 查询用户特定时间段血糖数据
+	 *   查询用户特定时间段血糖数据
+	 * 
 	 * */
+	
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
@@ -59,16 +67,19 @@ public class BloodSuggerInfoController {
 		long endTime =jsonObject.getLongValue("endTime");
 
 		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, userId);
-	
-		sugger.setCode("211");//-112
+		HealthLine healthLine = healthLineService.getSuggerLine(userId);
+		
+		sugger.setCode("211");
 		sugger.setBloodSuggerInfo(bloodList);
-	
+		sugger.setHealthLine(healthLine);
+		
 		return  JSONObject.toJSONString(sugger);
 	}
 	
 	/*
 	 * 
-	 * 医生查询用户特定时间段血糖数据
+	 *   医生查询用户特定时间段血糖数据
+	 *  
 	 * */
 	@RequestMapping(value="/doctorQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -82,8 +93,10 @@ public class BloodSuggerInfoController {
 		long endTime =jsonObject.getLongValue("endTime");
 		
 		List<BloodSuggerInfo> bloodList = bloodSuggerInfoService.getInfoByTime(startTime, endTime, user);
-	
+		
+		HealthLine healthLine = healthLineService.getSuggerLine(user);
 		sugger.setCode("211");
+		sugger.setHealthLine(healthLine);
 		sugger.setBloodSuggerInfo(bloodList);
 		
 		return  JSONObject.toJSONString(sugger);
@@ -129,9 +142,11 @@ public class BloodSuggerInfoController {
 		return result;
 	}
 	
+	
 	/*
 	 * 
-	 * 查询最近一段时间用户的血糖信息(单位为天，周，月)
+	 *  查询最近一段时间用户的血糖信息(单位为天，周，月)
+	 * 
 	 * */
 	@RequestMapping(value="/latestDay",produces = "text/html;charset=UTF-8")
 	@ResponseBody
@@ -142,26 +157,12 @@ public class BloodSuggerInfoController {
 		List<BloodSuggerInfo> bloodList = null;
 		int userId = (int)request.getAttribute("userId");
 		HealthTarget healthTarget=null;
-		try {
-			 healthTarget = healthTargetService.getHealthTarget(userId);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			healthTarget = null;
-		}
-		
-			try{
-				bloodList = bloodSuggerInfoService.getlatestTime(userId);
-				if(bloodList!=null){
-					response.setCode("211");
-					response.setHealthTarget(healthTarget);
-					response.setBloodSuggerInfo(bloodList);
-				}
-			} catch(Exception ex){
-				log.info("病人 "+userId+"最近的血糖信息为空");
-				response.setCode("211");
-				response.setBloodSuggerInfo(null);
-			}
-			
+		healthTarget = healthTargetService.getHealthTarget(userId);
+			bloodList = bloodSuggerInfoService.getlatestRecord(userId);	
+			response.setCode("211");
+			response.setHealthTarget(healthTarget);
+			response.setBloodSuggerInfo(bloodList);
+
 		return  JSONObject.toJSONString(response);
 	}
 
@@ -194,7 +195,7 @@ public class BloodSuggerInfoController {
 		//保存数据
 		bloodSuggerInfoService.addInfo(sugger, userId);
 		response.setCode("0");//-1
-		response.setMessage("record success");
+		response.setMessage("血糖上传成功");
 		
 	
 		return  JSON.toJSONString(response);

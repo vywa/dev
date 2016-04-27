@@ -188,10 +188,11 @@ public class AppPackageController {
 		while( (z=in.read(b,0,b.length))!= -1){ 
 		os.write(b,0,z);     
 		}
+		
 		in.close(); 
 		os.flush();
 		os.close();
-	
+
 		responseCode.setCode("208");
 		responseCode.setMessage("download success");
 

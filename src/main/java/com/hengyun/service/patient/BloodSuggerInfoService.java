@@ -26,11 +26,18 @@ public interface BloodSuggerInfoService extends BaseService<BloodSuggerInfo,Inte
 		 * */
 		public List<BloodSuggerInfo> getInfoByTime(long startTime,long endTime,int userId);
 		
+		public List<BloodSuggerInfo> getOrderByTime(long startTime,long endTime,int userId);
+		
 		/*
 		 * 获取最近一天数据
 		 * 
 		 * */
 		public List<BloodSuggerInfo> getlatestTime(int userId) ;
+		
+		/*
+		 *  获取最近一天数据
+		 * */
+		public List<BloodSuggerInfo> getlatestRecord(int userId) ;
 		
 		/*
 		 *  获取用户最近某个时期的血糖数据

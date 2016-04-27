@@ -41,7 +41,6 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 	
 	@Resource
 	private IndexCollectionDao indexCollectionDao;
-	
 	/*
 	 *  添加血糖
 	 * */
@@ -51,6 +50,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		int measureId = indexCollectionDao.updateIndex("measureId");
 		bloodSuggerInfo.setId(measureId);
 		bloodSuggerInfo.setRecordTime(new Date());
+	
 		bloodSuggerInfoDao.save(bloodSuggerInfo);
 		if(needAlarm(bloodSuggerInfo)){
 			int doctorId = rosterService.getDoctor(String.valueOf(userId));
@@ -89,7 +89,8 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query query = new Query();
 		Criteria criteria = Criteria.where("measureTime").gt(startTime).lte(endTime).andOperator(Criteria.where("userId").is(userId));
 	    
-        query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+        query.addCriteria(criteria);
+        query.with(new Sort(Direction.ASC, "measureTime"));
 		return bloodSuggerInfoDao.queryList(query);
 	}
 
@@ -99,15 +100,17 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query  query = new Query();
 	     Criteria criteria = Criteria.where("userId").is(userId);
 			 
-	     query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
 			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
 			if(info == null) {
 				log.info("病人:  "+userId +"最近没有血糖测量数据");
 				return null;
 			}else {
-			long time= info.getMeasureTime();
-		
-			Date date = new Date(time);
+			
+			long measureTime= info.getMeasureTime();
+			Date date = new Date(measureTime);
+			
+			
 			log.info(MessageFormat.format("病人最近的血糖测量时间为: {0}", date.toLocaleString()));
 			
 			Calendar   calendar   =   new   GregorianCalendar(); 
@@ -116,7 +119,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		     date=calendar.getTime();  
 		     long startTime = date.getTime();
 		
-		     return getInfoByTime(startTime,time,userId);
+		     return getInfoByTime(startTime,measureTime,userId);
 			}
 	}
 
@@ -131,7 +134,7 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 		Query  query = new Query();
 	     Criteria criteria = Criteria.where("userId").is(userId);
 			 
-	     query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
 			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
 			if(info == null) {
 				log.info("病人:  "+userId +"最近没有血糖测量数据");
@@ -170,6 +173,49 @@ public class BloodSuggerInfoServiceImpl extends BaseServiceImpl<BloodSuggerInfo,
 			return true;
 		}
 		return false;
+	}
+
+	/*
+	 *  获取最近一天时间血糖，最近测量时间排前
+	 * */
+	@Override
+	public List<BloodSuggerInfo> getlatestRecord(int userId) {
+		// TODO Auto-generated method stub
+		Query  query = new Query();
+	     Criteria criteria = Criteria.where("userId").is(userId);
+			 
+	      query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
+			BloodSuggerInfo info =  bloodSuggerInfoDao.queryOne(query);
+			if(info == null) {
+				log.info("病人:  "+userId +"最近没有血糖测量数据");
+				return null;
+			}else {
+			
+			long measureTime= info.getMeasureTime();
+			Date date = new Date(measureTime);
+			
+			
+			log.info(MessageFormat.format("病人最近的血糖测量时间为: {0}", date.toLocaleString()));
+			
+			Calendar   calendar   =   new   GregorianCalendar(); 
+		     calendar.setTime(date); 
+		     calendar.add(Calendar.DATE,-1);
+		     date=calendar.getTime();  
+		     long startTime = date.getTime();
+		
+		     return getOrderByTime(startTime,measureTime,userId);
+			}
+	}
+
+	@Override
+	public List<BloodSuggerInfo> getOrderByTime(long startTime, long endTime, int userId) {
+		// TODO Auto-generated method stub
+		Query query = new Query();
+		Criteria criteria = Criteria.where("measureTime").gt(startTime).lte(endTime).andOperator(Criteria.where("userId").is(userId));
+	    
+        query.addCriteria(criteria).with(new Sort(Direction.DESC, "id"));
+     
+		return bloodSuggerInfoDao.queryList(query);
 	}
 
 

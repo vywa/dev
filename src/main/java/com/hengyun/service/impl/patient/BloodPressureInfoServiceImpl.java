@@ -97,7 +97,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("userId").is(userId);
 		 
-        query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
 		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
 		if(info ==null){
 			log.info("病人: "+userId+"最近没有血压测量数据");
@@ -120,7 +120,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("measureTime").gt(begin).lte(end).andOperator(Criteria.where("userId").is(userId));
 		 
-		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+		   query.addCriteria(criteria).with(new Sort(Direction.ASC, "measureTime"));
 		return bloodPressureInfoDao.queryList(query);
 	}
 
@@ -134,7 +134,7 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 		Query query = new Query();
 		Criteria criteria = Criteria.where("userId").is(userId);
 		 
-		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
+		  query.addCriteria(criteria).with(new Sort(Direction.DESC, "measureTime"));
 		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
 		if(info ==null){
 			log.info("病人: "+userId+"最近没有血压测量数据");
@@ -226,11 +226,21 @@ public class BloodPressureInfoServiceImpl extends BaseServiceImpl<BloodPressureI
 	@Override
 	public BloodPressureInfo getlatestRecord(int userId) {
 		// TODO Auto-generated method stub
-		Query query = new Query();
-		Criteria criteria = Criteria.where("userId").is(userId);
-		 
-		 query.addCriteria(criteria).with(new Sort(Direction.DESC, "id").and(new Sort(Direction.DESC, "measureTime")));
-		BloodPressureInfo info =  bloodPressureInfoDao.queryOne(query);
+	
+		List<BloodPressureInfo> list = getlatestTime(userId);
+		BloodPressureInfo info=null;
+	
+		 try {
+			info=list.get(0);
+			for(BloodPressureInfo temp :list){
+				if(temp.getId()>info.getId()){
+					info = temp;
+				}
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			log.info("用户最近没有血压记录");
+		}
 		return info;
 	}
 

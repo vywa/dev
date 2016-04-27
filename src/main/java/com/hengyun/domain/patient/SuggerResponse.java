@@ -9,8 +9,16 @@ public class SuggerResponse implements Serializable{
 	private List<BloodSuggerInfo> bloodSuggerInfo= new ArrayList<BloodSuggerInfo>();
 	private String code;
 	private HealthTarget healthTarget;
+	private HealthLine healthLine;
 	
 	
+	
+	public HealthLine getHealthLine() {
+		return healthLine;
+	}
+	public void setHealthLine(HealthLine healthLine) {
+		this.healthLine = healthLine;
+	}
 	public HealthTarget getHealthTarget() {
 		return healthTarget;
 	}

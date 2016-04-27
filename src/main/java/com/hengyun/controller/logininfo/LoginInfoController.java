@@ -106,7 +106,7 @@ public class LoginInfoController {
 						Query query =Query.query(Criteria.where("userId").is(userId));
 						try{
 						 Information temp =informationService.queryOne(query);
-							account = userAccountService.queryById(userId);
+						//	account = userAccountService.getUserAccountById(userId);
 							 long dbRecordTime = Long.valueOf(temp.getRecordTime());
 							 if(dbRecordTime>Long.valueOf(recordTime)){
 								 String nickname = temp.getTrueName();
@@ -115,7 +115,7 @@ public class LoginInfoController {
 								 int age = temp.getAge();
 								 String birthday  = temp.getBirthday();
 							
-								 UserAccount account2 = userAccountService.queryById(userId);
+								 UserAccount account2 = userAccountService.getUserAccountById(userId);
 								 String mobilephone = account2.getMobilephone();
 								 String email = account2.getEmail();
 								 String workNum = account2.getWorkNum();
@@ -163,12 +163,12 @@ public class LoginInfoController {
 				try {
 					information = informationService.query(userId);
 				
-					account = userAccountService.queryById(userId);
-					information.setEmail(account.getEmail());
-					information.setMobilephone(account.getMobilephone());
-					information.setQQ(account.getQQ());
-					information.setWeiBo(account.getWeiBo());
-					information.setWeiChat(account.getWeiChat());
+					UserAccount account3 = userAccountService.getUserAccountById(userId);
+					information.setEmail(account3.getEmail());
+					information.setMobilephone(account3.getMobilephone());
+					information.setQQ(account3.getQQ());
+					information.setWeiBo(account3.getWeiBo());
+					information.setWeiChat(account3.getWeiChat());
 					
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
 					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
@@ -192,6 +192,15 @@ public class LoginInfoController {
 					Information info = new Information();
 					info.setUserId(userId);
 					info.setRecordTime(String.valueOf(new Date().getTime()));
+				
+				//	Information information2 = informationService.query(userId);
+					
+					UserAccount account3 = userAccountService.getUserAccountById(userId);
+					info.setEmail(account3.getEmail());
+					info.setMobilephone(account3.getMobilephone());
+					info.setQQ(account3.getQQ());
+					info.setWeiBo(account3.getWeiBo());
+					info.setWeiChat(account3.getWeiChat());
 					informationService.add(info, userId);
 					loginResult.setCode("206");
 					 loginResult.setInfo(info);

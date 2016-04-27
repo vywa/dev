@@ -1,7 +1,6 @@
 package com.hengyun.controller.patient;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,8 +21,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
+import com.hengyun.domain.patient.HealthLine;
 import com.hengyun.domain.patient.PressureResponse;
 import com.hengyun.service.patient.BloodPressureInfoService;
+import com.hengyun.service.patient.HealthLineService;
 import com.hengyun.service.patient.HealthTargetService;
 
 /*
@@ -42,6 +43,9 @@ public class BloodPressureInfoController {
 	
 	@Resource
 	private HealthTargetService healthTargetService;
+	
+	@Resource
+	private HealthLineService healthLineService;
 	/*
 	 * 
 	 * 	查询某个指定时间段的测量数据
@@ -57,11 +61,11 @@ public class BloodPressureInfoController {
 		long startTime = jsonObject.getLongValue("startTime");
 		long endTime =jsonObject.getLongValue("endTime");
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId);
-			
+		HealthLine healthLine = healthLineService.getPressureLine(userId);	
 		
 		response.setCode("211");//112
 		response.setBloodPressureInfo(bloodList);
-		
+		response.setHealthLine(healthLine);
 		return  JSONObject.toJSONString(response);
 	}
 	
@@ -75,15 +79,21 @@ public class BloodPressureInfoController {
 	
 		PressureResponse response = new PressureResponse();
 		int userId = (int)request.getAttribute("userId");
+		List<BloodPressureInfo> bloodList = null;
 		BloodPressureInfo lastRecode = bloodPressureInfoService.getlatestRecord(userId);
-		//List<BloodPressureInfo> bpi =  bloodPressureInfoService.getlatestTime(userId);
-		List<BloodPressureInfo> bpi = new ArrayList<BloodPressureInfo>();
-		bpi.add(lastRecode);
+		if(lastRecode==null){
+			response.setCode("211");
+			
+			response.setBloodPressureInfo(bloodList);
+
+		} else {
+			bloodList= new ArrayList<BloodPressureInfo>();
+			bloodList.add(lastRecode);
 		
 		response.setCode("211");
 		
-		response.setBloodPressureInfo(bpi);
-		
+		response.setBloodPressureInfo(bloodList);
+		}
 		return  JSONObject.toJSONString(response);
 	}
 	
@@ -103,7 +113,9 @@ public class BloodPressureInfoController {
 		long endTime =jsonObject.getLongValue("endTime");
 		
 		List<BloodPressureInfo> bloodList = bloodPressureInfoService.getInfoByTime(startTime, endTime, userId2);
+		HealthLine healthLine = healthLineService.getPressureLine(userId2);
 		response.setCode("211");
+		response.setHealthLine(healthLine);
 		response.setBloodPressureInfo(bloodList);
 		
 		return  JSONObject.toJSONString(response);
@@ -167,19 +179,7 @@ public class BloodPressureInfoController {
 		int userId = (int)request.getAttribute("userId");
 		blood.setUserId(userId);
 		
-		/*
-		long date = jsonObject.getLongValue("measureTime");
-		int highBP = jsonObject.getIntValue("highBP");
-		int lowBP = jsonObject.getIntValue("lowBP");
-		int heartRate = jsonObject.getIntValue("heartRate");
-
-		BloodPressureInfo blood = new BloodPressureInfo();
-		blood.setUserId(userId);
-		blood.setMeasureTime(date);
-		blood.setHighBP(highBP);
-		blood.setHeartRate(heartRate);
-		blood.setLowBP(lowBP);
-	*/
+	
 		//保存数据
 		bloodPressureInfoService.addInfo(blood);
 		

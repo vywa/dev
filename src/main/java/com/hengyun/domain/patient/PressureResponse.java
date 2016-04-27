@@ -7,12 +7,17 @@ import java.util.List;
 public class PressureResponse implements Serializable{
 
 	private List<BloodPressureInfo>  bloodPressureInfo= new ArrayList<BloodPressureInfo>();
-	
+	private HealthLine healthLine;
 	private String code;
 	
+
 	
-	
-	
+	public HealthLine getHealthLine() {
+		return healthLine;
+	}
+	public void setHealthLine(HealthLine healthLine) {
+		this.healthLine = healthLine;
+	}
 	public List<BloodPressureInfo> getBloodPressureInfo() {
 		return bloodPressureInfo;
 	}

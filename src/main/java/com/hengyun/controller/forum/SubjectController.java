@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.PostListResponseCode;
 import com.hengyun.domain.forum.Subject;
@@ -71,7 +72,7 @@ public class SubjectController {
 	@RequestMapping(value="/like",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String like(@RequestParam String data,HttpServletRequest request){
-		ForumResponseCode response = new ForumResponseCode();
+		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		int subjectId = jsonObject.getIntValue("subjectId");
 	//	Subject post = JSON.toJavaObject(jsonObject, Subject.class);
@@ -80,12 +81,12 @@ public class SubjectController {
 		//发表帖子
 		int result = subjectService.like(userId, subjectId);
 		if(result==-1){
-			response.setResponseCode(-1);
-			response.setDescription("你已经点过赞了，不能重复");
+			response.setCode(String.valueOf(-1));
+			response.setMessage("你已经点过赞了，不能重复");
 		}else {
 		
-		response.setResponseCode(0);
-		response.setDescription("点赞成功");
+		response.setCode(String.valueOf(0));
+		response.setMessage("点赞成功");
 		}
 
 		return JSON.toJSONString(response);
