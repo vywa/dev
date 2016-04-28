@@ -47,6 +47,7 @@
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/system/XMLProperties.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/interceptor/AuthenticateInterceptor.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/shiro/CustomRolesAuthorizationFileter.java
+/home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/notice/DailyNewsResponseList.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/controller/monitor/ExceptionInfoController.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/exception/BusinessException.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/service/util/SmsUtilService.java
@@ -96,6 +97,7 @@
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/casehistory/Cardiogram.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/service/impl/shiro/SimpleCacheManagerImpl.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/dao/impl/hospital/OfficeDaoImpl.java
+/home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/notice/DailyNewsListResponse.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/service/impl/patient/HealthLineServiceImpl.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/util/shiro/CodeFormAuthenticationFilter.java
 /home/bob/hengyun/healthcloudserver/src/main/java/com/hengyun/domain/loginInfo/constant/UserCatagory.java

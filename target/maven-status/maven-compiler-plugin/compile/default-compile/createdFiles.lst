@@ -563,6 +563,7 @@ com/hengyun/domain/monitor/ExceptionInfo.class
 com/hengyun/controller/casehistory/LibrarotySheetController.class
 com/hengyun/domain/casehistory/AnesthesiaConsent.class
 com/hengyun/domain/loginInfo/RegisterCache.class
+com/hengyun/domain/notice/DailyNewsResponseList.class
 com/hengyun/domain/patient/HealthInfoResponse.class
 com/hengyun/service/casehistory/DoctorAdviceService.class
 com/hengyun/domain/forum/ForumConfig.class
@@ -585,6 +586,7 @@ com/hengyun/domain/casehistory/response/CaseHistoryResponseCode.class
 com/hengyun/domain/monitor/Metric.class
 com/hengyun/domain/casehistory/response/SportInfoResponse.class
 com/hengyun/domain/patient/SuggerResponse.class
+com/hengyun/domain/notice/DailyNewsListResponse.class
 com/hengyun/dao/impl/casehistory/RiskFactorDaoImpl.class
 com/hengyun/util/system/VERSION.class
 com/hengyun/util/annotation/Flush.class

@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -97,7 +98,17 @@ public class CollectionController {
 		collection.setId(newsId);
     	
     	collection.setUrl(url);
+    	//用户收藏
 		int result = collectionService.addCollection(collection, userId,1);
+		Query query = Query.query(Criteria.where("id").is(newsId));
+		List<Integer> userList = dailyNews.getCollectorId();
+		if(userList==null){
+			userList = new ArrayList<Integer>();
+		}
+		userList.add(userId);
+		Update update = Update.update("collectorId", userList);
+		//更新收藏者列表
+		dailyNewsService.updateFirst(query, update);
 		if(result<0){
 			response.setCode("110");
 			response.setMessage("你已经收藏，不能重复");

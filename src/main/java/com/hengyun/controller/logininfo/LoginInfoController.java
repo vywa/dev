@@ -57,6 +57,7 @@ public class LoginInfoController {
 	/*
 	 *  用户名账号登陆
 	 * */
+	
 	@RequestMapping(value="/username",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String loginByUsername(@RequestParam String data,HttpServletRequest request) {
@@ -131,10 +132,11 @@ public class LoginInfoController {
 							
 								 doctorInfo.setTrueName(nickname);
 								 doctorInfo.setUserId(userId);
-								doctorInfo.setResume(resume);
+								 doctorInfo.setResume(resume);
 								 doctorInfo.setWorkNum(workNum);
 								 doctorInfo.setAge(age);
 								 doctorInfo.setSex(sex);
+								 
 								 loginResult.setDoctorInfo(doctorInfo);
 								 loginResult.setCode("206");
 								 loginResult.setUsername(account.getUsername());
