@@ -14,6 +14,9 @@ public class Information implements Serializable{
  * */
 	
 	private int userId;								//用户ID
+	
+	private String username;						//用户名
+	
 	private String trueName;					//姓名
 	private String sex;								//性别
 	
@@ -50,10 +53,14 @@ public class Information implements Serializable{
 	
 	
 	private String recordTime;							//记录时间
+
 	
-	
-	
-	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getQqName() {
 		return qqName;
 	}

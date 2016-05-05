@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -76,7 +75,6 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 
 	//更新资料
 	public int update(Information information, int userId) {
-		// TODO Auto-generated method stub
 	
 			Query query = Query.query(Criteria.where("userId").is(userId));
 			String birthday = information.getBirthday();
@@ -88,10 +86,8 @@ public class InformationServiceImpl extends BaseServiceImpl<Information,Integer>
 					date2=new Date();
 					date2 = simpleDateFormat.parse(digital);
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}catch (NullPointerException e) {
-					// TODO Auto-generated catch block
 					 date2=new Date();
 				}
 				

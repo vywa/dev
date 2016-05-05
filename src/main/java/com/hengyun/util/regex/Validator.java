@@ -12,7 +12,7 @@ public class Validator {
 	//验证邮箱
 	public static final String REGEX_EMAIL="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	//验证用户名
-	public static final  String REGEX_USERNAME="^[a-z0-9_-]{3,15}$";
+	public static final  String REGEX_USERNAME="^[a-zA-Z0-9_-]{3,15}$";
 	//验证手机号
 	public static final String REGEX_MOBILE = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 	//验证密码
@@ -56,5 +56,15 @@ public class Validator {
 	     */
 	    public static boolean isPassword(String password) {
 	        return Pattern.matches(REGEX_PASSWORD, password);
+	    }
+	    
+	    /*
+	     *  获取类型
+	     * */
+	    public static String type(String username){
+	    	if(isMobile(username)) return "mobilephone";
+	    	else if(isEmail(username)) return "email";
+	    	else if(isUsername(username)) return "username";
+	    	else return "unknown";
 	    }
 }

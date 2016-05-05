@@ -21,7 +21,7 @@
 				<!-- 设置认证开关 -->
 				<prop key="mail.smtp.auth">true</prop>
 				<!-- 启动调试开关 -->
-				<prop key="mail.debug">false</prop>
+				<prop key="mail.debug">true</prop>
 				<!-- 设置发送延时 -->
 				<prop key="mail.smtp.timeout">0</prop>
 				<prop key="mail.smtp.ssl.enable">true</prop>

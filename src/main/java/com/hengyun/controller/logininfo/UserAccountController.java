@@ -33,6 +33,7 @@ import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
 import com.hengyun.util.mail.Register;
 import com.hengyun.util.mail.SimpleMail;
+import com.hengyun.util.regex.Validator;
 import com.hengyun.util.sms.SubmitResult;
 import com.hengyun.util.sms.sender.SmsSender;
 
@@ -840,7 +841,7 @@ public class UserAccountController {
     }
     
     /*
-     *  解绑信息
+     *  解绑手机邮箱
      *  
      * */
     @ResponseBody  
@@ -850,11 +851,13 @@ public class UserAccountController {
     	JSONObject jsonObject = JSONObject.parseObject(data);
 
     	ResponseCode response = new ResponseCode();
-    	String type = jsonObject.getString("type");
+    	//String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
+		String type=Validator.type(username);
     	String  confirmCode = jsonObject.getString("code");
+    	
   	  if(!registerCacheService.getConfirmCode(username).equals(confirmCode)){
-			response.setCode("107");
+			response.setCode("107");	//106 发送次数过多
 			response.setMessage("验证码错误");
 			
 		}else {
@@ -868,7 +871,7 @@ public class UserAccountController {
        
     }
     
-    
+ 
     
     /*
      *  验证更改绑定合法
@@ -880,10 +883,10 @@ public class UserAccountController {
     	
     	JSONObject jsonObject = JSONObject.parseObject(data);
     	
-    	String type = jsonObject.getString("type");
+    	//String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
-	
-    
+		String type = Validator.type(username);
+		
     	ResponseCode response = new ResponseCode();
     	
     	int userId = (int)request.getAttribute("userId");
@@ -959,7 +962,7 @@ public class UserAccountController {
      *  
      * */
     @ResponseBody
-    @RequestMapping("/changeThird")
+    @RequestMapping(value="/changeThird",produces = "text/html;charset=UTF-8")
     public String changeThird(@RequestParam String data,HttpServletRequest request){
     	JSONObject jsonObject = JSONObject.parseObject(data);
     	String type = jsonObject.getString("type");
@@ -977,7 +980,7 @@ public class UserAccountController {
     		}
     		int status = userAccountService.change(type, username, userId);
     		response.setCode("206");
-    		response.setMessage("edit  thirdPart success ");
+    		response.setMessage("绑定成功");
     	}
     	return JSON.toJSONString(response);
     }
@@ -989,19 +992,21 @@ public class UserAccountController {
      *  
      * */
     @ResponseBody  
-    @RequestMapping("/change") 
+    @RequestMapping(value="/change",produces = "text/html;charset=UTF-8") 
     public  String  change(@RequestParam String data,HttpServletRequest request){
     	
     	JSONObject jsonObject = JSONObject.parseObject(data);
-    	String type = jsonObject.getString("type");
+  //  	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 		String confirmCode = jsonObject.getString("code");
+		String type = Validator.type(username);
 
     	ResponseCode response = new ResponseCode();
     	int userId = (int)request.getAttribute("userId");
     	
     
 			if(type.equals("email")){			//更改邮箱
+			
 				if(userAccountService.existUser(username,"email")>0){
 					 response.setCode("103");
 	  		    	response.setMessage("邮箱已经使用，请使用为使用邮箱");
@@ -1010,10 +1015,11 @@ public class UserAccountController {
 		
 			if(!registerCacheService.getConfirmCode(username).equals(confirmCode)){
 				response.setCode("107");
-				response.setMessage("code error");
+				response.setMessage("验证码错误");
 				return JSON.toJSONString(response);
 			}
 			} else if(type.equals("moblephone")){			//更改手机号
+				
 				if(userAccountService.existUser(username,"mobilephone")>0){
 					  response.setCode("103");
 	  		    		response.setMessage("手机号已经使用，请使用未使用手机号");
@@ -1026,8 +1032,9 @@ public class UserAccountController {
 					response.setMessage("验证码错误");
 					return JSON.toJSONString(response);
 				}
-				}
+			}
 			else if(type.equals("username")){			//更改用户名
+			
 				if(userAccountService.existUser(username,"username")>0){
 					  response.setCode("103");
 	  		    		response.setMessage("用户名已经使用，请使用未使用用户名");

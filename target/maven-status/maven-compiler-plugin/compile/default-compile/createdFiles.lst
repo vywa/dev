@@ -387,6 +387,7 @@ com/hengyun/domain/information/Icon.class
 com/hengyun/util/security/SecurityControlHolder.class
 com/hengyun/domain/casehistory/response/FollowupResponse.class
 com/hengyun/dao/impl/monitor/ExceptionInfoDaoImpl.class
+com/hengyun/domain/im/IMContent.class
 com/hengyun/domain/hospital/Office.class
 com/hengyun/service/impl/patient/PatientServiceImpl.class
 com/hengyun/dao/impl/patient/BloodSuggerInfoDaoImpl.class

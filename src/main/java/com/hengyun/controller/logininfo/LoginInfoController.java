@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +33,7 @@ import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.regex.Validator;
 
 @Controller
 @RequestMapping("reglog")
@@ -64,10 +66,11 @@ public class LoginInfoController {
 		// TODO Auto-generated method stub
 		JSONObject jsonObject =JSON.parseObject(data);
 
-		String type= jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
 		String recordTime = jsonObject.getString("recordTime");
+		String type=Validator.type(username);
+		
 		Date date= null;
 		if(recordTime.equals("none")){
 			try {
@@ -104,6 +107,172 @@ public class LoginInfoController {
 				 String userIdStr = String.valueOf(userId);
 				 //医生端
 				 if(userIdStr.startsWith("10")){
+						Query query =Query.query(Criteria.where("userId").is(userId));
+						 UserAccount account2 = userAccountService.getUserAccountById(userId);
+						try{
+						 Information temp =informationService.queryOne(query);
+						
+					
+							 long dbRecordTime = Long.valueOf(temp.getRecordTime());
+							 if(dbRecordTime>Long.valueOf(recordTime)){
+								 String nickname = temp.getTrueName();
+								 String sex = temp.getSex();
+								 String resume = temp.getResume();
+								 int age = temp.getAge();
+								 String birthday  = temp.getBirthday();
+							
+								
+								 String mobilephone = account2.getMobilephone();
+								 String email = account2.getEmail();
+								 String workNum = account2.getWorkNum();
+								 
+								
+								 String iconUrl = temp.getIconUrl();
+								 DoctorInfo doctorInfo = new DoctorInfo();
+								 doctorInfo.setIconUrl(iconUrl);
+								 doctorInfo.setBirthday(birthday);
+								 doctorInfo.setEmail(email);
+								
+								 doctorInfo.setMobilephone(mobilephone);
+							
+								 doctorInfo.setTrueName(nickname);
+								 doctorInfo.setUserId(userId);
+								 doctorInfo.setResume(resume);
+								 doctorInfo.setWorkNum(workNum);
+								 doctorInfo.setAge(age);
+								 doctorInfo.setSex(sex);
+								 
+								 loginResult.setDoctorInfo(doctorInfo);
+								 loginResult.setCode("206");
+								 loginResult.setUsername(account2.getUsername());
+							
+									 
+							 } else {
+								 loginResult.setCode("207");
+								 loginResult.setUsername(account2.getUsername());
+								 loginResult.setInfo(null);
+							 }
+							 } catch (NullPointerException ex) {
+									// TODO Auto-generated catch block
+									Information info = new Information();
+									info.setUserId(userId);
+									info.setRecordTime(String.valueOf(new Date().getTime()));
+									informationService.add(info, userId);
+									
+									loginResult.setCode("206");
+									 loginResult.setInfo(info);
+									 loginResult.setUsername(account2.getUsername());
+								}
+	
+				 } else if(userIdStr.startsWith("20")){
+				 Information information=null;
+				 UserAccount account3 = userAccountService.getUserAccountById(userId);
+				try {
+					information = informationService.query(userId);
+					
+					information.setEmail(account3.getEmail());
+					information.setMobilephone(account3.getMobilephone());
+					information.setQQ(account3.getQQ());
+					information.setWeiBo(account3.getWeiBo());
+					information.setWeiChat(account3.getWeiChat());
+					information.setUsername(account3.getUsername());
+					
+					
+					 long dbRecordTime = Long.valueOf(information.getRecordTime());
+					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
+					 if(caseHistoryId<0) {
+						 loginResult.setQuestionaire(false);
+					 } else {
+						 loginResult.setQuestionaire(true);
+					 }
+					 if(dbRecordTime>Long.valueOf(recordTime)){
+						 loginResult.setInfo(information);
+						 loginResult.setCode("206");
+						
+						 
+					 } else {
+						 loginResult.setCode("207");
+					
+						 loginResult.setInfo(null);
+					 }
+				} catch (NullPointerException ex) {
+					// TODO Auto-generated catch block
+					Information info = new Information();
+					info.setUserId(userId);
+					info.setRecordTime(String.valueOf(new Date().getTime()));
+				
+			
+					info.setEmail(account3.getEmail());
+					info.setMobilephone(account3.getMobilephone());
+					info.setQQ(account3.getQQ());
+					info.setWeiBo(account3.getWeiBo());
+					info.setWeiChat(account3.getWeiChat());
+					info.setUsername(account3.getUsername());
+					
+					informationService.add(info, userId);
+					loginResult.setCode("206");
+					 loginResult.setInfo(info);
+				
+				}
+				 }
+		}
+				return JSON.toJSONString(loginResult);
+		
+				 
+		
+	}
+	
+	/*
+	 *  用户名账号登陆
+	 * */
+	
+	@RequestMapping(value="doctor/username",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String doctorLogin(@RequestParam String data,HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		JSONObject jsonObject =JSON.parseObject(data);
+
+		String username = jsonObject.getString("username");
+		String password = jsonObject.getString("password");
+		String recordTime = jsonObject.getString("recordTime");
+		String type=Validator.type(username);
+		
+		Date date= null;
+		if(recordTime.equals("none")){
+			try {
+				date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-1-1 00:00:00");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			recordTime = String.valueOf(date.getTime());
+		}
+		String ip = request.getLocalAddr();
+		LoginInfo loginInfo = new LoginInfo();
+		UserAccount account = new UserAccount();
+		loginInfo.setLoginUsername(username);
+		loginInfo.setPassword(password);
+		loginInfo.setUserLoginIp(ip);
+		LoginResult loginResult;
+		try {
+			loginResult = loginInfoService.loginByUsername(loginInfo, type);
+			if(loginResult!=null){
+				System.out.println("用户登陆成功");
+			}
+		} catch (NullPointerException ex) {
+			// TODO Auto-generated catch block
+			loginResult = new LoginResult();
+			loginResult.setCode("104");
+			loginResult.setMessage("登陆失败");
+			return JSON.toJSONString(loginResult);
+		}
+	
+			int userId = loginResult.getUserId();
+			
+			 if(userId>0){
+				 String userIdStr = String.valueOf(userId);
+				 //医生端
+				
 						Query query =Query.query(Criteria.where("userId").is(userId));
 						try{
 						 Information temp =informationService.queryOne(query);
@@ -159,7 +328,64 @@ public class LoginInfoController {
 									 loginResult.setUsername(account.getUsername());
 								}
 	
-				 } else if(userIdStr.startsWith("20")){
+		
+				 }
+				return JSON.toJSONString(loginResult);
+		
+				 
+		
+	}
+	
+	
+	/*
+	 * 病人端登陆
+	 * */
+	@RequestMapping(value="patient/username",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String patientLogin(@RequestParam String data,HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		JSONObject jsonObject =JSON.parseObject(data);
+		String username = jsonObject.getString("username");
+		String password = jsonObject.getString("password");
+		String recordTime = jsonObject.getString("recordTime");
+		String type=Validator.type(username);
+		
+		Date date= null;
+		if(recordTime.equals("none")){
+			try {
+				date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-1-1 00:00:00");
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			recordTime = String.valueOf(date.getTime());
+		}
+		String ip = request.getLocalAddr();
+		LoginInfo loginInfo = new LoginInfo();
+		UserAccount account = new UserAccount();
+		loginInfo.setLoginUsername(username);
+		loginInfo.setPassword(password);
+		loginInfo.setUserLoginIp(ip);
+		LoginResult loginResult;
+		try {
+			loginResult = loginInfoService.loginByUsername(loginInfo, type);
+			if(loginResult!=null){
+				System.out.println("用户登陆成功");
+			}
+		} catch (NullPointerException ex) {
+			// TODO Auto-generated catch block
+			loginResult = new LoginResult();
+			loginResult.setCode("104");
+			loginResult.setMessage("登陆失败");
+			return JSON.toJSONString(loginResult);
+		}
+	
+			int userId = loginResult.getUserId();
+			
+			 if(userId>0){
+				 String userIdStr = String.valueOf(userId);
+				 //医生端
+			
 				 Information information=null;
 				
 				try {
@@ -208,15 +434,15 @@ public class LoginInfoController {
 					 loginResult.setInfo(info);
 					 loginResult.setUsername(account.getUsername());
 				}
-				 }
-		}
+			
+		} 
 				return JSON.toJSONString(loginResult);
 		
 				 
 		
 	}
 	
-
+	
 
 	/*
 	 * 通过存储tocken登陆
@@ -279,12 +505,15 @@ public class LoginInfoController {
 
 		loginInfo.setLoginUsername(thirdname);
 		loginInfo.setUserLoginIp(userLoginIp);
+		//三方登陆
 		LoginResult loginResult = loginInfoService.loginByThirdPart(type, loginInfo,nickName);
+		
 		int userId = loginResult.getUserId();
 		 Information information;
+		 account = userAccountService.queryById(userId);
 			try {
 				information = informationService.query(userId);
-				account = userAccountService.queryById(userId);
+				
 				 long dbRecordTime = Long.valueOf(information.getRecordTime());
 				 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
 				 if(caseHistoryId<0) {
@@ -295,12 +524,36 @@ public class LoginInfoController {
 				 if(dbRecordTime>Long.valueOf(recordTime)){
 					 loginResult.setInfo(information);
 					 loginResult.setCode("203");
-					 loginResult.setUsername(account.getUsername());
+					
 				 } else {
 					 loginResult.setCode("207");
 					 loginResult.setInfo(null);
-					 loginResult.setUsername(account.getUsername());
+				
 				 }
+				 Query query = Query.query(Criteria.where("userId").is(userId));
+				 Update update=new Update();
+				 switch(type){
+					case "QQ":
+						information.setQqName(nickName); 
+						update= update.set("qqName", nickName);
+						break;
+					case "weiBo":
+						information.setWeiboName(nickName);
+						update= update.set("weiBo", nickName);
+						break;
+					case "weiChat":
+						information.setWeiChatName(nickName);
+						update= update.set("weiChat", nickName);
+						break;
+					default :break;
+					}
+				informationService.updateFirst(query, update);;
+				information.setEmail(account.getEmail());
+				information.setMobilephone(account.getMobilephone());
+				information.setUsername(account.getUsername());
+				
+				
+				loginResult.setInfo(information);
 			} catch (NullPointerException ex) {
 				// TODO Auto-generated catch block
 				Information info = new Information();
@@ -319,12 +572,13 @@ public class LoginInfoController {
 				info.setUserId(userId);
 				info.setRecordTime(String.valueOf(new Date().getTime()));
 				informationService.add(info, userId);
-				 loginResult.setUsername(account.getUsername());
+				info.setUsername(account.getUsername());
+				info.setEmail(account.getEmail());
+				info.setMobilephone(account.getMobilephone());
 				loginResult.setCode("203");
-				// loginResult.setInfo(info);
+				loginResult.setInfo(info);
 			}
-		Information infor = informationService.query(userId);
-		loginResult.setInfo(infor);
+	
 		return JSON.toJSONString(loginResult);
 	}
 
@@ -342,7 +596,7 @@ public class LoginInfoController {
 		loginInfoService.logout(tocken);
 		
 		response.setCode("204");
-		response.setMessage("logout success");
+		response.setMessage("退出成功");
 	
 		return  JSON.toJSONString(response);
 	}

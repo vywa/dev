@@ -237,24 +237,47 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 	//更改用户对应的信息
 	public int change(String type, String sign,int userId) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("id").is(userId));
-		Update update =null;
+		Query query = Query.query(Criteria.where("_id").is(userId));
+		Update update =new Update();
 		if(type.equals("QQ")){
-		
-			 update= Update.update("QQ", sign);
+			if(sign==null){
+				update=update.unset("QQ");
+			}else {
+				 update= update.set("QQ", sign);
+			}
 			
 		}else if(type.equals("weiChat")){
-			 update= Update.update("weiChat", sign);
+			if(sign==null){
+				update=update.unset("weiChat");
+			}else {
+				 update= update.set("weiChat", sign);
+			}
 		
 		} else if(type.equals("weiBo")){
-			 update= Update.update("weiBo", sign);
+			if(sign==null){
+				update=update.unset("weiBo");
+			}else {
+				 update= update.set("weiBo", sign);
+			}
 			
 		}else if (type.equals("mobilephone")) {
-			 update= Update.update("mobilephone", sign);
+			if(sign==null){
+				update=update.unset("mobilephone");
+			}else{
+				 update= update.set("mobilephone", sign);
+			}
 		} else if (type.equals("email")) {
-			 update= Update.update("email", sign);
+			if(sign==null){
+				update=update.unset("email");
+			}else{
+				 update= update.set("email", sign);
+			}
 		}else if (type.equals("username")) {
-			 update= Update.update("username", sign);
+			if(sign==null){
+				update=update.unset("username");
+			} else {
+				 update= update.set("username", sign);
+			}
 		}
 		userAccountDao.updateFirst(query, update);
 		log.info("更改用户 "+userId+" 的用户信息成功");

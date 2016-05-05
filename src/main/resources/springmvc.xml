@@ -47,6 +47,9 @@
                         <value>/reglog/show</value>
                           <value>/reglog/thirdPart</value>
                             <value>/reglog/username</value>
+                            <value>/reglog/patient/username</value>
+                            <value>/reglog/doctor/username</value>
+                            
                             
                            <value>/subject/details</value>
                               <value>/info/download</value>
@@ -68,7 +71,8 @@
                               <value>/account/smsReceive</value>
                                 <value>/account/smsSend</value>
                                  <value>/account/findPassword</value>
-                              
+                              	 <value>/account/updatePassword</value>
+                              	 
                                 <value>/dnews/load</value>
                                 
                                   <value>/multiMedia</value>
@@ -89,6 +93,9 @@
 		                        <value>/reglog/show</value>
 		                          <value>/reglog/thirdPart</value>
 		                            <value>/reglog/username</value>
+		                             <value>/reglog/patient/username</value>
+                            			<value>/reglog/doctor/username</value>
+		                            
 		                                <value>/subject/details</value>
 		                            
 		                              <value>/info/download</value>
@@ -111,7 +118,9 @@
 		                              <value>/account/smsReceive</value>
 		                                <value>/account/smsSend</value>
 		                                 <value>/account/findPassword</value>
-		                             
+		                             	 <value>/account/updatePassword</value>
+		                             	
+		                             	
 		                             <value>/dnews/load</value>
 		                             
 		                               <value>/multiMedia</value>
