@@ -12,11 +12,13 @@ public class Validator {
 	//验证邮箱
 	public static final String REGEX_EMAIL="^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 	//验证用户名
-	public static final  String REGEX_USERNAME="^[a-zA-Z0-9_-]{3,15}$";
+	public static final  String REGEX_USERNAME="^[a-zA-Z_-]{3,15}$";
 	//验证手机号
 	public static final String REGEX_MOBILE = "^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 	//验证密码
 	public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,15}$";
+	//工号
+	public static final String REGEX_WORKNUM="^[0-9]{5}$";
 	
 	/**
      * 校验用户名
@@ -58,6 +60,10 @@ public class Validator {
 	        return Pattern.matches(REGEX_PASSWORD, password);
 	    }
 	    
+	    public static boolean isWorkNum(String password) {
+	        return Pattern.matches(REGEX_WORKNUM, password);
+	    }
+	    
 	    /*
 	     *  获取类型
 	     * */
@@ -65,6 +71,7 @@ public class Validator {
 	    	if(isMobile(username)) return "mobilephone";
 	    	else if(isEmail(username)) return "email";
 	    	else if(isUsername(username)) return "username";
+	    	else if(isWorkNum(username)) return "workNum";
 	    	else return "unknown";
 	    }
 }

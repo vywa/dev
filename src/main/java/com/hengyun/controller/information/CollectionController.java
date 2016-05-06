@@ -2,6 +2,7 @@ package com.hengyun.controller.information;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.hengyun.domain.information.DailyNewsCollection;
 import com.hengyun.domain.notice.DailyNews;
 import com.hengyun.domain.notice.DailyNewsResponse;
 import com.hengyun.service.forum.SubjectService;
+import com.hengyun.service.impl.forum.util.SubjectToResponse;
 import com.hengyun.service.information.CollectionService;
 import com.hengyun.service.notice.DailyNewsService;
 import com.hengyun.util.network.NetworkUtil;
@@ -62,19 +64,37 @@ public class CollectionController {
 		int subjectId = jsonObject.getIntValue("id");
 		String ip = NetworkUtil.getPhysicalHostIP();
     	String url = "http://"+ip+"/healthcloudserver/subject/details?id="+subjectId;   	
+    	int userId = (int)request.getAttribute("userId");
+		//查询帖子
+		Query query = Query.query(Criteria.where("subjectId").is(subjectId));
+		Subject subject = subjectService.queryOne(query);
+		List<Integer> userList = subject.getCollectPersons();
+		if(userList==null){
+			userList = new ArrayList<Integer>();
+		} else {
+			for(Integer temp:userList){
+				if(temp==userId){
+					response.setCode("110");
+					response.setMessage("你已经收藏，不能重复");
+					return  JSON.toJSONString(response);
+				}
+			}
+		}
+		userList.add(userId);
+		Update update = Update.update("collectPersons", userList);
+		//更新收藏者列表
+		subjectService.updateFirst(query, update);
+	
 		DailyNewsCollection collection = new DailyNewsCollection();
 		collection.setId(subjectId);
 		collection.setUrl(url);
-		int userId = (int)request.getAttribute("userId");
+	
 		
-		int result = collectionService.addCollection(collection, userId, 0);
-		if(result<0){
-			response.setCode("110");
-			response.setMessage("你已经收藏，不能重复");
-		} else {
+		//收藏帖子
+		 collectionService.addCollection(collection, userId, 0);
 		response.setCode("206");
 		response.setMessage("收藏帖子成功");
-		}
+	
 
 		return JSON.toJSONString(response);
 		
@@ -90,33 +110,40 @@ public class CollectionController {
 		ResponseCode response = new ResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
 		int newsId = jsonObject.getIntValue("id");
+		//查询资讯
 		DailyNews dailyNews = dailyNewsService.queryById(newsId);
 		String url = dailyNews.getUrl();
-		
 		int userId = (int)request.getAttribute("userId");
+		//获取收藏者列表
+		
+		List<Integer> userList = dailyNews.getCollectorId();
+		if(userList==null){
+			userList = new ArrayList<Integer>();
+		}else{
+			for(int temp :userList){
+				if(temp==userId){
+					response.setCode("110");
+					response.setMessage("你已经收藏，不能重复");
+					return  JSON.toJSONString(response);
+				}
+			}
+			
+		}
+		userList.add(userId);
+		//更新收藏者列表
+		Query query = Query.query(Criteria.where("id").is(newsId));
+		Update update = Update.update("collectorId", userList);
+		dailyNewsService.updateFirst(query, update);
+		
 		DailyNewsCollection collection = new DailyNewsCollection();
 		collection.setId(newsId);
     	
     	collection.setUrl(url);
     	//用户收藏
-		int result = collectionService.addCollection(collection, userId,1);
-		Query query = Query.query(Criteria.where("id").is(newsId));
-		List<Integer> userList = dailyNews.getCollectorId();
-		if(userList==null){
-			userList = new ArrayList<Integer>();
-		}
-		userList.add(userId);
-		Update update = Update.update("collectorId", userList);
-		//更新收藏者列表
-		dailyNewsService.updateFirst(query, update);
-		if(result<0){
-			response.setCode("110");
-			response.setMessage("你已经收藏，不能重复");
-		} else {
+		 collectionService.addCollection(collection, userId,1);
 		response.setCode("206");
 		response.setMessage("收藏帖子成功");
-		}
-
+	
 		return JSON.toJSONString(response);
 		
 	}
@@ -167,6 +194,7 @@ public class CollectionController {
 		
 		for(DailyNewsCollection temp:dailyList){
 			DailyNews daily = dailyNewsService.queryById(temp.getId());
+		//	daily = SubjectToResponse.transfer(daily, userId);
 			dlist.add(daily);
 		}
 		response.setDaily(dlist);
@@ -205,6 +233,7 @@ public class CollectionController {
 		for(DailyNewsCollection temp:dailyList){
 			Query query = Query.query(Criteria.where("subjectId").is(temp.getId()));
 			Subject daily = subjectService.queryOne(query);
+			daily = SubjectToResponse.transfer(daily, userId);
 			dlist.add(daily);
 			
 		}
@@ -234,6 +263,22 @@ public class CollectionController {
 		
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 0);
+		
+		//删除用户收藏帖子列表
+		Query query = Query.query(Criteria.where("subjectId").is(id));
+		Subject subject = subjectService.queryOne(query);
+		List<Integer> subjectList = subject.getCollectPersons();
+		CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<Integer>(subjectList); 
+		for(Integer temp:list){
+			if(temp==userId){
+				list.remove(temp);
+			}
+		}
+	
+		Update update = Update.update("collectPersons", list);
+		//更新收藏者内容
+		subjectService.updateFirst(query, update);
+		
 		response.setCode("206");
 		response.setMessage("取消收藏帖子成功");
 
@@ -253,6 +298,21 @@ public class CollectionController {
 		JSONObject jsonObject =JSON.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 1);
+		
+		//删除用户收藏资讯列表
+		DailyNews dn = dailyNewsService.query(id);
+		List<Integer> subjectList = dn.getCollectorId();
+		CopyOnWriteArrayList<Integer> list = new CopyOnWriteArrayList<Integer>(subjectList); 
+		for(Integer temp:list){
+			if(temp==userId){
+				list.remove(temp);
+			}
+		}
+		Query query = Query.query(Criteria.where("id").is(id));
+		Update update = Update.update("collectorId", list);
+		//更新内容
+		
+		dailyNewsService.updateFirst(query, update);
 		response.setCode("206");
 		response.setMessage("取消收藏资讯成功");
 

@@ -15,6 +15,8 @@ public class Collection implements Serializable{
 	private List<DailyNewsCollection> 						subjectList;			//帖子收藏
 	private List<DailyNewsCollection> 						dailyNewsList;		//每日资讯
 	private List<DailyNewsCollection> 						imCollection;			//及时通信内容
+	
+	
 	public int getUserId() {
 		return userId;
 	}

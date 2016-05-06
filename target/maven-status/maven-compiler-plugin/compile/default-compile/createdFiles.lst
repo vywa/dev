@@ -170,6 +170,7 @@ com/hengyun/domain/loginInfo/UserAccount.class
 com/hengyun/service/forum/ForumPostService.class
 com/hengyun/util/multiThread/ThreadContext.class
 com/hengyun/dao/impl/hospital/OfficeDaoImpl.class
+com/hengyun/service/im/IMContentService.class
 com/hengyun/domain/forum/ForumAuthority.class
 com/hengyun/dao/information/CollectionDao.class
 com/hengyun/controller/casehistory/ReTreateInfoController.class
@@ -235,6 +236,7 @@ com/hengyun/domain/casehistory/CaseHistoryConstant.class
 com/hengyun/controller/forum/SubjectAvailableListController.class
 com/hengyun/domain/friendcircle/RosterResponse.class
 com/hengyun/controller/administrator/AdministratorController.class
+com/hengyun/dao/impl/im/IMContentDaoImpl.class
 com/hengyun/domain/casehistory/HabitInfo.class
 com/hengyun/service/shiro/FilterChainDefinationService.class
 com/hengyun/service/impl/casehistory/AffiliatedClinicalDiseaseServiceImpl.class
@@ -274,6 +276,7 @@ com/hengyun/dao/forum/MultiMediaDao.class
 com/hengyun/controller/casehistory/DietInfoController.class
 com/hengyun/service/forum/PostCommentService.class
 com/hengyun/dao/friendcircle/mysql/RosterDao.class
+com/hengyun/dao/im/IMContentDao.class
 com/hengyun/controller/administrator/PermissionController.class
 com/hengyun/domain/notice/RetObj.class
 com/hengyun/controller/casehistory/FamilyHistoryController.class
@@ -472,6 +475,7 @@ com/hengyun/domain/forum/Icon.class
 com/hengyun/domain/administrator/PermissionResult.class
 com/hengyun/controller/administrator/RolesController.class
 com/hengyun/dao/impl/notice/MedicalNoticeDaoImpl.class
+com/hengyun/service/impl/im/IMContentServiceImpl.class
 com/hengyun/domain/forum/UserConfig.class
 com/hengyun/domain/forum/MultiMedia.class
 com/hengyun/controller/casehistory/PastDiseaseHistoryController.class
@@ -552,6 +556,7 @@ com/hengyun/dao/account/DoctorAccountDao.class
 com/hengyun/domain/casehistory/AnalysisResult.class
 com/hengyun/controller/hospital/HospitalController.class
 com/hengyun/service/logininfo/RegisterCacheService.class
+com/hengyun/service/impl/forum/util/SubjectToResponse.class
 com/hengyun/dao/impl/information/IconDaoImpl.class
 com/hengyun/dao/impl/logininfo/LoginInfoDaoImpl.class
 com/hengyun/domain/account/DoctorInfo.class

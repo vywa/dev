@@ -1,5 +1,6 @@
 package com.hengyun.domain.im;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
 * @version 创建时间：2016年5月5日 上午10:36:33
 * 及时通信内容
 */
-public class IMContent {
+public class IMContent implements Serializable{
 
 	private int id;
 	private int from;									//发送者

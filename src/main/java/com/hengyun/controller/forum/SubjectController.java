@@ -22,6 +22,7 @@ import com.hengyun.domain.forum.PostListResponseCode;
 import com.hengyun.domain.forum.Subject;
 import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.friendcircle.mysql.RosterService;
+import com.hengyun.service.impl.forum.util.SubjectToResponse;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 
@@ -78,6 +79,7 @@ public class SubjectController {
 	//	Subject post = JSON.toJavaObject(jsonObject, Subject.class);
 		
 		int userId =(int) request.getAttribute("userId");
+		
 		//发表帖子
 		int result = subjectService.like(userId, subjectId);
 		if(result==-1){
@@ -142,7 +144,7 @@ public class SubjectController {
 		int subjectId = jsonObject.getIntValue("subjectId");
 		int freshenType = jsonObject.getIntValue("freshenType");
 		List<Subject> postList = subjectService.friendsSubject(userId, subjectId, freshenType);
-
+		
 		response.setSubjectList(postList);
 		response.setResponseCode(0);
 		response.setDescription("获取列表成功");
@@ -179,7 +181,8 @@ public class SubjectController {
 		
 		PostListResponseCode response = new PostListResponseCode();
 		JSONObject jsonObject =JSON.parseObject(data);
-		int userId = jsonObject.getIntValue("userId");
+		//int userId = jsonObject.getIntValue("userId");
+		int userId = (int)request.getAttribute("userId");
 		int subjectId = jsonObject.getIntValue("subjectId");
 		int subjectType = jsonObject.getIntValue("subjectType");
 		int freshenType = jsonObject.getIntValue("freshenType");
@@ -187,9 +190,16 @@ public class SubjectController {
 		
 		//加载某人，某类，之前后包含关键字的帖子列表
 		List<Subject> postList =subjectService.showList(userId, subjectId, subjectType, freshenType);
+		
+		List<Subject> newList = new ArrayList<Subject>();
+		for(Subject temp:postList){
+			newList.add(SubjectToResponse.transfer(temp, userId));
+		
+		}
 		//帖子数添加数目
+	
 		subjectService.addViewCount();
-		response.setSubjectList(postList);
+		response.setSubjectList(newList);
 		response.setResponseCode(0);
 		response.setDescription("获取列表成功");
 		return JSON.toJSONString(response);
@@ -273,9 +283,14 @@ public class SubjectController {
 		int freshenType = jsonObject.getIntValue("freshenType");
 		int userId =(int) request.getAttribute("userId");
 		List<Subject> subjectList = subjectService.selfSubject(userId, subjectId, freshenType);
+		List<Subject> newList = new ArrayList<Subject>();
+		for(Subject temp:subjectList){
+			newList.add(SubjectToResponse.transfer(temp, userId));
+		}
+		
 		response.setResponseCode(0);
 		response.setDescription("查询我的问题成功");
-		response.setSubjectList(subjectList);
+		response.setSubjectList(newList);
 		return JSON.toJSONString(response);
 	}
 	
@@ -291,10 +306,12 @@ public class SubjectController {
 		int subjectId =Integer.valueOf(request.getParameter("id"));
 		PostListResponseCode response = new PostListResponseCode();
 		Subject subject = subjectService.subjectDetail(subjectId);
+		int userId =(int) request.getAttribute("userId");
+
 		response.setResponseCode(0);
 		response.setDescription("查询我的问题成功");
 		List<Subject> subjectList = new ArrayList<Subject>();
-		subjectList.add(subject);
+		subjectList.add(SubjectToResponse.transfer(subject, userId));
 		response.setSubjectList(subjectList);
 		
 		return JSON.toJSONString(response);
@@ -311,11 +328,14 @@ public class SubjectController {
 
 		int subjectId =Integer.valueOf(request.getParameter("id"));
 		PostListResponseCode response = new PostListResponseCode();
+		
 		Subject subject = subjectService.subjectDetail(subjectId);
+		int userId =(int) request.getAttribute("userId");
+		
 		response.setResponseCode(0);
 		response.setDescription("查询我的问题成功");
 		List<Subject> subjectList = new ArrayList<Subject>();
-		subjectList.add(subject);
+		subjectList.add(SubjectToResponse.transfer(subject, userId));
 		response.setSubjectList(subjectList);
 		
 		return JSON.toJSONString(response);

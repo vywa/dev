@@ -62,13 +62,14 @@ public class DailyNewsController {
 			List<DailyNews> list = dailyNewsService.queryList();
 			for(DailyNews dn :list){
 				DailyNewsResponseList dnl = new DailyNewsResponseList();
-				dnl= new DailyNewsResponseList();
+				
 				dnl.setContent(dn.getContent());
 				dnl.setId(dn.getId());
 				dnl.setImageUrl(dn.getImageUrl());
 				dnl.setPublishTime(dn.getPublishTime());
 				dnl.setTitle(dn.getTitle());
 				dnl.setUrl(dn.getUrl());
+				
 				List<Integer> il = dn.getCollectorId();
 				boolean collected = false;
 				if(il==null){
@@ -108,7 +109,7 @@ public class DailyNewsController {
 			List<DailyNews> list = dailyNewsService.queryList();
 			for(DailyNews dn :list){
 				DailyNewsResponseList dnl = new DailyNewsResponseList();
-				dnl= new DailyNewsResponseList();
+				
 				dnl.setContent(dn.getContent());
 				dnl.setId(dn.getId());
 				dnl.setImageUrl(dn.getImageUrl());
@@ -117,11 +118,16 @@ public class DailyNewsController {
 				dnl.setUrl(dn.getUrl());
 				List<Integer> il = dn.getCollectorId();
 				boolean collected = false;
+				if(il==null){
+				
+				}else{
+				
 				for(Integer temp :il){
 					if(temp==userId){
 						collected=true;
 						break;
 					}
+				}
 				}
 				dnl.setCollected(collected);
 				dailyList.add(dnl);

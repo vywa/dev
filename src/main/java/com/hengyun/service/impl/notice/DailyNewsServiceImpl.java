@@ -67,6 +67,7 @@ public class DailyNewsServiceImpl extends BaseServiceImpl<DailyNews, Integer> im
 		// TODO Auto-generated method stub
 		Query query = Query.query(Criteria.where("id").exists(true));
 		List<DailyNews> list = dailyNewsDao.queryList(query);
+	
 		return list;
 	}
 

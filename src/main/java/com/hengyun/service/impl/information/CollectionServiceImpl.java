@@ -82,14 +82,9 @@ public class CollectionServiceImpl extends BaseServiceImpl<Collection,Integer> i
 			List<DailyNewsCollection> dailyNewsList = collection.getDailyNewsList();
 			if(dailyNewsList == null){
 				dailyNewsList = new ArrayList<DailyNewsCollection>();
-			}else {
-				for(DailyNewsCollection temp :dailyNewsList){
-					if(temp.getId()==dailyNewsCollection.getId()){
-						return -1;
-					}
-				}
 			}
 			dailyNewsList.add(dailyNewsCollection);
+			//更新资讯收藏
 			Update update2 = Update.update("dailyNewsList", dailyNewsList);
 			collectionDao.updateFirst(query, update2);
 			break;

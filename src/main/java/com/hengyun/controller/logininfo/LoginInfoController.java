@@ -70,6 +70,7 @@ public class LoginInfoController {
 		String password = jsonObject.getString("password");
 		String recordTime = jsonObject.getString("recordTime");
 		String type=Validator.type(username);
+	
 		
 		Date date= null;
 		if(recordTime.equals("none")){
@@ -177,7 +178,7 @@ public class LoginInfoController {
 					information.setWeiChat(account3.getWeiChat());
 					information.setUsername(account3.getUsername());
 					
-					
+		
 					 long dbRecordTime = Long.valueOf(information.getRecordTime());
 					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
 					 if(caseHistoryId<0) {
@@ -208,6 +209,8 @@ public class LoginInfoController {
 					info.setWeiBo(account3.getWeiBo());
 					info.setWeiChat(account3.getWeiChat());
 					info.setUsername(account3.getUsername());
+					
+					
 					
 					informationService.add(info, userId);
 					loginResult.setCode("206");
