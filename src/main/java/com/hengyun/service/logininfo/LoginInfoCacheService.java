@@ -18,8 +18,14 @@ public interface LoginInfoCacheService {
 	//是否存在会话
 	public boolean valideSession(String tocken);
 	
+	//根据id获得tocken
+	public String getTockenById(int id);
+	
 	//查询用户id
 	public int getUserId(String tocken);
 	
-	public boolean loginByTocken(String tocken);
+	public boolean loginByTocken(String tocken,int userId,String oldTocken);
+	
+	//用户是否在线
+	public int isOnline(String tocken);
 }

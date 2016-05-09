@@ -22,8 +22,17 @@ public class LoginResult extends BaseResponseCode implements Serializable{
 	
 	private boolean questionaire;			//是否评估过
 	
+	private String tocken;							//tocken
 	
 	
+	public String getTocken() {
+		return tocken;
+	}
+
+	public void setTocken(String tocken) {
+		this.tocken = tocken;
+	}
+
 	public boolean isQuestionaire() {
 		return questionaire;
 	}

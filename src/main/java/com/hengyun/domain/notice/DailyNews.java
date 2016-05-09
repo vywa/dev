@@ -77,7 +77,5 @@ public class DailyNews implements Serializable{
 		this.content = content;
 	}
 
-	
-	
-	
+
 }

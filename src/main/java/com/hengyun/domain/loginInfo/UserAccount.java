@@ -21,19 +21,8 @@ public class UserAccount implements Serializable{
 	private String							password;							//用户密码
 	private String 							status;									//用户账号状态
 	
-	private List<Integer>				friendList;							//亲情号列表
+
 	
-	
-	public List<Integer> getFriendList() {
-		return friendList;
-	}
-
-
-	public void setFriendList(List<Integer> friendList) {
-		this.friendList = friendList;
-	}
-
-
 	public int getId() {
 		return id;
 	}

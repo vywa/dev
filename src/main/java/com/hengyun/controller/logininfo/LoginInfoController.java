@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
@@ -28,11 +27,13 @@ import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
+import com.hengyun.domain.loginInfo.response.DoctorLoginResponse;
 import com.hengyun.service.casehistory.CaseHistoryService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.randomcode.TockenGenerator;
 import com.hengyun.util.regex.Validator;
 
 @Controller
@@ -107,65 +108,7 @@ public class LoginInfoController {
 			 if(userId>0){
 				 String userIdStr = String.valueOf(userId);
 				 //医生端
-				 if(userIdStr.startsWith("10")){
-						Query query =Query.query(Criteria.where("userId").is(userId));
-						 UserAccount account2 = userAccountService.getUserAccountById(userId);
-						try{
-						 Information temp =informationService.queryOne(query);
-						
-					
-							 long dbRecordTime = Long.valueOf(temp.getRecordTime());
-							 if(dbRecordTime>Long.valueOf(recordTime)){
-								 String nickname = temp.getTrueName();
-								 String sex = temp.getSex();
-								 String resume = temp.getResume();
-								 int age = temp.getAge();
-								 String birthday  = temp.getBirthday();
-							
-								
-								 String mobilephone = account2.getMobilephone();
-								 String email = account2.getEmail();
-								 String workNum = account2.getWorkNum();
-								 
-								
-								 String iconUrl = temp.getIconUrl();
-								 DoctorInfo doctorInfo = new DoctorInfo();
-								 doctorInfo.setIconUrl(iconUrl);
-								 doctorInfo.setBirthday(birthday);
-								 doctorInfo.setEmail(email);
-								
-								 doctorInfo.setMobilephone(mobilephone);
-							
-								 doctorInfo.setTrueName(nickname);
-								 doctorInfo.setUserId(userId);
-								 doctorInfo.setResume(resume);
-								 doctorInfo.setWorkNum(workNum);
-								 doctorInfo.setAge(age);
-								 doctorInfo.setSex(sex);
-								 
-								 loginResult.setDoctorInfo(doctorInfo);
-								 loginResult.setCode("206");
-								 loginResult.setUsername(account2.getUsername());
-							
-									 
-							 } else {
-								 loginResult.setCode("207");
-								 loginResult.setUsername(account2.getUsername());
-								 loginResult.setInfo(null);
-							 }
-							 } catch (NullPointerException ex) {
-									// TODO Auto-generated catch block
-									Information info = new Information();
-									info.setUserId(userId);
-									info.setRecordTime(String.valueOf(new Date().getTime()));
-									informationService.add(info, userId);
-									
-									loginResult.setCode("206");
-									 loginResult.setInfo(info);
-									 loginResult.setUsername(account2.getUsername());
-								}
-	
-				 } else if(userIdStr.startsWith("20")){
+		 if(userIdStr.startsWith("20")){
 				 Information information=null;
 				 UserAccount account3 = userAccountService.getUserAccountById(userId);
 				try {
@@ -220,9 +163,7 @@ public class LoginInfoController {
 				 }
 		}
 				return JSON.toJSONString(loginResult);
-		
-				 
-		
+
 	}
 	
 	/*
@@ -237,103 +178,24 @@ public class LoginInfoController {
 
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
-		String recordTime = jsonObject.getString("recordTime");
+
 		String type=Validator.type(username);
-		
-		Date date= null;
-		if(recordTime.equals("none")){
-			try {
-				date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse("1990-1-1 00:00:00");
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			recordTime = String.valueOf(date.getTime());
+		DoctorLoginResponse response = new DoctorLoginResponse();
+		int userId = loginInfoService.doctorLogin(username, type, password);
+		if(userId<0){
+			response.setCode("104");
+			response.setMessage("登陆失败");
+		} else {
+			response.setCode("206");
+			response.setMessage("登陆成功");
+			response.setUserId(userId);
+			String tocken = TockenGenerator.generate(username+userId+new Date().toString());
+			String old = loginInfoCacheService.getTockenById(userId);
+			loginInfoCacheService.loginByTocken(tocken, userId, old);
+			response.setTocken(tocken);
 		}
-		String ip = request.getLocalAddr();
-		LoginInfo loginInfo = new LoginInfo();
-		UserAccount account = new UserAccount();
-		loginInfo.setLoginUsername(username);
-		loginInfo.setPassword(password);
-		loginInfo.setUserLoginIp(ip);
-		LoginResult loginResult;
-		try {
-			loginResult = loginInfoService.loginByUsername(loginInfo, type);
-			if(loginResult!=null){
-				System.out.println("用户登陆成功");
-			}
-		} catch (NullPointerException ex) {
-			// TODO Auto-generated catch block
-			loginResult = new LoginResult();
-			loginResult.setCode("104");
-			loginResult.setMessage("登陆失败");
-			return JSON.toJSONString(loginResult);
-		}
-	
-			int userId = loginResult.getUserId();
-			
-			 if(userId>0){
-				 String userIdStr = String.valueOf(userId);
-				 //医生端
-				
-						Query query =Query.query(Criteria.where("userId").is(userId));
-						try{
-						 Information temp =informationService.queryOne(query);
-						//	account = userAccountService.getUserAccountById(userId);
-							 long dbRecordTime = Long.valueOf(temp.getRecordTime());
-							 if(dbRecordTime>Long.valueOf(recordTime)){
-								 String nickname = temp.getTrueName();
-								 String sex = temp.getSex();
-								 String resume = temp.getResume();
-								 int age = temp.getAge();
-								 String birthday  = temp.getBirthday();
-							
-								 UserAccount account2 = userAccountService.getUserAccountById(userId);
-								 String mobilephone = account2.getMobilephone();
-								 String email = account2.getEmail();
-								 String workNum = account2.getWorkNum();
-								 
-								
-								 String iconUrl = temp.getIconUrl();
-								 DoctorInfo doctorInfo = new DoctorInfo();
-								 doctorInfo.setIconUrl(iconUrl);
-								 doctorInfo.setBirthday(birthday);
-								 doctorInfo.setEmail(email);
-								
-								 doctorInfo.setMobilephone(mobilephone);
-							
-								 doctorInfo.setTrueName(nickname);
-								 doctorInfo.setUserId(userId);
-								 doctorInfo.setResume(resume);
-								 doctorInfo.setWorkNum(workNum);
-								 doctorInfo.setAge(age);
-								 doctorInfo.setSex(sex);
-								 
-								 loginResult.setDoctorInfo(doctorInfo);
-								 loginResult.setCode("206");
-								 loginResult.setUsername(account.getUsername());
-							
-									 
-							 } else {
-								 loginResult.setCode("207");
-								 loginResult.setUsername(account.getUsername());
-								 loginResult.setInfo(null);
-							 }
-							 } catch (NullPointerException ex) {
-									// TODO Auto-generated catch block
-									Information info = new Information();
-									info.setUserId(userId);
-									info.setRecordTime(String.valueOf(new Date().getTime()));
-									informationService.add(info, userId);
-									
-									loginResult.setCode("206");
-									 loginResult.setInfo(info);
-									 loginResult.setUsername(account.getUsername());
-								}
-	
 		
-				 }
-				return JSON.toJSONString(loginResult);
+		return JSON.toJSONString(response);
 		
 				 
 		
@@ -445,7 +307,30 @@ public class LoginInfoController {
 		
 	}
 	
+	/*
+	 * 验证tocken有效性
+	 * 
+	 */
+	@RequestMapping(value="/fresh",produces = "text/html;charset=UTF-8")
+	@ResponseBody
+	public String freshToken(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		//JSONObject jsonObject =JSON.parseObject(data);
+		RegisterResult registResult = new RegisterResult();
+		String tocken = request.getParameter("tocken");
 	
+		LoginInfo loginInfo = new LoginInfo();
+		int status = loginInfoCacheService.isOnline(tocken);
+		
+		if(status>0){
+			registResult.setCode("206");
+			registResult.setMessage("令牌有效");
+		} else  {
+			registResult.setCode("106");
+			registResult.setMessage("令牌失效");
+		}
+		return JSON.toJSONString(registResult);
+}
 
 	/*
 	 * 通过存储tocken登陆
@@ -453,12 +338,13 @@ public class LoginInfoController {
 	 */
 	@RequestMapping(value="/auto",produces = "text/html;charset=UTF-8")
 	@ResponseBody
-	public String loginByTocken(@RequestParam String data,HttpServletRequest request) {
+	public String loginByTocken(HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		JSONObject jsonObject =JSON.parseObject(data);
+	//	JSONObject jsonObject =JSON.parseObject(data);
 		RegisterResult registResult = new RegisterResult();
-		String tocken = jsonObject.getString("tocken");
-		String type= jsonObject.getString("type");
+	//	String tocken = jsonObject.getString("tocken");
+	//	String type= jsonObject.getString("type");
+		String tocken = request.getParameter("tocken");
 		LoginInfo loginInfo = new LoginInfo();
 		
 		
@@ -596,7 +482,7 @@ public class LoginInfoController {
 		ResponseCode response = new ResponseCode();
 		String tocken = request.getParameter("tocken");
 		
-		loginInfoService.logout(tocken);
+		loginInfoCacheService.destroyCache(tocken);
 		
 		response.setCode("204");
 		response.setMessage("退出成功");

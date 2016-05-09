@@ -19,10 +19,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hengyun.domain.common.ResponseCode;
+import com.hengyun.domain.information.DoctorInfo;
+import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.PasswordResult;
 import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
+import com.hengyun.domain.loginInfo.response.UserAccountResponse;
 import com.hengyun.service.hospital.DocterService;
+import com.hengyun.service.impl.logininfo.util.DoctorInfoResponseUtil;
+import com.hengyun.service.impl.logininfo.util.UserAccountResponseUtil;
 import com.hengyun.service.impl.message.ProducerEmailServiceImpl;
 import com.hengyun.service.impl.message.ProducerSmsServiceImpl;
 import com.hengyun.service.information.InformationService;
@@ -1051,4 +1056,57 @@ public class UserAccountController {
        
     }
     
+    /*
+     *  查询用户账号
+     *  
+     * */
+    @ResponseBody  
+    @RequestMapping(value="/info",produces = "text/html;charset=UTF-8") 
+    public  String  info(HttpServletRequest request){
+    //	JSONObject jsonObject = JSONObject.parseObject(data);
+    //	String recordTime = jsonObject.getString("recordTime");
+    	
+    
+	
+    	int userId = (int)request.getAttribute("userId");
+    	UserAccount account = userAccountService.getUserAccountById(userId);
+    	  Query query =Query.query(Criteria.where("userId").is(userId));
+        
+           Information temp =informationService.queryOne(query);
+           
+           String nickname = temp.getTrueName();
+           String sex = temp.getSex();
+           String resume = temp.getResume();
+           int age = temp.getAge();
+           String birthday  = temp.getBirthday();
+
+       
+
+
+           String iconUrl = temp.getIconUrl();
+           DoctorInfo doctorInfo = new DoctorInfo();
+           doctorInfo.setIconUrl(iconUrl);
+           doctorInfo.setBirthday(birthday);
+          
+
+           doctorInfo.setTrueName(nickname);
+           doctorInfo.setUserId(userId);
+           doctorInfo.setResume(resume);
+        
+           doctorInfo.setAge(age);
+           doctorInfo.setSex(sex);
+
+           
+           
+    	UserAccountResponse response = new UserAccountResponse();
+    	account = UserAccountResponseUtil.transfer(account);
+    
+    	response.setCode("206");
+    	response.setMessage("查询成功");
+    	response.setAccount(account);
+    	response.setInfo(doctorInfo);
+	
+		return JSON.toJSONString(response);
+       
+    }
 }

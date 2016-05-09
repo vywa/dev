@@ -26,6 +26,7 @@ com/hengyun/service/forum/ForumAuthorityService.class
 com/hengyun/service/impl/patient/HealthLineServiceImpl.class
 com/hengyun/service/casehistory/RiskFactorService.class
 com/hengyun/controller/casehistory/BloodSuggerController.class
+com/hengyun/domain/loginInfo/response/DoctorLoginResponse.class
 com/hengyun/domain/forum/ReplyListResponseCode.class
 com/hengyun/dao/impl/forum/ForumAuthorityDaoImpl.class
 com/hengyun/domain/monitor/Transaction.class
@@ -47,6 +48,7 @@ com/hengyun/dao/impl/logininfo/UserAccountDaoImpl.class
 com/hengyun/controller/casehistory/FollowupController.class
 com/hengyun/service/patient/BloodPressureInfoService.class
 com/hengyun/dao/impl/casehistory/CaseHistoryDaoImpl.class
+com/hengyun/service/impl/logininfo/util/UserAccountResponseUtil.class
 com/hengyun/service/patient/PatientService.class
 com/hengyun/controller/casehistory/DoctorAdviceController.class
 com/hengyun/dao/notice/MedicalNoticeDao.class
@@ -110,6 +112,7 @@ com/hengyun/util/exception/ExceptionAdvisor.class
 com/hengyun/controller/casehistory/RecipeController.class
 com/hengyun/service/exception/BaseBusinessException.class
 com/hengyun/util/sms/GetNumResult.class
+com/hengyun/service/impl/logininfo/util/DoctorInfoResponseUtil.class
 com/hengyun/util/shiro/IncorrectCodeException.class
 com/hengyun/util/sms/sender/SmsSender.class
 com/hengyun/service/impl/account/UserNotExistException.class
@@ -162,6 +165,7 @@ com/hengyun/domain/forum/GeneralConfig.class
 com/hengyun/domain/notice/SystemNotice.class
 com/hengyun/domain/casehistory/TargetOrganDamage.class
 com/hengyun/util/interceptor/MethodCacheInterceptor.class
+com/hengyun/domain/loginInfo/response/UserAccountResponse.class
 com/hengyun/domain/casehistory/FamilyHistory.class
 com/hengyun/service/information/CollectionService.class
 com/hengyun/service/impl/monitor/kafkaMongodb/SchemaUtils.class
@@ -194,6 +198,7 @@ com/hengyun/dao/logininfo/IndexCollectionDao.class
 com/hengyun/service/impl/forum/SubjectAvailableListServiceImpl.class
 com/hengyun/service/impl/forum/PostCommentServiceImpl.class
 com/hengyun/service/casehistory/TreateWaitService.class
+com/hengyun/service/impl/notice/util/DailyNewsResponse.class
 com/hengyun/domain/forum/CommentContent.class
 com/hengyun/domain/casehistory/NurseReport.class
 com/hengyun/domain/forum/response/SubjectAvailableListResponse.class

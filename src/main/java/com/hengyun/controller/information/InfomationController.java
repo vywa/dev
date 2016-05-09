@@ -437,14 +437,14 @@ public class InfomationController {
 			 DoctorInfo doctorInfo = new DoctorInfo();
 			 doctorInfo.setIconUrl(iconUrl);
 			 doctorInfo.setBirthday(birthday);
-			 doctorInfo.setEmail(email);
+	//		 doctorInfo.setEmail(email);
 			 doctorInfo.setResume(resume);
-			 doctorInfo.setMobilephone(mobilephone);
+		//	 doctorInfo.setMobilephone(mobilephone);
 			 doctorInfo.setShortName(hospital.getShortName());
 			 doctorInfo.setTrueName(nickname);
 			 doctorInfo.setUserId(userId);
 			
-			 doctorInfo.setWorkNum(workNum);
+			// doctorInfo.setWorkNum(workNum);
 			 doctorInfo.setAge(age);
 			 doctorInfo.setSex(sex);
 			 response.setCode("206");

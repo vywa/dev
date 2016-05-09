@@ -50,6 +50,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 
 	
 	/*
+	 * 
 	 *  通过用户账号登陆
 	 * 
 	 * */
@@ -60,12 +61,9 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		if(loginResult!=null){
 			int userId = Integer.valueOf(loginResult.getUserId());
 			boolean isDoctor = false;
-				String old = getTockenById(userId);
+			//	String old = getTockenById(userId);
 				//检测用户是否登陆，已经登陆，则使其退出
-				if(old!=null){
-					logout(old);
-					log.debug(old + " 对应的用户 "+ userId + "已经退出");
-				}
+		
 			
 				loginInfo.setUserLoginTime(new Date());
 				 if(loginResult.getUserCode()==3){
@@ -79,17 +77,19 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				 }else if(loginResult.getUserCode()==1){
 					 loginInfo.setCatagory("admin");
 				 }
-				String tocken = TockenGenerator.generate(loginInfo.getLoginUsername());
+				String tocken = TockenGenerator.generate(loginInfo.getLoginUsername()+new Date().toString());
 				
 				loginInfo.setSessionid(tocken);
 				loginInfo.setUserId(userId);
 				loginInfoDao.save(loginInfo);
 				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
 				
-				
+			
+				String old = loginInfoCacheService.getTockenById(userId);
+				loginInfoCacheService.loginByTocken(tocken, userId, old);
 			
 				loginResult.setMessage(tocken);
-			
+				loginResult.setTocken(tocken);
 				return loginResult;
 		}
 		return null;
@@ -98,7 +98,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 	/*
 	 *  通过存储tocken登陆
 	 * 
-	 * */
+	 *
 	public boolean loginByTocken(String tocken,LoginInfo loginInfo) {
 		// TODO Auto-generated method stub
 		if(loginInfoCacheService.loginByTocken(tocken)){
@@ -109,7 +109,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 			return true;
 		}
 		return false;
-	}
+	} */
 
 	/*
 	 *  通过第三方登陆
@@ -140,11 +140,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 loginInfo.setUserId(userAccount.getId());
 					 
 					 loginResult.setUserId(userAccount.getId());
-						String old = getTockenById(userAccount.getId());
-						if(old!=null){
-							logout(old);
-							log.debug("用户 "+userAccount.getId() +" 成功退出!");
-						}
+					
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
 					 } else if(userAccount.getCatagory().equals("doctor"))
@@ -165,10 +161,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 loginInfo.setUserId(userAccount.getId());
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
-						if(old!=null){
-							logout(old);
-							log.debug("用户 "+userAccount.getId() +" 成功退出!");
-						}
+					
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
 					 } else if(userAccount.getCatagory().equals("doctor"))
@@ -189,10 +182,7 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 loginInfo.setUserId(userAccount.getId());
 					 loginResult.setUserId(userAccount.getId());
 						String old = getTockenById(userAccount.getId());
-						if(old!=null){
-							logout(old);
-							log.debug("用户 "+userAccount.getId() +" 成功退出!");
-						}
+					
 					 if(userAccount.getCatagory().equals("patient")){
 						 loginResult.setUserCode(3);
 					 } else if(userAccount.getCatagory().equals("doctor"))
@@ -200,8 +190,10 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 				 }
 			}
 			
-			String tocken = TockenGenerator.generate(loginInfo.getLoginUsername());
-		
+			String tocken = TockenGenerator.generate(loginInfo.getLoginUsername()+new Date().toString());
+
+			String old = loginInfoCacheService.getTockenById(userId);
+			loginInfoCacheService.loginByTocken(tocken, userId, old);
 			loginInfo.setSessionid(tocken);
 			loginInfo.setUserLoginTime(new Date());
 			
@@ -225,15 +217,15 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 		
 	//	int userId = loginInfoCacheService.getUserId(tocken);
 
-		Query query = Query.query(Criteria.where("sessionid").exists(true).andOperator(Criteria.where("sessionid").is(tocken)));
+	//	Query query = Query.query(Criteria.where("sessionid").exists(true).andOperator(Criteria.where("sessionid").is(tocken)));
 		
-		Update update =new Update();
+	//	Update update =new Update();
 		
-		update.unset("sessionid").addToSet("userLogoutTime", new Date());
+	//	update.unset("sessionid").addToSet("userLogoutTime", new Date());
 		//更新用户登陆状态为失效
-		loginInfoDao.updateFirst(query, update);
+	//	loginInfoDao.updateFirst(query, update);
 		
-	//	loginInfoCacheService.destroyCache(tocken);
+		loginInfoCacheService.destroyCache(tocken);
 		
 		return true;
 	}
@@ -265,6 +257,24 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 			return null;
 		}
 	}
+
+	//医生登陆
+	@Override
+	public int doctorLogin(String username, String type,String password) {
+		// TODO Auto-generated method stub
+		int userId = userAccountService.validateUser(username, type, password);
+		return userId;
+	}
+
+
+	@Override
+	public boolean loginByTocken(String tocken, LoginInfo loginInfo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
 
 
 

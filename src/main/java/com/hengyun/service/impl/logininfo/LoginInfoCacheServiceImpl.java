@@ -53,14 +53,56 @@ public class LoginInfoCacheServiceImpl implements LoginInfoCacheService{
 	 * */
 	public int getUserId(String tocken) {
 		// TODO Auto-generated method stub
-		String idStr =redisClientTemplate.hget( tocken, "userId");
+		String idStr;
+		try {
+			idStr = redisClientTemplate.get( tocken);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
 		return Integer.valueOf(idStr);
 	}
 
+	/*
+	 *  通过id 获取tocken
+	 * */
+	public String getTockenById(int id){
+		String tocken=null;
+		try {
+			 tocken = redisClientTemplate.hget(String.valueOf(id), "tocken");
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		return tocken;
+	}
+	
 	@Override
-	public boolean loginByTocken(String tocken) {
+	public boolean loginByTocken(String tocken,int userId,String oldTocken) {
 		// TODO Auto-generated method stub
+		redisClientTemplate.hset(String.valueOf(userId), "tocken", tocken);
+		if(oldTocken!=null){
+		redisClientTemplate.expire(oldTocken, 0);
+		}
+		redisClientTemplate.set(tocken, String.valueOf(userId));
 		return true;
+	}
+
+	@Override
+	public int isOnline(String tocken) {
+		// TODO Auto-generated method stub
+		String status=null;
+		try {
+			status= redisClientTemplate.get(tocken);
+			int userId = Integer.valueOf(status);
+			return userId;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			return -1;
+		}
+		
+
 	}
 	
 	

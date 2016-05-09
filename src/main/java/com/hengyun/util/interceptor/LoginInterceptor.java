@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.util.log.PlatformLogger;
 
 /**
@@ -25,7 +25,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	private final Logger log = LoggerFactory.getLogger(LoginInterceptor.class);  
 	
 	@Resource
-	private LoginInfoService loginInfoService;
+	private LoginInfoCacheService loginInfoCacheService;
 	
 	private String[] allowUrls;							//不拦截的资源
 	
@@ -53,7 +53,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		}
 		
 		String tocken = request.getParameter("tocken");
-		int loginUserId = loginInfoService.isOnline(tocken);
+		int loginUserId = loginInfoCacheService.isOnline(tocken);
 		//登陆成功，访问下一个拦截器
 		if(loginUserId>0){
 			//设置查询者的userId

@@ -25,4 +25,6 @@ public interface LoginInfoService  extends BaseService<LoginInfo,Integer> {
 	
 	public boolean logout(String tocken);
 
+	//医生登陆
+	public int  doctorLogin(String username, String type,String password);
 }

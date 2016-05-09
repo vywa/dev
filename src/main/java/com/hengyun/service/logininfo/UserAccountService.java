@@ -31,6 +31,8 @@ public interface UserAccountService  extends BaseService<UserAccount,Integer>{
 		//验证用户是否有效,返回用户userId
 		public LoginResult validateUserBySign(String sign, String type,String password) ;
 		
+		public int validateUser(String sign, String type,String password) ;
+		
 		//验证第三方用户是否存在
 		public UserAccount validateThirdUserBySign(String sign, String type) ;
 		

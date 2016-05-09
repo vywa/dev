@@ -313,7 +313,7 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 
 	/*
 	 *  绑定亲情号
-	 * */
+	 * 
 	@Override
 	public void bindFriend(int userId,int friendId) {
 		// TODO Auto-generated method stub
@@ -328,6 +328,39 @@ public class UserAccountServiceImpl extends BaseServiceImpl<UserAccount, Integer
 		}
 		Update update = Update.update("friendList", friendList);
 		userAccountDao.updateFirst(query, update);
+	}*/
+
+	@Override
+	public int validateUser(String sign, String type, String password) {
+		// TODO Auto-generated method stub
+		Query query = null;
+		UserAccount userAccount=null;
+		// 检查是否存在
+		if (type.equals("mobilephone")) {
+			query = Query.query(Criteria.where("mobilephone").is(sign).andOperator(Criteria.where("password").is(password)));
+		} else if (type.equals("email")) {
+			query = Query.query(Criteria.where("email").is(sign).andOperator(Criteria.where("password").is(password)));
+		} else if (type.equals("username")) {
+			query = Query.query(Criteria.where("username").is(sign).andOperator(Criteria.where("password").is(password)));
+				
+		}if (type.equals("workNum")) {
+			query = Query.query(Criteria.where("workNum").is(sign).andOperator(Criteria.where("password").is(password)));
+		}
+		
+		try{
+			userAccount = userAccountDao.queryOne(query);
+			return userAccount.getId();
+		} catch(NullPointerException ex){
+			
+			return -1;
+		}
+			
+	}
+
+	@Override
+	public void bindFriend(int userId, int friendId) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

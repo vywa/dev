@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class DoctorInfo implements Serializable{
 
 	private int userId;								//用户ID
-	private String workNum;					//工号
+	//private String workNum;					//工号
 	private String trueName;					//姓名
 	private String sex;								//性别
 	private String shortName;				//医院简称
@@ -25,9 +25,9 @@ public class DoctorInfo implements Serializable{
 	/*
 	 *  联系方式
 	 * */
-	private String email;							//邮箱
+//	private String email;							//邮箱
 	
-	private String mobilephone;			//手机号
+//	private String mobilephone;			//手机号
 	
 	private String recordTime;							//记录时间
 
@@ -49,13 +49,7 @@ public class DoctorInfo implements Serializable{
 		this.userId = userId;
 	}
 
-	public String getWorkNum() {
-		return workNum;
-	}
 
-	public void setWorkNum(String workNum) {
-		this.workNum = workNum;
-	}
 
 	public String getTrueName() {
 		return trueName;
@@ -113,21 +107,7 @@ public class DoctorInfo implements Serializable{
 		this.resume = resume;
 	}
 
-	public String getEmail() {
-		return email;
-	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getMobilephone() {
-		return mobilephone;
-	}
-
-	public void setMobilephone(String mobilephone) {
-		this.mobilephone = mobilephone;
-	}
 
 	public String getRecordTime() {
 		return recordTime;

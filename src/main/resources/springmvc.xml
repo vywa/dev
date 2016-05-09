@@ -49,7 +49,9 @@
                             <value>/reglog/username</value>
                             <value>/reglog/patient/username</value>
                             <value>/reglog/doctor/username</value>
-                            
+                              
+                               <value>/reglog/fresh</value>
+                                  <value>/reglog/auto</value>
                             
                            <value>/subject/details</value>
                               <value>/info/download</value>
@@ -73,6 +75,8 @@
                                  <value>/account/findPassword</value>
                               	 <value>/account/updatePassword</value>
                               	 
+                              	 
+                              	 
                                 <value>/dnews/load</value>
                                 
                                   <value>/multiMedia</value>
@@ -95,6 +99,10 @@
 		                            <value>/reglog/username</value>
 		                             <value>/reglog/patient/username</value>
                             			<value>/reglog/doctor/username</value>
+		                             
+		                                  <value>/reglog/fresh</value>
+                                 			 <value>/reglog/auto</value>
+                            
 		                            
 		                                <value>/subject/details</value>
 		                            
@@ -120,7 +128,8 @@
 		                                 <value>/account/findPassword</value>
 		                             	 <value>/account/updatePassword</value>
 		                             	
-		                             	
+		                            
+		                             		 
 		                             <value>/dnews/load</value>
 		                             
 		                               <value>/multiMedia</value>
