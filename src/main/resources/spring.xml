@@ -184,8 +184,12 @@ http://www.springframework.org/schema/cache
 
 <bean id="habitInfoDao" class="com.hengyun.dao.impl.patient.HabitInfoDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="habitInfoService" class="com.hengyun.service.impl.patient.HabitInfoServiceImpl" parent="BaseServiceImpl"/>
+
 <bean id="healthLineDao" class="com.hengyun.dao.impl.patient.HealthLineDaoImpl" parent="BaseMongodbDaoImpl"/>  
 <bean id="healthLineService" class="com.hengyun.service.impl.patient.HealthLineServiceImpl" parent="BaseServiceImpl"/>
+
+<bean id="machineRelationDao" class="com.hengyun.dao.impl.patient.MachineRelationDaoImpl" parent="BaseMongodbDaoImpl"/>  
+<bean id="machineRelationService" class="com.hengyun.service.impl.patient.MachineRelationServiceImpl" parent="BaseServiceImpl"/>
 
 <!-- 朋友圈 -->
 <bean id="friendCircleDao" class="com.hengyun.dao.impl.friendcircle.FriendCircleDaoImpl" parent="BaseMongodbDaoImpl"/>  

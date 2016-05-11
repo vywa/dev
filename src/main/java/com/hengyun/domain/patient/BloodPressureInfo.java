@@ -17,11 +17,18 @@ public class BloodPressureInfo implements Serializable{
 	private int highBP;										//高压数据
 	private int lowBP;										//d低压数据
 	private int heartRate;								//测量心率
-
+	private int arrhythmia;							//心率不齐
 	private Date recordTime;							//上传时间
 	
 
+	
 
+	public int getArrhythmia() {
+		return arrhythmia;
+	}
+	public void setArrhythmia(int arrhythmia) {
+		this.arrhythmia = arrhythmia;
+	}
 	public int getId() {
 		return id;
 	}

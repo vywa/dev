@@ -78,12 +78,12 @@ public class LoginInfoServiceImpl extends BaseServiceImpl<LoginInfo,Integer> imp
 					 loginInfo.setCatagory("admin");
 				 }
 				String tocken = TockenGenerator.generate(loginInfo.getLoginUsername()+new Date().toString());
-				
+				/*
 				loginInfo.setSessionid(tocken);
 				loginInfo.setUserId(userId);
 				loginInfoDao.save(loginInfo);
 				log.info("用户: "+userId+" 账号: "+loginInfo.getLoginUsername()+" 登陆成功");
-				
+				*/
 			
 				String old = loginInfoCacheService.getTockenById(userId);
 				loginInfoCacheService.loginByTocken(tocken, userId, old);

@@ -4,12 +4,9 @@ import javax.annotation.Resource;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 
 import com.hengyun.dao.logininfo.LoginInfoDao;
 import com.hengyun.dao.logininfo.UserAccountDao;
-import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.util.SpringTest;
 
 /**
