@@ -14,19 +14,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.GeneralPerson;
 import com.hengyun.service.information.GeneralPersonService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  个人基本信息管理
  * */
 @Controller
 @RequestMapping("person")
-public class GeneralPersonController {
+public class GeneralPersonController extends BaseController{
 	
 	@Resource
 	private LoginInfoService loginInfoService;
@@ -44,8 +46,8 @@ public class GeneralPersonController {
 	@ResponseBody
 	public String addPerson(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		GeneralPerson generalPerson = JSON.toJavaObject(jsonObject, GeneralPerson.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		GeneralPerson generalPerson = JSONUtil.toJavaObject(jsonObject, GeneralPerson.class);
 		ResponseCode response = new ResponseCode();
 	
 		generalPersonService.save(generalPerson);

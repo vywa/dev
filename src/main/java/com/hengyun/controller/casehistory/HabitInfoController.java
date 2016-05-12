@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.HabitInfo;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.patient.HabitInfoResponse;
 import com.hengyun.service.patient.HabitInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -24,7 +26,7 @@ import com.hengyun.service.patient.HabitInfoService;
 */
 @Controller
 @RequestMapping("habit")
-public class HabitInfoController {
+public class HabitInfoController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(HabitInfoController.class);
 	
@@ -38,8 +40,8 @@ public class HabitInfoController {
 	@ResponseBody
 	public String addHabit(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		HabitInfo habitInfo = JSON.toJavaObject(jsonObject, HabitInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		HabitInfo habitInfo = JSONUtil.toJavaObject(jsonObject, HabitInfo.class);
 		habitInfoService.storeHabit(habitInfo);
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
@@ -54,7 +56,7 @@ public class HabitInfoController {
 	@ResponseBody
 	public String queryHabit(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 		HabitInfo habitInfo = habitInfoService.query(userId);
 		HabitInfoResponse response = new HabitInfoResponse();
@@ -71,8 +73,8 @@ public class HabitInfoController {
 	@ResponseBody
 	public String updateHabit(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		HabitInfo habitInfo = JSON.toJavaObject(jsonObject, HabitInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		HabitInfo habitInfo = JSONUtil.toJavaObject(jsonObject, HabitInfo.class);
 		habitInfoService.update(habitInfo);
 		
 		HabitInfoResponse response = new HabitInfoResponse();

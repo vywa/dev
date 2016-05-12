@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.hospital.Hospital;
 import com.hengyun.service.hospital.HospitalService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  医院管理
@@ -27,7 +29,7 @@ import com.hengyun.service.hospital.HospitalService;
  * */
 @Controller
 @RequestMapping("hospital")
-public class HospitalController {
+public class HospitalController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(HospitalController.class);
 	@Resource 
@@ -41,8 +43,8 @@ public class HospitalController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addHospital(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
-		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
+		Hospital hospital = JSONUtil.toJavaObject(jsonObject, Hospital.class);
 		hospitalService.addHospital(hospital);
 		
 		ResponseCode response = new ResponseCode();
@@ -59,8 +61,8 @@ public class HospitalController {
 	@RequestMapping("/update")
 	@ResponseBody
 	public String updateHospital(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
-		Hospital hospital = JSON.toJavaObject(jsonObject, Hospital.class);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
+		Hospital hospital = JSONUtil.toJavaObject(jsonObject, Hospital.class);
 		Query query = Query.query(Criteria.where("id").is(hospital.getId()));
 		Update update = Update.update("hospitalName",hospital.getHospitalName()).set("email", hospital.getEmail()).
 				set("hospitalIM", hospital.getHospitalIM()).set("level", hospital.getLevel()).set("telephone", hospital.getTelephone()).
@@ -107,7 +109,7 @@ public class HospitalController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public String queryHospital(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		Hospital hospital = hospitalService.queryById(id);
 		return  JSON.toJSONString(hospital);  
@@ -127,7 +129,7 @@ public class HospitalController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public String deleteHospital(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		hospitalService.deleteById(id);
 		return "delete hospital sucess";

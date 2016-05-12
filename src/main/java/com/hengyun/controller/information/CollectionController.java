@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.PostListResponseCode;
 import com.hengyun.domain.forum.Subject;
@@ -31,6 +32,7 @@ import com.hengyun.service.forum.SubjectService;
 import com.hengyun.service.impl.forum.util.SubjectToResponse;
 import com.hengyun.service.information.CollectionService;
 import com.hengyun.service.notice.DailyNewsService;
+import com.hengyun.util.json.JSONUtil;
 import com.hengyun.util.network.NetworkUtil;
 
 /**
@@ -40,7 +42,7 @@ import com.hengyun.util.network.NetworkUtil;
 */
 @Controller
 @RequestMapping("collection")
-public class CollectionController {
+public class CollectionController extends BaseController{
 
 	
 	private static final Logger log = LoggerFactory.getLogger(CollectionController.class);
@@ -60,7 +62,7 @@ public class CollectionController {
 	public String subject(@RequestParam String data,HttpServletRequest request){
 	
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int subjectId = jsonObject.getIntValue("id");
 		String ip = NetworkUtil.getPhysicalHostIP();
     	String url = "http://"+ip+"/healthcloudserver/subject/details?id="+subjectId;   	
@@ -108,7 +110,7 @@ public class CollectionController {
 	public String dailyNews(@RequestParam String data,HttpServletRequest request){
 
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int newsId = jsonObject.getIntValue("id");
 		//查询资讯
 		DailyNews dailyNews = dailyNewsService.queryById(newsId);
@@ -155,8 +157,8 @@ public class CollectionController {
 	@ResponseBody
 	public String im(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
-		DailyNewsCollection collection = JSON.toJavaObject(jsonObject, DailyNewsCollection.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		DailyNewsCollection collection = JSONUtil.toJavaObject(jsonObject, DailyNewsCollection.class);
 		int userId = (int)request.getAttribute("userId");
 		int result = collectionService.addCollection(collection, userId, 2);
 		if(result<0){
@@ -259,7 +261,7 @@ public class CollectionController {
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 0);
@@ -295,7 +297,7 @@ public class CollectionController {
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 1);
 		
@@ -330,7 +332,7 @@ public class CollectionController {
 	
 		CollectionResponse response = new CollectionResponse();
 		int userId =(int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		collectionService.delete(userId, id, 2);
 		response.setCode("206");

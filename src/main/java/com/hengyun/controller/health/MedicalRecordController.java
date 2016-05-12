@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.health.MedicalRecord;
 import com.hengyun.domain.health.MedicalRecordResponse;
 import com.hengyun.service.health.MedicalRecordService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -24,7 +26,7 @@ import com.hengyun.service.health.MedicalRecordService;
 */
 @Controller
 @RequestMapping("mrecord")
-public class MedicalRecordController {
+public class MedicalRecordController extends BaseController{
 
 	@Resource
 	private MedicalRecordService medicalRecordService;
@@ -36,8 +38,8 @@ public class MedicalRecordController {
 	@ResponseBody
 	public String addRecord(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		MedicalRecord medicalRecord = JSON.toJavaObject(jsonObject, MedicalRecord.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		MedicalRecord medicalRecord = JSONUtil.toJavaObject(jsonObject, MedicalRecord.class);
 		int userId = (int)request.getAttribute("userId");
 		medicalRecord.setPatientId(userId);
 		medicalRecordService.addRecord(medicalRecord);
@@ -56,7 +58,7 @@ public class MedicalRecordController {
 	@ResponseBody
 	public String dqueryRecord(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 
 		List<MedicalRecord> list = medicalRecordService.queryList(userId);

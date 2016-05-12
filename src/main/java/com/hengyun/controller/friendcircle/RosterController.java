@@ -11,8 +11,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,15 +19,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.friendcircle.RosterResponse;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.information.NickIcon;
-import com.hengyun.domain.information.NickIconResponse;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -38,7 +37,7 @@ import com.hengyun.service.logininfo.UserAccountService;
 */
 @Controller
 @RequestMapping("roster")
-public class RosterController {
+public class RosterController extends BaseController{
 
 	@Resource
 	private RosterService rosterService;
@@ -117,7 +116,7 @@ public class RosterController {
 
 			RosterResponse response = new RosterResponse();
 			int userId = (int)request.getAttribute("userId");
-			JSONObject jsonObject = JSON.parseObject(data);
+			JSONObject jsonObject = JSONUtil.parseObject(data);
 			String searchName = jsonObject.getString("key");
 			
 			// 查找是否已经在好友列表中
@@ -206,7 +205,7 @@ public class RosterController {
 
 			RosterResponse response = new RosterResponse();
 			int userId = (int)request.getAttribute("userId");
-			JSONObject jsonObject = JSON.parseObject(data);
+			JSONObject jsonObject = JSONUtil.parseObject(data);
 			String searchName = jsonObject.getString("key");
 			List<Integer> idList = rosterService.searchFriendList(String.valueOf(userId), searchName);
 			
@@ -268,7 +267,7 @@ public class RosterController {
 
 			RosterResponse response = new RosterResponse();
 			//int userId = (int)request.getAttribute("userId");
-			JSONObject jsonObject = JSON.parseObject(data);
+			JSONObject jsonObject = JSONUtil.parseObject(data);
 			String searchName = jsonObject.getString("key");
 			List<Integer> idList = rosterService.searchPatient(searchName);
 
@@ -327,8 +326,8 @@ public class RosterController {
 			public String docterRequest( HttpServletRequest request,@RequestParam String data) {
 
 				RosterResponse response = new RosterResponse();
-					JSONObject jsonObject = JSON.parseObject(data);
-					JSONArray array = JSONArray.parseArray(jsonObject.getString("list"));
+					JSONObject jsonObject = JSONUtil.parseObject(data);
+					JSONArray array = JSONUtil.parseArray(jsonObject.getString("list"));
 
 					List<NickIcon> infos = new ArrayList<NickIcon>();
 					for(int i=0;i<array.size();i++){

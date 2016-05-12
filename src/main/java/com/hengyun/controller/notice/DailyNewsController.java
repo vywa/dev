@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.notice.DailyNews;
 import com.hengyun.domain.notice.DailyNewsListResponse;
 import com.hengyun.domain.notice.DailyNewsResponse;
@@ -27,7 +28,7 @@ import com.hengyun.service.notice.DailyNewsService;
 
 @Controller
 @RequestMapping("dnews")
-public class DailyNewsController {
+public class DailyNewsController extends BaseController{
 	
 	@Resource
 	private DailyNewsService dailyNewsService;

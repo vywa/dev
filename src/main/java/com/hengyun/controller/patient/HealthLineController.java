@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.patient.HealthLine;
 import com.hengyun.domain.patient.HealthLineResponse;
 import com.hengyun.service.patient.HealthLineService;
@@ -19,7 +20,7 @@ import com.hengyun.service.patient.HealthLineService;
 */
 @Controller
 @RequestMapping("healthLine")
-public class HealthLineController {
+public class HealthLineController extends BaseController{
 
 	@Resource
 	private HealthLineService healthLineService;

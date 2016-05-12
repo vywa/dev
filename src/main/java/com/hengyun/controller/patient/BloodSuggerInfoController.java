@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.patient.BloodSuggerInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
 import com.hengyun.domain.patient.HealthLine;
@@ -26,6 +27,7 @@ import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.BloodSuggerInfoService;
 import com.hengyun.service.patient.HealthLineService;
 import com.hengyun.service.patient.HealthTargetService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  * 
@@ -33,7 +35,7 @@ import com.hengyun.service.patient.HealthTargetService;
  * */
 @Controller
 @RequestMapping("bloodSugger")
-public class BloodSuggerInfoController {
+public class BloodSuggerInfoController extends BaseController{
 
 	 private static final Logger log = LoggerFactory.getLogger(BloodSuggerInfoController.class);
 	@Resource
@@ -58,7 +60,7 @@ public class BloodSuggerInfoController {
 	@ResponseBody
 	public String showBloodSugger(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 			
 		SuggerResponse sugger = new SuggerResponse();
 		int userId =(int)request.getAttribute("userId");
@@ -84,7 +86,7 @@ public class BloodSuggerInfoController {
 	@RequestMapping(value="/doctorQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 	
 		int user = jsonObject.getIntValue("userId");
 		SuggerResponse sugger = new SuggerResponse();
@@ -109,7 +111,7 @@ public class BloodSuggerInfoController {
 	@RequestMapping(value="/friendQuery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String friendQuery(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 	
 		int user = jsonObject.getIntValue("userId");
 		SuggerResponse sugger = new SuggerResponse();
@@ -175,7 +177,7 @@ public class BloodSuggerInfoController {
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		HealthInfoResponse response = new HealthInfoResponse();
 		int userId =(int) request.getAttribute("userId");

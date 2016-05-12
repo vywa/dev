@@ -6,27 +6,48 @@ package com.hengyun.util.exception;
 */
 public class ThealthException extends Exception{
 
-	public ThealthException(){
-		super();
-	}
-	
-	public ThealthException(String message){
-		super(message);
-	}
-	
-	public ThealthException(Throwable cause){
-		super(cause);
-	}
-	
-	public ThealthException(String message, Throwable cause){
-		super(message,cause);
-	}
+	  private int code;
 
-	@Override
-	public void printStackTrace() {
-		// TODO Auto-generated method stub
-		super.printStackTrace();
-	}
-	
+      public int getCode() {
+              return code;
+      }
+
+      public void setCode(int code) {
+              this.code = code;
+      }
+
+
+      public ThealthException(int code) {
+              super();
+              this.code = code;
+      }
+
+      public ThealthException(int code,String msg) {
+              super(msg);
+              this.code = code;
+      }
+
+      public ThealthException(int code,String msg,Throwable cause) {
+              super(msg,cause);
+              this.code = code;
+      }
+
+
+      public ThealthException(){
+              super();
+      }
+
+      public ThealthException (String msg){
+              super(msg);
+      }
+
+      public ThealthException(Throwable cause){
+              super(cause);
+      }
+
+      public ThealthException(String msg , Throwable cause){
+              super(msg,cause);
+      }
+
 	
 }

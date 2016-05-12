@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.LoginInfo;
 import com.hengyun.domain.loginInfo.LoginResult;
@@ -33,12 +33,13 @@ import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoCacheService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.json.JSONUtil;
 import com.hengyun.util.randomcode.TockenGenerator;
 import com.hengyun.util.regex.Validator;
 
 @Controller
 @RequestMapping("reglog")
-public class LoginInfoController {
+public class LoginInfoController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(LoginInfoController.class);
 	
@@ -65,7 +66,7 @@ public class LoginInfoController {
 	@ResponseBody
 	public String loginByUsername(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
@@ -112,33 +113,33 @@ public class LoginInfoController {
 				 Information information=null;
 				 UserAccount account3 = userAccountService.getUserAccountById(userId);
 				try {
-					information = informationService.query(userId);
-					
-					information.setEmail(account3.getEmail());
-					information.setMobilephone(account3.getMobilephone());
-					information.setQQ(account3.getQQ());
-					information.setWeiBo(account3.getWeiBo());
-					information.setWeiChat(account3.getWeiChat());
-					information.setUsername(account3.getUsername());
-					
-		
-					 long dbRecordTime = Long.valueOf(information.getRecordTime());
-					 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
-					 if(caseHistoryId<0) {
-						 loginResult.setQuestionaire(false);
-					 } else {
-						 loginResult.setQuestionaire(true);
-					 }
-					 if(dbRecordTime>Long.valueOf(recordTime)){
-						 loginResult.setInfo(information);
-						 loginResult.setCode("206");
+						information = informationService.query(userId);
 						
-						 
-					 } else {
-						 loginResult.setCode("207");
-					
-						 loginResult.setInfo(null);
-					 }
+						information.setEmail(account3.getEmail());
+						information.setMobilephone(account3.getMobilephone());
+						information.setQQ(account3.getQQ());
+						information.setWeiBo(account3.getWeiBo());
+						information.setWeiChat(account3.getWeiChat());
+						information.setUsername(account3.getUsername());
+						
+			
+						 long dbRecordTime = Long.valueOf(information.getRecordTime());
+						 int caseHistoryId = caseHistoryService.getPatientLatest(userId);
+						 if(caseHistoryId<0) {
+							 loginResult.setQuestionaire(false);
+						 } else {
+							 loginResult.setQuestionaire(true);
+						 }
+						 if(dbRecordTime>Long.valueOf(recordTime)){
+							 loginResult.setInfo(information);
+							 loginResult.setCode("206");
+							
+							 
+						 } else {
+							 loginResult.setCode("207");
+						
+							 loginResult.setInfo(null);
+						 }
 				} catch (NullPointerException ex) {
 					// TODO Auto-generated catch block
 					Information info = new Information();
@@ -174,7 +175,7 @@ public class LoginInfoController {
 	@ResponseBody
 	public String doctorLogin(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
@@ -209,7 +210,7 @@ public class LoginInfoController {
 	@ResponseBody
 	public String patientLogin(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		String username = jsonObject.getString("username");
 		String password = jsonObject.getString("password");
 		String recordTime = jsonObject.getString("recordTime");
@@ -368,7 +369,7 @@ public class LoginInfoController {
 	@ResponseBody
 	public String loginByThirdPart(@RequestParam String data,HttpServletRequest request) {
 		// TODO Auto-generated method stub
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		String recordTime = jsonObject.getString("recordTime");
 		String thirdname = jsonObject.getString("openId");
 		String type= jsonObject.getString("type");

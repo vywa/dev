@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.PostListResponseCode;
@@ -25,13 +26,14 @@ import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.impl.forum.util.SubjectToResponse;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  帖子管理
  * */
 @Controller  
 @RequestMapping("subject")  
-public class SubjectController {   
+public class SubjectController extends BaseController{   
     @Resource
     private LoginInfoService loginInfoService;
     @Resource
@@ -50,7 +52,7 @@ public class SubjectController {
 	@ResponseBody
 	public String addPost(@RequestParam String data,HttpServletRequest request){
 		ForumResponseCode response = new ForumResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		Subject post = JSON.toJavaObject(jsonObject, Subject.class);
 		
 		int userId =(int) request.getAttribute("userId");
@@ -74,7 +76,7 @@ public class SubjectController {
 	@ResponseBody
 	public String like(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int subjectId = jsonObject.getIntValue("subjectId");
 	//	Subject post = JSON.toJavaObject(jsonObject, Subject.class);
 		
@@ -100,7 +102,7 @@ public class SubjectController {
 	@ResponseBody
 	public String updateHospital(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);
-		Subject post = JSON.toJavaObject(jsonObject, Subject.class);
+		Subject post = JSONUtil.toJavaObject(jsonObject, Subject.class);
 		Query query = Query.query(Criteria.where("subjectId").is(post.getSubjectId()));
 		Update update = Update.update("title",post.getTitle()).set("content", post.getContent());
 		subjectService.updateInser(query, update);
@@ -140,7 +142,7 @@ public class SubjectController {
 	public String friendsSubject(@RequestParam String data,HttpServletRequest request){
 		PostListResponseCode response = new PostListResponseCode();
 		int userId = (int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int subjectId = jsonObject.getIntValue("subjectId");
 		int freshenType = jsonObject.getIntValue("freshenType");
 		List<Subject> postList = subjectService.friendsSubject(userId, subjectId, freshenType);
@@ -160,7 +162,7 @@ public class SubjectController {
 	@ResponseBody
 	public String friendSubject(@RequestParam String data,HttpServletRequest request){
 		int userId =(int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int subjectId = jsonObject.getIntValue("subjectId");
 		int freshenType = jsonObject.getIntValue("freshenType");
 		
@@ -180,7 +182,7 @@ public class SubjectController {
 	public String queryList(@RequestParam String data,HttpServletRequest request){
 		
 		PostListResponseCode response = new PostListResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		//int userId = jsonObject.getIntValue("userId");
 		int userId = (int)request.getAttribute("userId");
 		int subjectId = jsonObject.getIntValue("subjectId");
@@ -215,7 +217,7 @@ public class SubjectController {
 	@ResponseBody
 	public String idPost(@RequestParam String data,HttpServletRequest request){
 	
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PostListResponseCode response = new PostListResponseCode();
 		int subjectId = jsonObject.getIntValue("subjectId");
 
@@ -234,7 +236,7 @@ public class SubjectController {
 	@ResponseBody
 	public String perfect(@RequestParam String data,HttpServletRequest request){
 	
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PostListResponseCode response = new PostListResponseCode();
 		int subjectId = jsonObject.getIntValue("subjectId");
 
@@ -254,7 +256,7 @@ public class SubjectController {
 	@ResponseBody
 	public String perfectList(@RequestParam String data,HttpServletRequest request){
 	
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PostListResponseCode response = new PostListResponseCode();
 	
 		int subjectId = jsonObject.getIntValue("subjectId");
@@ -277,7 +279,7 @@ public class SubjectController {
 	@ResponseBody
 	public String selfSubject(@RequestParam String data,HttpServletRequest request){
 	
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PostListResponseCode response = new PostListResponseCode();
 		int subjectId = jsonObject.getIntValue("subjectId");
 		int freshenType = jsonObject.getIntValue("freshenType");
@@ -321,7 +323,6 @@ public class SubjectController {
 	 * 查询我的帖子列表
 	 * 
 	 * */
-	
 	@RequestMapping(value="/details",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String details(HttpServletRequest request){

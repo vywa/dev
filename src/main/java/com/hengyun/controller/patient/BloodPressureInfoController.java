@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.patient.BloodPressureInfo;
 import com.hengyun.domain.patient.HealthInfoResponse;
 import com.hengyun.domain.patient.HealthLine;
@@ -37,6 +38,7 @@ import com.hengyun.service.patient.BloodPressureInfoService;
 import com.hengyun.service.patient.HealthLineService;
 import com.hengyun.service.patient.HealthTargetService;
 import com.hengyun.service.patient.MachineRelationService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  * 
@@ -45,7 +47,7 @@ import com.hengyun.service.patient.MachineRelationService;
  * */
 @Controller
 @RequestMapping("bloodPressure")
-public class BloodPressureInfoController {
+public class BloodPressureInfoController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(BloodPressureInfoController.class);
 	
@@ -68,7 +70,7 @@ public class BloodPressureInfoController {
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showBlood(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PressureResponse response = new PressureResponse();
 
 		int userId = (int)request.getAttribute("userId");
@@ -120,7 +122,7 @@ public class BloodPressureInfoController {
 	@ResponseBody
 	public String doctorShow(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PressureResponse response = new PressureResponse();
 		int userId2 = jsonObject.getIntValue("userId");
 		long startTime = jsonObject.getLongValue("startTime");
@@ -145,7 +147,7 @@ public class BloodPressureInfoController {
 	@ResponseBody
 	public String friendQuery(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		PressureResponse response = new PressureResponse();
 		int userId2 = jsonObject.getIntValue("userId");
 		long startTime = jsonObject.getLongValue("startTime");
@@ -187,9 +189,9 @@ public class BloodPressureInfoController {
 	@ResponseBody
 	public String  upload(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		HealthInfoResponse response = new HealthInfoResponse();
-		BloodPressureInfo blood = JSON.toJavaObject(jsonObject, BloodPressureInfo.class);
+		BloodPressureInfo blood = JSONUtil.toJavaObject(jsonObject, BloodPressureInfo.class);
 		int userId = (int)request.getAttribute("userId");
 		blood.setUserId(userId);
 		
@@ -229,7 +231,7 @@ public class BloodPressureInfoController {
 		}
 	
 		log.info("收到的数据是:"+content);
-		JSONObject jsonObject =JSON.parseObject(content);
+		JSONObject jsonObject =JSONUtil.parseObject(content);
 		
 		String magic = jsonObject.getString("magic");
 		String mac = jsonObject.getString("mac");
@@ -346,7 +348,7 @@ public class BloodPressureInfoController {
 			e1.printStackTrace();
 		}
 		System.out.println("上传数据为:"+content);	  
-		JSONObject jsonObject =JSON.parseObject(content);
+		JSONObject jsonObject =JSONUtil.parseObject(content);
 		String magic = jsonObject.getString("magic");
 		int len = jsonObject.getIntValue("len");  
 		String mac = jsonObject.getString("mac");

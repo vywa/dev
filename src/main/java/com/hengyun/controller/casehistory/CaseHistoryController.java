@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.casehistory.response.CaseHistoryResponse;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.CaseHistoryService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  
@@ -28,7 +30,7 @@ import com.hengyun.service.casehistory.CaseHistoryService;
  * */
 @Controller
 @RequestMapping("casehistory")
-public class CaseHistoryController {
+public class CaseHistoryController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(CaseHistoryController.class);
 	
@@ -43,8 +45,8 @@ public class CaseHistoryController {
 	@RequestMapping(value="/add",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String addCaseHistory(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
-		CaseHistory caseHistory = JSON.toJavaObject(jsonObject, CaseHistory.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		CaseHistory caseHistory = JSONUtil.toJavaObject(jsonObject, CaseHistory.class);
 		caseHistoryService.addCaseHistory(caseHistory);
 		ResponseCode response = new ResponseCode();
 		response.setCode("206");
@@ -60,7 +62,7 @@ public class CaseHistoryController {
 	@RequestMapping(value="/dquery",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showdocterCaseHistory(@RequestParam String data, HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		int docterId = jsonObject.getIntValue("docterId");
 		List<CaseHistory> caseHistoryList ;
@@ -101,7 +103,7 @@ public class CaseHistoryController {
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryCaseHistory(@RequestParam String data, HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		int patientId = jsonObject.getIntValue("patientId");
 		int docterId = jsonObject.getIntValue("docterId");
@@ -123,7 +125,7 @@ public class CaseHistoryController {
 	@RequestMapping(value="/update",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String updateCaseHistory(@RequestParam String data, HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		int patientId = jsonObject.getIntValue("patientId");
 		int docterId = jsonObject.getIntValue("docterId");
@@ -145,7 +147,7 @@ public class CaseHistoryController {
 	@RequestMapping(value="/set",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String setCaseHistory(@RequestParam String data, HttpServletRequest request){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		CaseHistoryResponse response = new CaseHistoryResponse();
 		int patientId = jsonObject.getIntValue("patientId");
 		int docterId = jsonObject.getIntValue("docterId");

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.dao.forum.SubjectDao;
 import com.hengyun.domain.forum.ForumResponseCode;
 import com.hengyun.domain.forum.ReplyListResponseCode;
@@ -26,13 +27,14 @@ import com.hengyun.service.forum.ReplySubjectService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  帖子管理
  * */
 @Controller  
 @RequestMapping("replysubject")  
-public class ReplySubjectController {   
+public class ReplySubjectController extends BaseController{   
 	
 	private static final Logger log = LoggerFactory.getLogger(ReplySubjectController.class);
 	
@@ -53,8 +55,8 @@ public class ReplySubjectController {
 	@ResponseBody
 	public String addPost(@RequestParam String data,HttpServletRequest request){
 		ForumResponseCode response = new ForumResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
-		ReplySubject post = JSON.toJavaObject(jsonObject, ReplySubject.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		ReplySubject post = JSONUtil.toJavaObject(jsonObject, ReplySubject.class);
 	
 		int userId = (int)request.getAttribute("userId");
 	
@@ -111,7 +113,7 @@ public class ReplySubjectController {
 		public String queryList(@RequestParam String data,HttpServletRequest request){
 		
 			ReplyListResponseCode response = new ReplyListResponseCode();
-			JSONObject jsonObject =JSON.parseObject(data);
+			JSONObject jsonObject =JSONUtil.parseObject(data);
 			int userId = jsonObject.getIntValue("userId");
 			int subjectId = jsonObject.getIntValue("subjectId");
 			int replyId = jsonObject.getIntValue("replyId");
@@ -131,7 +133,7 @@ public class ReplySubjectController {
 				public String deleteReply(@RequestParam String data,HttpServletRequest request){
 				
 					ReplyListResponseCode response = new ReplyListResponseCode();
-					JSONObject jsonObject =JSON.parseObject(data);
+					JSONObject jsonObject =JSONUtil.parseObject(data);
 					int userId = jsonObject.getIntValue("userId");
 					int subjectId = jsonObject.getIntValue("subjectId");
 					int replyId = jsonObject.getIntValue("replyId");
@@ -151,9 +153,9 @@ public class ReplySubjectController {
 				public String reReply(@RequestParam String data,HttpServletRequest request){
 					
 					ReplyListResponseCode response = new ReplyListResponseCode();
-					JSONObject jsonObject =JSON.parseObject(data);
+					JSONObject jsonObject =JSONUtil.parseObject(data);
 					
-					ReplySubject post = JSON.toJavaObject(jsonObject, ReplySubject.class);
+					ReplySubject post = JSONUtil.toJavaObject(jsonObject, ReplySubject.class);
 					int userId = jsonObject.getIntValue("userId");
 					int subjectId = jsonObject.getIntValue("subjectId");
 					int replyId = jsonObject.getIntValue("replyId");
@@ -173,9 +175,9 @@ public class ReplySubjectController {
 				public String deletereReply(@RequestParam String data,HttpServletRequest request){
 				
 					ReplyListResponseCode response = new ReplyListResponseCode();
-					JSONObject jsonObject =JSON.parseObject(data);
+					JSONObject jsonObject =JSONUtil.parseObject(data);
 					
-					ReplySubject post = JSON.toJavaObject(jsonObject, ReplySubject.class);
+					ReplySubject post = JSONUtil.toJavaObject(jsonObject, ReplySubject.class);
 					int userId = jsonObject.getIntValue("userId");
 					int subjectId = jsonObject.getIntValue("subjectId");
 					int replyId = jsonObject.getIntValue("replyId");

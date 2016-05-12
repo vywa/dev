@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
-import com.hengyun.domain.forum.UploadResponseCode;
 import com.hengyun.domain.system.AppPackage;
 import com.hengyun.domain.system.AppPackageResponse;
 import com.hengyun.domain.system.AppVersionUpdate;
@@ -37,7 +37,7 @@ import com.mongodb.gridfs.GridFSDBFile;
 */
 @Controller
 @RequestMapping("app")
-public class AppPackageController {
+public class AppPackageController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(AppPackageController.class);
 	@Resource

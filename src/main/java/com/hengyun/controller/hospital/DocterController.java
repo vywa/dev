@@ -16,10 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
-
 import com.hengyun.domain.hospital.Docter;
 import com.hengyun.service.hospital.DocterService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  医生管理
@@ -27,7 +28,7 @@ import com.hengyun.service.hospital.DocterService;
  * */
 @Controller
 @RequestMapping("docter")
-public class DocterController {
+public class DocterController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(DocterController.class);
 	
@@ -41,8 +42,8 @@ public class DocterController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addHospital(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
-		Docter docter = JSON.toJavaObject(jsonObject, Docter.class);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
+		Docter docter = JSONUtil.toJavaObject(jsonObject, Docter.class);
 		docterService.save(docter);
 		
 		ResponseCode response = new ResponseCode();
@@ -60,7 +61,7 @@ public class DocterController {
 	@RequestMapping(value="/queryDoctor",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String showHospitalDocter(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		int hospitalId = jsonObject.getIntValue("hospitalId");
 		List<Docter> docterList ;
 		docterList = docterService.queryByHospital(hospitalId);
@@ -76,7 +77,7 @@ public class DocterController {
 	@RequestMapping("/show")
 	@ResponseBody
 	public String showDocter(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		int hospitalId = jsonObject.getIntValue("hospitalId");
 		
 		List<Docter> docterList ;
@@ -93,7 +94,7 @@ public class DocterController {
 	@RequestMapping("/query")
 	@ResponseBody
 	public String queryDocter(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String workNum = jsonObject.getString("workNum");
 		Query query = Query.query(Criteria.where("workNum").is(workNum));
 		Docter docter = docterService.queryOne(query);
@@ -110,7 +111,7 @@ public class DocterController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public String deleteDocter(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String workNum = jsonObject.getString("workNum");
 		Query query = Query.query(Criteria.where("workNum").is(workNum));
 	

@@ -12,19 +12,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.friendcircle.Friend;
 import com.hengyun.domain.information.Information;
 import com.hengyun.service.friendcircle.FriendCircleService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  朋友圈管理
  * */
 @Controller
 @RequestMapping("circle")
-public class FriendCircleController {
+public class FriendCircleController extends BaseController{
 
 	@Resource
 	private FriendCircleService friendCircleService;
@@ -37,11 +39,11 @@ public class FriendCircleController {
 	@RequestMapping("/docterRequest")
 	@ResponseBody
 	public String docterRequest(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
 
 		int docterId = Integer.valueOf(request.getParameter("id"));
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 		// 设置对方数据库中自己为病人
 
 		int userId = loginInfoService.isOnline(tocken);
@@ -74,10 +76,10 @@ public class FriendCircleController {
 	@RequestMapping("/patientRequest")
 	@ResponseBody
 	public String patientRequest(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
 		int patientId = Integer.valueOf(request.getParameter("id"));
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 
 		int userId = loginInfoService.isOnline(tocken);
 
@@ -109,11 +111,11 @@ public class FriendCircleController {
 	@RequestMapping("/friendRequest")
 	@ResponseBody
 	public String friendRequest(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
 		// 获取对方的id
 		int otherId = Integer.valueOf(request.getParameter("id"));
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 		int userId = loginInfoService.isOnline(tocken);
 		ResponseCode response = new ResponseCode();
 
@@ -143,9 +145,9 @@ public class FriendCircleController {
 	@RequestMapping("/addPatient")
 	@ResponseBody
 	public String addPatient(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 		friend.setRelation("patient");
 		int userId = loginInfoService.isOnline(tocken);
 
@@ -164,9 +166,9 @@ public class FriendCircleController {
 	@RequestMapping("/addDocter")
 	@ResponseBody
 	public String addDocter(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 		friend.setRelation("docter");
 		int userId = loginInfoService.isOnline(tocken);
 
@@ -185,9 +187,9 @@ public class FriendCircleController {
 	@RequestMapping("/addFriend")
 	@ResponseBody
 	public String addFriend(@RequestParam String data, HttpServletRequest request) {
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String tocken = request.getParameter("tocken");
-		Friend friend = JSON.toJavaObject(jsonObject, Friend.class);
+		Friend friend = JSONUtil.toJavaObject(jsonObject, Friend.class);
 		friend.setRelation("friend");
 		int userId = loginInfoService.isOnline(tocken);
 

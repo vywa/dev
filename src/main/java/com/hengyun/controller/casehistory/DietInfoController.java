@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.DietInfo;
 import com.hengyun.domain.casehistory.response.DietInfoResponse;
 import com.hengyun.domain.common.ResponseCode;
@@ -24,7 +25,7 @@ import com.hengyun.service.casehistory.DietInfoService;
 */
 @Controller
 @RequestMapping("diet")
-public class DietInfoController {
+public class DietInfoController extends BaseController{
 
 	@Resource
 	private DietInfoService dietInfoService;

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.Recipe;
-import com.hengyun.domain.casehistory.response.FollowupResponse;
 import com.hengyun.domain.casehistory.response.RecipeResponse;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.RecipeService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -25,7 +26,7 @@ import com.hengyun.service.casehistory.RecipeService;
 */
 @Controller
 @RequestMapping("/recipe")
-public class RecipeController {
+public class RecipeController extends BaseController{
 
 	@Resource
 	private RecipeService recipeService;
@@ -37,8 +38,8 @@ public class RecipeController {
 	@ResponseBody
 	public String addRecipe(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		Recipe recipe = JSON.toJavaObject(jsonObject, Recipe.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		Recipe recipe = JSONUtil.toJavaObject(jsonObject, Recipe.class);
 		int userId = (int)request.getAttribute("userId");
 		recipe.setDoctorId(userId);
 		recipeService.addRecipe(recipe);
@@ -55,7 +56,7 @@ public class RecipeController {
 	@RequestMapping(value="queryList",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String query(HttpServletRequest request,@RequestParam(required=false) String data){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = (int)request.getAttribute("userId");
 		int patientId = jsonObject.getIntValue("patientId");
 		List<Recipe> recipeList = recipeService.getPatientRecipe(patientId, userId);

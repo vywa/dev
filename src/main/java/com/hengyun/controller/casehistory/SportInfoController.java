@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.SportInfo;
 import com.hengyun.domain.casehistory.response.SportInfoResponse;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.service.casehistory.SportInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -24,7 +26,7 @@ import com.hengyun.service.casehistory.SportInfoService;
 */
 @Controller
 @RequestMapping("sport")
-public class SportInfoController {
+public class SportInfoController extends BaseController{
 
 	@Resource
 	private SportInfoService sportInfoService;
@@ -36,8 +38,8 @@ public class SportInfoController {
 	@ResponseBody
 	public String addSport(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
-		SportInfo sportInfo = JSON.toJavaObject(jsonObject, SportInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		SportInfo sportInfo = JSONUtil.toJavaObject(jsonObject, SportInfo.class);
 		int userId = (int)request.getAttribute("userId");
 		sportInfo.setUserId(userId);
 		sportInfoService.addSport(sportInfo);
@@ -71,7 +73,7 @@ public class SportInfoController {
 	@ResponseBody
 	public String dquerySport(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId"); 
 		
 		List<SportInfo> list = sportInfoService.getSportList(userId);
@@ -89,7 +91,7 @@ public class SportInfoController {
 	@ResponseBody
 	public String updateHabit(@RequestParam String data,HttpServletRequest request){
 		int userId = (int)request.getAttribute("userId");
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int id = jsonObject.getIntValue("id");
 		sportInfoService.delete(userId, id);
 		ResponseCode response = new ResponseCode();

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.system.AppVersionUpdate;
 import com.hengyun.domain.system.AppVersionUpdateResponse;
 import com.hengyun.service.system.AppVersionUpdateService;
@@ -22,7 +23,7 @@ import com.hengyun.service.system.AppVersionUpdateService;
 */
 @Controller
 @RequestMapping(value="version")
-public class AppVersionUpdateController {
+public class AppVersionUpdateController extends BaseController{
 
 
 	@Resource

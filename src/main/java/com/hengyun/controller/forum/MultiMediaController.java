@@ -7,10 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
-import java.util.Properties;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,10 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.forum.UploadResponseCode;
 import com.hengyun.service.forum.MultiMediaService;
-import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
@@ -37,7 +35,7 @@ import com.mongodb.gridfs.GridFSDBFile;
  * */
 @Controller
 @RequestMapping("multiMedia")
-public class MultiMediaController {
+public class MultiMediaController extends BaseController{
 
 	@Resource
 	private MultiMediaService multiMediaService;

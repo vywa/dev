@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.information.Information;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.domain.notice.MedicalNotice;
@@ -24,6 +25,7 @@ import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.service.notice.MedicalNoticeService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -32,7 +34,7 @@ import com.hengyun.service.notice.MedicalNoticeService;
 */
 @Controller
 @RequestMapping("mnotice")
-public class MedicalNoticeController {
+public class MedicalNoticeController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(MedicalNoticeController.class);
 	@Resource
@@ -54,7 +56,7 @@ public class MedicalNoticeController {
 	@RequestMapping(value="/queryNotice",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String queryNotice(HttpServletRequest request,@RequestParam String data){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int freshenType = jsonObject.getIntValue("freshenType");
 		int noticeId = jsonObject.getIntValue("noticeId");
 		int userId = (int)request.getAttribute("userId");
@@ -107,7 +109,7 @@ public class MedicalNoticeController {
 	@RequestMapping(value="/query",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String query(HttpServletRequest request,@RequestParam String data){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		String username = jsonObject.getString("key");
 		int userId =(int)request.getAttribute("userId");
 		List<Integer> rosterList =rosterService.searchFriendList(String.valueOf(userId), username);
@@ -164,7 +166,7 @@ public class MedicalNoticeController {
 	@ResponseBody
 	public String doctorQuery(HttpServletRequest request,@RequestParam String data){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int freshenType = jsonObject.getIntValue("freshenType");
 		int noticeId = jsonObject.getIntValue("noticeId");
 		int type = jsonObject.getIntValue("type");
@@ -222,7 +224,7 @@ public class MedicalNoticeController {
 	@RequestMapping(value="/handle",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String handle(HttpServletRequest request,@RequestParam String data){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int noticeId = jsonObject.getIntValue("noticeId");
 		medicalNoticeService.handleNotice(noticeId);
 		MedicalNoticeResponse response = new MedicalNoticeResponse();

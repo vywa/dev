@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.casehistory.AffiliatedClinicalDisease;
 import com.hengyun.domain.casehistory.CaseHistory;
 import com.hengyun.domain.casehistory.CaseHistoryConstant;
@@ -43,6 +44,7 @@ import com.hengyun.service.friendcircle.mysql.RosterService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.notice.MedicalNoticeService;
 import com.hengyun.service.patient.BloodPressureInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 
 /**
@@ -52,7 +54,7 @@ import com.hengyun.service.patient.BloodPressureInfoService;
 */
 @Controller
 @RequestMapping("diagnosis")
-public class DiagnosisController {
+public class DiagnosisController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(DiagnosisController.class);
 	
@@ -91,11 +93,11 @@ public class DiagnosisController {
 	public String upload(HttpServletRequest request,@RequestParam String data){
 		
 		int userId =(int) request.getAttribute("userId");
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		JSONArray[] array = new JSONArray[3];
-		 array[0] = JSONArray.parseArray(jsonObject.getString("danger"));
-		 array[1] = JSONArray.parseArray(jsonObject.getString("damage"));
-		 array[2] = JSONArray.parseArray(jsonObject.getString("disease"));
+		 array[0] = JSONUtil.parseArray(jsonObject.getString("danger"));
+		 array[1] = JSONUtil.parseArray(jsonObject.getString("damage"));
+		 array[2] = JSONUtil.parseArray(jsonObject.getString("disease"));
 		RiskFactor riskFactor = new RiskFactor();
 		riskFactor.setHightBloodPressure(bloodPressureInfoService.getLevel(userId));
 		riskFactor.setAge(informationService.query(userId).getAge());
@@ -207,7 +209,7 @@ public class DiagnosisController {
 	@RequestMapping(value="/show",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String show(HttpServletRequest request,@RequestParam String data){
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 		Query query = new Query();
 		query.addCriteria(Criteria.where("userId").is(userId));

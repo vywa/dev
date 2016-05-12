@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.information.DoctorInfo;
 import com.hengyun.domain.information.Information;
@@ -26,7 +27,6 @@ import com.hengyun.domain.loginInfo.RegisterResult;
 import com.hengyun.domain.loginInfo.UserAccount;
 import com.hengyun.domain.loginInfo.response.UserAccountResponse;
 import com.hengyun.service.hospital.DocterService;
-import com.hengyun.service.impl.logininfo.util.DoctorInfoResponseUtil;
 import com.hengyun.service.impl.logininfo.util.UserAccountResponseUtil;
 import com.hengyun.service.impl.message.ProducerEmailServiceImpl;
 import com.hengyun.service.impl.message.ProducerSmsServiceImpl;
@@ -36,6 +36,7 @@ import com.hengyun.service.logininfo.RegisterCacheService;
 import com.hengyun.service.logininfo.UserAccountService;
 import com.hengyun.service.util.EmailUtilService;
 import com.hengyun.service.util.SmsUtilService;
+import com.hengyun.util.json.JSONUtil;
 import com.hengyun.util.mail.Register;
 import com.hengyun.util.mail.SimpleMail;
 import com.hengyun.util.regex.Validator;
@@ -50,7 +51,7 @@ import com.hengyun.util.sms.sender.SmsSender;
 
 @Controller
 @RequestMapping("account")
-public class UserAccountController {
+public class UserAccountController extends BaseController{
 
 	 private static final Logger log = LoggerFactory.getLogger(UserAccountController.class);
 	@Resource
@@ -164,7 +165,7 @@ public class UserAccountController {
 		@RequestMapping(value="/bindRelative",produces = "text/html;charset=UTF-8")
 		@ResponseBody
 		public String bindRelative(@RequestParam String data,HttpServletRequest request){
-			JSONObject jsonObject =JSON.parseObject(data);
+			JSONObject jsonObject =JSONUtil.parseObject(data);
 			ResponseCode responseCode = new ResponseCode();
 			String mobilephone = jsonObject.getString("mobilephone");
 			int codeNum = (int)(Math.random()*10000);
@@ -199,7 +200,7 @@ public class UserAccountController {
 			@ResponseBody
 			public String confirmRelative(@RequestParam String data,HttpServletRequest request){
 				int userId = (int)request.getAttribute("userId");
-				JSONObject jsonObject =JSON.parseObject(data);
+				JSONObject jsonObject =JSONUtil.parseObject(data);
 				String confirmCode = jsonObject.getString("code");
 				String mobilephone = jsonObject.getString("mobilephone");
 				ResponseCode responseCode = new ResponseCode();
@@ -231,7 +232,7 @@ public class UserAccountController {
 	@RequestMapping(value="/smsSend",produces = "text/html;charset=UTF-8")
 	@ResponseBody
 	public String smsSend(@RequestParam String data){
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		String mobilephone = jsonObject.getString("mobilephone");
 		
@@ -282,7 +283,7 @@ public class UserAccountController {
 	@RequestMapping("/smsReceive")
 	@ResponseBody
 	public String smsReceive(@RequestParam String data){
-		JSONObject jsonObject = JSONObject.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
@@ -327,7 +328,7 @@ public class UserAccountController {
 	@ResponseBody
 	public String mailSend(@RequestParam String data){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		String email = jsonObject.getString("email");
 		RegisterResult registResult = new RegisterResult();
@@ -383,7 +384,7 @@ public class UserAccountController {
 	@ResponseBody
 	public String mail(@RequestParam String data){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		String email = jsonObject.getString("email");
 		RegisterResult registResult = new RegisterResult();
@@ -426,7 +427,7 @@ public class UserAccountController {
 		@ResponseBody
 		public String mailReceive(@RequestParam String data){
 
-			JSONObject jsonObject = JSONObject.parseObject(data);
+			JSONObject jsonObject = JSONUtil.parseObject(data);
 			String email = jsonObject.getString("email");
 			String confirmCode = jsonObject.getString("code");
 			String password =  jsonObject.getString("password");
@@ -467,9 +468,9 @@ public class UserAccountController {
 		@RequestMapping(value="/register",produces = "text/html;charset=UTF-8")
 		@ResponseBody
 		public String docterRegister(@RequestParam String data){
-			JSONObject jsonObject = JSONObject.parseObject(data);
+			JSONObject jsonObject = JSONUtil.parseObject(data);
 			ResponseCode response = new ResponseCode();
-			UserAccount account = JSON.toJavaObject(jsonObject, UserAccount.class);
+			UserAccount account = JSONUtil.toJavaObject(jsonObject, UserAccount.class);
 			String username = jsonObject.getString("workNum");
 		
 			if(!docterService.exist(username)){
@@ -514,9 +515,9 @@ public class UserAccountController {
     @RequestMapping(value="/add",produces = "text/html;charset=UTF-8") 
     @ResponseBody  
     public  String  addUserAccount(@RequestParam String data,HttpServletRequest request){
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
 		ResponseCode response = new ResponseCode();
-		UserAccount account = JSON.toJavaObject(jsonObject, UserAccount.class);
+		UserAccount account = JSONUtil.toJavaObject(jsonObject, UserAccount.class);
     	userAccountService.registerAccount(account);
     	response.setCode("206");
     	response.setMessage("添加用户成功");
@@ -531,7 +532,7 @@ public class UserAccountController {
     @RequestMapping("/query") 
     @ResponseBody  
     public  String   queryAccount(@RequestParam String data){
-    	JSONObject jsonObject =JSON.parseObject(data);
+    	JSONObject jsonObject =JSONUtil.parseObject(data);
     	int id = jsonObject.getIntValue("id");
     	UserAccount userAccount =null;
     	
@@ -560,7 +561,7 @@ public class UserAccountController {
     @ResponseBody  
     public  String   findPassword(@RequestParam String data){
     	
-    	JSONObject jsonObject =JSON.parseObject(data);
+    	JSONObject jsonObject =JSONUtil.parseObject(data);
 		String mobilephone = jsonObject.getString("mobilephone");
 		RegisterResult registResult = new RegisterResult();
 		
@@ -618,7 +619,7 @@ public class UserAccountController {
     @ResponseBody  
     public  String   emailPassword(@RequestParam String data){
     	
-    	JSONObject jsonObject =JSON.parseObject(data);
+    	JSONObject jsonObject =JSONUtil.parseObject(data);
 		String email = jsonObject.getString("email");
 		RegisterResult registResult = new RegisterResult();
 		
@@ -669,7 +670,7 @@ public class UserAccountController {
     @RequestMapping("/emailReset") 
     public  String  emailReset(@RequestParam String data){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
 		String email = jsonObject.getString("email");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
@@ -710,7 +711,7 @@ public class UserAccountController {
     @RequestMapping("/updatePassword") 
     public  String  updatePassword(@RequestParam String data){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
 		String mobilephone = jsonObject.getString("mobilephone");
 		String confirmCode = jsonObject.getString("code");
 		String password =  jsonObject.getString("password");
@@ -750,7 +751,7 @@ public class UserAccountController {
     @RequestMapping("/changePassword") 
     public  String  changePassword(@RequestParam String data,HttpServletRequest request){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
     	String password = jsonObject.getString("password");
     	String tocken = request.getParameter("tocken");
     	PasswordResult response = new PasswordResult();
@@ -785,7 +786,7 @@ public class UserAccountController {
     @RequestMapping(value="/selfSend",produces = "text/html;charset=UTF-8") 
     public  String  selfSend(@RequestParam String data,HttpServletRequest request){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
     	
     	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
@@ -853,7 +854,7 @@ public class UserAccountController {
     @RequestMapping(value="/unbind",produces = "text/html;charset=UTF-8") 
     public  String  unbind(@RequestParam String data,HttpServletRequest request){
     	int userId = (int)request.getAttribute("userId");
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
 
     	ResponseCode response = new ResponseCode();
     	//String type = jsonObject.getString("type");
@@ -886,7 +887,7 @@ public class UserAccountController {
     @RequestMapping(value="/validate",produces = "text/html;charset=UTF-8") 
     public  String  validate(@RequestParam String data,HttpServletRequest request){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
     	
     	//String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
@@ -969,7 +970,7 @@ public class UserAccountController {
     @ResponseBody
     @RequestMapping(value="/changeThird",produces = "text/html;charset=UTF-8")
     public String changeThird(@RequestParam String data,HttpServletRequest request){
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
     	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 	
@@ -1000,7 +1001,7 @@ public class UserAccountController {
     @RequestMapping(value="/change",produces = "text/html;charset=UTF-8") 
     public  String  change(@RequestParam String data,HttpServletRequest request){
     	
-    	JSONObject jsonObject = JSONObject.parseObject(data);
+    	JSONObject jsonObject = JSONUtil.parseObject(data);
   //  	String type = jsonObject.getString("type");
 		String username = jsonObject.getString("username");
 		String confirmCode = jsonObject.getString("code");

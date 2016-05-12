@@ -249,9 +249,11 @@ com/hengyun/domain/casehistory/HabitInfo.class
 com/hengyun/service/shiro/FilterChainDefinationService.class
 com/hengyun/service/impl/casehistory/AffiliatedClinicalDiseaseServiceImpl.class
 com/hengyun/dao/casehistory/TargetOrganDamageDao.class
+com/hengyun/controller/BaseController.class
 com/hengyun/domain/patient/MachineRelation.class
 com/hengyun/service/impl/monitor/logbackFlume/FlumeAppender.class
 com/hengyun/controller/information/CollectionController.class
+com/hengyun/dao/exception/NullArgumentException.class
 com/hengyun/util/mail/Register.class
 com/hengyun/service/impl/administrator/UserRoleServiceImpl.class
 com/hengyun/service/impl/patient/HabitInfoServiceImpl.class
@@ -336,6 +338,7 @@ com/hengyun/domain/casehistory/DoctorAdvice.class
 com/hengyun/domain/information/NickIcon.class
 com/hengyun/service/friendcircle/mysql/RosterService.class
 com/hengyun/dao/impl/casehistory/FollowupDaoImpl.class
+com/hengyun/controller/exception/ThealthIlligalArgument.class
 com/hengyun/domain/casehistory/BloodTransfusionConsent.class
 com/hengyun/dao/impl/patient/HealthLineDaoImpl.class
 com/hengyun/domain/monitor/GroupOperationHistory.class
@@ -444,6 +447,8 @@ com/hengyun/domain/casehistory/MachineExamination.class
 com/hengyun/domain/casehistory/PatientInfo$CostPay.class
 com/hengyun/controller/forum/ReplySubjectController.class
 com/hengyun/dao/impl/casehistory/TargetOrganDamageDaoImpl.class
+com/hengyun/controller/exception/ControllerAccessBusinessException.class
+com/hengyun/service/exception/BusinessDataAccessException.class
 com/hengyun/service/casehistory/FollowupService.class
 com/hengyun/service/impl/message/SmsListener.class
 com/hengyun/dao/casehistory/ReTreateInfoDao.class
@@ -457,6 +462,7 @@ com/hengyun/domain/casehistory/ColourDopplerUltrasound.class
 com/hengyun/dao/patient/MachineRelationDao.class
 com/hengyun/service/casehistory/RecipeService.class
 com/hengyun/service/impl/shiro/ShiroCacheManager.class
+com/hengyun/service/exception/ThealthBusinessException.class
 com/hengyun/domain/casehistory/FirstDiagnosis.class
 com/hengyun/controller/logininfo/CodeController.class
 com/hengyun/service/hospital/OfficeService.class
@@ -465,6 +471,7 @@ com/hengyun/domain/administrator/ResourcesResult.class
 com/hengyun/domain/casehistory/PatientInfo.class
 com/hengyun/controller/casehistory/DiagnosisController.class
 com/hengyun/service/impl/casehistory/TreateWaitServiceImpl.class
+com/hengyun/domain/common/AppResponse.class
 com/hengyun/domain/monitor/HeartBeat.class
 com/hengyun/controller/casehistory/AllergyHistoryController.class
 com/hengyun/dao/impl/information/InformationDaoImpl.class
@@ -472,6 +479,7 @@ com/hengyun/domain/casehistory/BloodBiochemical.class
 com/hengyun/service/administrator/UserRoleService.class
 com/hengyun/util/shiro/MongodbRealm.class
 com/hengyun/domain/notice/MedicalNoticeResponse.class
+com/hengyun/controller/exception/JsonParseException.class
 com/hengyun/domain/patient/BloodSuggerInfo.class
 com/hengyun/util/randomcode/TockenGenerator.class
 com/hengyun/domain/forum/ForumPost.class
@@ -481,8 +489,10 @@ com/hengyun/dao/notice/ScheduleJobDao.class
 com/hengyun/service/message/EmailProducerService.class
 com/hengyun/util/encrypt/MD5Util.class
 com/hengyun/service/impl/forum/SecondCommentServiceImpl.class
+com/hengyun/controller/exception/ControllerException.class
 com/hengyun/dao/impl/forum/SubjectAvailableListDaoImpl.class
 com/hengyun/dao/friendcircle/FriendCircleDao.class
+com/hengyun/service/exception/BusinessTimeoutException.class
 com/hengyun/domain/forum/Icon.class
 com/hengyun/domain/administrator/PermissionResult.class
 com/hengyun/controller/administrator/RolesController.class
@@ -495,6 +505,7 @@ com/hengyun/dao/impl/casehistory/SportInfoDaoImpl.class
 com/hengyun/util/exception/BusinessException.class
 com/hengyun/domain/loginInfo/constant/LoginChannel.class
 com/hengyun/domain/casehistory/AffiliatedClinicalDisease.class
+com/hengyun/dao/exception/InvalidateQueryField.class
 com/hengyun/domain/casehistory/PersonalHistory.class
 com/hengyun/controller/forum/SecondCommentController.class
 com/hengyun/domain/casehistory/PhysicalExamination.class
@@ -511,12 +522,14 @@ com/hengyun/domain/information/Collection.class
 com/hengyun/domain/information/DoctorInfo.class
 com/hengyun/domain/casehistory/Symptom.class
 com/hengyun/service/impl/hospital/HospitalServiceImpl.class
+com/hengyun/util/json/JSONUtil.class
 com/hengyun/service/casehistory/ReTreateInfoService.class
 com/hengyun/domain/casehistory/SecondaryHypertensionIndication.class
 com/hengyun/domain/notice/ApplicationNotice.class
 com/hengyun/dao/impl/information/CollectionDaoImpl.class
 com/hengyun/service/forum/SubjectService.class
 com/hengyun/domain/information/UploadImageResponse.class
+com/hengyun/dao/exception/IlligalArgumentException.class
 com/hengyun/controller/forum/UserAuthorityController.class
 com/hengyun/util/multiThread/Properties.class
 com/hengyun/controller/casehistory/ChiefComplaintController.class
@@ -545,6 +558,7 @@ com/hengyun/domain/forum/Vedio.class
 com/hengyun/controller/casehistory/HabitInfoController.class
 com/hengyun/util/network/NetworkUtil.class
 com/hengyun/controller/logininfo/LoginInfoController.class
+com/hengyun/dao/exception/DBException.class
 com/hengyun/service/impl/message/SmsReceiveQueueListener.class
 com/hengyun/domain/common/IndexCollection.class
 com/hengyun/util/exception/ExceptionCode.class
@@ -564,18 +578,21 @@ com/hengyun/domain/loginInfo/ThirdLoginResult.class
 com/hengyun/domain/loginInfo/constant/AccountStatus.class
 com/hengyun/domain/forum/SecondComment.class
 com/hengyun/util/log/PlatformLogger.class
+com/hengyun/service/exception/NullArgumentException.class
 com/hengyun/dao/account/DoctorAccountDao.class
 com/hengyun/domain/casehistory/AnalysisResult.class
 com/hengyun/controller/hospital/HospitalController.class
 com/hengyun/service/logininfo/RegisterCacheService.class
 com/hengyun/service/impl/forum/util/SubjectToResponse.class
 com/hengyun/dao/impl/information/IconDaoImpl.class
+com/hengyun/dao/exception/AuthorityDenyException.class
 com/hengyun/dao/impl/logininfo/LoginInfoDaoImpl.class
 com/hengyun/domain/account/DoctorInfo.class
 com/hengyun/service/monitor/Formatter.class
 com/hengyun/dao/impl/casehistory/DoctorAdviceDaoImpl.class
 com/hengyun/domain/casehistory/DietInfo.class
 com/hengyun/dao/patient/BloodPressureInfoDao.class
+com/hengyun/dao/exception/OperationTimeoutException.class
 com/hengyun/service/impl/message/EmailListener.class
 com/hengyun/domain/monitor/ExceptionInfo.class
 com/hengyun/controller/casehistory/LibrarotySheetController.class

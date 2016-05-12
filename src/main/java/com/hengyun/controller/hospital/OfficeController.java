@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.hospital.Office;
 import com.hengyun.service.hospital.OfficeService;
+import com.hengyun.util.json.JSONUtil;
 
 /*
  *  科室管理
@@ -27,7 +29,7 @@ import com.hengyun.service.hospital.OfficeService;
  * */
 @Controller
 @RequestMapping("office")
-public class OfficeController {
+public class OfficeController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(OfficeController.class);
 	
@@ -41,8 +43,8 @@ public class OfficeController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public String addOffice(@RequestParam String data,HttpServletRequest request){
-		JSONObject jsonObject = JSONObject.parseObject(data);
-		Office office = JSON.toJavaObject(jsonObject, Office.class);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
+		Office office = JSONUtil.toJavaObject(jsonObject, Office.class);
 		officeService.save(office);
 		
 		ResponseCode response = new ResponseCode();
@@ -75,7 +77,7 @@ public class OfficeController {
 	@ResponseBody
 	public String updateOfficel(@RequestParam String data,HttpServletRequest request){
 		JSONObject jsonObject = JSONObject.parseObject(data);
-		Office office = JSON.toJavaObject(jsonObject, Office.class);
+		Office office = JSONUtil.toJavaObject(jsonObject, Office.class);
 		Query query = Query.query(Criteria.where("officeId").is(office.getOfficeId()));
 		Update update = Update.update("hospitalId", office.getHospitalId()).set("officeName", office.getOfficeName()).set("description", office.getDescription());
 		officeService.updateFirst(query, update);

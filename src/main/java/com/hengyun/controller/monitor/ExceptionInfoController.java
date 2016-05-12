@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.monitor.ExceptionInfo;
 import com.hengyun.domain.monitor.ExceptionInfoResponse;
 import com.hengyun.service.monitor.ExceptionInfoService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -26,7 +28,7 @@ import com.hengyun.service.monitor.ExceptionInfoService;
 */
 @Controller
 @RequestMapping("exception")
-public class ExceptionInfoController {
+public class ExceptionInfoController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(ExceptionInfoController.class);
 	
@@ -37,8 +39,8 @@ public class ExceptionInfoController {
 	@ResponseBody
 	public String upload(HttpServletRequest request,@RequestParam String data){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
-		ExceptionInfo info = JSON.toJavaObject(jsonObject, ExceptionInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		ExceptionInfo info = JSONUtil.toJavaObject(jsonObject, ExceptionInfo.class);
 		exceptionInfoService.add(info);
 		response.setCode("206");
 		response.setMessage("上传成功");
@@ -49,8 +51,8 @@ public class ExceptionInfoController {
 	@ResponseBody
 	public String delete(HttpServletRequest request,@RequestParam String data){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
-		ExceptionInfo info = JSON.toJavaObject(jsonObject, ExceptionInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		ExceptionInfo info = JSONUtil.toJavaObject(jsonObject, ExceptionInfo.class);
 		exceptionInfoService.del(info);
 		response.setCode("206");
 		response.setMessage("删除成功");
@@ -61,8 +63,8 @@ public class ExceptionInfoController {
 	@ResponseBody
 	public String query(HttpServletRequest request,@RequestParam String data){
 		ExceptionInfoResponse response = new ExceptionInfoResponse();
-		JSONObject jsonObject =JSON.parseObject(data);
-		ExceptionInfo info = JSON.toJavaObject(jsonObject, ExceptionInfo.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		ExceptionInfo info = JSONUtil.toJavaObject(jsonObject, ExceptionInfo.class);
 		List<ExceptionInfo> list =  exceptionInfoService.query(info.getIp());
 		
 		response.setCode("206");

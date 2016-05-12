@@ -16,12 +16,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hengyun.controller.BaseController;
+
 /*
  *  验证码类
  * */
 @Controller
 @RequestMapping("validate")
-public class CodeController {
+public class CodeController extends BaseController{
     private int width = 90;//定义图片的width
     private int height = 20;//定义图片的height
     private int codeCount = 4;//定义图片上显示验证码的个数

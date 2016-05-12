@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hengyun.controller.BaseController;
+
 /*
  *  管理员操作
  * */
 @Controller
 @RequestMapping("admin")
-public class AdministratorController {
+public class AdministratorController extends BaseController{
 	
 	@RequestMapping("/add")
 	@ResponseBody

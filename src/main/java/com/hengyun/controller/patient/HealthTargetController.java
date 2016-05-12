@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.hengyun.domain.patient.BloodPressureInfo;
+import com.hengyun.controller.BaseController;
 import com.hengyun.domain.patient.HealthTarget;
 import com.hengyun.domain.patient.HealthTargetResponse;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.patient.HealthTargetService;
+import com.hengyun.util.json.JSONUtil;
 
 /**
 * @author bob E-mail:panbaoan@thealth.cn
@@ -25,7 +26,7 @@ import com.hengyun.service.patient.HealthTargetService;
 */
 @Controller
 @RequestMapping("healthTarget")
-public class HealthTargetController {
+public class HealthTargetController extends BaseController{
 
 	private static final Logger log = LoggerFactory.getLogger(HealthTarget.class);
 	
@@ -43,12 +44,12 @@ public class HealthTargetController {
 	@ResponseBody
 	public String  setBloodPressure(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject = JSON.parseObject(data);
+		JSONObject jsonObject = JSONUtil.parseObject(data);
 		
 		HealthTargetResponse response = new HealthTargetResponse();
 	
 		int userId = (int)request.getAttribute("userId");
-		HealthTarget blood = JSON.toJavaObject(jsonObject, HealthTarget.class);
+		HealthTarget blood = JSONUtil.toJavaObject(jsonObject, HealthTarget.class);
 		blood.setPatientId(userId);
 		//保存数据
 		healthTargetService.setBloodPressure(blood);
@@ -68,11 +69,11 @@ public class HealthTargetController {
 	@ResponseBody
 	public String  setBloodSugger(@RequestParam String data,HttpServletRequest request){
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = (int)request.getAttribute("userId");
 		
 		HealthTargetResponse response = new HealthTargetResponse();
-		HealthTarget healthTarget = JSON.toJavaObject(jsonObject, HealthTarget.class);
+		HealthTarget healthTarget = JSONUtil.toJavaObject(jsonObject, HealthTarget.class);
 		healthTarget.setPatientId(userId);
 		
 		//保存数据

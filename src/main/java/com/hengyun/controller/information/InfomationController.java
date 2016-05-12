@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hengyun.controller.BaseController;
 import com.hengyun.dao.information.IconDao;
 import com.hengyun.domain.common.ResponseCode;
 import com.hengyun.domain.hospital.Docter;
@@ -43,6 +44,7 @@ import com.hengyun.service.hospital.HospitalService;
 import com.hengyun.service.information.InformationService;
 import com.hengyun.service.logininfo.LoginInfoService;
 import com.hengyun.service.logininfo.UserAccountService;
+import com.hengyun.util.json.JSONUtil;
 import com.hengyun.util.network.NetworkUtil;
 import com.mongodb.gridfs.GridFSDBFile;
 
@@ -51,7 +53,7 @@ import com.mongodb.gridfs.GridFSDBFile;
  * */
 @Controller
 @RequestMapping("info")
-public class InfomationController {
+public class InfomationController extends BaseController{
 	
 	private static final Logger log = LoggerFactory.getLogger(InfomationController.class);
 	 
@@ -212,7 +214,7 @@ public class InfomationController {
 	public String queryInfo(@RequestParam String data,HttpServletRequest request){
 		InfoResponse response = new InfoResponse();
 		
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 
 		String timeStamp = jsonObject.getString("recordTime");
 	
@@ -247,8 +249,8 @@ public class InfomationController {
 	@ResponseBody
 	public String updateInfo(@RequestParam String data,HttpServletRequest request){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
-		Information info = JSON.toJavaObject(jsonObject, Information.class);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
+		Information info = JSONUtil.toJavaObject(jsonObject, Information.class);
 		String ip = NetworkUtil.getPhysicalHostIP();
 	
 		int userId =(int)request.getAttribute("userId");
@@ -287,7 +289,7 @@ public class InfomationController {
 	@ResponseBody
 	public String getnickName(HttpServletRequest request,@RequestParam String data){
 		NickIconResponse response = new NickIconResponse();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 			
 			Query query =Query.query(Criteria.where("userId").is(userId));
@@ -337,7 +339,7 @@ public class InfomationController {
 	@ResponseBody
 	public String getInfo(HttpServletRequest request,@RequestParam String data){
 		NickIconResponse response = new NickIconResponse();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 			
 			Query query =Query.query(Criteria.where("userId").is(userId));
@@ -389,7 +391,7 @@ public class InfomationController {
 	@ResponseBody
 	public String doctorInfo(HttpServletRequest request,@RequestParam String data){
 		DoctorInfoResponse response = new DoctorInfoResponse();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		int userId = jsonObject.getIntValue("userId");
 			
 			Query query =Query.query(Criteria.where("userId").is(userId));
@@ -464,7 +466,7 @@ public class InfomationController {
 	@ResponseBody
 	public String disease(HttpServletRequest request,@RequestParam String data){
 		ResponseCode response = new ResponseCode();
-		JSONObject jsonObject =JSON.parseObject(data);
+		JSONObject jsonObject =JSONUtil.parseObject(data);
 		
 		int userId = jsonObject.getIntValue("userId");
 		String disease = jsonObject.getString("disease");
