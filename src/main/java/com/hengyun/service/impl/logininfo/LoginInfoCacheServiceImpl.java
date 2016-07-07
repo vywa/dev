@@ -104,6 +104,35 @@ public class LoginInfoCacheServiceImpl implements LoginInfoCacheService{
 		
 
 	}
+
+	@Override
+	public void deviceState(int userId,String device) {
+		// TODO Auto-generated method stub
+		String deviceState = userId+device;
+		try {
+			redisClientTemplate.hset(String.valueOf(userId), "device",deviceState);
+			redisClientTemplate.setex(deviceState, 5, "online");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int getState(int userId) {
+		// TODO Auto-generated method stub
+		String state=null;
+		try {
+			String deviceState = redisClientTemplate.hget(String.valueOf(userId), "device");
+			state = redisClientTemplate.get(deviceState);
+			if(state.equals("online"))  return 1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
 	
 	
 	

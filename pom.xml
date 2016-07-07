@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.hengyun</groupId>
-	<artifactId>healthcloudserver</artifactId>
+	<artifactId>dev</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>healthcloudserver Maven Webapp</name>
@@ -163,6 +163,28 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		
+		<!-- 
+		<dependency>
+		    <groupId>com.github.abj351r7</groupId>
+		    <artifactId>wechat-java-sdk</artifactId>
+		    <version>1.0.1</version>
+		</dependency> -->
+		
+		<!-- https://mvnrepository.com/artifact/org.weixin4j/weixin4j -->
+		<dependency>
+		    <groupId>org.weixin4j</groupId>
+		    <artifactId>weixin4j</artifactId>
+		    <version>0.0.7</version>
+		</dependency>
+		
+			
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.2</version>
+		</dependency>
+			
 		
 		<!-- logback -->
 		<dependency>
@@ -365,6 +387,14 @@
 			<version>1.2</version>
 		</dependency>
 
+	
+		<dependency>
+		    <groupId>it.sauronsoftware.cron4j</groupId>
+		    <artifactId>cron4j</artifactId>
+		    <version>2.2.5</version>
+		</dependency>
+	
+
 
 		<dependency>
 			<groupId>taglibs</groupId>
@@ -502,6 +532,14 @@
 		
 	
 		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.9</version>
+		</dependency>
+
+		
+	
+		<dependency>
 			<groupId>org.apache.axis</groupId>
 			<artifactId>axis</artifactId>
 			<version>1.4</version>
@@ -572,7 +610,7 @@
     </plugins>  
      
 	</pluginManagement>
-		<!--  <finalName>healthcloudserver</finalName> -->
+		<finalName>dev</finalName> 
 		 
 		 <plugins>
 		 <plugin>  

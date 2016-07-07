@@ -28,4 +28,10 @@ public interface LoginInfoCacheService {
 	
 	//用户是否在线
 	public int isOnline(String tocken);
+	
+	//设备是否在线
+	public void deviceState(int userId,String device);
+	
+	//获取设备状态
+	public int getState(int userId);
 }

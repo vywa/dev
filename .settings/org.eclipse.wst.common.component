@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp"/>
-        <property name="java-output-path" value="/healthcloud/target/classes"/>
-        <property name="context-root" value="healthcloudserver"/>
+        <property name="java-output-path" value="/dev/target/classes"/>
+        <property name="context-root" value="dev"/>
     </wb-module>
 </project-modules>

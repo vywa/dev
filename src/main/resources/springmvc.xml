@@ -59,7 +59,7 @@
                               <value>/hospital</value>
                               <value>/office</value>
                               <value>/docter</value>
-                              
+                              <value>/chat</value>
                               <value>/index</value>
                               
                              <value>/permission</value>
@@ -75,7 +75,12 @@
                                  <value>/account/findPassword</value>
                               	 <value>/account/updatePassword</value>
                               	 
+                              	  <value>/finalresult</value>
+                              	   <value>/reg</value>
+                              	    <value>/insert</value>
+                              	     <value>/query</value>
                               	 
+                              	     	<value>/upload</value>
                               	 
                                 <value>/dnews/load</value>
                                 
@@ -112,7 +117,7 @@
 		                              <value>/hospital</value>
 		                              <value>/office</value>
 		                              <value>/docter</value>
-		                              
+		                              <value>/chat</value>
 		                                <value>/index</value>
 		                              
 		                             <value>/permission</value>
@@ -128,8 +133,12 @@
 		                                 <value>/account/findPassword</value>
 		                             	 <value>/account/updatePassword</value>
 		                             	
+		                             	 	<value>/upload</value>
 		                            
-		                             		 
+		                             	 <value>/finalresult</value>
+                              	   <value>/reg</value>
+                              	    <value>/insert</value>
+                              	     <value>/query</value>
 		                             <value>/dnews/load</value>
 		                             
 		                               <value>/multiMedia</value>

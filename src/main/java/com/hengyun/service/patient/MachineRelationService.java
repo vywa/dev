@@ -12,7 +12,7 @@ public interface MachineRelationService extends BaseService<MachineRelation,Inte
 
 	public int getUser(String serial,int user);
 	
-	public void bind(int userId,String seria,int user);
+	public int bind(int userId,String seria,int user);
 	
-	public void unbind( int userId,String seria);
+	public void unbind( int userId);
 }

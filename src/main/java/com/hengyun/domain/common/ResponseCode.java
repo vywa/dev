@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public  class ResponseCode  implements Serializable{
 
-private String code;					//返回的标志码
+		private String code;					//返回的标志码
 	
 	private String message;					//返回信息描述			
 

@@ -23,7 +23,7 @@ public class MachineRelationServiceImpl  extends BaseServiceImpl<MachineRelation
 	@Override
 	public int getUser(String serial, int user) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("serial").is(serial).andOperator(Criteria.where("user")));
+		Query query = Query.query(Criteria.where("serial").is(serial).andOperator(Criteria.where("user").is(user)));
 		MachineRelation mr = machieRelationDao.queryOne(query);
 		if(mr!=null) return mr.getUserId();
 		return -1;
@@ -31,21 +31,26 @@ public class MachineRelationServiceImpl  extends BaseServiceImpl<MachineRelation
 	
 	//绑定用户
 	@Override
-	public void bind(int userId, String seria, int user) {
+	public int bind(int userId, String seria, int user) {
 		// TODO Auto-generated method stub
 		MachineRelation mr = new MachineRelation();
+		int bindUser = getUser(seria,user);
+		if(bindUser<0){
+			return -1;
+		}
 		mr.setUserId(userId);
 		mr.setUser(user);
 		mr.setSerial(seria);
 		machieRelationDao.save(mr);
+		return 1;
 		
 	}
 	
 	//解绑用户
 	@Override
-	public void unbind(int userId, String seria) {
+	public void unbind(int userId) {
 		// TODO Auto-generated method stub
-		Query query = Query.query(Criteria.where("serial").is(seria).andOperator(Criteria.where("user")));
+		Query query = Query.query(Criteria.where("userId").is(userId));
 		machieRelationDao.delete(query);
 	}
 
